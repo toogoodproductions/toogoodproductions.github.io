@@ -7,8 +7,8 @@
   <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="#000000">
   <title>Brand Work · toogood</title>
-  <meta name="description" content="Sample brand work index — grid, carousel and list views.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23e3ff39'/%3E%3Cpath d='M11 8h10v4h-6v2h6v10H11v-4h6v-2h-6z' fill='%23000'/%3E%3C/svg%3E">
+  <meta name="description" content="Sample brand work index — grid and list views.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23ff7a00'/%3E%3Cpath d='M11 8h10v4h-6v2h6v10H11v-4h6v-2h-6z' fill='%23000'/%3E%3C/svg%3E">
   <link rel="preload" href="assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/chivo-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/main.css">
@@ -54,6 +54,7 @@
     </div>
   </header>
 
+
   <div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu">
     <div class="mobile-menu-close glass">
       <span class="glass-effect"></span>
@@ -96,17 +97,12 @@
       </div>
     </section>
 
-    <!-- Work index: Grid / Carousel / List -->
+    <!-- Work index: Grid / List -->
     <section class="section container work-index" data-view="grid">
       <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">
         <div class="view-switch" role="tablist" aria-label="Layout">
           <button role="tab" data-view-btn="grid" class="is-active" aria-selected="true">Grid</button>
-          <button role="tab" data-view-btn="carousel" aria-selected="false">Carousel</button>
           <button role="tab" data-view-btn="list" aria-selected="false">List</button>
-        </div>
-        <div class="carousel-nav">
-          <button class="prev" aria-label="Previous"><svg viewBox="0 0 8 10"><use href="#triangle"/></svg></button>
-          <button class="next" aria-label="Next"><svg viewBox="0 0 8 10"><use href="#triangle"/></svg></button>
         </div>
       </div>
       <div class="work-grid" data-reveal-group>
