@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="en" class="lenis" style="background:#f7f7f5">
+<html lang="en" class="lenis" style="background:#000">
 <head>
   <meta charset="UTF-8">
   <script>try{if(sessionStorage.getItem("visited"))document.documentElement.className+=" return-visit"}catch(e){}</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="color-scheme" content="light">
-  <meta name="theme-color" content="#f7f7f5">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#000000">
   <title>Academy · toogood</title>
   <meta name="description" content="Sample academy page — programs, curriculum and FAQ.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23e3ff39'/%3E%3Cpath d='M11 8h10v4h-6v2h6v10H11v-4h6v-2h-6z' fill='%23000'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%234100f5'/%3E%3Cpath d='M11 8h10v4h-6v2h6v10H11v-4h6v-2h-6z' fill='%23fff'/%3E%3C/svg%3E">
   <link rel="preload" href="assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/chivo-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/main.css">
@@ -18,7 +18,7 @@
   <svg style="display:none" aria-hidden="true"><filter id="glass-distortion" x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.01 0.01" numOctaves="1" seed="5" result="turbulence"></feTurbulence><feComponentTransfer in="turbulence" result="mapped"><feFuncR type="gamma" amplitude="1" exponent="10" offset="0.5"></feFuncR><feFuncG type="gamma" amplitude="0" exponent="1" offset="0"></feFuncG><feFuncB type="gamma" amplitude="0" exponent="1" offset="0.5"></feFuncB></feComponentTransfer><feGaussianBlur in="turbulence" stdDeviation="5" result="softMap"></feGaussianBlur><feSpecularLighting in="softMap" surfaceScale="5" specularConstant="1" specularExponent="100" lighting-color="white" result="specLight"><fePointLight x="-200" y="-200" z="300"></fePointLight></feSpecularLighting><feComposite in="specLight" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litImage"></feComposite><feDisplacementMap in="SourceGraphic" in2="softMap" scale="160" xChannelSelector="R" yChannelSelector="G" result="displaced1"></feDisplacementMap><feColorMatrix in="displaced1" type="matrix" values="1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" result="displacedR"></feColorMatrix><feDisplacementMap in="SourceGraphic" in2="softMap" scale="150" xChannelSelector="R" yChannelSelector="G" result="displaced2"></feDisplacementMap><feColorMatrix in="displaced2" type="matrix" values="0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0" result="displacedG"></feColorMatrix><feDisplacementMap in="SourceGraphic" in2="softMap" scale="140" xChannelSelector="R" yChannelSelector="G" result="displaced3"></feDisplacementMap><feColorMatrix in="displaced3" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0" result="displacedB"></feColorMatrix><feBlend in="displacedR" in2="displacedG" mode="screen" result="blend1"></feBlend><feBlend in="blend1" in2="displacedB" mode="screen"></feBlend></filter></svg>
 
   <div class="loader">
-    <div class="loader-logo"><img class="logo-img" src="assets/img/toogood-dark.png" alt="toogood"></div>
+    <div class="loader-logo"><img class="logo-img" src="assets/img/toogood-white.png" alt="toogood"></div>
     <span class="loader-count">000</span>
   </div>
 
@@ -28,9 +28,7 @@
   </svg>
 
   <header class="site-header">
-    <a href="index.html" class="header-logo" aria-label="Home">
-      <img class="logo-img" src="assets/img/toogood-dark.png" alt="toogood">
-    </a>
+    <a href="index.html" class="header-logo glass" aria-label="Home"><span class="glass-effect"></span><span class="glass-content border-shine"><img class="logo-img" src="assets/img/toogood-white.png" alt="toogood"></span></a>
     <nav class="header-nav glass" aria-label="Primary">
       <span class="glass-effect"></span>
       <div class="glass-content border-shine">
@@ -206,7 +204,7 @@
         <h2 class="footer-tagline" data-mask-reveal>
           <span class="line-mask"><span class="line-inner">Films, series and</span></span>
           <span class="line-mask"><span class="line-inner">brand worlds — built</span></span>
-          <span class="line-mask"><span class="line-inner"><span class="hl" style="--hl:var(--tangerine)">at the speed of culture</span></span></span>
+          <span class="line-mask"><span class="line-inner">at the speed of culture</span></span>
         </h2>
         <div class="footer-grid">
           <div class="footer-col">
@@ -265,6 +263,6 @@
   <script src="assets/js/vendor/ScrollTrigger.min.js"></script>
   <script src="assets/js/vendor/lenis.min.js"></script>
   <script src="assets/js/main.js"></script>
-  <div class="test-badge" aria-hidden="true">test 3 · light lab</div>
+  <div class="test-badge" aria-hidden="true">test 3 · purple</div>
 </body>
 </html>

@@ -1554,3 +1554,14 @@ html.return-visit .loader { display: none; }
 /* Accent loader: neon orange flash with the charcoal mark */
 .loader { background: var(--accent); }
 .loader .loader-count { color: #1b1b1b; }
+
+/* Logo capsule: identical glass construction to the menu bar (liquid
+   distortion comes from the .site-header .glass-effect rule) */
+.header-logo {
+  padding: 0;
+  background: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+.header-logo .glass-content { display: block; padding: 9px 16px; }
+@media (min-width: 900px) { .header-logo .glass-content { padding: 12px 20px; } }
