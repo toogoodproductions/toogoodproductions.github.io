@@ -1217,16 +1217,6 @@ body.is-loading { overflow: hidden; }
 }
 @media (min-width: 768px) { .media-row { grid-template-columns: 1fr 1fr; gap: 32px; } }
 
-.next-project {
-  position: relative;
-  display: block;
-  overflow: hidden;
-  padding-block: 96px;
-  text-align: center;
-  isolation: isolate;
-}
-.next-project .scene { z-index: -1; opacity: .5; transition: opacity .6s; }
-.next-project:hover .scene { opacity: .8; }
 
 /* play badge */
 .play-badge {
