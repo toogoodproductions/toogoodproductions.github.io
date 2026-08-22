@@ -198,7 +198,7 @@
     var idle = now - snapState.lastInput;
     var lenisVel = lenis ? Math.abs(lenis.velocity) : 0;
     // wait until the gesture is truly finished so we never fight the user
-    if (idle < 260 || lenisVel > 0.05 || velTrack.v > 0.04) return;
+    if (idle < 200 || lenisVel > 0.05 || velTrack.v > 0.04) return;
 
     var y = getY();
     var tops = panelTops();
@@ -210,11 +210,11 @@
     snapState.snapping = true;
     snapState.snapStarted = now;
     var dist = Math.abs(target - y);
-    var dur = Math.min(1.1, 0.55 + dist / window.innerHeight * 0.6);
+    var dur = Math.min(1.4, 0.85 + dist / window.innerHeight * 0.7);
     if (lenis) {
       lenis.scrollTo(target, {
         duration: dur,
-        easing: function (t) { return 1 - Math.pow(1 - t, 5); },
+        easing: function (t) { return 1 - Math.pow(1 - t, 3); },
         lock: false,
         onComplete: function () {
           snapState.snapping = false;
