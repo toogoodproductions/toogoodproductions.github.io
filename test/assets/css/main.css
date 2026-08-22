@@ -1538,8 +1538,3 @@ html.return-visit .loader { display: none; }
 .mobile-cta .btn { height: 50px; padding: 0 22px; border-radius: 999px; }
 @media (min-width: 900px) { .mobile-cta { display: none; } }
 
-/* Mobile: carousel view removed - grid and list only */
-@media (max-width: 767px) {
-  .view-switch button[data-view-btn="carousel"] { display: none; }
-  .work-index[data-view="carousel"] .carousel-nav { display: none; }
-}

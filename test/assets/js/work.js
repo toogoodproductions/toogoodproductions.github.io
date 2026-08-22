@@ -31,14 +31,8 @@
   });
   var saved = null;
   try { saved = sessionStorage.getItem('workView'); } catch (e) {}
+  if (saved === 'carousel') saved = 'grid'; // carousel view retired
   if (saved && saved !== index.getAttribute('data-view')) setView(saved);
-  /* Mobile has no carousel: fall back to grid if it was saved or preselected */
-  var mobileMQ = window.matchMedia('(max-width: 767px)');
-  function carouselGuard() {
-    if (mobileMQ.matches && index.getAttribute('data-view') === 'carousel') setView('grid');
-  }
-  carouselGuard();
-  if (mobileMQ.addEventListener) mobileMQ.addEventListener('change', carouselGuard);
 
   /* ---------- Carousel: drag-to-scroll with release momentum ---------- */
   var drag = { on: false, moved: 0, startX: 0, startLeft: 0, lastX: 0, lastT: 0, vx: 0 };
