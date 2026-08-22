@@ -132,8 +132,8 @@ html.lenis, html.lenis body { height: auto; }
 
 .text-balance { text-wrap: balance; }
 .text-accent { color: var(--accent); }
-.text-dim { color: rgba(255,255,255,.55); }
-.text-dim-2 { color: rgba(255,255,255,.35); }
+.text-dim { color: rgba(19,19,19,.62); }
+.text-dim-2 { color: rgba(19,19,19,.5); }
 
 /* 4px section rule — the site's signature divider */
 .rule-t { border-top: 4px solid var(--border); }
@@ -446,7 +446,7 @@ a:hover .sheen-overlay::before,
   right: var(--pad);
   font-size: 12px;
   letter-spacing: .08em;
-  color: rgba(255,255,255,.5);
+  color: rgba(19,19,19,.6);
   font-variant-numeric: tabular-nums;
 }
 body.is-loading { overflow: hidden; }
@@ -633,7 +633,7 @@ body.is-loading { overflow: hidden; }
   font-size: 2.8rem;
   letter-spacing: .02em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.5);
+  color: rgba(19,19,19,.6);
   white-space: nowrap;
 }
 
@@ -792,7 +792,7 @@ body.is-loading { overflow: hidden; }
   align-items: center;
   gap: 10px;
   margin-bottom: 20px;
-  color: rgba(255,255,255,.6);
+  color: rgba(19,19,19,.66);
 }
 .page-hero .kicker::before {
   content: '';
@@ -872,7 +872,7 @@ body.is-loading { overflow: hidden; }
   display: block;
   margin-top: 16px;
   margin-bottom: 4px;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(19,19,19,.55);
 }
 @media (min-width: 768px) { .work-card .client { margin-top: 20px; } }
 .work-card .title {
@@ -906,7 +906,7 @@ body.is-loading { overflow: hidden; }
 .banner-copy .client {
   display: block;
   margin-bottom: 6px;
-  color: rgba(255,255,255,.66);
+  color: rgba(19,19,19,.72);
 }
 .banner-copy .title {
   font-family: var(--font-display);
@@ -952,12 +952,12 @@ body.is-loading { overflow: hidden; }
   justify-content: center;
   font-family: var(--font-display);
   font-size: 6rem;
-  color: rgba(255,255,255,.24);
+  color: rgba(19,19,19,.4);
   z-index: 3;
 }
 .team-card h3 { font-family: var(--font-display); font-size: 2.6rem; text-transform: uppercase; letter-spacing: .01em; }
 .team-card .role { color: var(--accent); font-size: 12px; letter-spacing: .06em; text-transform: uppercase; margin-top: 4px; }
-.team-card p { margin-top: 10px; font-size: 14px; color: rgba(255,255,255,.55); }
+.team-card p { margin-top: 10px; font-size: 14px; color: rgba(19,19,19,.62); }
 
 /* news cards */
 .news-grid {
@@ -976,7 +976,7 @@ body.is-loading { overflow: hidden; }
 }
 .news-card .thumb .scene { transition: transform .8s var(--ease-out); }
 .news-card:hover .thumb .scene { transform: scale(1.05); }
-.news-card time { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: rgba(255,255,255,.45); }
+.news-card time { font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: rgba(19,19,19,.55); }
 .news-card h3 {
   font-family: var(--font-display);
   font-size: 2.4rem;
@@ -988,7 +988,7 @@ body.is-loading { overflow: hidden; }
   display: inline-flex; align-items: center; gap: 8px;
   margin-top: 12px;
   font-size: 12px; letter-spacing: .06em; text-transform: uppercase;
-  color: rgba(255,255,255,.6);
+  color: rgba(19,19,19,.66);
   transition: color .3s;
 }
 .news-card:hover .more { color: var(--accent); }
@@ -1006,14 +1006,14 @@ body.is-loading { overflow: hidden; }
 }
 .cap-block:last-child { border-bottom: 1px solid var(--border); }
 .cap-block h3 { font-family: var(--font-display); font-size: 3.6rem; text-transform: uppercase; line-height: 1.05; }
-.cap-block p { color: rgba(255,255,255,.6); max-width: 56ch; }
+.cap-block p { color: rgba(19,19,19,.66); max-width: 56ch; }
 .cap-block .cap-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
 .cap-tag {
   font-size: 11px; letter-spacing: .06em; text-transform: uppercase;
   padding: 8px 14px;
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,.14);
-  color: rgba(255,255,255,.66);
+  color: rgba(19,19,19,.72);
 }
 
 /* FAQ accordion */
@@ -1056,7 +1056,7 @@ body.is-loading { overflow: hidden; }
 }
 .faq-item.is-open .faq-a { grid-template-rows: 1fr; }
 .faq-a > div { overflow: hidden; }
-.faq-a p { padding-bottom: 24px; color: rgba(255,255,255,.6); max-width: 68ch; }
+.faq-a p { padding-bottom: 24px; color: rgba(19,19,19,.66); max-width: 68ch; }
 
 /* stats row */
 .stats-row {
@@ -1074,7 +1074,7 @@ body.is-loading { overflow: hidden; }
   line-height: 1;
   font-weight: 400;
 }
-.stat span { color: rgba(255,255,255,.5); font-size: 13px; letter-spacing: .05em; text-transform: uppercase; }
+.stat span { color: rgba(19,19,19,.6); font-size: 13px; letter-spacing: .05em; text-transform: uppercase; }
 
 /* ---------- Footer ---------- */
 .site-footer {
@@ -1105,14 +1105,14 @@ body.is-loading { overflow: hidden; }
   font-size: 12px;
   letter-spacing: .08em;
   text-transform: uppercase;
-  color: rgba(255,255,255,.4);
+  color: rgba(19,19,19,.55);
   margin-bottom: 16px;
   font-weight: 500;
 }
 .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
-.footer-col a { color: rgba(255,255,255,.75); font-size: 14px; transition: color .3s; }
+.footer-col a { color: rgba(19,19,19,.8); font-size: 14px; transition: color .3s; }
 .footer-col a:hover { color: var(--accent); }
-.footer-col .mail { font-size: 13px; color: rgba(255,255,255,.55); }
+.footer-col .mail { font-size: 13px; color: rgba(19,19,19,.62); }
 
 .newsletter { display: flex; flex-direction: column; gap: 10px; }
 .newsletter-field {
@@ -1133,9 +1133,9 @@ body.is-loading { overflow: hidden; }
   font-size: 14px;
   color: var(--fg);
 }
-.newsletter input::placeholder { color: rgba(255,255,255,.35); }
+.newsletter input::placeholder { color: rgba(19,19,19,.5); }
 .newsletter .btn { height: 44px; padding: 0 20px; }
-.newsletter-note { font-size: 12px; color: rgba(255,255,255,.35); }
+.newsletter-note { font-size: 12px; color: rgba(19,19,19,.5); }
 .newsletter .success { color: var(--accent); font-size: 13px; }
 
 .footer-bottom {
@@ -1149,7 +1149,7 @@ body.is-loading { overflow: hidden; }
   border-top: 1px solid var(--border);
   font-size: 12px;
   letter-spacing: .04em;
-  color: rgba(255,255,255,.4);
+  color: rgba(19,19,19,.55);
 }
 .footer-bottom .legal { display: flex; gap: 20px; }
 .footer-bottom a:hover { color: var(--fg); }
@@ -1161,7 +1161,7 @@ body.is-loading { overflow: hidden; }
   line-height: .8;
   text-transform: uppercase;
   letter-spacing: -0.02em;
-  color: rgba(255,255,255,.05);
+  color: rgba(19,19,19,.05);
   text-align: center;
   margin-top: 40px;
   margin-bottom: -0.16em;
@@ -1201,7 +1201,7 @@ body.is-loading { overflow: hidden; }
   padding-top: 32px;
 }
 @media (min-width: 768px) { .project-meta { grid-template-columns: repeat(4, 1fr); } }
-.project-meta h5 { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: 8px; font-weight: 500; }
+.project-meta h5 { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: rgba(19,19,19,.55); margin-bottom: 8px; font-weight: 500; }
 .project-meta p { font-size: 14px; }
 .media-block {
   position: relative;
@@ -1624,3 +1624,8 @@ body::before {
   mix-blend-mode: multiply;
   background: radial-gradient(circle, rgba(65, 0, 245, 0.16) 0%, transparent 62%);
 }
+
+/* TEST3: copy that sits on dark scene art stays white */
+.reel-panel { color: #fff; }
+.banner-card { color: #fff; }
+.banner-copy .client { color: rgba(255, 255, 255, 0.4); }
