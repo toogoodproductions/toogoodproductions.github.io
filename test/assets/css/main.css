@@ -6,9 +6,9 @@
 
 /* ---------- Fonts ---------- */
 @font-face {
-  font-family: 'League Spartan';
-  src: url('../fonts/league-spartan-latin.woff2') format('woff2-variations');
-  font-weight: 100 900;
+  font-family: 'DisplayCond';
+  src: url('../fonts/anton-latin.woff2') format('woff2');
+  font-weight: 400 900;
   font-style: normal;
   font-display: swap;
 }
@@ -24,13 +24,13 @@
 :root {
   --bg: #000;
   --fg: #fff;
-  --accent: #e3ff39;
+  --accent: #ff5f1f;
   --accent-fg: #000;
   --dark-shade: #0c0e0f;
   --border: rgba(255, 255, 255, 0.05);
   --radius: 8px;
 
-  --font-display: 'League Spartan', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-display: 'DisplayCond', 'Arial Narrow', Impact, sans-serif;
   --font-mono: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   --pad: 20px;                 /* page gutter */
@@ -101,7 +101,7 @@ html.lenis, html.lenis body { height: auto; }
 .type-heading-2xl, .type-heading-xl, .type-heading-lg, .type-heading-md,
 .type-heading-sm, .type-heading-xs {
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.02;
 }
 .type-heading-2xl { font-size: 4.8rem; letter-spacing: -0.03em; text-transform: uppercase; }
@@ -568,7 +568,7 @@ body.is-loading { overflow: hidden; }
 }
 .scene-art--engine {
   background:
-    radial-gradient(50% 64% at 70% 34%, rgba(227,255,57,.28), transparent 64%),
+    radial-gradient(50% 64% at 70% 34%, rgba(255,95,31,.28), transparent 64%),
     radial-gradient(64% 80% at 24% 74%, rgba(20,60,60,.8), transparent 72%),
     radial-gradient(30% 36% at 48% 18%, rgba(140,255,220,.18), transparent 70%),
     linear-gradient(200deg, #071010 0%, #040606 55%, #0c1206 100%);
@@ -750,7 +750,7 @@ body.is-loading { overflow: hidden; }
   outline-offset: 2px;
 }
 .reel-rail button:hover { opacity: 1; }
-.reel-rail button.is-active { opacity: 1; outline-color: rgba(227,255,57,.8); }
+.reel-rail button.is-active { opacity: 1; outline-color: rgba(255,95,31,.8); }
 .reel-rail .scene { position: absolute; inset: 0; }
 .reel-rail .scene::after { display: none; }
 .reel-rail .scene-art { animation: none; inset: 0; }
@@ -1123,7 +1123,7 @@ body.is-loading { overflow: hidden; }
   padding: 4px 4px 4px 20px;
   transition: border-color .3s;
 }
-.newsletter-field:focus-within { border-color: rgba(227,255,57,.7); }
+.newsletter-field:focus-within { border-color: rgba(255,95,31,.7); }
 .newsletter input {
   flex: 1;
   min-width: 0;
@@ -1427,7 +1427,7 @@ a:hover .play-badge, button:hover .play-badge { transform: scale(1.08); backgrou
   display: flex; align-items: center; justify-content: center;
   transition: border-color .3s, background .3s;
 }
-.carousel-nav button:hover { border-color: var(--accent); background: rgba(227,255,57,.08); }
+.carousel-nav button:hover { border-color: var(--accent); background: rgba(255,95,31,.08); }
 .carousel-nav svg { width: 9px; height: 11px; fill: currentColor; }
 .carousel-nav .prev svg { transform: rotate(180deg); }
 
@@ -1544,8 +1544,6 @@ html.return-visit .loader { display: none; }
 /* Menu: heavier, wider-tracked - reads as a control, not a caption */
 .header-nav a { font-weight: 700; letter-spacing: .09em; }
 
-/* Mobile menu: display type at full force */
-.mobile-menu nav a { font-weight: 800; }
 
 /* Micro-labels: punchier */
 .type-label { font-weight: 600; letter-spacing: .1em; }
@@ -1553,22 +1551,8 @@ html.return-visit .loader { display: none; }
 /* Buttons: confident */
 .btn { font-weight: 700; letter-spacing: .08em; }
 
-/* Multi-line headings: first line light, the rest bold.
-   One typographic gesture, applied only at marquee moments. */
-[data-mask-reveal] .line-mask:first-child:not(:only-child) .line-inner {
-  font-weight: 300;
-  letter-spacing: 0;
-}
 
-/* Hero on the reel AND its loop clone (clone uses plain .line spans,
-   so target the first child whatever its class - weight inherits down) */
-.hero-title > *:first-child:not(:only-child) { font-weight: 300; }
 
-/* Big statements: light and airy against the bold heads */
-.statement { font-weight: 300; }
-
-/* Panel eyebrows: light whisper above the bold title */
-.panel-eyebrow { font-weight: 300; }
 
 /* ===== Header clearance + mobile logo glass ===== */
 
