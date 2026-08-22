@@ -24,7 +24,7 @@
 :root {
   --bg: #000;
   --fg: #fff;
-  --accent: #ff5f1f;
+  --accent: #ff7a00;
   --accent-fg: #000;
   --dark-shade: #0c0e0f;
   --border: rgba(255, 255, 255, 0.05);
@@ -568,7 +568,7 @@ body.is-loading { overflow: hidden; }
 }
 .scene-art--engine {
   background:
-    radial-gradient(50% 64% at 70% 34%, rgba(255,95,31,.28), transparent 64%),
+    radial-gradient(50% 64% at 70% 34%, rgba(255,122,0,.28), transparent 64%),
     radial-gradient(64% 80% at 24% 74%, rgba(20,60,60,.8), transparent 72%),
     radial-gradient(30% 36% at 48% 18%, rgba(140,255,220,.18), transparent 70%),
     linear-gradient(200deg, #071010 0%, #040606 55%, #0c1206 100%);
@@ -750,7 +750,7 @@ body.is-loading { overflow: hidden; }
   outline-offset: 2px;
 }
 .reel-rail button:hover { opacity: 1; }
-.reel-rail button.is-active { opacity: 1; outline-color: rgba(255,95,31,.8); }
+.reel-rail button.is-active { opacity: 1; outline-color: rgba(255,122,0,.8); }
 .reel-rail .scene { position: absolute; inset: 0; }
 .reel-rail .scene::after { display: none; }
 .reel-rail .scene-art { animation: none; inset: 0; }
@@ -1123,7 +1123,7 @@ body.is-loading { overflow: hidden; }
   padding: 4px 4px 4px 20px;
   transition: border-color .3s;
 }
-.newsletter-field:focus-within { border-color: rgba(255,95,31,.7); }
+.newsletter-field:focus-within { border-color: rgba(255,122,0,.7); }
 .newsletter input {
   flex: 1;
   min-width: 0;
@@ -1427,7 +1427,7 @@ a:hover .play-badge, button:hover .play-badge { transform: scale(1.08); backgrou
   display: flex; align-items: center; justify-content: center;
   transition: border-color .3s, background .3s;
 }
-.carousel-nav button:hover { border-color: var(--accent); background: rgba(255,95,31,.08); }
+.carousel-nav button:hover { border-color: var(--accent); background: rgba(255,122,0,.08); }
 .carousel-nav svg { width: 9px; height: 11px; fill: currentColor; }
 .carousel-nav .prev svg { transform: rotate(180deg); }
 
