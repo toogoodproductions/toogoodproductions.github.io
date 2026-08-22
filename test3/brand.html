@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en" class="lenis" style="background:#f7f7f5">
+<head>
+  <meta charset="UTF-8">
+  <script>try{if(sessionStorage.getItem("visited"))document.documentElement.className+=" return-visit"}catch(e){}</script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#f7f7f5">
+  <title>Brand Work · toogood</title>
+  <meta name="description" content="Sample brand work index — grid and list views.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23e3ff39'/%3E%3Cpath d='M11 8h10v4h-6v2h6v10H11v-4h6v-2h-6z' fill='%23000'/%3E%3C/svg%3E">
+  <link rel="preload" href="assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/chivo-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/main.css">
+  <script type="speculationrules">{"prerender":[{"where":{"href_matches":"/*"},"eagerness":"moderate"}]}</script>
+</head>
+<body>
+  <svg style="display:none" aria-hidden="true"><filter id="glass-distortion" x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.01 0.01" numOctaves="1" seed="5" result="turbulence"></feTurbulence><feComponentTransfer in="turbulence" result="mapped"><feFuncR type="gamma" amplitude="1" exponent="10" offset="0.5"></feFuncR><feFuncG type="gamma" amplitude="0" exponent="1" offset="0"></feFuncG><feFuncB type="gamma" amplitude="0" exponent="1" offset="0.5"></feFuncB></feComponentTransfer><feGaussianBlur in="turbulence" stdDeviation="5" result="softMap"></feGaussianBlur><feSpecularLighting in="softMap" surfaceScale="5" specularConstant="1" specularExponent="100" lighting-color="white" result="specLight"><fePointLight x="-200" y="-200" z="300"></fePointLight></feSpecularLighting><feComposite in="specLight" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litImage"></feComposite><feDisplacementMap in="SourceGraphic" in2="softMap" scale="160" xChannelSelector="R" yChannelSelector="G" result="displaced1"></feDisplacementMap><feColorMatrix in="displaced1" type="matrix" values="1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" result="displacedR"></feColorMatrix><feDisplacementMap in="SourceGraphic" in2="softMap" scale="150" xChannelSelector="R" yChannelSelector="G" result="displaced2"></feDisplacementMap><feColorMatrix in="displaced2" type="matrix" values="0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0" result="displacedG"></feColorMatrix><feDisplacementMap in="SourceGraphic" in2="softMap" scale="140" xChannelSelector="R" yChannelSelector="G" result="displaced3"></feDisplacementMap><feColorMatrix in="displaced3" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0" result="displacedB"></feColorMatrix><feBlend in="displacedR" in2="displacedG" mode="screen" result="blend1"></feBlend><feBlend in="blend1" in2="displacedB" mode="screen"></feBlend></filter></svg>
+
+  <div class="loader">
+    <div class="loader-logo"><img class="logo-img" src="assets/img/toogood-dark.png" alt="toogood"></div>
+    <span class="loader-count">000</span>
+  </div>
+
+  <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="triangle" viewBox="0 0 8 10"><path d="M0 0 8 5 0 10Z"/></symbol>
+    <symbol id="menu" viewBox="0 0 16 12"><path d="M0 1h16M0 6h16M0 11h16" stroke-width="1.5" fill="none"/></symbol>
+  </svg>
+
+  <header class="site-header">
+    <a href="index.html" class="header-logo" aria-label="Home">
+      <img class="logo-img" src="assets/img/toogood-dark.png" alt="toogood">
+    </a>
+    <nav class="header-nav glass" aria-label="Primary">
+      <span class="glass-effect"></span>
+      <div class="glass-content border-shine">
+        <a href="brand.html">Brand</a>
+        <a href="narrative.html">Narrative</a>
+        <a href="about.html">About</a>
+        <a href="news.html">News</a>
+      </div>
+    </nav>
+    <div class="header-cta glass">
+      <span class="glass-effect"></span>
+      <a class="btn btn-accent btn-md glass-content border-shine" href="about.html#contact">
+        Get in touch <span class="btn-chip"><svg><use href="#triangle"/></svg></span>
+      </a>
+    </div>
+    <div class="header-menu-btn glass">
+      <span class="glass-effect"></span>
+      <button class="btn btn-dark glass-content border-shine" data-menu-open aria-label="Open menu">
+        Menu <svg viewBox="0 0 16 12"><use href="#menu"/></svg>
+      </button>
+    </div>
+  </header>
+
+
+  <div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="mobile-menu-close glass">
+      <span class="glass-effect"></span>
+      <button class="btn btn-dark glass-content border-shine" data-menu-close>Close</button>
+    </div>
+    <nav>
+      <ul>
+        <li class="menu-item"><a href="brand.html">Brand</a></li>
+        <li class="menu-item"><a href="narrative.html">Narrative</a></li>
+        <li class="menu-item"><a href="about.html">About</a></li>
+        <li class="menu-item"><a href="news.html">News</a></li>
+      </ul>
+    </nav>
+    <div class="menu-foot">
+      <a class="btn btn-accent btn-md" href="about.html#contact">Get in touch
+        <span class="btn-chip"><svg><use href="#triangle"/></svg></span>
+      </a>
+    </div>
+  </div>
+
+  
+  <main class="page-main">
+
+    <!-- Hero: stark title + intro -->
+    <header class="page-hero container">
+      <h1 class="type-heading-xl text-balance" data-mask-reveal>
+        <span class="line-mask"><span class="line-inner"><span class="hl" style="--hl:var(--fushia)">Brand</span></span></span>
+      </h1>
+      <p class="type-base text-dim" data-reveal style="max-width:72ch;margin-top:24px">Lorem ipsum dolor sit amet, consectetur adipiscing elit — placeholder copy about partnering with sample brands, artists and studios to build campaign films, social-first spots and full brand worlds, end to end.</p>
+      <hr style="margin-top:48px">
+    </header>
+
+    <!-- Logotype marquee -->
+    <section class="marquee-band" data-reveal>
+      <div class="marquee">
+        <div class="marquee-track">
+          <span class="marquee-set"><span class="marquee-item">Lorem Co</span><span class="marquee-item">Ipsum Inc</span><span class="marquee-item">Dolor Labs</span><span class="marquee-item">Amet Group</span><span class="marquee-item">Sit Media</span><span class="marquee-item">Elit Corp</span><span class="marquee-item">Tempor & Co</span><span class="marquee-item">Magna Works</span></span>
+          <span class="marquee-set" aria-hidden="true"><span class="marquee-item">Lorem Co</span><span class="marquee-item">Ipsum Inc</span><span class="marquee-item">Dolor Labs</span><span class="marquee-item">Amet Group</span><span class="marquee-item">Sit Media</span><span class="marquee-item">Elit Corp</span><span class="marquee-item">Tempor & Co</span><span class="marquee-item">Magna Works</span></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Work index: Grid / List -->
+    <section class="section container work-index" data-view="grid">
+      <div style="display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap">
+        <div class="view-switch" role="tablist" aria-label="Layout">
+          <button role="tab" data-view-btn="grid" class="is-active" aria-selected="true">Grid</button>
+          <button role="tab" data-view-btn="list" aria-selected="false">List</button>
+        </div>
+      </div>
+      <div class="work-grid" data-reveal-group>
+        <div class="work-cell" data-reveal>
+          <a class="work-card" href="project.html">
+            <span class="media">
+              <span class="media-inner sheen-overlay">
+                <span class="scene scene--still"><span class="scene-art scene-art--city"></span><span class="scene-vignette"></span></span>
+              </span>
+            </span>
+            <span class="copy">
+              <span class="client type-heading-xs">Client Partner</span>
+              <span class="title type-heading-sm">Neon District</span>
+            </span>
+            <span class="row-chip"><svg><use href="#triangle"/></svg></span>
+          </a>
+        </div>
+        <div class="work-cell" data-reveal>
+          <a class="work-card" href="project.html">
+            <span class="media">
+              <span class="media-inner sheen-overlay">
+                <span class="scene scene--still"><span class="scene-art scene-art--pop"></span><span class="scene-vignette"></span></span>
+              </span>
+            </span>
+            <span class="copy">
+              <span class="client type-heading-xs">Client Partner</span>
+              <span class="title type-heading-sm">Pop Anthem</span>
+            </span>
+            <span class="row-chip"><svg><use href="#triangle"/></svg></span>
+          </a>
+        </div>
+        <div class="work-cell" data-reveal>
+          <a class="work-card" href="project.html">
+            <span class="media">
+              <span class="media-inner sheen-overlay">
+                <span class="scene scene--still"><span class="scene-art scene-art--golden"></span><span class="scene-vignette"></span></span>
+              </span>
+            </span>
+            <span class="copy">
+              <span class="client type-heading-xs">Client Partner</span>
+              <span class="title type-heading-sm">Golden Hour</span>
+            </span>
+            <span class="row-chip"><svg><use href="#triangle"/></svg></span>
+          </a>
+        </div>
+        <div class="work-cell" data-reveal>
+          <a class="work-card" href="project.html">
+            <span class="media">
+              <span class="media-inner sheen-overlay">
+                <span class="scene scene--still"><span class="scene-art scene-art--engine"></span><span class="scene-vignette"></span></span>
+              </span>
+            </span>
+            <span class="copy">
+              <span class="client type-heading-xs">Client Partner</span>
+              <span class="title type-heading-sm">Signal Boost</span>
+            </span>
+            <span class="row-chip"><svg><use href="#triangle"/></svg></span>
+          </a>
+        </div>
+        <div class="work-cell" data-reveal>
+          <a class="work-card" href="project.html">
+            <span class="media">
+              <span class="media-inner sheen-overlay">
+                <span class="scene scene--still"><span class="scene-art scene-art--pastel"></span><span class="scene-vignette"></span></span>
+              </span>
+            </span>
+            <span class="copy">
+              <span class="client type-heading-xs">Client Partner</span>
+              <span class="title type-heading-sm">Soft Launch</span>
+            </span>
+            <span class="row-chip"><svg><use href="#triangle"/></svg></span>
+          </a>
+        </div>
+        <div class="work-cell" data-reveal>
+          <a class="work-card" href="project.html">
+            <span class="media">
+              <span class="media-inner sheen-overlay">
+                <span class="scene scene--still"><span class="scene-art scene-art--heist"></span><span class="scene-vignette"></span></span>
+              </span>
+            </span>
+            <span class="copy">
+              <span class="client type-heading-xs">Client Partner</span>
+              <span class="title type-heading-sm">Red Carpet</span>
+            </span>
+            <span class="row-chip"><svg><use href="#triangle"/></svg></span>
+          </a>
+        </div>
+        <div class="work-cell" data-reveal>
+          <a class="work-card" href="project.html">
+            <span class="media">
+              <span class="media-inner sheen-overlay">
+                <span class="scene scene--still"><span class="scene-art scene-art--forest"></span><span class="scene-vignette"></span></span>
+              </span>
+            </span>
+            <span class="copy">
+              <span class="client type-heading-xs">Client Partner</span>
+              <span class="title type-heading-sm">Evergreen</span>
+            </span>
+            <span class="row-chip"><svg><use href="#triangle"/></svg></span>
+          </a>
+        </div>
+        <div class="work-cell" data-reveal>
+          <a class="work-card" href="project.html">
+            <span class="media">
+              <span class="media-inner sheen-overlay">
+                <span class="scene scene--still"><span class="scene-art scene-art--showreel"></span><span class="scene-vignette"></span></span>
+              </span>
+            </span>
+            <span class="copy">
+              <span class="client type-heading-xs">Client Partner</span>
+              <span class="title type-heading-sm">Prime Time</span>
+            </span>
+            <span class="row-chip"><svg><use href="#triangle"/></svg></span>
+          </a>
+        </div>
+        <div class="work-cell" data-reveal>
+          <a class="work-card" href="project.html">
+            <span class="media">
+              <span class="media-inner sheen-overlay">
+                <span class="scene scene--still"><span class="scene-art scene-art--city"></span><span class="scene-vignette"></span></span>
+              </span>
+            </span>
+            <span class="copy">
+              <span class="client type-heading-xs">Client Partner</span>
+              <span class="title type-heading-sm">After Hours</span>
+            </span>
+            <span class="row-chip"><svg><use href="#triangle"/></svg></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+      <div class="container">
+        <h2 class="footer-tagline" data-mask-reveal>
+          <span class="line-mask"><span class="line-inner">Films, series and</span></span>
+          <span class="line-mask"><span class="line-inner">brand worlds — built</span></span>
+          <span class="line-mask"><span class="line-inner"><span class="hl" style="--hl:var(--tangerine)">at the speed of culture</span></span></span>
+        </h2>
+        <div class="footer-grid">
+          <div class="footer-col">
+            <h4>Follow</h4>
+            <div class="socials">
+              <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1s-3.6 0-4.9-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 4 4 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zm0 3.6a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-10.5a1.4 1.4 0 1 0 0 2.9 1.4 1.4 0 0 0 0-2.9z"/></svg></a>
+              <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M17.5 3h3.1l-6.8 7.8L21.8 21h-6.3l-4.9-6.4L5 21H1.9l7.3-8.3L2.2 3h6.4l4.4 5.9L17.5 3zm-1.1 16.1h1.7L7.7 4.8H5.9l10.5 14.3z"/></svg></a>
+              <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.5c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"/></svg></a>
+              <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 7.2a3 3 0 0 0-2.1-2.2C19.5 4.5 12 4.5 12 4.5s-7.5 0-9.4.5A3 3 0 0 0 .5 7.2 32 32 0 0 0 0 12a32 32 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A32 32 0 0 0 24 12a32 32 0 0 0-.5-4.8zM9.5 15.5v-7l6.5 3.5-6.5 3.5z"/></svg></a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h4>Menu</h4>
+            <ul>
+              <li><a href="brand.html">Brand</a></li>
+              <li><a href="narrative.html">Narrative</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="news.html">News</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <ul>
+              <li><span class="type-label text-dim-2">Brand projects</span><br><a class="mail" href="mailto:brand@example.com">brand@example.com</a></li>
+              <li><span class="type-label text-dim-2">Narrative</span><br><a class="mail" href="mailto:narrative@example.com">narrative@example.com</a></li>
+              <li><span class="type-label text-dim-2">General</span><br><a class="mail" href="mailto:hello@example.com">hello@example.com</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Newsletter</h4>
+            <form class="newsletter">
+              <div class="newsletter-field">
+                <input type="email" name="email" placeholder="your@email.com" required aria-label="Email">
+                <button class="btn btn-accent" type="submit">Subscribe</button>
+              </div>
+              <span class="newsletter-note">Sample form — no data is sent.</span>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="footer-mark" aria-hidden="true">toogood</div>
+      <div class="container">
+        <div class="footer-bottom">
+          <span>© 2026 toogood</span>
+          <div class="legal">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="assets/js/vendor/gsap.min.js"></script>
+  <script src="assets/js/vendor/ScrollTrigger.min.js"></script>
+  <script src="assets/js/vendor/lenis.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/work.js"></script>
+  <div class="test-badge" aria-hidden="true">test 3 · light lab</div>
+</body>
+</html>
