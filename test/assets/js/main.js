@@ -72,7 +72,14 @@
       if (loader.parentNode) loader.remove();
       runIntro();
     };
-    setTimeout(forceDone, 3800);
+    var whenShown = function (fn) {
+      if (document.prerendering) {
+        document.addEventListener('prerenderingchange', function () { fn(); }, { once: true });
+      } else {
+        fn();
+      }
+    };
+    whenShown(function () { setTimeout(forceDone, 3800); });
     document.addEventListener('visibilitychange', function onVis() {
       if (!document.hidden && document.body.classList.contains('is-loading')) {
         // resumed from a hidden tab — give the timeline a moment, then force
@@ -112,8 +119,10 @@
       // the return-visit class set in <head>). Fire the intro on the first
       // painted frame. Double rAF guarantees every classic script has executed
       // and registered its site:intro listener before the event dispatches.
-      requestAnimationFrame(function () {
-        requestAnimationFrame(forceDone);
+      whenShown(function () {
+        requestAnimationFrame(function () {
+          requestAnimationFrame(forceDone);
+        });
       });
       // hidden-tab insurance: rAF may not fire — the 3.8s cap still applies
     }
@@ -121,25 +130,11 @@
     requestAnimationFrame(runIntro);
   }
 
-  /* ---------- Page transition veil ---------- */
-  var veil = document.createElement('div');
-  veil.className = 'veil';
-  document.body.appendChild(veil);
-
-  document.addEventListener('click', function (e) {
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
-    var a = e.target.closest('a');
-    if (!a) return;
-    var href = a.getAttribute('href');
-    if (!href || href.charAt(0) === '#' || a.target === '_blank' || a.hasAttribute('download')) return;
-    if (/^(https?:|mailto:|tel:)/.test(href)) return;
-    e.preventDefault();
-    veil.classList.add('is-active');
-    setTimeout(function () { window.location.href = href; }, 170);
-  });
-  window.addEventListener('pageshow', function (e) {
-    if (e.persisted) veil.classList.remove('is-active');
-  });
+  /* ---------- Page transitions ----------
+     No exit fade: links navigate the instant they are clicked. The browser
+     paint-holds the current dark page until the next page is ready, and
+     speculation-rules prerendering makes that swap instant on hover in
+     Chromium. The arrival intro is the single visible motion. */
 
   /* Hover prefetch — the next page is already cached before the click lands */
   var prefetched = {};
