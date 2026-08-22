@@ -1431,35 +1431,6 @@ a:hover .play-badge, button:hover .play-badge { transform: scale(1.08); backgrou
 .carousel-nav svg { width: 9px; height: 11px; fill: currentColor; }
 .carousel-nav .prev svg { transform: rotate(180deg); }
 
-/* — Continue-to CTA (rule-t section, accent underlined target) — */
-.continue-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 48px var(--pad);
-}
-@media (min-width: 768px)  { .continue-section { padding-block: 80px; } }
-@media (min-width: 1024px) { .continue-section { padding-block: 120px; } }
-.continue-link {
-  display: inline-flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 16px;
-  transition: color .3s;
-}
-.continue-link:hover { color: var(--accent); }
-.continue-link .target { color: var(--accent); text-decoration: underline; }
-.continue-link .chip {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px; height: 32px;
-  border-radius: var(--radius);
-  background: rgba(255,255,255,.1);
-}
-.continue-link .chip svg { width: 8px; height: 10px; fill: currentColor; }
 
 /* ---------- Focus visibility ---------- */
 :focus-visible {
@@ -1570,3 +1541,12 @@ html.return-visit .loader { display: none; }
     backdrop-filter: blur(10px) brightness(1.15) saturate(1.2);
   }
 }
+
+/* ===== Accent text highlights ===== */
+.header-nav a.is-active { color: var(--accent); }
+.mobile-menu nav a.is-active { color: var(--accent); }
+.kicker { color: var(--accent); }
+.panel-eyebrow { color: var(--accent); }
+.role { color: var(--accent); }
+.news-card:hover h3 { color: var(--accent); }
+.news-card h3 { transition: color .3s; }
