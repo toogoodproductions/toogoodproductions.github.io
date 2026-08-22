@@ -1560,10 +1560,9 @@ html.return-visit .loader { display: none; }
   letter-spacing: 0;
 }
 
-/* Hero on the reel gets the same treatment */
-.hero-title .line-mask:first-child:not(:only-child) .line-inner {
-  font-weight: 300;
-}
+/* Hero on the reel AND its loop clone (clone uses plain .line spans,
+   so target the first child whatever its class - weight inherits down) */
+.hero-title > *:first-child:not(:only-child) { font-weight: 300; }
 
 /* Big statements: light and airy against the bold heads */
 .statement { font-weight: 300; }
