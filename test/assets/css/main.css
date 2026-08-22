@@ -1543,6 +1543,6 @@ html.return-visit .loader { display: none; }
 .news-card h3 { transition: color .3s; }
 
 /* ===== Logo image (white wordmark, transparent, negative space baked in) ===== */
-.header-logo .logo-img { display: block; height: 30px; width: auto; }
-@media (min-width: 900px) { .header-logo .logo-img { height: 34px; } }
-.loader-logo .logo-img { display: block; height: 64px; width: auto; margin: 0 auto; }
+.header-logo .logo-img { display: block; height: 38px; width: auto; }
+@media (min-width: 900px) { .header-logo .logo-img { height: 44px; } }
+.loader-logo .logo-img { display: block; height: 84px; width: auto; margin: 0 auto; }
