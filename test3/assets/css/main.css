@@ -1569,3 +1569,7 @@ html.return-visit .loader { display: none; }
 /* purple lab: light content on the deep accent */
 .test-badge { color: #fff; }
 .btn-accent .btn-chip { background: rgba(255, 255, 255, 0.18); }
+
+/* Reel panels will hold real footage: labels read white over media,
+   never accent-tinted */
+.reel-panel .panel-eyebrow { color: #fff; }
