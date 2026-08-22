@@ -1538,3 +1538,35 @@ html.return-visit .loader { display: none; }
 .mobile-cta .btn { height: 50px; padding: 0 22px; border-radius: 999px; }
 @media (min-width: 900px) { .mobile-cta { display: none; } }
 
+
+/* ===== Typography v2: deliberate weight contrast ===== */
+
+/* Menu: heavier, wider-tracked - reads as a control, not a caption */
+.header-nav a { font-weight: 700; letter-spacing: .09em; }
+
+/* Mobile menu: display type at full force */
+.mobile-menu nav a { font-weight: 800; }
+
+/* Micro-labels: punchier */
+.type-label { font-weight: 600; letter-spacing: .1em; }
+
+/* Buttons: confident */
+.btn { font-weight: 700; letter-spacing: .08em; }
+
+/* Multi-line headings: first line light, the rest bold.
+   One typographic gesture, applied only at marquee moments. */
+[data-mask-reveal] .line-mask:first-child:not(:only-child) .line-inner {
+  font-weight: 300;
+  letter-spacing: 0;
+}
+
+/* Hero on the reel gets the same treatment */
+.hero-title .line-mask:first-child:not(:only-child) .line-inner {
+  font-weight: 300;
+}
+
+/* Big statements: light and airy against the bold heads */
+.statement { font-weight: 300; }
+
+/* Panel eyebrows: light whisper above the bold title */
+.panel-eyebrow { font-weight: 300; }
