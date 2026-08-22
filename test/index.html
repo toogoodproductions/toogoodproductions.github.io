@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en" class="lenis" style="background:#000">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#000000">
+  <title>toogood</title>
+  <meta name="description" content="toogood, an ai studio in ahmedabad.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23e3ff39'/%3E%3Cpath d='M11 8h10v4h-6v2h6v10H11v-4h6v-2h-6z' fill='%23000'/%3E%3C/svg%3E">
+  <link rel="preload" href="assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/chivo-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+  <svg style="display:none" aria-hidden="true"><filter id="glass-distortion" x="-50%" y="-50%" width="200%" height="200%" filterUnits="objectBoundingBox" color-interpolation-filters="sRGB"><feTurbulence type="fractalNoise" baseFrequency="0.01 0.01" numOctaves="1" seed="5" result="turbulence"></feTurbulence><feComponentTransfer in="turbulence" result="mapped"><feFuncR type="gamma" amplitude="1" exponent="10" offset="0.5"></feFuncR><feFuncG type="gamma" amplitude="0" exponent="1" offset="0"></feFuncG><feFuncB type="gamma" amplitude="0" exponent="1" offset="0.5"></feFuncB></feComponentTransfer><feGaussianBlur in="turbulence" stdDeviation="5" result="softMap"></feGaussianBlur><feSpecularLighting in="softMap" surfaceScale="5" specularConstant="1" specularExponent="100" lighting-color="white" result="specLight"><fePointLight x="-200" y="-200" z="300"></fePointLight></feSpecularLighting><feComposite in="specLight" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="litImage"></feComposite><feDisplacementMap in="SourceGraphic" in2="softMap" scale="160" xChannelSelector="R" yChannelSelector="G" result="displaced1"></feDisplacementMap><feColorMatrix in="displaced1" type="matrix" values="1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0" result="displacedR"></feColorMatrix><feDisplacementMap in="SourceGraphic" in2="softMap" scale="150" xChannelSelector="R" yChannelSelector="G" result="displaced2"></feDisplacementMap><feColorMatrix in="displaced2" type="matrix" values="0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 0" result="displacedG"></feColorMatrix><feDisplacementMap in="SourceGraphic" in2="softMap" scale="140" xChannelSelector="R" yChannelSelector="G" result="displaced3"></feDisplacementMap><feColorMatrix in="displaced3" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 0" result="displacedB"></feColorMatrix><feBlend in="displacedR" in2="displacedG" mode="screen" result="blend1"></feBlend><feBlend in="blend1" in2="displacedB" mode="screen"></feBlend></filter></svg>
+
+  <!-- Loader -->
+  <div class="loader">
+    <div class="loader-logo">
+      <div class="logo-stack" style="text-align:center">
+        <span>toogood</span>
+      </div>
+    </div>
+    <span class="loader-count">000</span>
+  </div>
+
+  <!-- SVG symbols -->
+  <svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="triangle" viewBox="0 0 8 10"><path d="M0 0 8 5 0 10Z"/></symbol>
+    <symbol id="menu" viewBox="0 0 16 12"><path d="M0 1h16M0 6h16M0 11h16" stroke-width="1.5" fill="none"/></symbol>
+  </svg>
+
+  <!-- Header -->
+  <header class="site-header">
+    <a href="index.html" class="header-logo" aria-label="Home">
+      <div class="logo-stack"><span>toogood</span></div>
+    </a>
+    <nav class="header-nav glass" aria-label="Primary">
+      <span class="glass-effect"></span>
+      <div class="glass-content border-shine">
+        <a href="brand.html">Brand</a>
+        <a href="narrative.html">Narrative</a>
+        <a href="about.html">About</a>
+        <a href="news.html">News</a>
+      </div>
+    </nav>
+    <div class="header-cta glass">
+      <span class="glass-effect"></span>
+      <a class="btn btn-glass btn-md glass-content border-shine" href="about.html#contact">
+        Get in touch
+        <span class="btn-chip"><svg><use href="#triangle"/></svg></span>
+      </a>
+    </div>
+    <div class="header-menu-btn glass">
+      <span class="glass-effect"></span>
+      <button class="btn btn-dark glass-content border-shine" data-menu-open aria-label="Open menu">
+        Menu
+        <svg viewBox="0 0 16 12"><use href="#menu"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="mobile-menu-close glass">
+      <span class="glass-effect"></span>
+      <button class="btn btn-dark glass-content border-shine" data-menu-close>Close</button>
+    </div>
+    <nav>
+      <ul>
+        <li class="menu-item"><a href="brand.html">Brand</a></li>
+        <li class="menu-item"><a href="narrative.html">Narrative</a></li>
+        <li class="menu-item"><a href="about.html">About</a></li>
+        <li class="menu-item"><a href="news.html">News</a></li>
+      </ul>
+    </nav>
+    <div class="menu-foot">
+      <a class="btn btn-accent btn-md" href="about.html#contact">Get in touch
+        <span class="btn-chip"><svg><use href="#triangle"/></svg></span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Thumbnail rail (desktop) -->
+  <!-- Rail reads as a circle: 3 panels behind you, the reel (center, active), 3 ahead -->
+  <nav class="reel-rail" aria-label="Featured work">
+    <ul>
+      <li><button data-target="4" aria-label="Pop Anthem"><span class="scene"><span class="scene-art scene-art--pop"></span></span></button></li>
+      <li><button data-target="5" aria-label="Soft Focus"><span class="scene"><span class="scene-art scene-art--pastel"></span></span></button></li>
+      <li><button data-target="6" aria-label="Golden Hour"><span class="scene"><span class="scene-art scene-art--golden"></span></span></button></li>
+      <li><button data-target="0" aria-label="Showreel"><span class="scene"><span class="scene-art scene-art--showreel"></span></span></button></li>
+      <li><button data-target="1" aria-label="Project Ember"><span class="scene"><span class="scene-art scene-art--forest"></span></span></button></li>
+      <li><button data-target="2" aria-label="The Lorem Job"><span class="scene"><span class="scene-art scene-art--heist"></span></span></button></li>
+      <li><button data-target="3" aria-label="Neon District"><span class="scene"><span class="scene-art scene-art--city"></span></span></button></li>
+    </ul>
+  </nav>
+
+  <!-- Progress dots (mobile) -->
+  <nav class="reel-dots" aria-label="Sections">
+    <button aria-label="Panel 1"></button><button aria-label="Panel 2"></button>
+    <button aria-label="Panel 3"></button><button aria-label="Panel 4"></button>
+    <button aria-label="Panel 5"></button><button aria-label="Panel 6"></button>
+    <button aria-label="Panel 7"></button>
+  </nav>
+
+  <main id="main">
+
+    <!-- 0 · Hero -->
+    <section class="reel-panel" id="showreel">
+      <div class="reel-panel-inner">
+        <div class="scene"><div class="scene-art scene-art--showreel"></div><div class="scene-vignette"></div></div>
+        <article class="container grid-12">
+          <div class="panel-copy">
+            <h1 class="type-heading-lg hero-title text-balance">
+              <span class="line-mask"><span class="line-inner">A Creative Studio</span></span>
+              <span class="line-mask"><span class="line-inner">Powered by AI</span></span>
+            </h1>
+            <p class="hero-para text-balance">Lorem ipsum dolor sit amet, consectetur adipiscing elit — a sample studio crafting films, series and brand worlds with cinematic craft, at the speed of culture.</p>
+            <div class="hero-cta">
+              <div class="glass" style="display:inline-flex;border-radius:999px">
+                <span class="glass-effect"></span>
+                <a class="btn btn-glass btn-lg glass-content border-shine" href="about.html">
+                  Watch Showreel
+                  <span class="btn-chip"><svg><use href="#triangle"/></svg></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 1 · Narrative project -->
+    <section class="reel-panel" id="project-ember">
+      <div class="reel-panel-inner">
+        <div class="scene"><div class="scene-art scene-art--forest"></div><div class="scene-vignette"></div></div>
+        <article class="container grid-12">
+          <div class="panel-copy">
+            <span class="panel-eyebrow">Studio Originals</span>
+            <h2 class="type-heading-xl text-balance">Project Ember</h2>
+            <div class="panel-actions">
+              <div class="glass" style="display:inline-flex;border-radius:999px">
+                <span class="glass-effect"></span>
+                <a class="btn btn-glass btn-lg glass-content border-shine" href="project.html">
+                  Watch Project
+                  <span class="btn-chip"><svg><use href="#triangle"/></svg></span>
+                </a>
+              </div>
+              <a class="btn btn-ghost" href="narrative.html">See All Narrative Work
+                <span class="btn-chip"><svg><use href="#triangle"/></svg></span>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 2 · Narrative project -->
+    <section class="reel-panel" id="lorem-job">
+      <div class="reel-panel-inner">
+        <div class="scene"><div class="scene-art scene-art--heist"></div><div class="scene-vignette"></div></div>
+        <article class="container grid-12">
+          <div class="panel-copy">
+            <span class="panel-eyebrow">Studio Originals</span>
+            <h2 class="type-heading-xl text-balance">The Lorem Job</h2>
+            <div class="panel-actions">
+              <div class="glass" style="display:inline-flex;border-radius:999px">
+                <span class="glass-effect"></span>
+                <a class="btn btn-glass btn-lg glass-content border-shine" href="project.html">
+                  Watch Project
+                  <span class="btn-chip"><svg><use href="#triangle"/></svg></span>
+                </a>
+              </div>
+              <a class="btn btn-ghost" href="narrative.html">See All Narrative Work
+                <span class="btn-chip"><svg><use href="#triangle"/></svg></span>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 3 · Brand project -->
+    <section class="reel-panel" id="neon-district">
+      <div class="reel-panel-inner">
+        <div class="scene"><div class="scene-art scene-art--city"></div><div class="scene-vignette"></div></div>
+        <article class="container grid-12">
+          <div class="panel-copy">
+            <span class="panel-eyebrow">Client Partner</span>
+            <h2 class="type-heading-xl text-balance">Neon District</h2>
+            <div class="panel-actions">
+              <div class="glass" style="display:inline-flex;border-radius:999px">
+                <span class="glass-effect"></span>
+                <a class="btn btn-glass btn-lg glass-content border-shine" href="project.html">
+                  Watch Project
+                  <span class="btn-chip"><svg><use href="#triangle"/></svg></span>
+                </a>
+              </div>
+              <a class="btn btn-ghost" href="brand.html">See All Brand Work
+                <span class="btn-chip"><svg><use href="#triangle"/></svg></span>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 4 · Brand project -->
+    <section class="reel-panel" id="pop-anthem">
+      <div class="reel-panel-inner">
+        <div class="scene"><div class="scene-art scene-art--pop"></div><div class="scene-vignette"></div></div>
+        <article class="container grid-12">
+          <div class="panel-copy">
+            <span class="panel-eyebrow">Client Partner</span>
+            <h2 class="type-heading-xl text-balance">Pop Anthem</h2>
+            <div class="panel-actions">
+              <div class="glass" style="display:inline-flex;border-radius:999px">
+                <span class="glass-effect"></span>
+                <a class="btn btn-glass btn-lg glass-content border-shine" href="project.html">
+                  Watch Project
+                  <span class="btn-chip"><svg><use href="#triangle"/></svg></span>
+                </a>
+              </div>
+              <a class="btn btn-ghost" href="brand.html">See All Brand Work
+                <span class="btn-chip"><svg><use href="#triangle"/></svg></span>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 5 · Narrative project -->
+    <section class="reel-panel" id="soft-focus">
+      <div class="reel-panel-inner">
+        <div class="scene"><div class="scene-art scene-art--pastel"></div><div class="scene-vignette"></div></div>
+        <article class="container grid-12">
+          <div class="panel-copy">
+            <span class="panel-eyebrow">Studio Originals</span>
+            <h2 class="type-heading-xl text-balance">Soft Focus</h2>
+            <div class="panel-actions">
+              <div class="glass" style="display:inline-flex;border-radius:999px">
+                <span class="glass-effect"></span>
+                <a class="btn btn-glass btn-lg glass-content border-shine" href="project.html">
+                  Watch Project
+                  <span class="btn-chip"><svg><use href="#triangle"/></svg></span>
+                </a>
+              </div>
+              <a class="btn btn-ghost" href="narrative.html">See All Narrative Work
+                <span class="btn-chip"><svg><use href="#triangle"/></svg></span>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 6 · Brand project -->
+    <section class="reel-panel" id="golden-hour">
+      <div class="reel-panel-inner">
+        <div class="scene"><div class="scene-art scene-art--golden"></div><div class="scene-vignette"></div></div>
+        <article class="container grid-12">
+          <div class="panel-copy">
+            <span class="panel-eyebrow">Client Partner</span>
+            <h2 class="type-heading-xl text-balance">Golden Hour</h2>
+            <div class="panel-actions">
+              <div class="glass" style="display:inline-flex;border-radius:999px">
+                <span class="glass-effect"></span>
+                <a class="btn btn-glass btn-lg glass-content border-shine" href="project.html">
+                  Watch Project
+                  <span class="btn-chip"><svg><use href="#triangle"/></svg></span>
+                </a>
+              </div>
+              <a class="btn btn-ghost" href="brand.html">See All Brand Work
+                <span class="btn-chip"><svg><use href="#triangle"/></svg></span>
+              </a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- 7 · Outro (loops back to hero) -->
+    <section class="reel-panel" id="outro">
+      <div class="reel-panel-inner">
+        <div class="scene"><div class="scene-art scene-art--showreel"></div><div class="scene-vignette"></div></div>
+        <article class="container grid-12">
+          <div class="panel-copy">
+            <h2 class="type-heading-lg hero-title text-balance">
+              <span class="line">A Creative Studio</span>
+              <span class="line">Powered by AI</span>
+            </h2>
+            <p class="hero-para text-balance">Lorem ipsum dolor sit amet, consectetur adipiscing elit — a sample studio crafting films, series and brand worlds with cinematic craft, at the speed of culture.</p>
+            <div class="hero-cta">
+              <div class="glass" style="display:inline-flex;border-radius:999px">
+                <span class="glass-effect"></span>
+                <a class="btn btn-glass btn-lg glass-content border-shine" href="about.html">
+                  Watch Showreel
+                  <span class="btn-chip"><svg><use href="#triangle"/></svg></span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="assets/js/vendor/gsap.min.js"></script>
+  <script src="assets/js/vendor/ScrollTrigger.min.js"></script>
+  <script src="assets/js/vendor/lenis.min.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/home.js"></script>
+  <div class="test-badge" aria-hidden="true">test build</div>
+</body>
+</html>
