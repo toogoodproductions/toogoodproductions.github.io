@@ -735,13 +735,13 @@ body.is-loading { overflow: hidden; }
 .reel-rail ul {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 .reel-rail button {
   display: block;
-  width: 80px;
-  height: 48px;
-  border-radius: var(--radius);
+  width: 64px;
+  height: 40px;
+  border-radius: 6px;
   overflow: hidden;
   position: relative;
   opacity: .45;
@@ -1499,3 +1499,13 @@ a:hover .play-badge, button:hover .play-badge { transform: scale(1.08); backgrou
 
 /* toogood logo override */
 .logo-stack { text-transform: none; }
+
+
+/* ===== Motion + glass enhancements ===== */
+/* Liquid glass: SVG distortion warps what passes behind the nav (from reference site) */
+.site-header .glass-effect { filter: url(#glass-distortion); }
+
+
+/* return visit: skip the arrival overlay entirely - the page is already dark,
+   the text entrance is the single visible load event */
+html.return-visit .loader { display: none; }

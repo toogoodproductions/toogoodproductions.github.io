@@ -29,7 +29,7 @@
   var lenis = null;
   if (!prefersReduced && window.Lenis) {
     lenis = new Lenis({
-      duration: 1.35,
+      duration: 0.75,
       easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
       smoothWheel: true,
       wheelMultiplier: 1,
@@ -72,7 +72,14 @@
       if (loader.parentNode) loader.remove();
       runIntro();
     };
-    setTimeout(forceDone, 3800);
+    var whenShown = function (fn) {
+      if (document.prerendering) {
+        document.addEventListener('prerenderingchange', function () { fn(); }, { once: true });
+      } else {
+        fn();
+      }
+    };
+    whenShown(function () { setTimeout(forceDone, 3800); });
     document.addEventListener('visibilitychange', function onVis() {
       if (!document.hidden && document.body.classList.contains('is-loading')) {
         // resumed from a hidden tab — give the timeline a moment, then force
@@ -107,40 +114,27 @@
         ease: 'power4.inOut'
       }, '+=0.1');
       loader.style.clipPath = 'inset(0% 0% 0% 0%)';
-    } else if (!prefersReduced) {
-      // return visit: quick fade keeps the black continuity from the veil
-      loader.classList.add('loader-fade');
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () { loader.style.opacity = '0'; });
-      });
-      setTimeout(forceDone, 320);
-      // hidden-tab insurance: rAF may not fire — forceDone's 3.8s cap still applies
     } else {
-      forceDone();
+      // Return visit (or reduced motion): no arrival overlay (CSS hides it via
+      // the return-visit class set in <head>). Fire the intro on the first
+      // painted frame. Double rAF guarantees every classic script has executed
+      // and registered its site:intro listener before the event dispatches.
+      whenShown(function () {
+        requestAnimationFrame(function () {
+          requestAnimationFrame(forceDone);
+        });
+      });
+      // hidden-tab insurance: rAF may not fire — the 3.8s cap still applies
     }
   } else {
     requestAnimationFrame(runIntro);
   }
 
-  /* ---------- Page transition veil ---------- */
-  var veil = document.createElement('div');
-  veil.className = 'veil';
-  document.body.appendChild(veil);
-
-  document.addEventListener('click', function (e) {
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
-    var a = e.target.closest('a');
-    if (!a) return;
-    var href = a.getAttribute('href');
-    if (!href || href.charAt(0) === '#' || a.target === '_blank' || a.hasAttribute('download')) return;
-    if (/^(https?:|mailto:|tel:)/.test(href)) return;
-    e.preventDefault();
-    veil.classList.add('is-active');
-    setTimeout(function () { window.location.href = href; }, 170);
-  });
-  window.addEventListener('pageshow', function (e) {
-    if (e.persisted) veil.classList.remove('is-active');
-  });
+  /* ---------- Page transitions ----------
+     No exit fade: links navigate the instant they are clicked. The browser
+     paint-holds the current dark page until the next page is ready, and
+     speculation-rules prerendering makes that swap instant on hover in
+     Chromium. The arrival intro is the single visible motion. */
 
   /* Hover prefetch — the next page is already cached before the click lands */
   var prefetched = {};
@@ -214,7 +208,7 @@
         el.style.setProperty('--reveal-delay', (idx * 0.08) + 's');
       } else if (el.getBoundingClientRect().top < window.innerHeight) {
         // above the fold: choreograph after the heading sweep
-        el.style.setProperty('--reveal-delay', '0.35s');
+        el.style.setProperty('--reveal-delay', '0.15s');
       }
       io.observe(el);
     });

@@ -59,7 +59,7 @@
           {
             yPercent: 18,
             scale: 1.06,
-            autoAlpha: 0.55,
+            autoAlpha: 1,
             ease: 'none',
             immediateRender: false,
             scrollTrigger: {
