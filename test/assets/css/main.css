@@ -1492,7 +1492,7 @@ html.return-visit .loader { display: none; }
   position: fixed;
   left: 50%;
   transform: translateX(-50%);
-  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  bottom: calc(34px + env(safe-area-inset-bottom, 0px));
   z-index: 65;
   border-radius: 999px;
 }
