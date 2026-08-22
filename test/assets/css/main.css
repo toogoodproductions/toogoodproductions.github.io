@@ -1525,3 +1525,15 @@ a:hover .play-badge, button:hover .play-badge { transform: scale(1.08); backgrou
 /* return visit: skip the arrival overlay entirely - the page is already dark,
    the text entrance is the single visible load event */
 html.return-visit .loader { display: none; }
+
+/* Mobile: persistent get-in-touch pill, bottom center. Desktop keeps the header CTA. */
+.mobile-cta {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 65;
+  border-radius: 999px;
+}
+.mobile-cta .btn { height: 50px; padding: 0 22px; border-radius: 999px; }
+@media (min-width: 900px) { .mobile-cta { display: none; } }

@@ -16,6 +16,8 @@
   /* ---------- Panel scrub motion ---------- */
   if (hasGsap && !prefersReduced) {
     gsap.registerPlugin(ScrollTrigger);
+    ScrollTrigger.config({ ignoreMobileResize: true });
+    var isSmall = window.matchMedia('(max-width: 767px)').matches;
 
     panels.forEach(function (panel, i) {
       var inner = panel.querySelector('.reel-panel-inner');
@@ -28,10 +30,10 @@
       if (!isFirst) {
         gsap.fromTo(inner,
           {
-            yPercent: -20,
-            rotation: 7,
-            scale: 1.3,
-            autoAlpha: 0.5,
+            yPercent: isSmall ? -10 : -20,
+            rotation: isSmall ? 3 : 7,
+            scale: isSmall ? 1.12 : 1.3,
+            autoAlpha: isSmall ? 0.85 : 0.5,
             transformOrigin: '50% 50%'
           },
           {
@@ -57,8 +59,8 @@
         gsap.fromTo(inner,
           { yPercent: 0, scale: 1, autoAlpha: 1 },
           {
-            yPercent: 18,
-            scale: 1.06,
+            yPercent: isSmall ? 10 : 18,
+            scale: isSmall ? 1.03 : 1.06,
             autoAlpha: 1,
             ease: 'none',
             immediateRender: false,
