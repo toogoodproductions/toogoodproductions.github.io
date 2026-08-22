@@ -107,40 +107,24 @@
         ease: 'power4.inOut'
       }, '+=0.1');
       loader.style.clipPath = 'inset(0% 0% 0% 0%)';
-    } else if (!prefersReduced) {
-      // return visit: quick fade keeps the black continuity from the veil
-      loader.classList.add('loader-fade');
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () { loader.style.opacity = '0'; });
-      });
-      setTimeout(forceDone, 320);
-      // hidden-tab insurance: rAF may not fire — forceDone's 3.8s cap still applies
     } else {
+      // Return visit (or reduced motion): no arrival fade at all. The new page
+      // is already dark and fully styled, so reveal it instantly and let the
+      // text animation play as the single entrance. This removes the
+      // page-to-page flicker while keeping the reveal on every page.
       forceDone();
     }
   } else {
     requestAnimationFrame(runIntro);
   }
 
-  /* ---------- Page transition veil ---------- */
-  var veil = document.createElement('div');
-  veil.className = 'veil';
-  document.body.appendChild(veil);
-
-  document.addEventListener('click', function (e) {
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
-    var a = e.target.closest('a');
-    if (!a) return;
-    var href = a.getAttribute('href');
-    if (!href || href.charAt(0) === '#' || a.target === '_blank' || a.hasAttribute('download')) return;
-    if (/^(https?:|mailto:|tel:)/.test(href)) return;
-    e.preventDefault();
-    veil.classList.add('is-active');
-    setTimeout(function () { window.location.href = href; }, 170);
-  });
-  window.addEventListener('pageshow', function (e) {
-    if (e.persisted) veil.classList.remove('is-active');
-  });
+  /* ---------- Page transitions ----------
+     Deliberately NO fade-out veil. Links navigate natively: the browser
+     holds the current (dark) page until the next page's render-blocking CSS
+     is ready, then swaps straight to it. Both pages are dark from the first
+     paint (color-scheme:dark + inline html bg), so there is no white flash
+     and no black-fade seam — the click feels instant and the only motion is
+     the text reveal on arrival. */
 
   /* Hover prefetch — the next page is already cached before the click lands */
   var prefetched = {};
