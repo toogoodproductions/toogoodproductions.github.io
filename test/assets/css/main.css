@@ -6,9 +6,9 @@
 
 /* ---------- Fonts ---------- */
 @font-face {
-  font-family: 'DisplayCond';
-  src: url('../fonts/anton-latin.woff2') format('woff2');
-  font-weight: 400 900;
+  font-family: 'League Spartan';
+  src: url('../fonts/league-spartan-latin.woff2') format('woff2-variations');
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
@@ -30,8 +30,8 @@
   --border: rgba(255, 255, 255, 0.05);
   --radius: 8px;
 
-  --font-display: 'DisplayCond', 'Arial Narrow', Impact, sans-serif;
-  --font-mono: 'FonoMono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --font-display: 'League Spartan', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-mono: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 
   --pad: 20px;                 /* page gutter */
   --header-safe: 60px;
@@ -101,7 +101,7 @@ html.lenis, html.lenis body { height: auto; }
 .type-heading-2xl, .type-heading-xl, .type-heading-lg, .type-heading-md,
 .type-heading-sm, .type-heading-xs {
   font-family: var(--font-display);
-  font-weight: 400;
+  font-weight: 700;
   line-height: 1.02;
 }
 .type-heading-2xl { font-size: 4.8rem; letter-spacing: -0.03em; text-transform: uppercase; }
@@ -1396,13 +1396,13 @@ a:hover .play-badge, button:hover .play-badge { transform: scale(1.08); backgrou
    leaves center, so the strip bends like a wheel. */
 .work-index[data-view="carousel"] .work-grid {
   display: flex;
-  gap: 28px;
+  gap: 20px;
   overflow-x: auto;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   cursor: grab;
-  padding: 8px 4px calc(min(46vw, 720px) * 0.46);
+  padding: 8px 4px calc(min(46vw, 720px) * 0.15);
 }
 .work-index[data-view="carousel"] .work-grid::-webkit-scrollbar { display: none; }
 .work-index[data-view="carousel"] .work-grid.is-dragging { cursor: grabbing; scroll-snap-type: none; }
@@ -1537,3 +1537,9 @@ html.return-visit .loader { display: none; }
 }
 .mobile-cta .btn { height: 50px; padding: 0 22px; border-radius: 999px; }
 @media (min-width: 900px) { .mobile-cta { display: none; } }
+
+/* Mobile: carousel view removed - grid and list only */
+@media (max-width: 767px) {
+  .view-switch button[data-view-btn="carousel"] { display: none; }
+  .work-index[data-view="carousel"] .carousel-nav { display: none; }
+}

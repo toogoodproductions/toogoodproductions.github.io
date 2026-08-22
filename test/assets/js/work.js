@@ -32,6 +32,13 @@
   var saved = null;
   try { saved = sessionStorage.getItem('workView'); } catch (e) {}
   if (saved && saved !== index.getAttribute('data-view')) setView(saved);
+  /* Mobile has no carousel: fall back to grid if it was saved or preselected */
+  var mobileMQ = window.matchMedia('(max-width: 767px)');
+  function carouselGuard() {
+    if (mobileMQ.matches && index.getAttribute('data-view') === 'carousel') setView('grid');
+  }
+  carouselGuard();
+  if (mobileMQ.addEventListener) mobileMQ.addEventListener('change', carouselGuard);
 
   /* ---------- Carousel: drag-to-scroll with release momentum ---------- */
   var drag = { on: false, moved: 0, startX: 0, startLeft: 0, lastX: 0, lastT: 0, vx: 0 };
@@ -65,13 +72,15 @@
     // fling: carry the release velocity, then settle on the nearest snap point
     var v = drag.vx;
     if (Math.abs(v) > 0.15 && window.gsap) {
-      var cellW = (grid.querySelector('.work-cell') || { offsetWidth: 400 }).offsetWidth + 28;
-      var projected = grid.scrollLeft - v * 320;                    // momentum projection
+      var cellW = (grid.querySelector('.work-cell') || { offsetWidth: 400 }).offsetWidth + 20;
+      var projected = grid.scrollLeft - v * 180;                    // momentum projection
       var snapped = Math.round(projected / cellW) * cellW;          // land on a slide
+      grid.style.scrollSnapType = 'none';
       gsap.to(grid, {
         scrollLeft: Math.max(0, Math.min(snapped, grid.scrollWidth - grid.clientWidth)),
-        duration: 0.9,
-        ease: 'power3.out'
+        duration: 0.55,
+        ease: 'power3.out',
+        onComplete: function () { grid.style.scrollSnapType = ''; }
       });
     }
     setTimeout(function () { grid.classList.remove('is-dragging'); }, 30);
@@ -84,22 +93,32 @@
   }, true);
 
   if (nav) {
-    var step = function () {
+    var goStep = function (dir) {
       var cell = grid.querySelector('.work-cell');
-      return cell ? cell.getBoundingClientRect().width + 28 : 400;
+      var w = cell ? cell.getBoundingClientRect().width + 20 : 400;
+      var target = Math.round((grid.scrollLeft + dir * w) / w) * w;
+      target = Math.max(0, Math.min(target, grid.scrollWidth - grid.clientWidth));
+      if (window.gsap) {
+        gsap.killTweensOf(grid);
+        grid.style.scrollSnapType = 'none';
+        gsap.to(grid, {
+          scrollLeft: target,
+          duration: 0.5,
+          ease: 'power3.out',
+          onComplete: function () { grid.style.scrollSnapType = ''; }
+        });
+      } else {
+        grid.scrollTo({ left: target, behavior: 'smooth' });
+      }
     };
-    nav.querySelector('.next').addEventListener('click', function () {
-      grid.scrollBy({ left: step(), behavior: 'smooth' });
-    });
-    nav.querySelector('.prev').addEventListener('click', function () {
-      grid.scrollBy({ left: -step(), behavior: 'smooth' });
-    });
+    nav.querySelector('.next').addEventListener('click', function () { goStep(1); });
+    nav.querySelector('.prev').addEventListener('click', function () { goStep(-1); });
   }
 
   /* ---------- Circular wheel: slides rotate toward ±24° and sink up to
      52% of their height as they leave center — the strip bends. ---------- */
-  var MAX_DEG = 24;
-  var MAX_SINK = 52; // percent of slide height at full rotation
+  var MAX_DEG = 8;
+  var MAX_SINK = 14; // percent of slide height at full rotation
   var COS_MAX = Math.cos(MAX_DEG * Math.PI / 180);
   var wheelCards = null;
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
