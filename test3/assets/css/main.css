@@ -1563,8 +1563,8 @@ html.return-visit .loader { display: none; }
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
 }
-.header-logo .glass-content { display: block; padding: 9px 16px; }
-@media (min-width: 900px) { .header-logo .glass-content { padding: 12px 20px; } }
+.header-logo .glass-content { display: block; padding: 5px 14px; }
+@media (min-width: 900px) { .header-logo .glass-content { padding: 7px 16px; } }
 
 /* purple lab: light content on the deep accent */
 .test-badge { color: #fff; }
