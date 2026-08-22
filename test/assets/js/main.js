@@ -107,16 +107,15 @@
         ease: 'power4.inOut'
       }, '+=0.1');
       loader.style.clipPath = 'inset(0% 0% 0% 0%)';
-    } else if (!prefersReduced) {
-      // return visit: quick fade keeps the black continuity from the veil
-      loader.classList.add('loader-fade');
-      requestAnimationFrame(function () {
-        requestAnimationFrame(function () { loader.style.opacity = '0'; });
-      });
-      setTimeout(forceDone, 320);
-      // hidden-tab insurance: rAF may not fire — forceDone's 3.8s cap still applies
     } else {
-      forceDone();
+      // Return visit (or reduced motion): no arrival overlay (CSS hides it via
+      // the return-visit class set in <head>). Fire the intro on the first
+      // painted frame. Double rAF guarantees every classic script has executed
+      // and registered its site:intro listener before the event dispatches.
+      requestAnimationFrame(function () {
+        requestAnimationFrame(forceDone);
+      });
+      // hidden-tab insurance: rAF may not fire — the 3.8s cap still applies
     }
   } else {
     requestAnimationFrame(runIntro);
@@ -214,7 +213,7 @@
         el.style.setProperty('--reveal-delay', (idx * 0.08) + 's');
       } else if (el.getBoundingClientRect().top < window.innerHeight) {
         // above the fold: choreograph after the heading sweep
-        el.style.setProperty('--reveal-delay', '0.35s');
+        el.style.setProperty('--reveal-delay', '0.15s');
       }
       io.observe(el);
     });

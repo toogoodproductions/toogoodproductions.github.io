@@ -1521,3 +1521,7 @@ a:hover .play-badge, button:hover .play-badge { transform: scale(1.08); backgrou
   pointer-events: none;
   opacity: .9;
 }
+
+/* return visit: skip the arrival overlay entirely - the page is already dark,
+   the text entrance is the single visible load event */
+html.return-visit .loader { display: none; }
