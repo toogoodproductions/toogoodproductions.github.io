@@ -1495,3 +1495,7 @@ a:hover .play-badge, button:hover .play-badge { transform: scale(1.08); backgrou
   .line-mask > .line-inner { transform: none; }
   html { scroll-behavior: auto; }
 }
+
+
+/* toogood logo override */
+.logo-stack { text-transform: none; }
