@@ -1,0 +1,4 @@
+# STAGING MODE - search engines blocked.
+# Remove this file (or replace with the live version) before going public.
+User-agent: *
+Disallow: /
