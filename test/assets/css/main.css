@@ -1541,3 +1541,8 @@ html.return-visit .loader { display: none; }
 .role { color: var(--accent); }
 .news-card:hover h3 { color: var(--accent); }
 .news-card h3 { transition: color .3s; }
+
+/* ===== Logo image (white wordmark, transparent, negative space baked in) ===== */
+.header-logo .logo-img { display: block; height: 30px; width: auto; }
+@media (min-width: 900px) { .header-logo .logo-img { height: 34px; } }
+.loader-logo .logo-img { display: block; height: 64px; width: auto; margin: 0 auto; }
