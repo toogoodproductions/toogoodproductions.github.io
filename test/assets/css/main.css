@@ -1550,3 +1550,7 @@ html.return-visit .loader { display: none; }
 /* Get-in-touch: accent-filled so it pops */
 .btn-accent:hover { filter: brightness(1.07); }
 .btn-accent .btn-chip { background: rgba(0, 0, 0, 0.14); }
+
+/* Accent loader: neon orange flash with the charcoal mark */
+.loader { background: var(--accent); }
+.loader .loader-count { color: #1b1b1b; }

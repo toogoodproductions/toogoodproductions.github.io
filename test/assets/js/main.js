@@ -99,7 +99,11 @@
     if (window.gsap && total > 0) {
       var proxy = { v: 0 };
       var tl = gsap.timeline({ onComplete: forceDone });
-      tl.to(logo, { opacity: 1, duration: 0.5, ease: 'power2.out' }, 0);
+      // mark pops in with overshoot, then drifts while the count runs
+      tl.fromTo(logo,
+        { opacity: 0, scale: 0.55, rotation: -5, transformOrigin: '50% 50%' },
+        { opacity: 1, scale: 1, rotation: 0, duration: 0.65, ease: 'back.out(1.8)' }, 0);
+      tl.to(logo, { scale: 1.05, duration: Math.max(0.4, total / 1000 - 0.3), ease: 'none' }, 0.65);
       tl.to(proxy, {
         v: 100,
         duration: total / 1000,
@@ -107,12 +111,12 @@
         onUpdate: function () {
           if (count) count.textContent = String(Math.round(proxy.v)).padStart(3, '0');
         }
-      }, 0);
+      }, 0.2);
       tl.to(loader, {
         clipPath: 'inset(0% 0% 100% 0%)',
-        duration: 0.85,
+        duration: 0.8,
         ease: 'power4.inOut'
-      }, '+=0.1');
+      }, '+=0.12');
       loader.style.clipPath = 'inset(0% 0% 0% 0%)';
     } else {
       // Return visit (or reduced motion): no arrival overlay (CSS hides it via
