@@ -1570,3 +1570,20 @@ html.return-visit .loader { display: none; }
 
 /* Panel eyebrows: light whisper above the bold title */
 .panel-eyebrow { font-weight: 300; }
+
+/* ===== Header clearance + mobile logo glass ===== */
+
+/* Reel panels: centered content starts below the fixed nav, never under it */
+.reel-panel-inner { padding-top: calc(var(--header-safe) + 24px); }
+
+/* Mobile: glass capsule behind the wordmark, matching the menu button,
+   so the logo never sits raw on top of scrolling content */
+@media (max-width: 899px) {
+  .header-logo {
+    padding: 9px 16px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.28);
+    -webkit-backdrop-filter: blur(10px) brightness(1.15) saturate(1.2);
+    backdrop-filter: blur(10px) brightness(1.15) saturate(1.2);
+  }
+}
