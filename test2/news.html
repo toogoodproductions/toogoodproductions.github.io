@@ -2,13 +2,13 @@
 <html lang="en" class="lenis" style="background:#000">
 <head>
   <meta charset="UTF-8">
-  <script>try{if(sessionStorage.getItem("visited"))document.documentElement.className+=" return-visit"}catch(e){}</script>
+  <script>try{if(sessionStorage.getItem("visited")&&!/[?&]intro=/.test(location.search))document.documentElement.className+=" return-visit"}catch(e){}</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="#000000">
   <title>News · toogood</title>
   <meta name="description" content="Sample news index.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23f037a5'/%3E%3Cpath d='M11 8h10v4h-6v2h6v10H11v-4h6v-2h-6z' fill='%23000'/%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%234100f5'/%3E%3Cpath d='M11 8h10v4h-6v2h6v10H11v-4h6v-2h-6z' fill='%23fff'/%3E%3C/svg%3E">
   <link rel="preload" href="assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/chivo-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="assets/css/main.css">
@@ -40,7 +40,7 @@
     </nav>
     <div class="header-cta glass">
       <span class="glass-effect"></span>
-      <a class="btn btn-accent btn-md glass-content border-shine" href="about.html#contact">
+      <a class="btn btn-accent btn-md glass-content border-shine" href="contact.html">
         Get in touch <span class="btn-chip"><svg><use href="#triangle"/></svg></span>
       </a>
     </div>
@@ -67,7 +67,7 @@
       </ul>
     </nav>
     <div class="menu-foot">
-      <a class="btn btn-accent btn-md" href="about.html#contact">Get in touch
+      <a class="btn btn-accent btn-md" href="contact.html">Get in touch
         <span class="btn-chip"><svg><use href="#triangle"/></svg></span>
       </a>
     </div>
@@ -158,31 +158,11 @@
             </div>
           </div>
           <div class="footer-col">
-            <h4>Menu</h4>
-            <ul>
-              <li><a href="brand.html">Brand</a></li>
-              <li><a href="narrative.html">Narrative</a></li>
-              <li><a href="about.html">About</a></li>
-              <li><a href="news.html">News</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
             <h4>Contact</h4>
             <ul>
-              <li><span class="type-label text-dim-2">Brand projects</span><br><a class="mail" href="mailto:brand@example.com">brand@example.com</a></li>
-              <li><span class="type-label text-dim-2">Narrative</span><br><a class="mail" href="mailto:narrative@example.com">narrative@example.com</a></li>
-              <li><span class="type-label text-dim-2">General</span><br><a class="mail" href="mailto:hello@example.com">hello@example.com</a></li>
+              <li><span class="type-label text-dim-2">Email</span><br><a class="mail" href="mailto:hello@toogoodai.in">hello@toogoodai.in</a></li>
+              <li><span class="type-label text-dim-2">WhatsApp</span><br><a class="mail" href="https://wa.me/917574003272?text=Hi%20toogood%2C%20I%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener">+91 75740 03272</a></li>
             </ul>
-          </div>
-          <div class="footer-col">
-            <h4>Newsletter</h4>
-            <form class="newsletter">
-              <div class="newsletter-field">
-                <input type="email" name="email" placeholder="your@email.com" required aria-label="Email">
-                <button class="btn btn-accent" type="submit">Subscribe</button>
-              </div>
-              <span class="newsletter-note">Sample form — no data is sent.</span>
-            </form>
           </div>
         </div>
       </div>
@@ -202,8 +182,9 @@
 
   <script src="assets/js/vendor/gsap.min.js"></script>
   <script src="assets/js/vendor/ScrollTrigger.min.js"></script>
+  <script src="assets/js/vendor/SplitText.min.js"></script>
   <script src="assets/js/vendor/lenis.min.js"></script>
   <script src="assets/js/main.js"></script>
-  <div class="test-badge" aria-hidden="true">test 2 · pink</div>
+  <div class="test-badge" aria-hidden="true">test 2 · motion lab</div>
 </body>
 </html>

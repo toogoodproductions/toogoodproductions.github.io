@@ -303,17 +303,14 @@
       return;
     }
     var hero = panels[0];
-    var lines = hero.querySelectorAll('.line-inner');
     var para = hero.querySelector('.hero-para');
     var cta = hero.querySelector('.hero-cta');
     var tl = gsap.timeline({ delay: 0.05 });
-    tl.to(lines, {
-      yPercent: 0,
-      y: 0,
-      duration: 1.25,
-      ease: 'power4.out',
-      stagger: 0.11
-    }, 0);
+    if (heroSplit) {
+      tl.to(heroSplit.chars, { yPercent: 0, duration: 1.0, ease: 'power4.out', stagger: { each: 0.02, from: 'start' } }, 0);
+    } else {
+      tl.to(hero.querySelectorAll('.line-inner'), { yPercent: 0, y: 0, duration: 1.25, ease: 'power4.out', stagger: 0.11 }, 0);
+    }
     if (para) tl.fromTo(para, { y: 26, opacity: 0 }, { y: 0, opacity: 1, duration: 1, ease: 'power3.out' }, 0.45);
     if (cta) tl.fromTo(cta, { y: 20, opacity: 0 }, { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' }, 0.6);
     if (rail) {
@@ -324,9 +321,18 @@
     }
   });
 
-  // Pre-position hero lines for masked reveal
+  // Pre-position hero text for the masked reveal (letters when SplitText is present)
+  var heroSplit = null;
   if (hasGsap && !prefersReduced) {
-    gsap.set(document.querySelectorAll('.reel-panel .line-inner'), { yPercent: 112 });
+    var heroTitle = panels[0].querySelector('.hero-title');
+    if (window.SplitText && heroTitle) {
+      var hInners = heroTitle.querySelectorAll('.line-inner');
+      if (hInners.length) heroTitle.innerHTML = Array.prototype.map.call(hInners, function (i) { return i.innerHTML; }).join('<br>');
+      heroSplit = SplitText.create(heroTitle, { type: 'lines,chars', mask: 'lines', linesClass: 'sl-line', charsClass: 'sl-char' });
+      gsap.set(heroSplit.chars, { yPercent: 115 });
+    } else {
+      gsap.set(document.querySelectorAll('.reel-panel .line-inner'), { yPercent: 112 });
+    }
   }
 
   /* ---------- Keyboard navigation ---------- */

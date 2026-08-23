@@ -91,33 +91,60 @@
 
     var logo = loader.querySelector('.loader-logo');
     var count = loader.querySelector('.loader-count');
-    var isFirstVisit = !sessionStorage.getItem('visited');
+    var params = new URLSearchParams(location.search);
+    var forceIntro = params.has('intro');
+    var introVariant = Math.max(1, Math.min(3, parseInt(params.get('intro'), 10) || 2));
+    var isFirstVisit = !sessionStorage.getItem('visited') || forceIntro;
     sessionStorage.setItem('visited', '1');
     // cinematic loader on the first visit only — page-to-page must feel instant
-    var total = (prefersReduced || !isFirstVisit) ? 0 : 1100;
+    var total = (prefersReduced || !isFirstVisit) ? 0 : 1;
 
     if (window.gsap && total > 0) {
-      var proxy = { v: 0 };
+      var img = logo.querySelector('.logo-img');
       var tl = gsap.timeline({ onComplete: forceDone });
-      // mark pops in with overshoot, then drifts while the count runs
-      tl.fromTo(logo,
-        { opacity: 0, scale: 0.55, rotation: -5, transformOrigin: '50% 50%' },
-        { opacity: 1, scale: 1, rotation: 0, duration: 0.65, ease: 'back.out(1.8)' }, 0);
-      tl.to(logo, { scale: 1.05, duration: Math.max(0.4, total / 1000 - 0.3), ease: 'none' }, 0.65);
-      tl.to(proxy, {
-        v: 100,
-        duration: total / 1000,
-        ease: 'power3.inOut',
-        onUpdate: function () {
-          if (count) count.textContent = String(Math.round(proxy.v)).padStart(3, '0');
+      // click anywhere / Escape skips straight to the site
+      var skip = function () { tl.progress(1); };
+      loader.addEventListener('click', skip);
+      document.addEventListener('keydown', function onKey(e) {
+        if (e.key === 'Escape') { skip(); document.removeEventListener('keydown', onKey); }
+      });
+      loader.classList.add('intro-' + introVariant);
+
+      if (introVariant === 1) {
+        // 1 · MASK REVEAL: the mark wipes in through a moving mask, then the colour lifts away
+        gsap.set(logo, { opacity: 1, clipPath: 'inset(0 100% 0 0)' });
+        tl.to(logo, { clipPath: 'inset(0 0% 0 0)', duration: 0.8, ease: 'power3.inOut' }, 0);
+        tl.to(logo, { scale: 1.04, duration: 0.45, ease: 'none' }, 0.8);
+        tl.to(loader, { clipPath: 'inset(0% 0% 100% 0%)', duration: 0.75, ease: 'power4.inOut' }, '+=0.1');
+        loader.style.clipPath = 'inset(0% 0% 0% 0%)';
+      } else if (introVariant === 2) {
+        // 2 · CURTAIN SPLIT: two colour panels part like doors
+        var top = document.createElement('div'); top.className = 'curtain curtain-top';
+        var bottom = document.createElement('div'); bottom.className = 'curtain curtain-bottom';
+        loader.insertBefore(bottom, loader.firstChild);
+        loader.insertBefore(top, loader.firstChild);
+        tl.fromTo(logo, { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.7)' }, 0);
+        tl.to(logo, { opacity: 0, scale: 0.92, duration: 0.3, ease: 'power2.in' }, 0.95);
+        tl.to(top, { yPercent: -100, duration: 0.8, ease: 'power4.inOut' }, 1.05);
+        tl.to(bottom, { yPercent: 100, duration: 0.8, ease: 'power4.inOut' }, 1.05);
+      } else {
+        // 3 · LETTERS ASSEMBLE: the mark arrives as staggered vertical slices, then a hard cut
+        var N = 8, slices = [];
+        var wrap = document.createElement('div'); wrap.className = 'slices';
+        for (var i = 0; i < N; i++) {
+          var sl = document.createElement('div'); sl.className = 'slice';
+          sl.style.backgroundImage = 'url(' + img.getAttribute('src') + ')';
+          sl.style.backgroundSize = (N * 100) + '% 100%';
+          sl.style.backgroundPosition = (i / (N - 1) * 100) + '% 0';
+          wrap.appendChild(sl); slices.push(sl);
         }
-      }, 0.2);
-      tl.to(loader, {
-        clipPath: 'inset(0% 0% 100% 0%)',
-        duration: 0.8,
-        ease: 'power4.inOut'
-      }, '+=0.12');
-      loader.style.clipPath = 'inset(0% 0% 0% 0%)';
+        img.style.visibility = 'hidden';
+        logo.appendChild(wrap);
+        gsap.set(logo, { opacity: 1 });
+        tl.from(slices, { yPercent: -140, opacity: 0, duration: 0.7, ease: 'back.out(1.6)', stagger: 0.06 }, 0);
+        tl.to(wrap, { scale: 1.03, duration: 0.3, ease: 'power1.out' }, 1.0);
+        tl.to(loader, { opacity: 0, scale: 1.06, duration: 0.28, ease: 'power2.in' }, '+=0.15');
+      }
     } else {
       // Return visit (or reduced motion): no arrival overlay (CSS hides it via
       // the return-visit class set in <head>). Fire the intro on the first
@@ -218,24 +245,40 @@
     });
   }
 
-  /* ---------- Masked line reveals ---------- */
+  /* ---------- Headline reveals: letters rise through line masks ---------- */
   var maskParents = Array.prototype.slice.call(document.querySelectorAll('[data-mask-reveal]'));
-  if (window.gsap) {
+  var useSplit = !!(window.gsap && window.SplitText && !prefersReduced);
+  function flattenLines(parent) {
+    var inners = parent.querySelectorAll('.line-inner, .line');
+    if (!inners.length) return;
+    parent.innerHTML = Array.prototype.map.call(inners, function (i) { return i.innerHTML; }).join('<br>');
+  }
+  if (useSplit) {
+    maskParents.forEach(function (parent) {
+      flattenLines(parent);
+      parent._split = SplitText.create(parent, { type: 'lines,chars', mask: 'lines', linesClass: 'sl-line', charsClass: 'sl-char' });
+      gsap.set(parent._split.chars, { yPercent: 115 });
+    });
+  } else if (window.gsap) {
     maskParents.forEach(function (parent) {
       gsap.set(parent.querySelectorAll('.line-inner'), { yPercent: 112 });
     });
   }
   function playMask(parent, delay) {
-    var inners = parent.querySelectorAll('.line-inner');
-    if (window.gsap) {
-      gsap.to(inners, {
-        y: 0, yPercent: 0,
-        duration: 1.15,
+    if (useSplit && parent._split) {
+      gsap.to(parent._split.chars, {
+        yPercent: 0,
+        duration: 0.9,
         ease: 'power4.out',
-        stagger: 0.09,
+        stagger: { each: 0.016, from: 'start' },
         delay: delay || 0,
         overwrite: true
       });
+      return;
+    }
+    var inners = parent.querySelectorAll('.line-inner');
+    if (window.gsap) {
+      gsap.to(inners, { y: 0, yPercent: 0, duration: 1.15, ease: 'power4.out', stagger: 0.09, delay: delay || 0, overwrite: true });
     } else {
       inners.forEach(function (el) { el.style.transform = 'none'; });
     }
@@ -243,17 +286,25 @@
   function initMaskReveals() {
     maskParents.forEach(function (parent) {
       if (parent.getBoundingClientRect().top < window.innerHeight * 0.9) {
-        playMask(parent, 0.1); // in first view: part of the entrance choreography
+        playMask(parent, 0.1);
       } else if (window.gsap && window.ScrollTrigger) {
-        ScrollTrigger.create({
-          trigger: parent,
-          start: 'top 85%',
-          once: true,
-          onEnter: function () { playMask(parent, 0); }
-        });
+        ScrollTrigger.create({ trigger: parent, start: 'top 85%', once: true, onEnter: function () { playMask(parent, 0); } });
       } else {
         playMask(parent, 0);
       }
+    });
+  }
+
+  /* ---------- Subtle media parallax on cards (desktop only) ---------- */
+  function initParallax() {
+    if (!window.gsap || !window.ScrollTrigger || prefersReduced || window.innerWidth < 900) return;
+    document.querySelectorAll('.work-card .media, .news-card .thumb, .team-card .portrait').forEach(function (box) {
+      var scene = box.querySelector('.scene');
+      if (!scene) return;
+      gsap.fromTo(scene, { yPercent: -7, scale: 1.16 }, {
+        yPercent: 7, scale: 1.16, ease: 'none',
+        scrollTrigger: { trigger: box, start: 'top bottom', end: 'bottom top', scrub: true }
+      });
     });
   }
 
@@ -346,6 +397,7 @@
   document.addEventListener('site:intro', function () {
     initMaskReveals();
     initReveals();
+    initParallax();
     if (!window.gsap || prefersReduced) return;
     var bits = document.querySelectorAll('.site-header > *');
     gsap.fromTo(bits,

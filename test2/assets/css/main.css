@@ -24,8 +24,8 @@
 :root {
   --bg: #000;
   --fg: #fff;
-  --accent: #f037a5;
-  --accent-fg: #000;
+  --accent: #4100f5;
+  --accent-fg: #fff;
   --dark-shade: #0c0e0f;
   --border: rgba(255, 255, 255, 0.05);
   --radius: 8px;
@@ -568,7 +568,7 @@ body.is-loading { overflow: hidden; }
 }
 .scene-art--engine {
   background:
-    radial-gradient(50% 64% at 70% 34%, rgba(240,55,165,.28), transparent 64%),
+    radial-gradient(50% 64% at 70% 34%, rgba(65,0,245,.28), transparent 64%),
     radial-gradient(64% 80% at 24% 74%, rgba(20,60,60,.8), transparent 72%),
     radial-gradient(30% 36% at 48% 18%, rgba(140,255,220,.18), transparent 70%),
     linear-gradient(200deg, #071010 0%, #040606 55%, #0c1206 100%);
@@ -750,7 +750,7 @@ body.is-loading { overflow: hidden; }
   outline-offset: 2px;
 }
 .reel-rail button:hover { opacity: 1; }
-.reel-rail button.is-active { opacity: 1; outline-color: rgba(240,55,165,.8); }
+.reel-rail button.is-active { opacity: 1; outline-color: rgba(65,0,245,.8); }
 .reel-rail .scene { position: absolute; inset: 0; }
 .reel-rail .scene::after { display: none; }
 .reel-rail .scene-art { animation: none; inset: 0; }
@@ -1123,7 +1123,7 @@ body.is-loading { overflow: hidden; }
   padding: 4px 4px 4px 20px;
   transition: border-color .3s;
 }
-.newsletter-field:focus-within { border-color: rgba(240,55,165,.7); }
+.newsletter-field:focus-within { border-color: rgba(65,0,245,.7); }
 .newsletter input {
   flex: 1;
   min-width: 0;
@@ -1417,7 +1417,7 @@ a:hover .play-badge, button:hover .play-badge { transform: scale(1.08); backgrou
   display: flex; align-items: center; justify-content: center;
   transition: border-color .3s, background .3s;
 }
-.carousel-nav button:hover { border-color: var(--accent); background: rgba(240,55,165,.08); }
+.carousel-nav button:hover { border-color: var(--accent); background: rgba(65,0,245,.08); }
 .carousel-nav svg { width: 9px; height: 11px; fill: currentColor; }
 .carousel-nav .prev svg { transform: rotate(180deg); }
 
@@ -1462,26 +1462,10 @@ a:hover .play-badge, button:hover .play-badge { transform: scale(1.08); backgrou
 .logo-stack { text-transform: none; }
 
 
-/* ===== TEST BUILD overrides ===== */
+/* ===== Motion + glass enhancements ===== */
 /* Liquid glass: SVG distortion warps what passes behind the nav (from reference site) */
 .site-header .glass-effect { filter: url(#glass-distortion); }
 
-.test-badge {
-  position: fixed;
-  left: 14px;
-  bottom: 14px;
-  z-index: 200;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: #000;
-  background: var(--accent);
-  padding: 5px 9px;
-  border-radius: 4px;
-  pointer-events: none;
-  opacity: .9;
-}
 
 /* return visit: skip the arrival overlay entirely - the page is already dark,
    the text entrance is the single visible load event */
@@ -1553,7 +1537,7 @@ html.return-visit .loader { display: none; }
 
 /* Accent loader: neon orange flash with the charcoal mark */
 .loader { background: var(--accent); }
-.loader .loader-count { color: #1b1b1b; }
+.loader .loader-count { color: rgba(255,255,255,.9); }
 
 /* Logo capsule: identical glass construction to the menu bar (liquid
    distortion comes from the .site-header .glass-effect rule) */
@@ -1565,3 +1549,123 @@ html.return-visit .loader { display: none; }
 }
 .header-logo .glass-content { display: block; padding: 5px 14px; }
 @media (min-width: 900px) { .header-logo .glass-content { padding: 7px 16px; } }
+
+/* purple lab: light content on the deep accent */
+.btn-accent .btn-chip { background: rgba(255, 255, 255, 0.18); }
+
+/* Reel panels will hold real footage: labels read white over media,
+   never accent-tinted */
+.reel-panel .panel-eyebrow { color: #fff; }
+
+/* ===== Contact page (minimal) ===== */
+.contact-main { position: relative; overflow: hidden; min-height: 100vh; display: flex; flex-direction: column; }
+.contact-ghost {
+  display: block;
+  margin: calc(var(--header-safe) + 40px) 0 0;
+  font-family: var(--font-display);
+  font-size: 16.6vw;
+  line-height: .8;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  color: rgba(255,255,255,.075);
+  pointer-events: none;
+  user-select: none;
+}
+.contact-grid {
+  display: grid;
+  gap: 40px 32px;
+  padding-top: 48px;
+  padding-bottom: 64px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.6;
+}
+@media (min-width: 640px)  { .contact-grid { grid-template-columns: repeat(2, 1fr); padding-top: 64px; } }
+@media (min-width: 1024px) { .contact-grid { grid-template-columns: 1.2fr 1fr 1.2fr 1.4fr; padding-top: 80px; padding-bottom: 120px; } }
+.contact-col { display: flex; flex-direction: column; align-items: flex-start; }
+.contact-name { font-family: var(--font-display); font-size: 2.4rem; line-height: 1; text-transform: uppercase; }
+.contact-desc { margin-top: 10px; color: rgba(255,255,255,.55); max-width: 26ch; }
+.contact-label {
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: rgba(255,255,255,.45);
+  margin-bottom: 10px;
+}
+.contact-label + .contact-label, .contact-line + .contact-label { margin-top: 22px; }
+.contact-list { display: flex; flex-direction: column; gap: 6px; }
+.contact-list a, .contact-line { color: var(--fg); transition: color .3s; }
+.contact-list a:hover, .contact-line:hover { color: var(--accent); }
+.contact-line { display: block; }
+
+.contact-form { width: 100%; max-width: 320px; }
+.form-fields { display: flex; flex-direction: column; gap: 8px; }
+.contact-form input, .contact-form textarea {
+  width: 100%;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--fg);
+  outline: 0;
+  transition: border-color .3s, background .3s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.contact-form input::placeholder, .contact-form textarea::placeholder { color: rgba(255,255,255,.35); }
+.contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); background: rgba(255,255,255,.06); }
+.contact-form textarea { resize: vertical; min-height: 84px; }
+.contact-form .hp { position: absolute; left: -9999px; opacity: 0; height: 0; width: 0; }
+.contact-form .btn { align-self: flex-start; height: 40px; padding: 0 18px; margin-top: 4px; }
+.form-error { display: none; font-size: 12px; color: var(--accent); }
+.form-success { display: none; }
+.contact-form.is-error .form-error { display: block; }
+.contact-form.is-sent .form-fields { display: none; }
+.contact-form.is-sent .form-success { display: block; }
+
+/* Footer: Follow left, Contact right, full-width row */
+@media (min-width: 768px) {
+  .footer-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 48px;
+    margin-top: 48px;
+  }
+  .footer-col:last-child { text-align: right; }
+  .footer-col:last-child ul { align-items: flex-end; }
+}
+.footer-col h4 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--fg);
+  margin-bottom: 18px;
+}
+.footer-col ul { display: flex; flex-direction: column; gap: 16px; }
+.footer-col .mail { font-size: 15px; }
+.footer-col .socials { gap: 14px; }
+
+/* ===== Motion lab ===== */
+.loader-count { display: none; }
+.loader.intro-2 { background: transparent; }
+.curtain { position: absolute; left: 0; width: 100%; height: 50%; background: var(--accent); z-index: 0; }
+.curtain-top { top: 0; }
+.curtain-bottom { top: 50%; }
+.loader .loader-logo { position: relative; z-index: 1; }
+.slices { position: absolute; inset: 0; display: flex; }
+.slice { flex: 1 1 0; background-repeat: no-repeat; will-change: transform; }
+.sl-char { will-change: transform; }
+.test-badge {
+  position: fixed; left: 14px; bottom: 14px; z-index: 200;
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+  color: #fff; background: var(--accent); padding: 5px 9px; border-radius: 4px; pointer-events: none; opacity: .9;
+}
