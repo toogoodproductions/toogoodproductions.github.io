@@ -7,7 +7,7 @@
   <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="#000000">
   <title>Get in touch · toogood</title>
-  <meta name="description" content="Talk to toogood, an ai studio in ahmedabad. Email, WhatsApp or send the form.">
+  <meta name="description" content="Talk to toogood, an ai studio in ahmedabad.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%234100f5'/%3E%3Cpath d='M11 8h10v4h-6v2h6v10H11v-4h6v-2h-6z' fill='%23fff'/%3E%3C/svg%3E">
   <link rel="preload" href="assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/chivo-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -75,148 +75,48 @@
 
   
   <main class="page-main contact-main">
-    <div class="contact-ghost" aria-hidden="true">get in touch</div>
+    <h1 class="contact-ghost" aria-hidden="false">Get in touch</h1>
 
-    <!-- Hero -->
-    <section class="page-hero container">
-      <span class="kicker type-label" data-reveal>Get in touch</span>
-      <h1 class="type-heading-xl text-balance" data-mask-reveal>
-        <span class="line-mask"><span class="line-inner">Tell us what</span></span>
-        <span class="line-mask"><span class="line-inner">you are making</span></span>
-      </h1>
-      <p class="type-base text-dim contact-intro" data-reveal>toogood is an ai studio in ahmedabad. Write to us, message us, or use the form. Everything gets read by a person.</p>
+    <section class="container contact-grid">
+      <div class="contact-col" data-reveal>
+        <span class="contact-name">toogood</span>
+        <p class="contact-desc">an ai studio in ahmedabad.</p>
+      </div>
+
+      <div class="contact-col" data-reveal>
+        <span class="contact-label">Follow</span>
+        <ul class="contact-list">
+          <li><a href="#" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="#" target="_blank" rel="noopener">X</a></li>
+          <li><a href="#" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><a href="#" target="_blank" rel="noopener">YouTube</a></li>
+        </ul>
+      </div>
+
+      <div class="contact-col" data-reveal>
+        <span class="contact-label">Email</span>
+        <a class="contact-line" href="mailto:hello@toogoodai.in">hello@toogoodai.in</a>
+        <span class="contact-label">WhatsApp</span>
+        <a class="contact-line" href="https://wa.me/917574003272?text=Hi%20toogood%2C%20I%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener">+91 75740 03272</a>
+      </div>
+
+      <div class="contact-col" data-reveal>
+        <span class="contact-label">Message</span>
+        <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" novalidate>
+          <div class="form-fields">
+            <input name="name" type="text" placeholder="Name" required autocomplete="name" aria-label="Name">
+            <input name="email" type="email" placeholder="Email" required autocomplete="email" aria-label="Email">
+            <textarea name="message" rows="3" placeholder="What are you making?" required aria-label="Message"></textarea>
+            <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+            <input type="hidden" name="_subject" value="New enquiry via toogoodai.in">
+            <button class="btn btn-accent" type="submit">Send</button>
+            <span class="form-error">Not sent. Email us instead.</span>
+          </div>
+          <p class="form-success">Got it. We will reply soon.</p>
+        </form>
+      </div>
     </section>
 
-    <!-- Channels + form -->
-    <section class="section container contact-grid">
-      <div class="contact-channels">
-        <div class="channel" data-reveal>
-          <span class="type-label text-dim-2">Email</span>
-          <a class="channel-link" href="mailto:hello@toogoodai.in">hello@toogoodai.in</a>
-        </div>
-        <div class="channel" data-reveal>
-          <span class="type-label text-dim-2">WhatsApp</span>
-          <a class="channel-link" href="https://wa.me/917574003272?text=Hi%20toogood%2C%20I%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener">+91 75740 03272</a>
-          <a class="btn btn-accent btn-md" href="https://wa.me/917574003272?text=Hi%20toogood%2C%20I%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener">Chat on WhatsApp
-            <span class="btn-chip"><svg><use href="#triangle"/></svg></span>
-          </a>
-        </div>
-        <div class="channel" data-reveal>
-          <span class="type-label text-dim-2">Studio</span>
-          <span class="channel-text">Ahmedabad, India</span>
-        </div>
-        <div class="channel" data-reveal>
-          <span class="type-label text-dim-2">Follow</span>
-          <div class="socials">
-              <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1s-3.6 0-4.9-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 4 4 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zm0 3.6a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-10.5a1.4 1.4 0 1 0 0 2.9 1.4 1.4 0 0 0 0-2.9z"/></svg></a>
-              <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M17.5 3h3.1l-6.8 7.8L21.8 21h-6.3l-4.9-6.4L5 21H1.9l7.3-8.3L2.2 3h6.4l4.4 5.9L17.5 3zm-1.1 16.1h1.7L7.7 4.8H5.9l10.5 14.3z"/></svg></a>
-              <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.5c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"/></svg></a>
-              <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 7.2a3 3 0 0 0-2.1-2.2C19.5 4.5 12 4.5 12 4.5s-7.5 0-9.4.5A3 3 0 0 0 .5 7.2 32 32 0 0 0 0 12a32 32 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A32 32 0 0 0 24 12a32 32 0 0 0-.5-4.8zM9.5 15.5v-7l6.5 3.5-6.5 3.5z"/></svg></a>
-            </div>
-        </div>
-      </div>
-
-      <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" data-reveal novalidate>
-        <div class="form-fields">
-          <div class="field">
-            <label for="c-name">Name</label>
-            <input id="c-name" name="name" type="text" required autocomplete="name">
-          </div>
-          <div class="field">
-            <label for="c-email">Email</label>
-            <input id="c-email" name="email" type="email" required autocomplete="email">
-          </div>
-          <div class="field">
-            <label for="c-company">Company</label>
-            <input id="c-company" name="company" type="text" autocomplete="organization">
-          </div>
-          <div class="field">
-            <label for="c-type">What are you making?</label>
-            <select id="c-type" name="project_type">
-              <option value="An AI advertisement">An AI advertisement</option>
-              <option value="A documentary or film">A documentary or film</option>
-              <option value="Advisory on AI for our business">Advisory on AI for our business</option>
-              <option value="Something else">Something else</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="c-msg">Tell us about it</label>
-            <textarea id="c-msg" name="message" rows="5" required></textarea>
-          </div>
-          <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
-          <input type="hidden" name="_subject" value="New enquiry via toogoodai.in">
-        </div>
-        <div class="form-actions">
-          <button class="btn btn-accent btn-md" type="submit">Send
-            <span class="btn-chip"><svg><use href="#triangle"/></svg></span>
-          </button>
-          <span class="form-note type-label text-dim-2">Expect a reply within one working day.</span>
-          <span class="form-error type-label">Something went wrong. Email us instead: hello@toogoodai.in</span>
-        </div>
-        <div class="form-success">
-          <h3 class="type-heading-md">Got it.</h3>
-          <p class="type-base text-dim">Your message is with us. Expect a reply within one working day.</p>
-        </div>
-      </form>
-    </section>
-
-    <footer class="site-footer">
-      <div class="container">
-        <h2 class="footer-tagline" data-mask-reveal>
-          <span class="line-mask"><span class="line-inner">Films, series and</span></span>
-          <span class="line-mask"><span class="line-inner">brand worlds — built</span></span>
-          <span class="line-mask"><span class="line-inner">at the speed of culture</span></span>
-        </h2>
-        <div class="footer-grid">
-          <div class="footer-col">
-            <h4>Follow</h4>
-            <div class="socials">
-              <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.9.1s-3.6 0-4.9-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 4 4 2.4 7.2 2.3 8.4 2.2 8.8 2.2 12 2.2zm0 3.6a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zm0 10.2a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-10.5a1.4 1.4 0 1 0 0 2.9 1.4 1.4 0 0 0 0-2.9z"/></svg></a>
-              <a href="#" aria-label="X"><svg viewBox="0 0 24 24"><path d="M17.5 3h3.1l-6.8 7.8L21.8 21h-6.3l-4.9-6.4L5 21H1.9l7.3-8.3L2.2 3h6.4l4.4 5.9L17.5 3zm-1.1 16.1h1.7L7.7 4.8H5.9l10.5 14.3z"/></svg></a>
-              <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.5c0-1.3 0-3-1.9-3s-2.2 1.4-2.2 2.9V21H9z"/></svg></a>
-              <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 7.2a3 3 0 0 0-2.1-2.2C19.5 4.5 12 4.5 12 4.5s-7.5 0-9.4.5A3 3 0 0 0 .5 7.2 32 32 0 0 0 0 12a32 32 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A32 32 0 0 0 24 12a32 32 0 0 0-.5-4.8zM9.5 15.5v-7l6.5 3.5-6.5 3.5z"/></svg></a>
-            </div>
-          </div>
-          <div class="footer-col">
-            <h4>Menu</h4>
-            <ul>
-              <li><a href="brand.html">Brand</a></li>
-              <li><a href="narrative.html">Narrative</a></li>
-              <li><a href="about.html">About</a></li>
-              <li><a href="news.html">News</a></li>
-              <li><a href="contact.html">Get in touch</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>Contact</h4>
-            <ul>
-              <li><span class="type-label text-dim-2">Email</span><br><a class="mail" href="mailto:hello@toogoodai.in">hello@toogoodai.in</a></li>
-              <li><span class="type-label text-dim-2">WhatsApp</span><br><a class="mail" href="https://wa.me/917574003272?text=Hi%20toogood%2C%20I%20would%20like%20to%20talk%20about%20a%20project." target="_blank" rel="noopener">+91 75740 03272</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>Newsletter</h4>
-            <form class="newsletter">
-              <div class="newsletter-field">
-                <input type="email" name="email" placeholder="your@email.com" required aria-label="Email">
-                <button class="btn btn-accent" type="submit">Subscribe</button>
-              </div>
-              <span class="newsletter-note">Sample form — no data is sent.</span>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="footer-mark" aria-hidden="true">toogood</div>
-      <div class="container">
-        <div class="footer-bottom">
-          <span>© 2026 toogood</span>
-          <div class="legal">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
-          </div>
-        </div>
-      </div>
-    </footer>
 
   </main>
 
