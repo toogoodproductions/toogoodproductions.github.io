@@ -1644,3 +1644,6 @@ html.return-visit .loader { display: none; }
 .contact-form.is-error .form-error { display: block; }
 .contact-form.is-sent .form-fields { display: none; }
 .contact-form.is-sent .form-success { display: block; }
+
+/* Footer: two columns only (Follow + Contact) */
+@media (min-width: 768px) { .footer-grid { grid-template-columns: repeat(2, max-content); column-gap: 120px; } }
