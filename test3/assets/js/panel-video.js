@@ -52,6 +52,13 @@
       if (dist < bestDist) { bestDist = dist; best = v; }
     });
 
+    // Defensive: anything the script does not own must not be running. The
+    // hero carries an autoplay attribute, and a browser may start others on
+    // its own after a stall or a restore from the back/forward cache.
+    vids.forEach(function (v) {
+      if (v !== best && !v.paused) v.pause();
+    });
+
     activate(best);
   }
 
@@ -62,11 +69,27 @@
   }
 
   vids.forEach(function (v) {
+    // iOS only treats a clip as autoplayable if it is muted as a property,
+    // not merely as an attribute, and it must be set before the first play.
+    v.muted = true;
+    v.setAttribute('webkit-playsinline', '');
+
     if (v.readyState >= 3) v.classList.add('is-ready');
     else v.addEventListener('canplay', function () {
       v.classList.add('is-ready');
       if (current === v) tryPlay(v);   // buffered late, start it now
     }, { once: true });
+  });
+
+  // A phone can refuse programmatic playback outright - Low Power Mode and
+  // Safari's per-site autoplay setting both do. The refusal is lifted by any
+  // real user gesture, so retry on the first one and then stop listening.
+  function unlock() {
+    if (current) tryPlay(current);
+    else schedule();
+  }
+  ['touchstart', 'pointerdown', 'keydown'].forEach(function (evt) {
+    addEventListener(evt, unlock, { once: true, passive: true });
   });
 
   addEventListener('scroll', schedule, { passive: true });
