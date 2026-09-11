@@ -1670,3 +1670,27 @@ html.return-visit .loader { display: none; }
 .footer-col ul { display: flex; flex-direction: column; gap: 16px; }
 .footer-col .mail { font-size: 15px; }
 .footer-col .socials { gap: 14px; }
+
+/* ---------- Panel background film ----------
+   Sits above the gradient scene-art and below the vignette. Fades in once
+   the clip can actually play, so a slow connection shows the poster and
+   then the gradient rather than a black hole. */
+.scene-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  opacity: 0;
+  transition: opacity .8s var(--ease-inout);
+  pointer-events: none;
+}
+.scene-video.is-ready { opacity: 1; }
+
+/* The gradient underneath keeps drifting; the film should not. */
+.scene:has(.scene-video.is-ready) .scene-art { animation: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-video { display: none; }
+}

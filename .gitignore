@@ -3,3 +3,17 @@ Thumbs.db
 desktop.ini
 .DS_Store
 *.tmp
+
+# Source films stay local - only the generated loops are committed
+*.mov
+assets/video/*.mp4
+!assets/video/loops/
+
+# Local review page, not part of the site
+_preview.html
+
+# Local dev server config
+.claude/
+
+# Local comparison files, not part of the site
+_review/
