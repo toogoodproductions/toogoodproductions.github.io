@@ -1914,3 +1914,30 @@ body.film-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .still img, .project-hero .hero-still { transition: none; }
 }
+
+/* ---------- FAQ ---------- */
+.faq-list { border-top: 1px solid var(--border); max-width: 80ch; }
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-q {
+  list-style: none;
+  cursor: pointer;
+  padding: 24px 40px 24px 0;
+  position: relative;
+  font-size: 1.5rem;
+  transition: color .4s var(--ease-inout);
+}
+.faq-q::-webkit-details-marker { display: none; }
+.faq-q::after {
+  content: "+";
+  position: absolute;
+  right: 4px;
+  top: 22px;
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, .45);
+  transition: transform .35s var(--ease-inout);
+}
+.faq-item[open] .faq-q::after { transform: rotate(45deg); }
+.faq-a { padding: 0 40px 26px 0; }
+.faq-a p { margin: 0; color: rgba(255, 255, 255, .62); max-width: 68ch; }
+
+@media (prefers-reduced-motion: reduce) { .faq-q, .faq-q::after { transition: none; } }
