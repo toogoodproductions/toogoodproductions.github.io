@@ -342,34 +342,71 @@ the same repository. No YouTube, no Vimeo, no account, no cost.
 
 ## Still to do
 
+Ordered. Everything above the line changes what the work looks like; everything
+below it can wait.
+
+### Decide first
+
+1. **The final web address.** toogoodai.in, or promote `test3/` to the repo
+   root. Google and the answer engines learn whichever address the site goes
+   live on, and moving afterwards gives some of that away. Nothing else here is
+   time-sensitive in the same way.
+   - toogoodai.in needs a `CNAME` file in the repo plus DNS at the registrar,
+     and **it has to resolve before canonicals point at it** — a canonical
+     aimed at a dead domain is worse than none.
+   - Then change `ROOT` (and `BASE`, if test3 is promoted) at the top of
+     `tools/seo.py` and run it.
+2. **Go live**, when the address is settled: `python3 tools/seo.py --live`.
+   Until then `robots.txt` blocks every crawler, which is correct for a site
+   sitting on a test URL.
+
 ### Needs the user
 
-1. **Product copy.** Page built, three placeholder slots.
-2. **Blog posts.** Page built, nothing written.
-3. **Project copy review.** Real copy is in, supplied by the user, but worth a read.
-4. **Clean Jewellery/Viraasat master.** Burned-in timecode and watermark, and it
-   is the hero of the site.
-5. **Team photographs** → `assets/img/team/harsh-dhakan.jpg` and
-   `kushank-joshi.jpg`. Square, around 600x600. Initials stand in until then.
-6. **Sanatan Seal** is in the logo folder but has no project. Currently shown as
-   a client in the marquee. Unresolved.
-7. **Promote `test3/` to the root**, or not.
-8. **toogoodai.in** — needs a `CNAME` file in the repo plus DNS records at the
-   registrar. Until it resolves, canonicals point at the github.io URL.
-9. **Real social URLs.** Every footer link is still `#`. Put the real ones in
+3. **Product copy** for `product-founders-digital-avatar.html`. Every word on
+   it is a stand-in and says so in the file. The page structure, the thread and
+   the film are done; only the writing is placeholder.
+4. **Products two and three.** A line in `PRODUCTS` in `tools/seo.py`, a card in
+   `product.html`, and a copy of the first product page. About an hour each once
+   the copy exists.
+5. **Real social URLs.** Every footer icon still links to `#`. Put them in
    `SAME_AS` in `tools/seo.py` and in the footers, and the profiles get tied to
    the brand in search.
+6. **The Formspree form ID** on `contact.html`. The form refuses to send while
+   `YOUR_FORM_ID` is there. Email and WhatsApp work.
+7. **Blog posts.** Page and layout ready, nothing written. This is the biggest
+   single lever for being quoted by ChatGPT and Perplexity: they quote pages
+   that answer a question properly. One post per film would do it.
+8. **Clean Viraasat master.** Burned-in timecode and watermark, and it is the
+   first thing anyone sees on the homepage.
+9. **Team photographs** → `assets/img/team/harsh-dhakan.jpg` and
+   `kushank-joshi.jpg`. Square, around 600x600. Initials stand in until then.
 10. **A street address**, and a Google Business Profile. The schema claims
     Ahmedabad, Gujarat and nothing finer, which is as far as the known facts go.
-11. **The Formspree form ID** on `contact.html`. The form refuses to send until
-    `YOUR_FORM_ID` is replaced.
-12. **Go live** when the site moves off the test URL: `python3 tools/seo.py --live`.
 
 ### Open work
 
-- Frames under each project are auto-picked; some are the wrong moments and
+- **Frames under each project** are auto-picked; some are the wrong moments and
   should be chosen by hand.
-- A second favicon, the Face mark, sits unused in `assets/Favicon/`.
+- **Sanatan Seal** is in the logo folder and in the Work marquee but has no
+  project. Unresolved.
+- **A second favicon**, the Face mark, sits unused in `assets/Favicon/`.
+
+### Done, so nobody redoes it
+
+- **The FAQ** is twelve questions in four groups on `offerings.html#faq`,
+  generated from `tools/seo.py` so the visible rows and the structured data
+  cannot drift.
+- **Search, answer and AI engines** get titles, descriptions, canonicals, Open
+  Graph, Twitter cards and a full JSON-LD graph on all seventeen pages, plus
+  `sitemap.xml` and `llms.txt`. Before this every page said "Sample brand work
+  index".
+- **Product** is an index with a page per product, the same pattern as Work.
+- **The played Telegram thread** on the product page, with the founder's voice
+  note and the bot reading the angle back.
+- **Money At Work** in the Work marquee; the lorem placeholder names removed.
+- **The white test badge** is gone from every page.
+- **About** carries the positioning as its headline and the origin story as its
+  statement line.
 
 ---
 
