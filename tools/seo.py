@@ -248,7 +248,7 @@ PRODUCTS = [
                    "Avatar cloned to the founder's face and voice",
                    "Script written in the founder's own style",
                    "Automatic edit: b-roll, motion graphics, captions",
-                   "Video or static, cut for LinkedIn or Instagram"]),
+                   "Choose where it goes: LinkedIn or Instagram"]),
 ]
 
 CLIENTS = ["Adani Realty", "Petpooja", "UB Heritage", "The Storeys Golf Coast",

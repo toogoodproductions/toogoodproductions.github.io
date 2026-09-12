@@ -2325,6 +2325,50 @@ body.film-open { overflow: hidden; }
 .chat-said p { max-width: 46ch; margin-top: 20px; color: rgba(255,255,255,.55); }
 .chat-hint { display: none; }
 
+/* Nothing about a phone on a page says "this one works". These two say it:
+   a tag above that never changes, and a line below that says what to do
+   right now. Without them a visitor watches a screenshot and leaves. */
+.phone-wrap { width: 100%; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.phone-tag {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .12em;
+  text-transform: uppercase; color: rgba(255,255,255,.7);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 999px;
+  padding: 7px 14px 7px 12px;
+  background: rgba(255,255,255,.04);
+}
+.phone-tag i {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: #6ab3f3; flex: none;
+  box-shadow: 0 0 0 0 rgba(106,179,243,.6);
+  animation: livePulse 2s infinite;
+}
+@keyframes livePulse {
+  0%   { box-shadow: 0 0 0 0 rgba(106,179,243,.55); }
+  70%  { box-shadow: 0 0 0 7px rgba(106,179,243,0); }
+  100% { box-shadow: 0 0 0 0 rgba(106,179,243,0); }
+}
+
+.phone-cue {
+  min-height: 20px;
+  display: flex; align-items: center; gap: 9px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: .1em;
+  text-transform: uppercase; color: #6ab3f3;
+  opacity: 0;
+  transition: opacity .35s;
+  text-align: center;
+}
+.phone-cue.is-on { opacity: 1; }
+/* An arrow back up at the thing they are meant to touch. */
+.phone-cue::before {
+  content: ''; width: 7px; height: 7px; flex: none;
+  border-left: 1.4px solid currentColor; border-top: 1.4px solid currentColor;
+  transform: rotate(45deg);
+  animation: cueNudge 1.6s var(--ease-inout) infinite;
+}
+@keyframes cueNudge { 0%,100% { transform: rotate(45deg) translate(0,0); } 50% { transform: rotate(45deg) translate(2px,2px); } }
+
 .phone {
   --tg-bg: #0e1621;
   --tg-panel: #17212b;
@@ -2447,23 +2491,17 @@ body.film-open { overflow: hidden; }
   flex: 1 1 40%;
   text-align: center;
   padding: 9px 8px;
-  border: 0;
   border-radius: 7px;
   background: rgba(255,255,255,.09);
-  font: inherit;
   font-size: 12px;
   color: #fff;
-  cursor: default;
-  transition: background .2s, color .2s, transform .2s var(--ease-out);
+  transition: background .22s, color .22s, transform .22s var(--ease-out);
 }
-.tg-key.is-picked { background: var(--tg-blue); color: #0e1621; font-weight: 600; }
-/* While the thread is waiting on you, the buttons say so: they breathe,
-   and they answer the pointer. Nothing else on the screen moves. */
-.tg-keys.is-waiting .tg-key { cursor: pointer; background: rgba(106,179,243,.18); }
-.tg-keys.is-waiting .tg-key:hover { background: rgba(106,179,243,.42); transform: translateY(-1px); }
-.tg-keys.is-waiting .tg-key:active { transform: translateY(0); }
-.tg-keys.is-waiting { animation: keysWait 2s var(--ease-inout) infinite; }
-@keyframes keysWait { 0%,100% { opacity: .82; } 50% { opacity: 1; } }
+/* Lit a beat before the reply lands, so you see the button go in. */
+.tg-key.is-picked {
+  background: var(--tg-blue); color: #0e1621; font-weight: 600;
+  transform: scale(1.03);
+}
 
 .tg-typing .tg-bubble { padding: 11px 13px; }
 .tg-dots { display: flex; gap: 4px; }
@@ -2495,43 +2533,56 @@ body.film-open { overflow: hidden; }
   border-top: 1px solid rgba(0,0,0,.3);
 }
 .tg-input > svg { width: 17px; height: 17px; fill: rgba(255,255,255,.3); flex: none; }
-.tg-input input {
+/* The founder's line types itself in here before it sends. Watching a
+   sentence appear is what makes eleven seconds of work believable. */
+.tg-draft {
   flex: 1; min-width: 0;
-  border: 0; background: none; outline: none;
-  font: inherit; font-size: 13px; color: #fff;
-  padding: 4px 0;
+  font-size: 13px; line-height: 1.4;
+  color: rgba(255,255,255,.3);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
-.tg-input input::placeholder { color: rgba(255,255,255,.3); }
-.tg-input input:disabled { color: rgba(255,255,255,.3); }
+.tg-draft.is-typing { color: #fff; }
+.tg-draft.is-typing::after {
+  content: ''; display: inline-block;
+  width: 1.5px; height: 12px; margin-left: 2px;
+  background: var(--tg-blue); vertical-align: -2px;
+  animation: caret .9s steps(1) infinite;
+}
+@keyframes caret { 0%,50% { opacity: 1; } 51%,100% { opacity: 0; } }
 .tg-send {
-  flex: none; border: 0; padding: 0; background: none;
+  flex: none;
   width: 26px; height: 26px; border-radius: 50%;
   display: grid; place-items: center;
-  cursor: default;
-  transition: background .2s, transform .2s var(--ease-out);
+  transition: background .25s;
 }
-.tg-send svg { width: 15px; height: 15px; fill: rgba(255,255,255,.3); transition: fill .2s; }
-/* Live only while it is your turn, so the phone never invites a tap it
-   will not answer. */
-.tg-input.is-live { box-shadow: inset 0 1px 0 rgba(106,179,243,.35); }
-.tg-input.is-live input::placeholder { color: rgba(106,179,243,.7); }
-.tg-input.is-live .tg-send { background: var(--tg-blue); cursor: pointer; }
+.tg-send svg { width: 15px; height: 15px; fill: rgba(255,255,255,.3); transition: fill .25s; }
+.tg-input.is-live .tg-send { background: var(--tg-blue); }
 .tg-input.is-live .tg-send svg { fill: #0e1621; }
-.tg-input.is-live .tg-send:hover { transform: scale(1.08); }
 
+/* The payoff, and the only thing on this side of the screen that moves.
+   It waits until the thread is over: offered any earlier it competes with
+   the buttons the visitor is meant to be tapping. */
+.chat-done { margin-top: 32px; animation: doneIn .6s var(--ease-expo) both; }
+@keyframes doneIn { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.chat-done-line {
+  font-size: 15px; line-height: 1.5;
+  color: rgba(255,255,255,.75);
+  max-width: 34ch;
+  margin-bottom: 20px;
+}
+.chat-done-acts { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
 .chat-replay {
-  margin-top: 28px;
-  border: 1px solid rgba(255,255,255,.2);
+  border: 1px solid rgba(255,255,255,.22);
   background: none;
-  color: #fff;
+  color: rgba(255,255,255,.75);
   font-family: var(--font-mono);
   font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
-  padding: 11px 20px;
+  padding: 12px 20px;
   border-radius: 999px;
   cursor: pointer;
-  transition: background .25s, border-color .25s;
+  transition: background .25s, border-color .25s, color .25s;
 }
-.chat-replay:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.4); }
+.chat-replay:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.45); color: #fff; }
 /* On a phone the labels are gone, so the replay sits under the device. */
 @media (max-width: 899px) {
   .chat-scroll .chat-said { display: block; }

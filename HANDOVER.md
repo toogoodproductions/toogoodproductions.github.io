@@ -242,21 +242,25 @@ and Lenis which were already there.
 | `panels.js` | Offerings and FAQ rows. |
 | `chat-play.js` | The product page's Telegram thread, which the visitor drives. |
 
-### The conversation you drive
+### The played conversation
 
-`chat-play.js` runs the Telegram thread on the product page. The visitor taps
-the same four buttons a founder would, types their own line if they want to,
-and gets the film back. Four taps, about twenty seconds.
+`chat-play.js` runs the Telegram thread on the product page. It starts once,
+when the phone comes into view, and plays start to finish in about twenty
+seconds: the digest arrives, a button lights up as though it were pressed, the
+founder's line types itself into the input and sends, the film comes back, a
+destination is picked, it posts. Then a payoff block offers the contact page
+and a replay.
 
-It took two wrong turns before this, and both are worth knowing so nobody
-tries them again.
+Three versions were wrong before this one. Do not go back to any of them.
 
-1. **Tied to the scrollbar**, with the phone pinned and a message per so many
-   pixels moved. It stuttered, because a conversation does not happen in
-   scroll distance.
-2. **Playing itself on a timer.** Smooth, but a recording, and a recording
-   cannot answer the only question a founder has, which is whether this is
-   actually easy. Letting them do it answers it in twenty seconds.
+1. **Tied to the scrollbar**, phone pinned, a message per so many pixels moved.
+   It stuttered, because a conversation does not happen in scroll distance.
+2. **Genuinely interactive**, with real buttons to tap. It worked, and nobody
+   tapped them. A phone on a page does not read as a thing you can use, and a
+   demo waiting on an action the visitor never takes never plays at all.
+3. **Scroll locked until it finished.** Considered and rejected. Trapping
+   someone for twenty seconds to make them watch is worse than them not
+   watching, and it breaks on a phone.
 
 Things that matter:
 
@@ -268,12 +272,14 @@ Things that matter:
   costs no JavaScript.
 - **A turn that has not arrived is `display: none`,** so its animation runs
   when it appears rather than once on load.
+- **A button lights a beat before its reply lands.** A tap and its message are
+  a beat apart; lighting them together looks like a diagram, not a phone.
+- **The founder's line types itself, character by character.** Watching a
+  sentence appear is what makes eleven seconds of work believable. A finished
+  bubble appearing whole does not.
 - **It starts once and is then left alone.** An earlier version rewound when
-  the phone left the viewport, which threw away a conversation somebody was
-  halfway through. Running it again is a button.
-- **The outgoing bubbles are filled with what the visitor chose.** Pick
-  Instagram and the last message says Instagram. A thread that ignores your
-  taps is worse than no thread.
+  the phone left the viewport, throwing away a conversation somebody was
+  watching. Running it again is a button.
 - **The phone keeps Telegram's own dark palette.** The page is black and white,
   but a screenshot recoloured to match stops reading as a screenshot, which is
   the only job it has.
