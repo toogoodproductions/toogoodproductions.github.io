@@ -287,6 +287,13 @@ Things that matter:
 - **It starts once and is then left alone.** An earlier version rewound when
   the phone left the viewport, throwing away a conversation somebody was
   watching. Running it again is a button.
+- **Get yours and Run it again are there from the start, on every width.**
+  They were revealed only at the end, which meant that on a phone, where the
+  labels beside the device are hidden anyway, there was no way off the page
+  until the thread finished.
+- **The active step gets a bar, a tinted ground and a blue number.** Shifting
+  the text and brightening it was not a change anybody noticed while their eyes
+  were on the phone.
 - **The phone keeps Telegram's own dark palette.** The page is black and white,
   but a screenshot recoloured to match stops reading as a screenshot, which is
   the only job it has.

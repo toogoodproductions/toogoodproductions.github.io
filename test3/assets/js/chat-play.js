@@ -28,7 +28,6 @@
   var rec = section.querySelector('[data-chat-rec]');
   var recTime = section.querySelector('[data-chat-rectime]');
   var input = section.querySelector('.tg-input');
-  var done = section.querySelector('[data-chat-done]');
   var replay = section.querySelector('[data-chat-replay]');
   var steps = Array.prototype.slice.call(section.querySelectorAll('.chat-step'));
   var marks = Array.prototype.slice.call(section.querySelectorAll('[data-phase-item]'));
@@ -52,7 +51,6 @@
     });
     section.querySelectorAll('[data-tap]').forEach(function (el) { tap(el); });
     setPhase(4);
-    if (done) done.hidden = false;
     return;
   }
 
@@ -132,7 +130,6 @@
   function finish() {
     stopRec();
     setDraft('');
-    if (done) done.hidden = false;
   }
 
   function reset() {
@@ -142,7 +139,6 @@
     section.querySelectorAll('.tg-key').forEach(function (k) { k.classList.remove('is-picked'); });
     stopRec();
     setDraft('');
-    if (done) done.hidden = true;
     setPhase(0);
   }
 

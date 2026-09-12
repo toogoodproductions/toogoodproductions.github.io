@@ -2668,24 +2668,41 @@ body.film-open { overflow: hidden; }
   transition: background .25s, border-color .25s, color .25s;
 }
 .chat-replay:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.45); color: #fff; }
-/* On a phone the labels are gone, so the replay sits under the device. */
+/* On a phone the heading and the four labels are gone, but the two buttons
+   stay: they were the only way off this page and they were hidden. */
 @media (max-width: 899px) {
-  .chat-scroll .chat-said { display: block; }
-  .chat-scroll .chat-said > :not([data-chat-replay]) { display: none; }
-  .chat-said { order: 2; text-align: center; }
+  .chat-scroll .chat-said { display: block; order: 2; text-align: center; }
+  .chat-scroll .chat-said > :not([data-chat-done]) { display: none; }
+  .chat-done { margin-top: 4px; }
+  .chat-done-line { margin-inline: auto; }
+  .chat-done-acts { justify-content: center; }
 }
 
 /* ---- the four labels beside the phone ---- */
 .phases { margin-top: 36px; display: flex; flex-direction: column; gap: 2px; }
 .phase {
+  position: relative;
   display: grid;
   grid-template-columns: 32px 1fr;
   gap: 16px;
-  padding: 16px 16px 16px 0;
+  padding: 16px 16px 16px 18px;
   border-top: 1px solid rgba(255,255,255,.08);
-  transition: padding-left .5s var(--ease-out), border-color .5s;
+  transition: background .45s var(--ease-out);
 }
 .phase:last-child { border-bottom: 1px solid rgba(255,255,255,.08); }
+/* A bar that grows down the left of whichever step the thread is on. The
+   old version only shifted the text and brightened it, which on a black
+   page is not a change anybody notices while watching a phone. */
+.phase::before {
+  content: '';
+  position: absolute;
+  left: 0; top: -1px; bottom: -1px;
+  width: 3px;
+  background: var(--tg-blue, #6ab3f3);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform .45s var(--ease-out);
+}
 .phase-num {
   font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em;
   color: rgba(255,255,255,.3); padding-top: 4px;
@@ -2705,12 +2722,15 @@ body.film-open { overflow: hidden; }
   color: rgba(255,255,255,.4);
   transition: color .4s;
 }
-.phase.is-done .phase-text b { color: rgba(255,255,255,.75); }
-/* The step the thread is on sits proud of the others and goes fully white. */
-.phase.is-on { padding-left: 16px; border-color: rgba(255,255,255,.3); }
-.phase.is-on .phase-num { color: #fff; }
+.phase.is-done .phase-text b { color: rgba(255,255,255,.72); }
+.phase.is-done .phase-num { color: rgba(255,255,255,.5); }
+
+/* The step the thread is on: bar out, tinted ground, everything white. */
+.phase.is-on { background: rgba(106,179,243,.09); }
+.phase.is-on::before { transform: scaleY(1); }
+.phase.is-on .phase-num { color: #6ab3f3; }
 .phase.is-on .phase-text b { color: #fff; }
-.phase.is-on .phase-text small { color: rgba(255,255,255,.68); }
+.phase.is-on .phase-text small { color: rgba(255,255,255,.72); }
 .chat-scroll.is-static .phase { opacity: 1; }
 
 /* ---- the one number ---- */
