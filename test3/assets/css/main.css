@@ -24,8 +24,9 @@
 :root {
   --bg: #000;
   --fg: #fff;
-  --accent: #4100f5;
-  --accent-fg: #fff;
+  /* White accent: the work carries the colour, the interface does not. */
+  --accent: #fff;
+  --accent-fg: #000;
   --dark-shade: #0c0e0f;
   --border: rgba(255, 255, 255, 0.05);
   --radius: 8px;
@@ -1864,3 +1865,52 @@ body.film-open { overflow: hidden; }
 }
 /* Floating list-view preview carries a running clip, not a still. */
 .work-preview video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ---------- Project page: hero still, then the film ---------- */
+.hero-still,
+.project-hero .hero-film {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.project-hero .hero-film { opacity: 0; pointer-events: none; z-index: 1; }
+.project-hero.is-playing .hero-film { opacity: 1; pointer-events: auto; object-fit: contain; background: #000; }
+.project-hero.is-playing .hero-still,
+.project-hero.is-playing .scene-vignette,
+.project-hero.is-playing .play-badge { opacity: 0; pointer-events: none; }
+.project-hero.is-playing .container { opacity: 0; pointer-events: none; }
+.project-hero .hero-still,
+.project-hero .scene-vignette,
+.project-hero .play-badge,
+.project-hero .container { transition: opacity .45s var(--ease-inout); }
+
+/* ---------- Frame showcase ---------- */
+.still-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 12px;
+}
+.still {
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--dark-shade);
+}
+.still img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  transition: transform .9s var(--ease-expo);
+}
+.still:hover img { transform: scale(1.04); }
+/* First frame runs full width - it sets the tone for the rest. */
+.still-grid .still:first-child { grid-column: 1 / -1; }
+.still-grid .still:first-child img { aspect-ratio: 21 / 9; }
+
+@media (prefers-reduced-motion: reduce) {
+  .still img, .project-hero .hero-still { transition: none; }
+}

@@ -81,12 +81,12 @@
     <!-- Project hero -->
     <section class="project-hero">
       <div class="scene">
-        <video class="scene-video" autoplay muted loop playsinline preload="metadata"
-               poster="../assets/video/loops/apna-ghar-adani-realty.jpg" src="../assets/video/loops/apna-ghar-adani-realty.mp4"
-               aria-hidden="true"></video>
+        <img class="hero-still" src="../assets/video/films/apna-ghar-adani-realty.jpg" alt="Apna Ghar">
+        <video class="hero-film" controls playsinline preload="none"
+               src="../assets/video/films/apna-ghar-adani-realty.mp4"></video>
         <div class="scene-vignette"></div>
       </div>
-      <button class="play-badge" aria-label="Play (sample)">
+      <button class="play-badge" data-play-film aria-label="Play Apna Ghar">
         <svg viewBox="0 0 8 10"><use href="#triangle"/></svg>
       </button>
       <div class="container">
@@ -120,14 +120,17 @@
       </div>
     </section>
 
-    <!-- Film -->
+    <!-- Frames -->
     <section class="section container" data-reveal-group>
-      <div class="film-stage" data-reveal>
-        <video class="film-full" controls playsinline preload="none"
-               poster="../assets/video/films/apna-ghar-adani-realty.jpg"
-               src="../assets/video/films/apna-ghar-adani-realty.mp4"></video>
+      <h2 class="type-label text-dim" data-reveal style="margin-bottom:20px">Frames</h2>
+      <div class="still-grid">
+        <figure class="still" data-reveal><img src="../assets/video/stills/apna-ghar-adani-realty/01.jpg" alt="" loading="lazy"></figure>
+        <figure class="still" data-reveal><img src="../assets/video/stills/apna-ghar-adani-realty/02.jpg" alt="" loading="lazy"></figure>
+        <figure class="still" data-reveal><img src="../assets/video/stills/apna-ghar-adani-realty/03.jpg" alt="" loading="lazy"></figure>
+        <figure class="still" data-reveal><img src="../assets/video/stills/apna-ghar-adani-realty/04.jpg" alt="" loading="lazy"></figure>
+        <figure class="still" data-reveal><img src="../assets/video/stills/apna-ghar-adani-realty/05.jpg" alt="" loading="lazy"></figure>
+        <figure class="still" data-reveal><img src="../assets/video/stills/apna-ghar-adani-realty/06.jpg" alt="" loading="lazy"></figure>
       </div>
-      <p class="type-label text-dim" style="margin-top:14px">Watch the full film</p>
     </section>
 
 
@@ -176,6 +179,7 @@
   <script src="assets/js/vendor/ScrollTrigger.min.js"></script>
   <script src="assets/js/vendor/lenis.min.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/project-film.js"></script>
   <div class="test-badge" aria-hidden="true">test 3 · purple</div>
 </body>
 </html>
