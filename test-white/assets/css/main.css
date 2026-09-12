@@ -1771,74 +1771,6 @@ body.film-open { overflow: hidden; }
   .work-video, .film-player, .film-player-stage { transition: none; }
 }
 
-/* ---------- Offerings ---------- */
-.offer-list {
-  display: grid;
-  gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-}
-.offer-card {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  padding: 34px 32px 30px;
-  border-radius: var(--radius);
-  background: var(--dark-shade);
-  border: 1px solid rgba(255, 255, 255, .07);
-  transition: transform .6s var(--ease-expo), border-color .6s var(--ease-inout);
-}
-.offer-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(255, 255, 255, .18);
-}
-.offer-num {
-  display: block;
-  color: rgba(255, 255, 255, .32);
-  margin-bottom: 22px;
-}
-.offer-title { margin: 0 0 14px; }
-.offer-body { margin: 0 0 22px; max-width: 46ch; }
-.offer-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-.offer-tag {
-  padding: 6px 13px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, .14);
-  font-size: 12px;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, .62);
-  transition: border-color .4s var(--ease-inout), color .4s var(--ease-inout);
-}
-.offer-card:hover .offer-tag {
-  border-color: rgba(255, 255, 255, .3);
-  color: rgba(255, 255, 255, .85);
-}
-/* Light follows the cursor across the card. */
-.offer-glow {
-  position: absolute;
-  inset: -40%;
-  z-index: -1;
-  opacity: 0;
-  background: radial-gradient(38% 38% at var(--mx, 50%) var(--my, 50%),
-              rgba(255, 255, 255, .13), transparent 70%);
-  transition: opacity .5s var(--ease-inout);
-}
-.offer-card:hover .offer-glow { opacity: 1; }
-
-@media (prefers-reduced-motion: reduce) {
-  .offer-card, .offer-tag, .offer-glow { transition: none; }
-  .offer-card:hover { transform: none; }
-}
-
-/* Rail thumbnails now carry real film stills rather than gradient art. */
-.rail-thumb {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
 
 /* ---------- Project page: the full film ---------- */
 .film-stage {
@@ -1942,3 +1874,130 @@ body.film-open { overflow: hidden; }
 .faq-a p { margin: 0; color: rgba(255, 255, 255, .62); max-width: 68ch; }
 
 @media (prefers-reduced-motion: reduce) { .faq-q, .faq-q::after { transition: none; } }
+
+/* ---------- Offerings: an index that opens ----------
+   Four rows, only the numbers and titles showing. The row under the
+   cursor opens and the rest close, so the page reads as a short list
+   rather than four competing blocks of text. */
+.offer-index {
+  border-top: 1px solid var(--border);
+  max-width: 1100px;
+}
+.offer-row {
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+/* A line that draws in from the left under the open row. */
+.offer-row::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  height: 1px;
+  width: 0;
+  background: var(--accent);
+  transition: width .8s var(--ease-expo);
+}
+.offer-row.is-open::after { width: 100%; }
+
+.offer-head {
+  width: 100%;
+  display: flex;
+  align-items: baseline;
+  gap: 28px;
+  padding: 38px 0;
+  background: none;
+  border: 0;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+}
+.offer-num {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .14em;
+  color: rgba(255, 255, 255, .34);
+  flex: none;
+  width: 34px;
+  transition: color .5s var(--ease-inout);
+}
+.offer-row.is-open .offer-num { color: var(--accent); }
+
+.offer-title {
+  font-family: var(--font-display, inherit);
+  /* px, not rem: this site sets a non-default root size, which drags a
+     rem-based clamp down to its minimum. */
+  font-size: clamp(32px, 6.4vw, 88px);
+  line-height: .94;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .55);
+  transition: color .5s var(--ease-inout), transform .7s var(--ease-expo);
+  transform-origin: left center;
+}
+.offer-row.is-open .offer-title { color: #fff; transform: translateX(10px); }
+
+/* Small mark that turns as the row opens. */
+.offer-mark {
+  margin-left: auto;
+  flex: none;
+  width: 13px;
+  height: 13px;
+  position: relative;
+  align-self: center;
+  opacity: .4;
+  transition: opacity .5s var(--ease-inout), transform .6s var(--ease-expo);
+}
+.offer-mark::before,
+.offer-mark::after {
+  content: "";
+  position: absolute;
+  background: currentColor;
+  inset: 0;
+}
+.offer-mark::before { height: 1px; top: 6px; }
+.offer-mark::after { width: 1px; left: 6px; }
+.offer-row.is-open .offer-mark { opacity: 1; transform: rotate(135deg); }
+
+/* 0fr to 1fr animates height without knowing the content's size. */
+.offer-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .7s var(--ease-expo);
+}
+.offer-row.is-open .offer-wrap { grid-template-rows: 1fr; }
+.offer-body {
+  overflow: hidden;
+  min-height: 0;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity .5s var(--ease-inout) .1s, transform .6s var(--ease-expo) .1s;
+}
+.offer-row.is-open .offer-body { opacity: 1; transform: none; }
+
+.offer-text {
+  margin: 0 0 22px 62px;
+  max-width: 54ch;
+  color: rgba(255, 255, 255, .62);
+}
+.offer-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 34px 62px; }
+.offer-tag {
+  padding: 6px 13px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .14);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .6);
+}
+
+@media (max-width: 640px) {
+  .offer-head { gap: 16px; padding: 22px 0; }
+  .offer-num { width: 26px; }
+  .offer-text, .offer-tags { margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .offer-row::after, .offer-title, .offer-mark, .offer-wrap, .offer-body,
+  .offer-num { transition: none; }
+}

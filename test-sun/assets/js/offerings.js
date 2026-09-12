@@ -1,16 +1,37 @@
-/* Cursor-tracked glow on the offering cards. Pointer-driven only, so touch
-   devices simply get the static card. */
-(function () {
-  var cards = Array.prototype.slice.call(document.querySelectorAll('.offer-card'));
-  if (!cards.length) return;
-  if (window.matchMedia && window.matchMedia('(hover: none)').matches) return;
-  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+/* ---------------------------------------------------------------
+   Offerings index.
 
-  cards.forEach(function (card) {
-    card.addEventListener('pointermove', function (e) {
-      var r = card.getBoundingClientRect();
-      card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
-      card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+   One row open at a time. Where there is a real pointer the row
+   under the cursor opens; on touch, tapping toggles. Either way the
+   page stays a short list until you ask for detail.
+   --------------------------------------------------------------- */
+(function () {
+  var rows = Array.prototype.slice.call(document.querySelectorAll('[data-offer]'));
+  if (!rows.length) return;
+
+  var fine = !(window.matchMedia && window.matchMedia('(hover: none)').matches);
+
+  function open(row) {
+    rows.forEach(function (r) {
+      var on = r === row;
+      r.classList.toggle('is-open', on);
+      r.querySelector('.offer-head').setAttribute('aria-expanded', String(on));
     });
+  }
+
+  rows.forEach(function (row) {
+    var head = row.querySelector('.offer-head');
+
+    // Tapping always works, which also covers keyboard: a button fires
+    // click on Enter and Space.
+    head.addEventListener('click', function () {
+      if (row.classList.contains('is-open') && !fine) open(null);
+      else open(row);
+    });
+
+    if (fine) {
+      row.addEventListener('mouseenter', function () { open(row); });
+      head.addEventListener('focus', function () { open(row); });
+    }
   });
 })();
