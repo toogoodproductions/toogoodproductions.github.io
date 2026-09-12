@@ -4,10 +4,15 @@ desktop.ini
 .DS_Store
 *.tmp
 
-# Source films stay local - only the generated loops are committed
+# Source films stay local - only what the tools generate is committed.
+# Ignoring the folder's own files rather than a list of extensions, so a
+# master dropped in as .mov, .superseded or anything else is covered too.
 *.mov
-assets/video/*.mp4
+assets/video/*
 !assets/video/loops/
+!assets/video/films/
+!assets/video/stills/
+!assets/video/.gitkeep
 
 # Local review page, not part of the site
 _preview.html

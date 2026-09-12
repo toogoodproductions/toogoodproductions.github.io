@@ -751,7 +751,8 @@ body.is-loading { overflow: hidden; }
   outline-offset: 2px;
 }
 .reel-rail button:hover { opacity: 1; }
-.reel-rail button.is-active { opacity: 1; outline-color: rgba(65,0,245,.8); }
+/* Follows the accent token - it was the old purple, hardcoded. */
+.reel-rail button.is-active { opacity: 1; outline-color: var(--accent); }
 .reel-rail .scene { position: absolute; inset: 0; }
 .reel-rail .scene::after { display: none; }
 .reel-rail .scene-art { animation: none; inset: 0; }
