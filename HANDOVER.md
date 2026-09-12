@@ -240,23 +240,45 @@ and Lenis which were already there.
 | `work-film.js` | Work card loops. |
 | `project-film.js` | Project hero: still until you press play. |
 | `panels.js` | Offerings and FAQ rows. |
-| `chat-scroll.js` | The product page's Telegram thread, played by scrolling. |
+| `chat-play.js` | The product page's Telegram thread, which the visitor drives. |
 
-### The played conversation
+### The conversation you drive
 
-`chat-scroll.js` pins the phone on the product page and brings the messages in
-one at a time as you scroll, with the four labels beside it ticking along.
+`chat-play.js` runs the Telegram thread on the product page. The visitor taps
+the same four buttons a founder would, types their own line if they want to,
+and gets the film back. Four taps, about twenty seconds.
 
+It took two wrong turns before this, and both are worth knowing so nobody
+tries them again.
+
+1. **Tied to the scrollbar**, with the phone pinned and a message per so many
+   pixels moved. It stuttered, because a conversation does not happen in
+   scroll distance.
+2. **Playing itself on a timer.** Smooth, but a recording, and a recording
+   cannot answer the only question a founder has, which is whether this is
+   actually easy. Letting them do it answers it in twenty seconds.
+
+Things that matter:
+
+- **The whole transcript is in the markup, in order.** A crawler or a reader
+  without JavaScript gets the conversation as a document. The script hides it
+  and hands it back a turn at a time.
 - **The log is `justify-content: flex-end` with hidden overflow.** New messages
-  push older ones off the top on their own. That is what a chat does, and it
+  push older ones off the top on their own, which is what a chat does, and it
   costs no JavaScript.
-- **A message that has not arrived is `display: none`,** so the animation runs
-  every time it appears rather than only once. Scrolling back takes it away.
+- **A turn that has not arrived is `display: none`,** so its animation runs
+  when it appears rather than once on load.
+- **It starts once and is then left alone.** An earlier version rewound when
+  the phone left the viewport, which threw away a conversation somebody was
+  halfway through. Running it again is a button.
+- **The outgoing bubbles are filled with what the visitor chose.** Pick
+  Instagram and the last message says Instagram. A thread that ignores your
+  taps is worse than no thread.
 - **The phone keeps Telegram's own dark palette.** The page is black and white,
   but a screenshot recoloured to match stops reading as a screenshot, which is
   the only job it has.
-- **Below 900px it does not pin.** Pinning a tall phone on a phone leaves
-  nowhere to pin it to, so narrow screens get the whole thread at once.
+- **Below 900px the labels beside it are hidden.** The thread is the selling
+  point and a column of explanation was competing with it.
 
 ### Conventions worth keeping
 

@@ -34,7 +34,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/chivo-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/main.css?v=2609121433">
+  <link rel="stylesheet" href="assets/css/main.css?v=2609121446">
   <script type="speculationrules">{"prefetch":[{"where":{"href_matches":"/*"},"eagerness":"conservative"}]}</script>
 </head>
 <body>
@@ -132,21 +132,25 @@
       </figure>
     </section>
 
-    <!-- The thread, played by scrolling. The phone pins, messages arrive one
-         at a time, and the four labels beside it tick along. Everything the
-         product does is visible here; the words are captions, not the case. -->
-    <section class="chat-scroll" data-chat-scroll>
+    <!-- The thread is not a recording, it is the product. A visitor taps the
+         same four buttons a founder would and gets the same film back, which
+         answers "is this actually easy?" in a way no paragraph can.
+
+         The full transcript is here in the markup, in order, so a crawler or
+         a reader without JavaScript gets the whole conversation. The script
+         hides it and hands it back one turn at a time. -->
+    <section class="chat-scroll" data-chat-play>
       <div class="chat-stage container">
 
         <div class="chat-said">
-          <h2 class="type-heading-lg text-balance" data-reveal>Four steps.<br>You do one.</h2>
+          <h2 class="type-heading-lg text-balance" data-reveal>Try it.<br>It takes four taps.</h2>
           <ol class="phases">
             <li class="phase" data-phase-item="1"><span class="phase-num">01</span><span class="phase-text"><b>It arrives</b><small>Telegram, 7 am. Your niche, last 24 hours.</small></span></li>
             <li class="phase" data-phase-item="2"><span class="phase-num">02</span><span class="phase-text"><b>You tap and type</b><small>One point, one line. Eleven seconds. Your whole job.</small></span></li>
             <li class="phase" data-phase-item="3"><span class="phase-num">03</span><span class="phase-text"><b>You say it</b><small>Your face, your voice. Cut, graded, captioned.</small></span></li>
             <li class="phase" data-phase-item="4"><span class="phase-num">04</span><span class="phase-text"><b>It is live</b><small>Before your first meeting.</small></span></li>
           </ol>
-          <p class="chat-hint">Scroll</p>
+          <button class="chat-replay" type="button" data-chat-replay hidden>Run it again</button>
         </div>
 
         <div class="phone">
@@ -165,59 +169,88 @@
 
             <div class="tg-log">
 
-              <div class="chat-step tg-day" data-phase="1"><span>Today</span></div>
+              <div class="chat-step tg-day" data-wait="0" data-phase="1"><span>Today</span></div>
 
-              <div class="chat-step tg-row" data-phase="1">
+              <div class="chat-step tg-row tg-typing" data-wait="500" data-typing><div class="tg-bubble"><span class="tg-dots"><i></i><i></i><i></i></span></div></div>
+
+              <div class="chat-step tg-row" data-wait="1100" data-phase="1">
                 <div class="tg-bubble">
-                  <b>Good morning.</b> Four things moved in your world overnight.
+                  <b>Good morning.</b> Four things moved in your world overnight. Which one do you want to say something about?
                   <ol>
                     <li>Meta opened Advantage+ creative to India.</li>
                     <li>A rival founder posted on AI actors. 400 comments.</li>
                     <li>New study: 62&#37; of B2B buyers start on video.</li>
                     <li>Your Tuesday post is still climbing. 11k.</li>
                   </ol>
-                  <div class="tg-keys">
-                    <span class="tg-key">1</span><span class="tg-key">2</span>
-                    <span class="tg-key is-picked">3</span><span class="tg-key">4</span>
+                  <div class="tg-keys" data-keys="pick">
+                    <button class="tg-key" type="button" data-value="1">1</button>
+                    <button class="tg-key" type="button" data-value="2">2</button>
+                    <button class="tg-key" type="button" data-value="3">3</button>
+                    <button class="tg-key" type="button" data-value="4">4</button>
                   </div>
                   <div class="tg-meta">07:02</div>
                 </div>
               </div>
 
-              <div class="chat-step tg-row tg-row--out" data-phase="2">
-                <div class="tg-bubble">
-                  Everyone reads that as a video stat. It is a trust stat.
-                  <div class="tg-meta">07:04
-                    <svg class="tg-tick" viewBox="0 0 13 8" aria-hidden="true"><path d="M1 4.4 3.6 7 8.4 1.4"/><path d="M5.6 6.2 6.4 7l4.8-5.6"/></svg>
-                  </div>
+              <div class="chat-step tg-row tg-row--out" data-await="pick" data-phase="2">
+                <div class="tg-bubble"><span data-fill>3</span>
+                  <div class="tg-meta">07:03 <svg class="tg-tick" viewBox="0 0 13 8" aria-hidden="true"><path d="M1 4.4 3.6 7 8.4 1.4"/><path d="M5.6 6.2 6.4 7l4.8-5.6"/></svg></div>
                 </div>
               </div>
 
-              <div class="chat-step tg-row" data-phase="2">
-                <div class="tg-bubble">
-                  Good angle. Video or static, and where?
-                  <div class="tg-keys">
-                    <span class="tg-key is-picked">Video</span><span class="tg-key">Static</span>
-                    <span class="tg-key is-picked">LinkedIn</span><span class="tg-key">Instagram</span>
+              <div class="chat-step tg-row" data-wait="850" data-phase="2">
+                <div class="tg-bubble">And your take on it? One line is plenty.
+                  <div class="tg-meta">07:03</div>
+                </div>
+              </div>
+
+              <div class="chat-step tg-row tg-row--out" data-await="text" data-phase="2">
+                <div class="tg-bubble"><span data-fill>Everyone reads that as a video stat. It is a trust stat.</span>
+                  <div class="tg-meta">07:04 <svg class="tg-tick" viewBox="0 0 13 8" aria-hidden="true"><path d="M1 4.4 3.6 7 8.4 1.4"/><path d="M5.6 6.2 6.4 7l4.8-5.6"/></svg></div>
+                </div>
+              </div>
+
+              <div class="chat-step tg-row" data-wait="800" data-phase="2">
+                <div class="tg-bubble">Got it. Film or a still?
+                  <div class="tg-keys" data-keys="format">
+                    <button class="tg-key" type="button" data-value="Film">Film</button>
+                    <button class="tg-key" type="button" data-value="Still">Still</button>
                   </div>
                   <div class="tg-meta">07:04</div>
                 </div>
               </div>
 
-              <div class="chat-step tg-row tg-row--out" data-phase="2">
-                <div class="tg-bubble">
-                  Video, LinkedIn.
-                  <div class="tg-meta">07:05
-                    <svg class="tg-tick" viewBox="0 0 13 8" aria-hidden="true"><path d="M1 4.4 3.6 7 8.4 1.4"/><path d="M5.6 6.2 6.4 7l4.8-5.6"/></svg>
-                  </div>
+              <div class="chat-step tg-row tg-row--out" data-await="format" data-phase="2">
+                <div class="tg-bubble"><span data-fill>Film</span>
+                  <div class="tg-meta">07:04 <svg class="tg-tick" viewBox="0 0 13 8" aria-hidden="true"><path d="M1 4.4 3.6 7 8.4 1.4"/><path d="M5.6 6.2 6.4 7l4.8-5.6"/></svg></div>
                 </div>
               </div>
 
-              <div class="chat-step tg-row tg-typing" data-phase="3" data-typing>
-                <div class="tg-bubble"><span class="tg-dots"><i></i><i></i><i></i></span></div>
+              <div class="chat-step tg-row" data-wait="750" data-phase="2">
+                <div class="tg-bubble">And where is it going?
+                  <div class="tg-keys" data-keys="where">
+                    <button class="tg-key" type="button" data-value="LinkedIn">LinkedIn</button>
+                    <button class="tg-key" type="button" data-value="Instagram">Instagram</button>
+                  </div>
+                  <div class="tg-meta">07:05</div>
+                </div>
               </div>
 
-              <div class="chat-step tg-row" data-phase="3">
+              <div class="chat-step tg-row tg-row--out" data-await="where" data-phase="3">
+                <div class="tg-bubble"><span data-fill>LinkedIn</span>
+                  <div class="tg-meta">07:05 <svg class="tg-tick" viewBox="0 0 13 8" aria-hidden="true"><path d="M1 4.4 3.6 7 8.4 1.4"/><path d="M5.6 6.2 6.4 7l4.8-5.6"/></svg></div>
+                </div>
+              </div>
+
+              <div class="chat-step tg-row" data-wait="700" data-phase="3">
+                <div class="tg-bubble">On it. Writing in your voice.
+                  <div class="tg-meta">07:05</div>
+                </div>
+              </div>
+
+              <div class="chat-step tg-row tg-typing" data-wait="900" data-typing><div class="tg-bubble"><span class="tg-dots"><i></i><i></i><i></i></span></div></div>
+
+              <div class="chat-step tg-row" data-wait="2100" data-phase="3">
                 <div class="tg-bubble tg-film">
                   <div class="tg-film-frame" data-loop-film>
                     <video muted loop playsinline preload="none"
@@ -230,20 +263,21 @@
                 </div>
               </div>
 
-              <div class="chat-step tg-row" data-phase="4">
-                <div class="tg-bubble">
-                  Posted to LinkedIn. <b>07:26.</b>
+              <div class="chat-step tg-row" data-wait="900" data-phase="4">
+                <div class="tg-bubble">Posted to <span data-fill-where>LinkedIn</span>. <b>07:26.</b>
                   <div class="tg-meta">07:26</div>
                 </div>
               </div>
 
             </div>
 
-            <div class="tg-input">
+            <form class="tg-input" data-chat-form>
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 6.5v9a4.5 4.5 0 0 1-9 0V6a3 3 0 0 1 6 0v9a1.5 1.5 0 0 1-3 0V6.5H9V15a3 3 0 0 0 6 0V6a4.5 4.5 0 0 0-9 0v9.5a6 6 0 0 0 12 0v-9z"/></svg>
-              <span>Message</span>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.9V22h2v-3.1A7 7 0 0 0 19 12z"/></svg>
-            </div>
+              <input type="text" placeholder="Message" maxlength="140" autocomplete="off" aria-label="Your take" disabled>
+              <button class="tg-send" type="submit" aria-label="Send" disabled>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+              </button>
+            </form>
 
           </div>
         </div>
@@ -334,13 +368,13 @@
 
   </main>
 
-  <script src="assets/js/vendor/gsap.min.js?v=2609121433"></script>
-  <script src="assets/js/vendor/ScrollTrigger.min.js?v=2609121433"></script>
-  <script src="assets/js/vendor/lenis.min.js?v=2609121433"></script>
-  <script src="assets/js/main.js?v=2609121433"></script>
-  <script src="assets/js/work.js?v=2609121433"></script>
-  <script src="assets/js/work-film.js?v=2609121433"></script>
-  <script src="assets/js/chat-scroll.js?v=2609121433"></script>
-  <script src="assets/js/project-film.js?v=2609121433"></script>
+  <script src="assets/js/vendor/gsap.min.js?v=2609121446"></script>
+  <script src="assets/js/vendor/ScrollTrigger.min.js?v=2609121446"></script>
+  <script src="assets/js/vendor/lenis.min.js?v=2609121446"></script>
+  <script src="assets/js/main.js?v=2609121446"></script>
+  <script src="assets/js/work.js?v=2609121446"></script>
+  <script src="assets/js/work-film.js?v=2609121446"></script>
+  <script src="assets/js/chat-play.js?v=2609121446"></script>
+  <script src="assets/js/project-film.js?v=2609121446"></script>
 </body>
 </html>

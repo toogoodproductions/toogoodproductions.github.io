@@ -2299,22 +2299,22 @@ body.film-open { overflow: hidden; }
    as a screenshot, which is the only job it has.
    ------------------------------------------------------------------ */
 .chat-scroll { position: relative; }
+/* An ordinary section. Nothing pins, nothing takes the scroll off you.
+   The thread plays on its own when it arrives in front of you. */
 .chat-stage {
   display: grid;
   grid-template-columns: 1fr;
   gap: 40px;
   align-items: center;
   justify-items: center;
-  min-height: 100vh;
-  min-height: 100svh;
-  padding-block: 40px;
+  padding-block: 72px;
 }
 @media (min-width: 900px) {
   .chat-stage {
     grid-template-columns: 1fr minmax(300px, 340px);
     gap: 80px;
     justify-items: stretch;
-    padding-block: 64px;
+    padding-block: 96px;
   }
 }
 /* On a phone the thread is the only thing on screen. It is the selling
@@ -2323,18 +2323,7 @@ body.film-open { overflow: hidden; }
 .chat-scroll.is-static .chat-said { display: block; }
 .chat-said h2 { max-width: 15ch; }
 .chat-said p { max-width: 46ch; margin-top: 20px; color: rgba(255,255,255,.55); }
-.chat-hint {
-  display: inline-flex; align-items: center; gap: 10px;
-  margin-top: 32px !important;
-  font-family: var(--font-mono); font-size: 11px; letter-spacing: .12em;
-  text-transform: uppercase; color: rgba(255,255,255,.35) !important;
-}
-.chat-hint::after {
-  content: ''; width: 26px; height: 1px; background: currentColor;
-  animation: hintPull 1.8s var(--ease-inout) infinite;
-}
-@keyframes hintPull { 0%,100% { transform: scaleX(.4); transform-origin: left; } 50% { transform: scaleX(1); transform-origin: left; } }
-.chat-scroll.is-static .chat-hint { display: none; }
+.chat-hint { display: none; }
 
 .phone {
   --tg-bg: #0e1621;
@@ -2361,10 +2350,9 @@ body.film-open { overflow: hidden; }
   flex-direction: column;
   height: 600px;
 }
-/* Pinned on a phone, the device fills the screen it is standing in for. */
 @media (max-width: 899px) {
-  .phone { max-width: min(340px, 84vw); }
-  .phone-screen { height: min(600px, 68vh); height: min(600px, 68svh); }
+  .phone { max-width: min(340px, 86vw); }
+  .phone-screen { height: min(580px, 72vh); height: min(580px, 72svh); }
 }
 .chat-scroll.is-static .phone-screen { height: auto; min-height: 520px; }
 
@@ -2458,13 +2446,24 @@ body.film-open { overflow: hidden; }
 .tg-key {
   flex: 1 1 40%;
   text-align: center;
-  padding: 7px 8px;
+  padding: 9px 8px;
+  border: 0;
   border-radius: 7px;
   background: rgba(255,255,255,.09);
+  font: inherit;
   font-size: 12px;
   color: #fff;
+  cursor: default;
+  transition: background .2s, color .2s, transform .2s var(--ease-out);
 }
 .tg-key.is-picked { background: var(--tg-blue); color: #0e1621; font-weight: 600; }
+/* While the thread is waiting on you, the buttons say so: they breathe,
+   and they answer the pointer. Nothing else on the screen moves. */
+.tg-keys.is-waiting .tg-key { cursor: pointer; background: rgba(106,179,243,.18); }
+.tg-keys.is-waiting .tg-key:hover { background: rgba(106,179,243,.42); transform: translateY(-1px); }
+.tg-keys.is-waiting .tg-key:active { transform: translateY(0); }
+.tg-keys.is-waiting { animation: keysWait 2s var(--ease-inout) infinite; }
+@keyframes keysWait { 0%,100% { opacity: .82; } 50% { opacity: 1; } }
 
 .tg-typing .tg-bubble { padding: 11px 13px; }
 .tg-dots { display: flex; gap: 4px; }
@@ -2491,13 +2490,54 @@ body.film-open { overflow: hidden; }
 
 .tg-input {
   display: flex; align-items: center; gap: 10px;
-  padding: 11px 16px 14px;
+  padding: 10px 14px 13px;
   background: var(--tg-panel);
   border-top: 1px solid rgba(0,0,0,.3);
-  font-size: 13px; color: rgba(255,255,255,.35);
 }
-.tg-input svg { width: 17px; height: 17px; fill: rgba(255,255,255,.35); flex: none; }
-.tg-input span { flex: 1; }
+.tg-input > svg { width: 17px; height: 17px; fill: rgba(255,255,255,.3); flex: none; }
+.tg-input input {
+  flex: 1; min-width: 0;
+  border: 0; background: none; outline: none;
+  font: inherit; font-size: 13px; color: #fff;
+  padding: 4px 0;
+}
+.tg-input input::placeholder { color: rgba(255,255,255,.3); }
+.tg-input input:disabled { color: rgba(255,255,255,.3); }
+.tg-send {
+  flex: none; border: 0; padding: 0; background: none;
+  width: 26px; height: 26px; border-radius: 50%;
+  display: grid; place-items: center;
+  cursor: default;
+  transition: background .2s, transform .2s var(--ease-out);
+}
+.tg-send svg { width: 15px; height: 15px; fill: rgba(255,255,255,.3); transition: fill .2s; }
+/* Live only while it is your turn, so the phone never invites a tap it
+   will not answer. */
+.tg-input.is-live { box-shadow: inset 0 1px 0 rgba(106,179,243,.35); }
+.tg-input.is-live input::placeholder { color: rgba(106,179,243,.7); }
+.tg-input.is-live .tg-send { background: var(--tg-blue); cursor: pointer; }
+.tg-input.is-live .tg-send svg { fill: #0e1621; }
+.tg-input.is-live .tg-send:hover { transform: scale(1.08); }
+
+.chat-replay {
+  margin-top: 28px;
+  border: 1px solid rgba(255,255,255,.2);
+  background: none;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+  padding: 11px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background .25s, border-color .25s;
+}
+.chat-replay:hover { background: rgba(255,255,255,.1); border-color: rgba(255,255,255,.4); }
+/* On a phone the labels are gone, so the replay sits under the device. */
+@media (max-width: 899px) {
+  .chat-scroll .chat-said { display: block; }
+  .chat-scroll .chat-said > :not([data-chat-replay]) { display: none; }
+  .chat-said { order: 2; text-align: center; }
+}
 
 /* ---- the four labels beside the phone ---- */
 .phases { margin-top: 36px; display: flex; flex-direction: column; gap: 2px; }
