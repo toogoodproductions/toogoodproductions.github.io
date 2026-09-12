@@ -21,7 +21,7 @@ commit, push — GitHub Pages serves it.
 | --- | --- |
 | `test3/` | **The site.** All current work lives here. |
 | `test/`, `test2/` | Old variants, untouched, effectively dead. |
-| `assets/video/` | Source films (ignored by git) plus generated output (committed). |
+| `assets/video/` | Source films (ignored by git) plus generated output (committed). `products/` holds the product demo film, its loop and its card. |
 | `assets/img/` | Logos, team photos, favicon files. |
 | `assets/Logo (Brand)/` | Original client logo files as supplied. |
 | `assets/Favicon/` | Original favicon art as supplied. |
@@ -34,7 +34,7 @@ it. Promoting `test3/` to the root is an open decision.
 
 ## Pages
 
-16 pages, all in `test3/`.
+17 pages, all in `test3/`.
 
 | Page | Notes |
 | --- | --- |
@@ -47,6 +47,10 @@ it. Promoting `test3/` to the root is an open decision.
 | `blog.html` | Layout ready. **No posts.** |
 | `contact.html` | Email, WhatsApp, socials, form. |
 | `project-*.html` | Nine project pages, one per film. |
+
+**`product.html` stays the URL** even though it is an index of several products
+now. It is linked from the header, the overlay menu and every footer; renaming it
+would mean touching all seventeen pages to save one letter.
 
 **Menu:** Home, Work, Offerings, Product, About, Blog. Present in both the header
 bar and the overlay menu on every page. The header bar only shows above 900px
@@ -85,7 +89,11 @@ Run from the repo root.
 ./tools/make-films.sh                         # watchable films with sound
 ./tools/make-stills.sh                        # six frames per project
 python3 tools/make-logos.py                   # client logos, white, trimmed
+python3 tools/seo.py                          # meta, schema, FAQ rows, sitemap, llms.txt
 ```
+
+`seo.py` is the one that runs after **any** copy change. The others only run
+when a film or a logo changes.
 
 **`make-loops.sh`** builds the silent background loops. Equal-length cuts, each
 sitting wholly inside one continuous shot, so no cut breaks a natural edit or
@@ -237,10 +245,10 @@ and Lenis which were already there.
 | `home.js` | Pre-existing. The reel: panel transitions, snapping, infinite loop. |
 | `work.js` | Pre-existing. Grid/list toggle, cursor-riding list preview. |
 | `panel-video.js` | Home reel background film. |
-| `work-film.js` | Work card loops. |
-| `project-film.js` | Project hero: still until you press play. |
+| `work-film.js` | Work card loops, and any film outside the grid that opts in with `data-loop-film`. |
+| `project-film.js` | A hero that holds a film: still until you press play. Project pages, and the product hero via `data-film-hero`. |
 | `panels.js` | Offerings and FAQ rows. |
-| `chat-play.js` | The product page's Telegram thread, which the visitor drives. |
+| `chat-play.js` | The product page's Telegram thread, played start to finish. |
 
 ### The played conversation
 
