@@ -1875,92 +1875,115 @@ body.film-open { overflow: hidden; }
 
 @media (prefers-reduced-motion: reduce) { .faq-q, .faq-q::after { transition: none; } }
 
-/* ---------- Offerings / Product panels ----------
-   One idea per screen, in the same language as the home reel: a scene behind,
-   the copy resting on the bottom-left, the mark large and faint on the right.
-   Nothing to open, nothing to hover, nothing competing. */
+/* ---------- Offerings / Product rows ----------
+   Compact rows, all of them readable at once - no opening, no hovering, no
+   row filling the screen. Everything arrives on scroll instead. */
 .offer-panel {
   position: relative;
-  min-height: 78vh;
-  display: flex;
-  align-items: flex-end;
-  overflow: hidden;
   border-top: 1px solid var(--border);
+  overflow: hidden;
 }
-.offer-panel .scene { position: absolute; inset: 0; }
-.offer-panel .scene-art { position: absolute; inset: -12%; }
+.offer-panel:last-of-type { border-bottom: 1px solid var(--border); }
 
 .pan-inner {
   position: relative;
   z-index: 2;
-  padding-top: 96px;
-  padding-bottom: 72px;
-  max-width: 900px;
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 0 24px;
+  padding-top: 46px;
+  padding-bottom: 46px;
+  max-width: 1100px;
 }
 .pan-num {
-  display: block;
+  grid-column: 1;
   font-family: var(--font-mono);
   font-size: 12px;
   letter-spacing: .16em;
   color: var(--accent);
-  margin-bottom: 18px;
+  padding-top: 10px;
 }
+.pan-title, .pan-lead, .pan-body, .pan-tags { grid-column: 2; }
+
 .pan-title {
   font-family: var(--font-display, inherit);
-  font-size: clamp(38px, 7vw, 96px);
-  line-height: .95;
+  font-size: clamp(32px, 4.6vw, 62px);
+  line-height: .98;
   text-transform: uppercase;
-  margin: 0 0 22px;
+  margin: 0 0 16px;
 }
+/* The mask the reveal slides through. */
+.pan-title .line-mask { display: block; overflow: hidden; }
+.pan-title .line-inner { display: block; }
+
 .pan-lead {
-  margin: 0 0 14px;
-  max-width: 30ch;
-  font-size: clamp(17px, 2vw, 22px);
-  line-height: 1.35;
+  margin: 0 0 8px;
+  max-width: 46ch;
+  font-size: clamp(15px, 1.5vw, 18px);
+  line-height: 1.4;
   color: #fff;
 }
 .pan-body {
-  margin: 0 0 30px;
-  max-width: 52ch;
-  font-size: 15px;
+  margin: 0 0 20px;
+  max-width: 58ch;
+  font-size: 14px;
   line-height: 1.6;
-  color: rgba(255, 255, 255, .58);
+  color: rgba(255, 255, 255, .55);
 }
-.pan-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.pan-tags { display: flex; flex-wrap: wrap; gap: 7px; }
 .pan-tag {
-  padding: 7px 14px;
+  padding: 6px 12px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, .18);
+  border: 1px solid rgba(255, 255, 255, .16);
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 10.5px;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, .72);
-  transition: border-color .4s var(--ease-inout), color .4s var(--ease-inout),
-              background-color .4s var(--ease-inout);
+  color: rgba(255, 255, 255, .66);
+  transition: border-color .35s var(--ease-inout), color .35s var(--ease-inout),
+              background-color .35s var(--ease-inout);
 }
 .pan-tag:hover { border-color: var(--accent); color: var(--accent-fg); background: var(--accent); }
 
-/* The mark, large and faint, anchored to the right of the panel. */
+/* Mark drifts up the row as you scroll past it. */
 .pan-motif {
   position: absolute;
-  right: 6%;
+  right: 5%;
   top: 50%;
-  transform: translateY(-50%);
-  width: clamp(160px, 22vw, 300px);
-  height: clamp(160px, 22vw, 300px);
+  width: clamp(84px, 9vw, 132px);
+  height: clamp(84px, 9vw, 132px);
   z-index: 1;
   color: #fff;
-  opacity: .07;
+  opacity: .085;
   pointer-events: none;
+  transform: translateY(-50%);
 }
 .pan-motif svg { width: 100%; height: 100%; display: block; }
 
-@media (max-width: 860px) {
-  .offer-panel { min-height: 0; }
-  .pan-inner { padding-top: 64px; padding-bottom: 56px; }
-  .pan-motif { right: 4%; width: 130px; height: 130px; opacity: .05; }
-  .pan-lead { max-width: none; font-size: 17px; }
-  .pan-body { font-size: 14px; margin-bottom: 24px; }
-  .pan-tag { padding: 6px 11px; font-size: 10px; }
+/* Light gathers on the row the pointer is over. */
+.offer-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--accent) 8%, transparent) 0%, transparent 48%);
+  transition: opacity .5s var(--ease-inout);
+}
+.offer-panel:hover::after { opacity: 1; }
+.offer-panel:hover .pan-motif { opacity: .18; }
+.pan-motif { transition: opacity .5s var(--ease-inout); }
+
+@media (max-width: 720px) {
+  .pan-inner { grid-template-columns: 34px minmax(0, 1fr); gap: 0 12px;
+               padding-top: 30px; padding-bottom: 30px; }
+  .pan-motif { display: none; }
+  .pan-title { font-size: clamp(28px, 8vw, 40px); margin-bottom: 12px; }
+  .pan-lead { font-size: 15px; }
+  .pan-body { font-size: 13.5px; margin-bottom: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .offer-panel::after, .pan-motif, .pan-tag { transition: none; }
 }
