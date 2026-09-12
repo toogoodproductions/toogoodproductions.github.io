@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="#000000">
-  <title>The Engine · toogood</title>
-  <meta name="description" content="Sample production platform page with scroll-lit statement and pillars.">
+  <title>Product · toogood</title>
+  <meta name="description" content="Sample brand work index — grid and list views.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23FFD23F'/%3E%3Cpath d='M11 8h10v4h-6v2h6v10H11v-4h6v-2h-6z' fill='%23000000'/%3E%3C/svg%3E">
   <link rel="preload" href="assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/chivo-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -78,89 +78,41 @@
   
   <main class="page-main">
 
-    <!-- Hero -->
-    <section class="page-hero container">
-      <span class="kicker type-label" data-reveal>The Engine</span>
+    <!-- Hero: stark title + intro -->
+    <header class="page-hero container">
       <h1 class="type-heading-xl text-balance" data-mask-reveal>
-        <span class="line-mask"><span class="line-inner">One pipeline, from</span></span>
-        <span class="line-mask"><span class="line-inner">idea to final frame</span></span>
+        <span class="line-mask"><span class="line-inner">Product</span></span>
       </h1>
-      <p class="hero-para text-dim" data-reveal style="max-width:64ch;margin-top:20px">
-        Lorem ipsum dolor sit amet — a sample description of a cloud production platform
-        connecting story, design and delivery in one continuous workflow.
-      </p>
+      <p class="type-base text-dim" data-reveal style="max-width:72ch;margin-top:24px">Software we built for ourselves first. Each one came out of a problem we hit doing the work, solved properly rather than worked around, and then turned into something other people can use.</p>
+      <hr style="margin-top:48px">
+    </header>
+
+    <!-- Logotype marquee -->
+    <!-- Work index: Grid / List -->
+    <section class="section container offer-list" data-reveal-group>
+        <article class="offer-card" data-reveal>
+          <span class="offer-num type-heading-xs">01</span>
+          <h2 class="offer-title type-heading-lg">Product one</h2>
+          <p class="offer-body type-base text-dim">What it does and the problem it solves. Replace with the real name and description.</p>
+          <div class="offer-tags"><span class="offer-tag">Tag</span><span class="offer-tag">Tag</span><span class="offer-tag">Tag</span></div>
+          <span class="offer-glow" aria-hidden="true"></span>
+        </article>
+        <article class="offer-card" data-reveal>
+          <span class="offer-num type-heading-xs">02</span>
+          <h2 class="offer-title type-heading-lg">Product two</h2>
+          <p class="offer-body type-base text-dim">What it does and the problem it solves. Replace with the real name and description.</p>
+          <div class="offer-tags"><span class="offer-tag">Tag</span><span class="offer-tag">Tag</span></div>
+          <span class="offer-glow" aria-hidden="true"></span>
+        </article>
+        <article class="offer-card" data-reveal>
+          <span class="offer-num type-heading-xs">03</span>
+          <h2 class="offer-title type-heading-lg">Product three</h2>
+          <p class="offer-body type-base text-dim">What it does and the problem it solves. Replace with the real name and description.</p>
+          <div class="offer-tags"><span class="offer-tag">Tag</span><span class="offer-tag">Tag</span></div>
+          <span class="offer-glow" aria-hidden="true"></span>
+        </article>
     </section>
 
-    <!-- Full-bleed scene band -->
-    <section class="section container" data-reveal>
-      <div class="media-block sheen-overlay" style="aspect-ratio:21/9">
-        <div class="scene"><div class="scene-art scene-art--engine"></div><div class="scene-vignette"></div></div>
-      </div>
-    </section>
-
-    <!-- Word-scrub statement -->
-    <section class="section container">
-      <p class="statement" data-word-scrub>Continuity, speed and creative clarity at scale — placeholder statement text that lights up word by word as you scroll through it.</p>
-    </section>
-
-    <!-- Pillars -->
-    <section class="section container">
-      <div class="section-head">
-        <h2 class="type-heading-md" data-reveal>What it does</h2>
-        <span class="type-label text-dim" data-reveal>Sample pillars</span>
-      </div>
-      <div data-reveal-group>
-        <div class="cap-block" data-reveal>
-          <h3>World Memory</h3>
-          <div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Characters, locations and
-            lore stay consistent across every shot, episode and format.</p>
-            <div class="cap-tags">
-              <span class="cap-tag">Continuity</span><span class="cap-tag">Style Lock</span><span class="cap-tag">Asset Library</span>
-            </div>
-          </div>
-        </div>
-        <div class="cap-block" data-reveal>
-          <h3>Speed of Culture</h3>
-          <div>
-            <p>Sed do eiusmod tempor incididunt ut labore. From brief to broadcast-ready in days,
-            not months — without dropping craft.</p>
-            <div class="cap-tags">
-              <span class="cap-tag">Rapid Iteration</span><span class="cap-tag">Live Review</span><span class="cap-tag">Versioning</span>
-            </div>
-          </div>
-        </div>
-        <div class="cap-block" data-reveal>
-          <h3>End-to-End Delivery</h3>
-          <div>
-            <p>Ut enim ad minim veniam, quis nostrud exercitation. Development, production and
-            finishing inside one connected system.</p>
-            <div class="cap-tags">
-              <span class="cap-tag">Edit</span><span class="cap-tag">Grade</span><span class="cap-tag">Sound</span><span class="cap-tag">Master</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Stats -->
-    <section class="section container">
-      <div class="stats-row" data-reveal-group>
-        <div class="stat" data-reveal><b data-count="10">10</b><span>x faster turnaround</span></div>
-        <div class="stat" data-reveal><b data-count="120">120</b><span>sample projects</span></div>
-        <div class="stat" data-reveal><b data-count="40">40</b><span>brand partners</span></div>
-        <div class="stat" data-reveal><b data-count="6">6</b><span>continents shipped</span></div>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="section container" style="text-align:center">
-      <p class="type-label text-dim" data-reveal style="margin-bottom:16px">Ready when you are</p>
-      <a class="type-heading-md" href="contact.html" data-reveal style="display:inline-block;transition:color .3s"
-         onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color=''">
-        Start a project →
-      </a>
-    </section>
 
 
     <!-- Footer -->
@@ -208,6 +160,8 @@
   <script src="assets/js/vendor/ScrollTrigger.min.js"></script>
   <script src="assets/js/vendor/lenis.min.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/work.js"></script>
+  <script src="assets/js/offerings.js"></script>
   <div class="test-badge" aria-hidden="true">test · sun</div>
 </body>
 </html>
