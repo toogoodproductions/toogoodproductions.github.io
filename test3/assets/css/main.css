@@ -2304,11 +2304,23 @@ body.film-open { overflow: hidden; }
   grid-template-columns: 1fr;
   gap: 40px;
   align-items: center;
-  padding-block: 64px;
+  justify-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding-block: 40px;
 }
 @media (min-width: 900px) {
-  .chat-stage { grid-template-columns: 1fr minmax(300px, 340px); gap: 80px; min-height: 100vh; }
+  .chat-stage {
+    grid-template-columns: 1fr minmax(300px, 340px);
+    gap: 80px;
+    justify-items: stretch;
+    padding-block: 64px;
+  }
 }
+/* On a phone the thread is the only thing on screen. It is the selling
+   point; a column of explanation beside it is not. */
+@media (max-width: 899px) { .chat-said { display: none; } }
+.chat-scroll.is-static .chat-said { display: block; }
 .chat-said h2 { max-width: 15ch; }
 .chat-said p { max-width: 46ch; margin-top: 20px; color: rgba(255,255,255,.55); }
 .chat-hint {
@@ -2336,6 +2348,7 @@ body.film-open { overflow: hidden; }
   margin-inline: auto;
   padding: 10px;
   border-radius: 42px;
+  will-change: transform;
   background: linear-gradient(160deg, #2a2d31 0%, #121316 60%);
   box-shadow: 0 50px 90px -45px rgba(0,0,0,.95), inset 0 0 0 1px rgba(255,255,255,.06);
 }
@@ -2348,7 +2361,12 @@ body.film-open { overflow: hidden; }
   flex-direction: column;
   height: 600px;
 }
-@media (max-width: 899px) { .phone-screen { height: auto; min-height: 520px; } }
+/* Pinned on a phone, the device fills the screen it is standing in for. */
+@media (max-width: 899px) {
+  .phone { max-width: min(340px, 84vw); }
+  .phone-screen { height: min(600px, 68vh); height: min(600px, 68svh); }
+}
+.chat-scroll.is-static .phone-screen { height: auto; min-height: 520px; }
 
 .tg-status {
   display: flex; align-items: center; justify-content: space-between;
@@ -2390,9 +2408,9 @@ body.film-open { overflow: hidden; }
 }
 
 .chat-step { display: none; }
-.chat-step.is-in { animation: tgIn .34s var(--ease-out) both; }
+.chat-step.is-in { animation: tgIn .42s var(--ease-expo) both; }
 @keyframes tgIn {
-  from { opacity: 0; transform: translateY(10px) scale(.97); }
+  from { opacity: 0; transform: translateY(14px) scale(.965); }
   to   { opacity: 1; transform: none; }
 }
 .tg-day.is-in { display: flex; justify-content: center; }
@@ -2485,22 +2503,38 @@ body.film-open { overflow: hidden; }
 .phases { margin-top: 36px; display: flex; flex-direction: column; gap: 2px; }
 .phase {
   display: grid;
-  grid-template-columns: 34px 1fr;
-  gap: 14px;
-  padding: 14px 16px 14px 0;
-  border-top: 1px solid var(--border);
-  opacity: .34;
-  transition: opacity .45s var(--ease-out), padding-left .45s var(--ease-out);
+  grid-template-columns: 32px 1fr;
+  gap: 16px;
+  padding: 16px 16px 16px 0;
+  border-top: 1px solid rgba(255,255,255,.08);
+  transition: padding-left .5s var(--ease-out), border-color .5s;
 }
-.phase:last-child { border-bottom: 1px solid var(--border); }
-.phase.is-done { opacity: .5; }
-/* The step the thread is on sits proud of the others and lights up. */
-.phase.is-on { opacity: 1; padding-left: 14px; }
-.phase-num { font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em; color: rgba(255,255,255,.4); padding-top: 3px; }
-.phase.is-on .phase-num { color: var(--accent); }
-.phase-text { display: flex; flex-direction: column; gap: 4px; }
-.phase-text b { font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
-.phase-text { font-size: 13px; line-height: 1.5; color: rgba(255,255,255,.5); }
+.phase:last-child { border-bottom: 1px solid rgba(255,255,255,.08); }
+.phase-num {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em;
+  color: rgba(255,255,255,.3); padding-top: 4px;
+  transition: color .4s;
+}
+.phase-text { display: flex; flex-direction: column; gap: 5px; }
+/* Label stays readable at every state; only its weight in the eye changes.
+   Dimming a line to a third of its contrast does not read as "later", it
+   reads as broken. */
+.phase-text b {
+  font-size: 17px; font-weight: 600; letter-spacing: -.01em;
+  color: rgba(255,255,255,.6);
+  transition: color .4s;
+}
+.phase-text small {
+  font-size: 13.5px; line-height: 1.5;
+  color: rgba(255,255,255,.4);
+  transition: color .4s;
+}
+.phase.is-done .phase-text b { color: rgba(255,255,255,.75); }
+/* The step the thread is on sits proud of the others and goes fully white. */
+.phase.is-on { padding-left: 16px; border-color: rgba(255,255,255,.3); }
+.phase.is-on .phase-num { color: #fff; }
+.phase.is-on .phase-text b { color: #fff; }
+.phase.is-on .phase-text small { color: rgba(255,255,255,.68); }
 .chat-scroll.is-static .phase { opacity: 1; }
 
 /* ---- the one number ---- */
