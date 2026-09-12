@@ -2222,15 +2222,19 @@ body.film-open { overflow: hidden; }
 /* Client logos in the Work marquee. All supplied at one height and recoloured
    white, so they only need a cap here and a little optical breathing room. */
 .marquee-logo {
-  height: 46px;
+  /* Marks are trimmed of their margin, so height alone sets how big they
+     read. The width cap stops a very wide wordmark taking over the row. */
+  height: 54px;
   width: auto;
+  max-width: 200px;
+  object-fit: contain;
   display: block;
-  opacity: .62;
+  opacity: .7;
   transition: opacity .4s var(--ease-inout);
 }
 .marquee-item:hover .marquee-logo { opacity: 1; }
 .marquee-item { display: inline-flex; align-items: center; }
-@media (max-width: 720px) { .marquee-logo { height: 32px; } }
+@media (max-width: 720px) { .marquee-logo { height: 38px; max-width: 140px; } }
 
 /* The production note under each project: same size, quieter, so the two
    paragraphs read as story then fact rather than one block. */
