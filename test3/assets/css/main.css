@@ -1875,38 +1875,52 @@ body.film-open { overflow: hidden; }
 
 @media (prefers-reduced-motion: reduce) { .faq-q, .faq-q::after { transition: none; } }
 
-/* ---------- Offerings: an index that opens ----------
-   Four rows, only the numbers and titles showing. The row under the
-   cursor opens and the rest close, so the page reads as a short list
-   rather than four competing blocks of text. */
+/* ---------- Offerings ----------
+   Four rows. Only numbers and titles show; the row under the cursor opens
+   and the rest close. Laid out on a grid so the number, title, motif and
+   mark line up on one axis whether a row is open or shut. */
 .offer-index {
+  position: relative;
   border-top: 1px solid var(--border);
   max-width: 1100px;
 }
-.offer-row {
-  border-bottom: 1px solid var(--border);
-  position: relative;
-  overflow: hidden;          /* keeps the numeral from spilling past the row */
+/* Ambient wash for the whole section, anchored to the left edge. */
+.offer-index::before {
+  content: "";
+  position: absolute;
+  inset: -40px -24px;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(70% 130% at 0% 50%,
+      color-mix(in srgb, var(--accent) 7%, transparent) 0%,
+      transparent 62%);
 }
-/* A line that draws in from the left under the open row. */
+.offer-row { position: relative; z-index: 1; border-bottom: 1px solid var(--border); }
+
+/* Light gathering on the open row, contained inside it. */
 .offer-row::after {
   content: "";
   position: absolute;
-  left: 0;
-  bottom: -1px;
-  height: 1px;
-  width: 0;
-  background: var(--accent);
-  transition: width .8s var(--ease-expo);
+  inset: 0;
+  z-index: -1;
+  opacity: 0;
+  pointer-events: none;
+  background: linear-gradient(90deg,
+    color-mix(in srgb, var(--accent) 10%, transparent) 0%,
+    color-mix(in srgb, var(--accent) 3%, transparent) 30%,
+    transparent 62%);
+  transition: opacity .6s var(--ease-inout);
 }
-.offer-row.is-open::after { width: 100%; }
+.offer-row.is-open::after { opacity: 1; }
 
 .offer-head {
+  display: grid;
+  grid-template-columns: 52px 1fr auto auto;
+  align-items: center;
+  gap: 0 24px;
   width: 100%;
-  display: flex;
-  align-items: baseline;
-  gap: 28px;
-  padding: 38px 0;
+  padding: 26px 0;
   background: none;
   border: 0;
   color: inherit;
@@ -1918,44 +1932,41 @@ body.film-open { overflow: hidden; }
   font-family: var(--font-mono);
   font-size: 12px;
   letter-spacing: .14em;
-  color: rgba(255, 255, 255, .34);
-  flex: none;
-  width: 34px;
-  transition: color .5s var(--ease-inout);
+  color: rgba(255, 255, 255, .3);
+  transition: color .45s var(--ease-inout);
 }
 .offer-row.is-open .offer-num { color: var(--accent); }
 
 .offer-title {
   font-family: var(--font-display, inherit);
-  /* px, not rem: this site sets a non-default root size, which drags a
-     rem-based clamp down to its minimum. */
-  font-size: clamp(32px, 6.4vw, 88px);
-  line-height: .94;
+  font-size: clamp(30px, 5.4vw, 74px);
+  line-height: 1;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, .55);
-  transition: color .5s var(--ease-inout), transform .7s var(--ease-expo);
-  transform-origin: left center;
+  color: rgba(255, 255, 255, .5);
+  transition: color .45s var(--ease-inout);
 }
-.offer-row.is-open .offer-title { color: #fff; transform: translateX(10px); }
+.offer-row.is-open .offer-title { color: #fff; }
 
-/* Small mark that turns as the row opens. */
+.offer-motif {
+  width: 40px;
+  height: 40px;
+  opacity: .32;
+  color: rgba(255, 255, 255, .85);
+  transition: opacity .45s var(--ease-inout), color .45s var(--ease-inout),
+              transform .8s var(--ease-expo);
+}
+.offer-motif svg { width: 100%; height: 100%; display: block; }
+.offer-row.is-open .offer-motif { opacity: 1; color: var(--accent); transform: rotate(-4deg); }
+
 .offer-mark {
-  margin-left: auto;
-  flex: none;
   width: 13px;
   height: 13px;
   position: relative;
-  align-self: center;
   opacity: .4;
-  transition: opacity .5s var(--ease-inout), transform .6s var(--ease-expo);
+  transition: opacity .45s var(--ease-inout), transform .55s var(--ease-expo);
 }
 .offer-mark::before,
-.offer-mark::after {
-  content: "";
-  position: absolute;
-  background: currentColor;
-  inset: 0;
-}
+.offer-mark::after { content: ""; position: absolute; background: currentColor; inset: 0; }
 .offer-mark::before { height: 1px; top: 6px; }
 .offer-mark::after { width: 1px; left: 6px; }
 .offer-row.is-open .offer-mark { opacity: 1; transform: rotate(135deg); }
@@ -1964,27 +1975,27 @@ body.film-open { overflow: hidden; }
 .offer-wrap {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows .7s var(--ease-expo);
+  transition: grid-template-rows .6s var(--ease-expo);
 }
 .offer-row.is-open .offer-wrap { grid-template-rows: 1fr; }
 .offer-body {
-  position: relative;
   overflow: hidden;
   min-height: 0;
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity .5s var(--ease-inout) .1s, transform .6s var(--ease-expo) .1s;
+  transition: opacity .45s var(--ease-inout) .1s;
 }
-.offer-row.is-open .offer-body { opacity: 1; transform: none; }
+.offer-row.is-open .offer-body { opacity: 1; }
 
+/* Indented to the title, not the number, so the block hangs off one edge. */
+.offer-inner { padding: 0 0 34px 76px; }
 .offer-text {
-  margin: 0 0 24px 62px;
+  margin: 0 0 22px;
   max-width: 58ch;
   font-size: 15px;
-  line-height: 1.55;
+  line-height: 1.6;
   color: rgba(255, 255, 255, .58);
 }
-.offer-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 34px 62px; }
+.offer-tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .offer-tag {
   padding: 6px 13px;
   border-radius: 999px;
@@ -1994,24 +2005,8 @@ body.film-open { overflow: hidden; }
   letter-spacing: .1em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, .6);
-}
-
-@media (max-width: 640px) {
-  .offer-head { gap: 16px; padding: 22px 0; }
-  .offer-num { width: 26px; }
-  .offer-text, .offer-tags { margin-left: 0; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .offer-row::after, .offer-title, .offer-mark, .offer-wrap, .offer-body,
-  .offer-num { transition: none; }
-}
-
-.offer-head, .offer-wrap { position: relative; z-index: 1; }
-
-/* Tags carry more of the visual rhythm now the paragraph is quieter. */
-.offer-tag {
-  transition: border-color .45s var(--ease-inout), color .45s var(--ease-inout),
-              background-color .45s var(--ease-inout);
+  transition: border-color .4s var(--ease-inout), color .4s var(--ease-inout),
+              background-color .4s var(--ease-inout);
 }
 .offer-row.is-open .offer-tag:hover {
   border-color: var(--accent);
@@ -2019,70 +2014,17 @@ body.film-open { overflow: hidden; }
   background: var(--accent);
 }
 
-/* A wash of the accent bleeding in from the left of the open row. */
-.offer-row::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  opacity: 0;
-  /* Reads as light entering from the left edge: a short, steep falloff plus a
-     hard bar at x=0. The old version faded across nearly half the row, which
-     landed as a grey panel behind the title rather than a gradient. */
-  background:
-    linear-gradient(90deg, var(--accent) 0 2px, transparent 2px),
-    linear-gradient(90deg,
-      color-mix(in srgb, var(--accent) 13%, transparent) 0,
-      color-mix(in srgb, var(--accent) 4%, transparent) 12%,
-      transparent 26%);
-  transition: opacity .7s var(--ease-inout);
-  pointer-events: none;
-}
-.offer-row.is-open::before { opacity: 1; }
-
-@media (prefers-reduced-motion: reduce) {
-  .offer-tag, .offer-row::before { transition: none; }
-}
-
-/* ---------- Offerings: motif + mobile weight ----------
-   A drawn mark per row rather than a giant numeral. It sits in the head so it
-   is never inside the element that animates open, which is what was slicing
-   the numeral. Line drawings in the same thin-stroke language as the chips. */
-.offer-motif {
-  margin-left: auto;
-  flex: none;
-  width: 46px;
-  height: 46px;
-  align-self: center;
-  color: rgba(255, 255, 255, .3);
-  transition: color .5s var(--ease-inout), transform .9s var(--ease-expo);
-}
-.offer-motif svg { width: 100%; height: 100%; display: block; }
-.offer-row.is-open .offer-motif { color: var(--accent); transform: rotate(-4deg) scale(1.06); }
-
-/* Present on every row, dim until the row opens. */
-.offer-motif { opacity: .38; transition: opacity .5s var(--ease-inout),
-               color .5s var(--ease-inout), transform .9s var(--ease-expo); }
-.offer-row.is-open .offer-motif { opacity: 1; }
-
-.offer-mark { margin-left: 22px; }
-
 @media (max-width: 720px) {
-  /* The page was reading as a wall on a phone: everything smaller, one
-     column, motif dropped, and nothing open until it is asked for. */
+  .offer-head { grid-template-columns: 34px 1fr auto; gap: 0 12px; padding: 18px 0; }
   .offer-motif { display: none; }
-  .offer-title { font-size: clamp(26px, 8.5vw, 40px); }
-  .offer-head { padding: 20px 0; gap: 14px; }
-  .offer-text {
-    font-size: 14px;
-    line-height: 1.5;
-    margin-bottom: 18px;
-  }
-  .offer-tags { margin-bottom: 24px; gap: 6px; }
+  .offer-title { font-size: clamp(26px, 8.4vw, 40px); }
+  .offer-inner { padding: 0 0 24px 46px; }
+  .offer-text { font-size: 14px; line-height: 1.5; margin-bottom: 16px; }
+  .offer-tags { gap: 6px; }
   .offer-tag { padding: 5px 10px; font-size: 10px; }
-  .offer-mark { margin-left: 12px; }
+  .offer-index::before { inset: -20px -16px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .offer-motif, .offer-motif svg > * { transition: none; }
-  .offer-motif svg > * { stroke-dashoffset: 0; }
+  .offer-row::after, .offer-title, .offer-num, .offer-motif, .offer-mark,
+  .offer-wrap, .offer-body, .offer-tag { transition: none; }
 }
