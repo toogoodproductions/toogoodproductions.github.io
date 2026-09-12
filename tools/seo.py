@@ -263,8 +263,8 @@ PAGES = {
     "about.html": dict(
         url=BASE + "/about.html", crumb="About", kind="AboutPage",
         title="About · toogood",
-        desc="One of the first fully AI video agencies in Ahmedabad. Everything we make is "
-             "made with AI. None of it looks like it.",
+        desc="One of the first fully AI video agencies in Ahmedabad. Everything made with AI. "
+             "None of it looks like it.",
         image="real-estate-ad-concept"),
     "blog.html": dict(
         url=BASE + "/blog.html", crumb="Blog", kind=["CollectionPage", "Blog"],
