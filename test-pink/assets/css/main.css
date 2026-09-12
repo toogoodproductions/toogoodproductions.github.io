@@ -2034,37 +2034,78 @@ body.film-open { overflow: hidden; }
 }
 
 /* ---------- FAQ, inside Offerings ----------
-   Same open-on-click mechanism as the offering rows, scaled down: ten
-   questions at the offering size would dwarf the four things above them. */
-.faq-head { padding-bottom: 8px; }
-.faq-list { max-width: 1100px; margin: 0 auto; padding: 0 var(--gutter, 24px); }
+   A supporting section, not a second page title. Ten questions split into
+   three named groups so the block reads as three short lists rather than one
+   long one, with room between them. */
+.faq-head-title {
+  padding-top: 96px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: rgba(255, 255, 255, .45);
+  margin-bottom: 40px;
+}
+
+.faq-list { padding-bottom: 96px; }
+.faq-group + .faq-group { margin-top: 56px; }
+.faq-group-label {
+  margin: 0 0 4px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--accent);
+}
+.faq-group-rows { border-top: 1px solid var(--border); }
+
+/* Rows here are plain: no full-bleed hover wash, no motif. */
+.faq-panel { border-top: 0; border-bottom: 1px solid var(--border); overflow: visible; }
+.faq-panel:last-of-type { border-bottom: 1px solid var(--border); }
+.faq-panel::after { content: none; }
+.faq-panel .pan-inner { max-width: none; padding: 0; }
 
 .faq-panel .pan-head {
-  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
   align-items: start;
-  padding: 20px 0;
-  gap: 0 20px;
+  gap: 0 18px;
+  padding: 22px 0;
 }
+.faq-num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .1em;
+  color: rgba(255, 255, 255, .3);
+  padding-top: 4px;
+  transition: color .4s var(--ease-inout);
+}
+.faq-panel.is-open .faq-num { color: var(--accent); }
+
 .faq-panel .pan-title {
   font-family: inherit;
-  font-size: clamp(16px, 1.7vw, 20px);
-  line-height: 1.35;
+  font-size: clamp(15px, 1.55vw, 18px);
+  line-height: 1.4;
   text-transform: none;
   letter-spacing: 0;
-  color: rgba(255, 255, 255, .78);
+  color: rgba(255, 255, 255, .76);
 }
 .faq-panel.is-open .pan-title,
 .faq-panel:hover .pan-title { color: #fff; }
-.faq-panel .pan-mark { margin-top: 5px; }
-.faq-panel .pan-detail { padding-left: 0; padding-right: 52px; }
-.faq-panel.is-open .pan-detail { padding-bottom: 22px; }
-.faq-panel .pan-body { margin: 0; max-width: 74ch; font-size: 14.5px; }
-/* Answers have one child, so no stagger to run - keep the single fade. */
+.faq-panel .pan-mark { margin-top: 6px; }
+
+.faq-panel .pan-detail { padding-left: 58px; padding-right: 56px; }
+.faq-panel.is-open .pan-detail { padding-bottom: 26px; }
+.faq-panel .pan-body { margin: 0; max-width: 72ch; font-size: 14.5px; line-height: 1.65; }
 .faq-panel .pan-detail.is-in .pan-body { transition-delay: 0s; }
 
 @media (max-width: 720px) {
-  .faq-panel .pan-head { padding: 16px 0; gap: 0 14px; }
-  .faq-panel .pan-title { font-size: 15px; }
-  .faq-panel .pan-detail { padding-right: 30px; }
+  .faq-head-title { padding-top: 64px; margin-bottom: 28px; }
+  .faq-list { padding-bottom: 64px; }
+  .faq-group + .faq-group { margin-top: 40px; }
+  .faq-panel .pan-head { grid-template-columns: 28px minmax(0, 1fr) auto; gap: 0 12px; padding: 18px 0; }
+  .faq-panel .pan-title { font-size: 14.5px; }
+  .faq-panel .pan-detail { padding-left: 40px; padding-right: 28px; }
   .faq-panel .pan-body { font-size: 13.5px; }
 }
