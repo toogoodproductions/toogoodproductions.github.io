@@ -34,7 +34,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="preload" href="assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/chivo-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/main.css?v=2609121333">
+  <link rel="stylesheet" href="assets/css/main.css?v=2609121412">
   <script type="speculationrules">{"prefetch":[{"where":{"href_matches":"/*"},"eagerness":"conservative"}]}</script>
 </head>
 <body>
@@ -103,70 +103,189 @@
   
   <main class="page-main">
 
-    <!-- Hero: stark title + intro -->
-    <header class="page-hero container">
-      <h1 class="type-heading-xl text-balance" data-mask-reveal>
-        <span class="line-mask"><span class="line-inner">Product</span></span>
-      </h1>
-      <p class="type-base text-dim" data-reveal style="max-width:72ch;margin-top:24px">Software we built for ourselves first. Each one came out of a problem we hit doing the work, solved properly rather than worked around, and then turned into something other people can use.</p>
-      <hr style="margin-top:48px">
-    </header>
+    <!-- ============================================================
+         PLACEHOLDER COPY. Every word below is a stand-in written from
+         what the product does, so the page can be looked at rather
+         than imagined. Replace it.
 
-    <!-- Logotype marquee -->
-    <!-- Work index: Grid / List -->
-    <section class="offer-panel" data-panel data-reveal>
-      <span class="pan-motif" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="13" width="50" height="38" rx="5"/><path d="M28 26.5 40 32l-12 5.5z"/><path d="M7 22h50M7 42h50" opacity=".45"/></svg></span>
-      <div class="container pan-inner">
-        <button class="pan-head" type="button" aria-expanded="false" aria-controls="pan-01">
-          <span class="pan-num">01</span>
-          <span class="pan-title" data-mask-reveal><span class="line-mask"><span class="line-inner">Product one</span></span></span>
-          <span class="pan-mark" aria-hidden="true"></span>
+         Two assets are missing and referenced ahead of time:
+           ../assets/video/products/founder-avatar.jpg   (hero still)
+           ../assets/video/products/founder-avatar.mp4   (demo film)
+         The still removes itself until the file exists, so the hero
+         sits black rather than broken.
+         ============================================================ -->
+
+    <section class="page-hero container prod-hero">
+      <div class="prod-hero-copy">
+        <span class="kicker type-label" data-reveal>Product 01</span>
+        <h1 class="type-heading-xl text-balance" data-mask-reveal>
+          <span class="line-mask"><span class="line-inner">Founder's</span></span>
+          <span class="line-mask"><span class="line-inner">digital avatar</span></span>
+        </h1>
+        <p class="type-base text-dim prod-sub" data-reveal>You reply to one message. A film goes out in your face, in your voice, cut and graded and ready to post.</p>
+      </div>
+
+      <!-- The film is vertical because the product makes vertical film. A
+           wide full-bleed hero would crop the face and argue against itself. -->
+      <figure class="prod-hero-film" data-film-hero data-reveal>
+        <img class="hero-still" src="../assets/video/products/founder-avatar.jpg" alt="A founder avatar mid-sentence"
+             onerror="var f=this.closest('.prod-hero-film'); this.remove(); f.classList.add('no-film')">
+        <video class="hero-film" controls playsinline preload="none"
+               poster="../assets/video/products/founder-avatar.jpg"
+               src="../assets/video/products/founder-avatar.mp4"></video>
+        <button class="play-badge" data-play-film aria-label="Play the demo">
+          <svg viewBox="0 0 8 10"><use href="#triangle"/></svg>
         </button>
-        <div class="pan-wrap" id="pan-01">
-          <div class="pan-detail">
-            <p class="pan-lead">What it does, in one line.</p>
-            <p class="pan-body">The problem it solves and who it is for. Replace with the real name and description.</p>
-            <div class="pan-tags"><span class="pan-tag">Tag</span><span class="pan-tag">Tag</span><span class="pan-tag">Tag</span></div>
+      </figure>
+    </section>
+
+    <section class="section container">
+      <p class="type-base prod-sub" data-reveal style="max-width:68ch">Founders know they should be posting. Almost none of them have forty minutes a day to write, shoot, edit and upload. This removes every part of that except the one part only you can do, which is having the opinion.</p>
+    </section>
+
+    <!-- The message. This is the artifact, so it gets the most room. -->
+    <section class="section container">
+      <div class="chat-block">
+        <div class="chat-said" data-reveal>
+          <h2 class="type-heading-lg text-balance">It starts as a message.</h2>
+          <p>Not a dashboard you have to remember to open. Telegram or WhatsApp, wherever you already are, every morning.</p>
+          <p>Your involvement is two taps and one sentence. Everything after that happens without you.</p>
+        </div>
+
+        <div class="phone" data-reveal-group>
+          <div class="phone-bar">
+            <span class="phone-avatar">tg</span>
+            <span class="phone-who"><b>toogood</b><span>online</span></span>
+          </div>
+          <div class="chat-log">
+            <div class="msg msg--bot" data-reveal>
+              Four things moved in your world overnight.
+              <ol>
+                <li>Meta opened Advantage+ creative to Indian advertisers.</li>
+                <li>A competitor's founder posted on AI actors. 400 comments, mostly angry.</li>
+                <li>New study: 62&#37; of B2B buyers now start on video.</li>
+                <li>Your Tuesday post is still climbing. 11k.</li>
+              </ol>
+              <span class="msg-time">07:02</span>
+            </div>
+            <div class="chat-chips" data-reveal>
+              <span class="chip">01</span><span class="chip">02</span>
+              <span class="chip is-picked">03</span><span class="chip">04</span>
+            </div>
+            <div class="msg msg--me" data-reveal>
+              Everyone is reading that as a video stat. It is a trust stat.
+              <span class="msg-time">07:04</span>
+            </div>
+            <div class="msg msg--bot" data-reveal>
+              Good. Video or static, and where?
+              <span class="msg-time">07:04</span>
+            </div>
+            <div class="chat-chips" data-reveal>
+              <span class="chip is-picked">Video</span><span class="chip">Static</span>
+            </div>
+            <div class="chat-chips" data-reveal>
+              <span class="chip is-picked">LinkedIn</span><span class="chip">Instagram</span>
+            </div>
+            <div class="msg msg--bot" data-reveal>
+              Writing it in your voice. Twenty minutes.
+              <span class="msg-time">07:05</span>
+            </div>
+            <figure class="msg-film" data-reveal data-loop-film>
+              <video muted loop playsinline preload="none"
+                     poster="../assets/video/products/founder-avatar.jpg"
+                     src="../assets/video/products/founder-avatar-loop.mp4"
+                     onerror="this.closest('.msg-film').remove()"></video>
+              <figcaption>0:19 &middot; ready to post</figcaption>
+            </figure>
           </div>
         </div>
       </div>
     </section>
-    <section class="offer-panel" data-panel data-reveal>
-      <span class="pan-motif" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M52 32a20 20 0 1 1-5.9-14.1"/><path d="M52 18v8h-8"/><circle cx="32" cy="32" r="5.5"/></svg></span>
-      <div class="container pan-inner">
-        <button class="pan-head" type="button" aria-expanded="false" aria-controls="pan-02">
-          <span class="pan-num">02</span>
-          <span class="pan-title" data-mask-reveal><span class="line-mask"><span class="line-inner">Product two</span></span></span>
-          <span class="pan-mark" aria-hidden="true"></span>
-        </button>
-        <div class="pan-wrap" id="pan-02">
-          <div class="pan-detail">
-            <p class="pan-lead">What it does, in one line.</p>
-            <p class="pan-body">The problem it solves and who it is for. Replace with the real name and description.</p>
-            <div class="pan-tags"><span class="pan-tag">Tag</span><span class="pan-tag">Tag</span></div>
-          </div>
+
+    <!-- The flow, small and thin. The caption under the proof, not the proof. -->
+    <section class="section container" data-reveal-group>
+      <h2 class="type-label text-dim" data-reveal style="margin-bottom:24px">How it runs</h2>
+      <div class="flow">
+        <div class="flow-step" data-reveal>
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M8 12h32a4 4 0 0 1 4 4v14a4 4 0 0 1-4 4H20l-8 7v-7H8a4 4 0 0 1-4-4V16a4 4 0 0 1 4-4z"/><path d="M12 20h20M12 26h13" opacity=".6"/></svg>
+          <span class="flow-num">01</span>
+          <h3>The digest</h3>
+          <p>Your niche, the last twenty-four hours, filtered through your persona. It arrives before you are at your desk.</p>
+        </div>
+        <div class="flow-step" data-reveal>
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 10h22M6 18h16M6 26h10" opacity=".6"/><path d="M28 22l14 9-6 2 4 7-3 2-4-7-4 4z"/></svg>
+          <span class="flow-num">02</span>
+          <h3>You pick, you react</h3>
+          <p>One tap on the point worth saying something about. One line of what you actually think. That is the whole of your involvement.</p>
+        </div>
+        <div class="flow-step" data-reveal>
+          <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="18" cy="15" r="7"/><path d="M6 40c0-6.6 5.4-11 12-11s12 4.4 12 11"/><path d="M36 16v14M41 12v22" opacity=".6"/></svg>
+          <span class="flow-num">03</span>
+          <h3>Your avatar speaks</h3>
+          <p>Looks like you, sounds like you, phrases it the way you would. The script is written out of your line, not around it.</p>
+        </div>
+        <div class="flow-step" data-reveal>
+          <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="10" width="40" height="20" rx="3"/><path d="M4 36h40M4 42h26" opacity=".6"/><path d="M19 15l10 5-10 5z"/></svg>
+          <span class="flow-num">04</span>
+          <h3>The edit happens</h3>
+          <p>B-roll, motion graphics, captions, cuts. The film comes back finished, not as footage waiting for someone.</p>
+        </div>
+        <div class="flow-step" data-reveal>
+          <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M44 5L21 24"/><path d="M44 5L30 44l-9-20-17-7z"/></svg>
+          <span class="flow-num">05</span>
+          <h3>It goes out</h3>
+          <p>LinkedIn or Instagram, video or static, cut the way that platform actually rewards.</p>
         </div>
       </div>
     </section>
-    <section class="offer-panel" data-panel data-reveal>
-      <span class="pan-motif" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M32 14 55 24 32 34 9 24z"/><path d="M18 28v11c0 3.6 6.3 6.5 14 6.5s14-2.9 14-6.5V28"/><path d="M52 26v13" opacity=".55"/><circle cx="52" cy="41" r="2.2"/></svg></span>
-      <div class="container pan-inner">
-        <button class="pan-head" type="button" aria-expanded="false" aria-controls="pan-03">
-          <span class="pan-num">03</span>
-          <span class="pan-title" data-mask-reveal><span class="line-mask"><span class="line-inner">Product three</span></span></span>
-          <span class="pan-mark" aria-hidden="true"></span>
-        </button>
-        <div class="pan-wrap" id="pan-03">
-          <div class="pan-detail">
-            <p class="pan-lead">What it does, in one line.</p>
-            <p class="pan-body">The problem it solves and who it is for. Replace with the real name and description.</p>
-            <div class="pan-tags"><span class="pan-tag">Tag</span><span class="pan-tag">Tag</span></div>
+
+    <!-- One real input beside its finished output. -->
+    <section class="section container">
+      <h2 class="type-heading-lg text-balance" data-reveal style="max-width:18ch">One sentence in. A finished film out.</h2>
+      <div class="io" data-reveal-group style="margin-top:36px">
+        <div class="io-card" data-reveal>
+          <span class="io-label">What you typed</span>
+          <p class="io-scrap">Everyone is reading that as a video stat. It is a trust stat.</p>
+          <span class="io-label">Time spent</span>
+          <p class="io-scrap">11 seconds.</p>
+        </div>
+        <div class="io-card io-card--out" data-reveal>
+          <span class="io-label">What went out</span>
+          <div class="io-post" data-loop-film>
+            <video muted loop playsinline preload="none"
+                   poster="../assets/video/products/founder-avatar.jpg"
+                   src="../assets/video/products/founder-avatar-loop.mp4"
+                   onerror="this.closest('.io-card').remove()"></video>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- The differentiator gets its own beat rather than a bullet. -->
+    <section class="section container">
+      <div class="moat" data-reveal>
+        <h2 class="type-heading-lg text-balance" style="max-width:20ch">The hard part is not the video.</h2>
+        <div class="moat-body">
+          <p>Anyone can generate a talking head now. Almost nobody can generate one that sounds like you.</p>
+          <p>The work is upstream of the camera. How you build an argument. The words you would never use. Where you stop short of the obvious point, because the obvious point bores you. Your aesthetic, which is a real thing even if you have never written it down.</p>
+          <p>We spend the first stretch there, not on the model. Get it wrong and it is a stranger wearing your face. Get it right and your own team stops being able to tell.</p>
+        </div>
+        <div class="moat-list">
+          <span class="pan-tag">Voice</span><span class="pan-tag">Persona</span><span class="pan-tag">Aesthetic</span><span class="pan-tag">Editorial line</span>
+        </div>
+      </div>
+    </section>
 
+    <section class="section container" data-reveal>
+      <h2 class="type-heading-lg text-balance" style="max-width:20ch">Want to see yours?</h2>
+      <div class="glass" style="display:inline-flex;border-radius:999px;margin-top:28px">
+        <span class="glass-effect"></span>
+        <a class="btn btn-accent btn-lg glass-content border-shine" href="contact.html">
+          Get in touch
+          <span class="btn-chip"><svg><use href="#triangle"/></svg></span>
+        </a>
+      </div>
+    </section>
 
     <!-- Footer -->
     <footer class="site-footer">
@@ -207,12 +326,12 @@
 
   </main>
 
-  <script src="assets/js/vendor/gsap.min.js?v=2609121333"></script>
-  <script src="assets/js/vendor/ScrollTrigger.min.js?v=2609121333"></script>
-  <script src="assets/js/vendor/lenis.min.js?v=2609121333"></script>
-  <script src="assets/js/main.js?v=2609121333"></script>
-  <script src="assets/js/work.js?v=2609121333"></script>
-  <script src="assets/js/panels.js?v=2609121333"></script>
-  <div class="test-badge" aria-hidden="true">test · white</div>
+  <script src="assets/js/vendor/gsap.min.js?v=2609121412"></script>
+  <script src="assets/js/vendor/ScrollTrigger.min.js?v=2609121412"></script>
+  <script src="assets/js/vendor/lenis.min.js?v=2609121412"></script>
+  <script src="assets/js/main.js?v=2609121412"></script>
+  <script src="assets/js/work.js?v=2609121412"></script>
+  <script src="assets/js/work-film.js?v=2609121412"></script>
+  <script src="assets/js/project-film.js?v=2609121412"></script>
 </body>
 </html>

@@ -1,12 +1,15 @@
 /* ---------------------------------------------------------------
-   Work page: every card loops silently while it is on screen.
+   Any card that holds a film loops it silently while it is on screen.
+
+   Work cards opt in by their class; anything else by data-loop-film.
 
    Clips load lazily and only what is actually in the viewport
    decodes - eight fetched on first paint would cost more than the
    page itself. The full film lives on each project page.
    --------------------------------------------------------------- */
 (function () {
-  var cards = Array.prototype.slice.call(document.querySelectorAll('.work-card'));
+  var cards = Array.prototype.slice.call(
+    document.querySelectorAll('.work-card, [data-loop-film]'));
   if (!cards.length) return;
 
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -21,7 +24,7 @@
     if (p && p.catch) p.catch(function () {});
   }
 
-  var vids = cards.map(function (c) { return c.querySelector('.work-video'); }).filter(Boolean);
+  var vids = cards.map(function (c) { return c.querySelector('video'); }).filter(Boolean);
 
   vids.forEach(function (v) {
     v.muted = true;
@@ -34,7 +37,7 @@
     // in the viewport decodes, so scrolling past eight of them is cheap.
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) {
-        var v = e.target.querySelector('.work-video');
+        var v = e.target.querySelector('video');
         if (!v) return;
         if (e.isIntersecting) {
           if (v.preload === 'none') v.preload = 'auto';
@@ -51,7 +54,7 @@
     function unlock() {
       cards.forEach(function (c) {
         var r = c.getBoundingClientRect();
-        if (r.bottom > 0 && r.top < window.innerHeight) start(c.querySelector('.work-video'));
+        if (r.bottom > 0 && r.top < window.innerHeight) start(c.querySelector('video'));
       });
     }
     ['touchstart', 'pointerdown', 'keydown'].forEach(function (evt) {

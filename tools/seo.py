@@ -231,7 +231,8 @@ PROJECTS = [
 ]
 
 CLIENTS = ["Adani Realty", "Petpooja", "UB Heritage", "The Storeys Golf Coast",
-           "The Paragraph", "Mera Broadband", "Storython Studios", "Sanatan Seal"]
+           "The Paragraph", "Mera Broadband", "Storython Studios", "Sanatan Seal",
+           "Money At Work"]
 
 # --- the pages -----------------------------------------------------------
 PAGES = {
@@ -452,8 +453,19 @@ def work_list():
         "itemListOrder": "https://schema.org/ItemListOrderAscending",
         "itemListElement": [
             {
-                "@type": "ListItem", "position": i + 1, "name": p["title"],
-                "url": "%s/project-%s.html" % (BASE, p["slug"]),
+                "@type": "ListItem", "position": i + 1,
+                "item": {
+                    "@type": "VideoObject",
+                    "@id": "%s/project-%s.html#film" % (BASE, p["slug"]),
+                    "name": p["title"],
+                    "url": "%s/project-%s.html" % (BASE, p["slug"]),
+                    "thumbnailUrl": ROOT + "/assets/video/loops/%s.jpg" % p["slug"],
+                    # Naming the client here is what ties the logo in the
+                    # marquee to a real brand for anything reading the page.
+                    "about": ({"@id": org_id()} if p["client"] == "toogood Originals"
+                              else {"@type": "Organization", "name": p["client"]}),
+                    "creator": {"@id": org_id()},
+                },
             }
             for i, p in enumerate(PROJECTS)
         ],

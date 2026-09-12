@@ -41,7 +41,7 @@ it. Promoting `test3/` to the root is an open decision.
 | `index.html` | The scroll reel. Seven full-screen panels plus an outro that loops back to the hero. |
 | `work.html` | Client logo marquee, then a grid/list of nine projects. |
 | `offerings.html` | Four services as click-to-open rows, then the FAQ. |
-| `product.html` | Same row pattern. **Three placeholder slots — needs real copy.** |
+| `product.html` | One product, built out: hero film, the Telegram thread, five steps, an input beside its output, and the persona section. **Copy is a stand-in.** |
 | `about.html` | Positioning, statement line, two founders, contact banner. |
 | `blog.html` | Layout ready. **No posts.** |
 | `contact.html` | Email, WhatsApp, socials, form. |
@@ -118,6 +118,26 @@ visitors get new HTML with ten-minute-old cached scripts after a deploy. That bu
 cost hours: a page shipped with a stale script looking for markup that had been
 removed, so nothing responded and nothing errored.
 
+### The product demo film
+
+Not part of the nine-project pipeline, so it is built directly. From a vertical
+master in `assets/video/`:
+
+```bash
+FF=~/.local/bin/ffmpeg
+$FF -y -i "assets/video/Founder Video 1 - Aaditya.mp4" -vf scale=720:1280:flags=lanczos \
+  -c:v libx264 -crf 23 -preset slow -pix_fmt yuv420p -c:a aac -b:a 128k \
+  -movflags +faststart assets/video/products/founder-avatar.mp4
+$FF -y -ss 1 -t 8 -i "assets/video/Founder Video 1 - Aaditya.mp4" -an -vf scale=608:1080:flags=lanczos \
+  -c:v libx264 -crf 26 -preset slow -pix_fmt yuv420p \
+  -movflags +faststart assets/video/products/founder-avatar-loop.mp4
+$FF -y -ss 2 -i assets/video/products/founder-avatar.mp4 -frames:v 1 -q:v 3 \
+  assets/video/products/founder-avatar.jpg
+```
+
+The film carries sound and plays in the hero. The silent loop is what the chat
+bubble and the output card run, so neither pulls the full film down.
+
 ---
 
 ## What search and answer engines read
@@ -160,6 +180,13 @@ the work can be quoted rather than skipped. `llms.txt` is the plain-language
 brief those engines read: who we are, the four services, all nine films, the
 clients, the founders and the full FAQ. `product.html` carries `noindex` and
 stays out of the sitemap until it has real copy.
+
+**Client names are carried by `alt` text and by structured data, not by hidden
+text.** Every logo in the Work marquee has the brand name as its `alt`, which is
+what crawlers and screen readers read, and the Work page's `ItemList` names the
+client behind every film. Text hidden behind or under an image adds nothing on
+top of that and is the definition of cloaking, which is a penalty rather than a
+ranking.
 
 Nothing in there is invented. Where a fact is not known it is left out, because
 a wrong claim in structured data is worse than a missing one. That is why there

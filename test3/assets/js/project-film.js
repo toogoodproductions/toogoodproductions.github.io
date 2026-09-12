@@ -1,6 +1,7 @@
-/* Project hero: a still until you ask for the film, then the film. */
+/* A hero that holds a film: a still until you ask for it, then the film.
+   Project pages use .project-hero; anything else opts in with data-film-hero. */
 (function () {
-  var hero = document.querySelector('.project-hero');
+  var hero = document.querySelector('.project-hero, [data-film-hero]');
   if (!hero) return;
   var badge = hero.querySelector('[data-play-film]');
   var film = hero.querySelector('.hero-film');

@@ -24,6 +24,7 @@ NAMES = {
     "Mera Broadband.png": "mera-broadband",
     "Petpooja.png": "petpooja",
     "Sanatan Seal.png": "sanatan-seal",
+    "Money at work.png": "money-at-work",
 }
 # Two-tone lockups lose their shape if flattened to one colour.
 KEEP_COLOUR = {"The Storys - Golf Coast.png"}

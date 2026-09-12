@@ -12,6 +12,7 @@ assets/video/*
 !assets/video/loops/
 !assets/video/films/
 !assets/video/stills/
+!assets/video/products/
 !assets/video/.gitkeep
 
 # Local review page, not part of the site

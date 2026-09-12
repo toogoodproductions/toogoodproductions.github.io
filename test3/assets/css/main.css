@@ -1471,22 +1471,6 @@ a:hover .play-badge, button:hover .play-badge { transform: scale(1.08); backgrou
 /* Liquid glass: SVG distortion warps what passes behind the nav (from reference site) */
 .site-header .glass-effect { filter: url(#glass-distortion); }
 
-.test-badge {
-  position: fixed;
-  left: 14px;
-  bottom: 14px;
-  z-index: 200;
-  font-family: var(--font-mono);
-  font-size: 10px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: #000;
-  background: var(--accent);
-  padding: 5px 9px;
-  border-radius: 4px;
-  pointer-events: none;
-  opacity: .9;
-}
 
 /* return visit: skip the arrival overlay entirely - the page is already dark,
    the text entrance is the single visible load event */
@@ -1572,7 +1556,6 @@ html.return-visit .loader { display: none; }
 @media (min-width: 900px) { .header-logo .glass-content { padding: 7px 16px; } }
 
 /* purple lab: light content on the deep accent */
-.test-badge { color: #fff; }
 .btn-accent .btn-chip { background: rgba(255, 255, 255, 0.18); }
 
 /* Reel panels will hold real footage: labels read white over media,
@@ -2246,3 +2229,265 @@ body.film-open { overflow: hidden; }
   border-top: 1px solid var(--border);
   max-width: 62ch;
 }
+
+
+/* ================================================================
+   Product page.
+
+   The argument is the artifact, not a diagram of it. So the page is
+   mostly the real thing: the message that arrives, the avatar
+   speaking, one scrappy input beside its finished output. The flow
+   diagram is the caption underneath, drawn small and thin.
+   ================================================================ */
+
+/* Until a demo film is in the repo, a hero sits black rather than offering
+   a play button that does nothing. */
+.project-hero.no-film .play-badge,
+.prod-hero-film.no-film .play-badge { display: none; }
+
+.prod-hero { display: grid; gap: 44px; align-items: center; }
+@media (min-width: 900px) {
+  .prod-hero { grid-template-columns: 1fr minmax(260px, 340px); gap: 72px; }
+}
+.prod-hero-copy .prod-sub { margin-top: 24px; max-width: 44ch; }
+.prod-hero-film {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  border-radius: calc(var(--radius) * 2);
+  overflow: hidden;
+  background: #000;
+  border: 1px solid rgba(255,255,255,.1);
+  box-shadow: 0 50px 90px -50px rgba(0,0,0,.9);
+  max-width: 340px;
+  width: 100%;
+}
+.prod-hero-film > img,
+.prod-hero-film > video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.prod-hero-film > video { opacity: 0; pointer-events: none; }
+.prod-hero-film.is-playing > video { opacity: 1; pointer-events: auto; }
+.prod-hero-film > img,
+.prod-hero-film .play-badge { transition: opacity .45s var(--ease-inout); }
+.prod-hero-film.is-playing > img,
+.prod-hero-film.is-playing .play-badge { opacity: 0; pointer-events: none; }
+.prod-hero-film .play-badge { width: 72px; height: 72px; }
+.prod-hero-film .play-badge svg { width: 17px; height: 20px; }
+
+.prod-lede {
+  max-width: 24ch;
+  margin-top: 28px;
+}
+.prod-sub {
+  max-width: 62ch;
+  margin-top: 20px;
+  color: rgba(255,255,255,.55);
+}
+
+/* ---- the chat: two columns, phone on the right ---- */
+.chat-block {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .chat-block { grid-template-columns: 1fr minmax(320px, 380px); gap: 80px; }
+  .chat-said { position: sticky; top: 120px; }
+}
+.chat-said h2 { max-width: 16ch; }
+.chat-said p { max-width: 46ch; margin-top: 20px; color: rgba(255,255,255,.55); }
+
+/* A frame, not a device. Pretending to be an iPhone reads as a mockup;
+   this reads as the thing itself. */
+.phone {
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 28px;
+  background: linear-gradient(180deg, #0c0e0f 0%, #050506 100%);
+  padding: 14px 14px 22px;
+  box-shadow: 0 40px 80px -40px rgba(0,0,0,.9);
+}
+.phone-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 6px 14px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+.phone-avatar {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: #fff;
+  color: #000;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  flex: none;
+}
+.phone-who { display: flex; flex-direction: column; line-height: 1.3; }
+.phone-who b { font-size: 13px; font-weight: 600; }
+.phone-who span { font-size: 11px; color: rgba(255,255,255,.35); font-family: var(--font-mono); }
+
+.chat-log { display: flex; flex-direction: column; gap: 10px; }
+.msg {
+  max-width: 88%;
+  padding: 11px 14px;
+  border-radius: 16px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+.msg--bot {
+  align-self: flex-start;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.06);
+  border-bottom-left-radius: 5px;
+}
+.msg--me {
+  align-self: flex-end;
+  background: #fff;
+  color: #000;
+  border-bottom-right-radius: 5px;
+}
+.msg b { font-weight: 600; }
+/* The site resets list markers away, so the digest numbers itself. Mono
+   numerals also read more like a machine wrote them, which is the point. */
+.msg ol { margin: 9px 0 0; display: flex; flex-direction: column; gap: 8px; counter-reset: digest; }
+.msg li {
+  counter-increment: digest;
+  display: grid;
+  grid-template-columns: 18px 1fr;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: rgba(255,255,255,.7);
+}
+.msg li::before {
+  content: counter(digest, decimal-leading-zero);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: rgba(255,255,255,.32);
+  padding-top: 2px;
+}
+.msg--me li { color: rgba(0,0,0,.7); }
+.msg-time {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .06em;
+  color: rgba(255,255,255,.3);
+}
+.msg--me .msg-time { color: rgba(0,0,0,.35); }
+
+.chat-chips { display: flex; flex-wrap: wrap; gap: 6px; align-self: flex-start; max-width: 88%; }
+.chip {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .04em;
+  padding: 6px 11px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.16);
+  color: rgba(255,255,255,.7);
+}
+.chip.is-picked { background: #fff; border-color: #fff; color: #000; }
+
+/* the finished film, delivered back into the thread */
+.msg-film {
+  align-self: flex-start;
+  /* A vertical film at full bubble width is a column of black taller than
+     the phone. Telegram renders these small; so do we. */
+  max-width: 62%;
+  border-radius: 16px;
+  border-bottom-left-radius: 5px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.08);
+  background: #000;
+}
+.msg-film video, .msg-film img { display: block; width: 100%; aspect-ratio: 9 / 16; object-fit: cover; }
+.msg-film figcaption {
+  padding: 9px 13px;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: .05em;
+  color: rgba(255,255,255,.4);
+  border-top: 1px solid var(--border);
+}
+
+/* ---- the five steps, thin line drawings ---- */
+.flow {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border-block: 1px solid var(--border);
+}
+@media (min-width: 720px)  { .flow { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1100px) { .flow { grid-template-columns: repeat(5, 1fr); } }
+.flow-step {
+  background: var(--bg);
+  padding: 32px 24px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.flow-step svg {
+  width: 40px; height: 40px;
+  stroke: #fff;
+  fill: none;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: .55;
+}
+.flow-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .12em;
+  color: rgba(255,255,255,.3);
+}
+.flow-step h3 { font-size: 15px; font-weight: 600; letter-spacing: -.01em; }
+.flow-step p { font-size: 13.5px; line-height: 1.55; color: rgba(255,255,255,.45); }
+
+/* ---- one input beside its output ---- */
+.io {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  align-items: start;
+}
+@media (min-width: 900px) { .io { grid-template-columns: 1fr 1fr; gap: 32px; } }
+.io-card {
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 2);
+  padding: 28px;
+  background: var(--dark-shade);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.io-card--out { background: #000; border-color: rgba(255,255,255,.12); }
+.io-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.35);
+}
+.io-card p { font-size: 15px; line-height: 1.6; color: rgba(255,255,255,.75); }
+.io-card .io-scrap { font-family: var(--font-mono); font-size: 13.5px; line-height: 1.6; color: rgba(255,255,255,.5); }
+.io-post {
+  max-width: 300px;
+  margin-inline: auto;
+  width: 100%;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #0c0e0f;
+  border: 1px solid var(--border);
+}
+.io-post video, .io-post img { display: block; width: 100%; aspect-ratio: 9 / 16; object-fit: cover; }
+
+/* ---- the persona section ---- */
+.moat { border-top: 1px solid var(--border); padding-top: 56px; }
+.moat-body { max-width: 60ch; margin-top: 24px; color: rgba(255,255,255,.55); display: flex; flex-direction: column; gap: 16px; }
+.moat-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
