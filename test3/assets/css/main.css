@@ -2205,3 +2205,27 @@ body.film-open { overflow: hidden; }
 /* The contact column uses the footer's icon set; it just needs the gap the
    text list used to get from its list styling. */
 .contact-col .socials { margin-top: 14px; }
+
+/* Client logos in the Work marquee. All supplied at one height and recoloured
+   white, so they only need a cap here and a little optical breathing room. */
+.marquee-logo {
+  height: 30px;
+  width: auto;
+  display: block;
+  opacity: .55;
+  transition: opacity .4s var(--ease-inout);
+}
+.marquee-item:hover .marquee-logo { opacity: 1; }
+.marquee-item { display: inline-flex; align-items: center; }
+@media (max-width: 720px) { .marquee-logo { height: 22px; } }
+
+/* The production note under each project: same size, quieter, so the two
+   paragraphs read as story then fact rather than one block. */
+.project-note {
+  color: rgba(255, 255, 255, .42);
+  font-size: 14px;
+  line-height: 1.6;
+  padding-top: 18px;
+  border-top: 1px solid var(--border);
+  max-width: 62ch;
+}
