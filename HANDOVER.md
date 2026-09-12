@@ -51,9 +51,12 @@ it. Promoting `test3/` to the root is an open decision.
 bar and the overlay menu on every page. The header bar only shows above 900px
 wide; below that it becomes the Menu button and Home lives inside the overlay.
 
-There is no standalone FAQ page. The FAQ lives on `offerings.html#faq`, with the
-structured data that search and answer engines read. Keep it in one place —
-duplicating it makes the two copies compete.
+There is no standalone FAQ page. The FAQ lives on `offerings.html#faq`, twelve
+questions in four groups, with the structured data that search and answer engines
+read. Keep it in one place — duplicating it makes the two copies compete.
+
+**The FAQ is generated.** Both the rows people read and the structured data
+engines read come from `FAQ` in `tools/seo.py`. Edit there, never in the HTML.
 
 ---
 
@@ -105,13 +108,62 @@ destroys it.
 ### After any change to `test3/`
 
 ```bash
+python3 tools/seo.py
 python3 tools/stamp-assets.py test3 "$(date -u +%y%m%d%H%M)"
 ```
 
-This version-stamps every CSS and JS link. **Do not skip it.** Without it,
+The first rewrites titles, descriptions and structured data. The second
+version-stamps every CSS and JS link. **Do not skip it.** Without it,
 visitors get new HTML with ten-minute-old cached scripts after a deploy. That bug
 cost hours: a page shipped with a stale script looking for markup that had been
 removed, so nothing responded and nothing errored.
+
+---
+
+## What search and answer engines read
+
+`tools/seo.py` is the single source of truth. Run it from the repo root and it
+writes, into every page in `test3/`, between `<!-- seo:start -->` and
+`<!-- seo:end -->` in the head: title, meta description, canonical, robots,
+Open Graph, Twitter card and one JSON-LD `@graph`. It also writes the visible
+FAQ rows on `offerings.html`, and `sitemap.xml`, `llms.txt` and `robots.txt` at
+the repo root. **Nothing inside those markers should be edited by hand** — the
+next run overwrites it.
+
+The schema carried on each page: Organization plus ProfessionalService (address,
+phone, email, founders, service catalogue, topics), WebSite, a typed page node,
+breadcrumbs, and then per page — nine VideoObjects with real durations on the
+project pages, an ItemList on Work and the reel, four Service nodes and a
+FAQPage on Offerings, two Person nodes on About.
+
+Two constants at the top decide every absolute URL:
+
+```python
+ROOT = "https://toogoodproductions.github.io"   # the host
+BASE = ROOT + "/test3"                          # the site within it
+```
+
+Promoting `test3/` to the root means `BASE = ROOT`. Moving to toogoodai.in means
+changing `ROOT` — **and that domain has to resolve first.** A canonical pointing
+at a dead domain is worse than no canonical.
+
+`robots.txt` still blocks everyone, because the site is staging on a test URL.
+Going live is one command:
+
+```bash
+python3 tools/seo.py --live
+```
+
+That opens the site to search engines and names the AI crawlers explicitly —
+GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot and the rest — so
+the work can be quoted rather than skipped. `llms.txt` is the plain-language
+brief those engines read: who we are, the four services, all nine films, the
+clients, the founders and the full FAQ. `product.html` carries `noindex` and
+stays out of the sitemap until it has real copy.
+
+Nothing in there is invented. Where a fact is not known it is left out, because
+a wrong claim in structured data is worse than a missing one. That is why there
+is no `sameAs` yet: the footer social links are still `#`.
 
 ---
 
@@ -216,7 +268,15 @@ the same repository. No YouTube, no Vimeo, no account, no cost.
    a client in the marquee. Unresolved.
 7. **Promote `test3/` to the root**, or not.
 8. **toogoodai.in** — needs a `CNAME` file in the repo plus DNS records at the
-   registrar.
+   registrar. Until it resolves, canonicals point at the github.io URL.
+9. **Real social URLs.** Every footer link is still `#`. Put the real ones in
+   `SAME_AS` in `tools/seo.py` and in the footers, and the profiles get tied to
+   the brand in search.
+10. **A street address**, and a Google Business Profile. The schema claims
+    Ahmedabad, Gujarat and nothing finer, which is as far as the known facts go.
+11. **The Formspree form ID** on `contact.html`. The form refuses to send until
+    `YOUR_FORM_ID` is replaced.
+12. **Go live** when the site moves off the test URL: `python3 tools/seo.py --live`.
 
 ### Open work
 

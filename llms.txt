@@ -1,0 +1,80 @@
+# toogood
+
+> AI video agency in Ahmedabad. Ads, brand films, reels, launch films and animated films, generated rather than filmed. Also workflow automation, AI training and custom software.
+
+Based in Ahmedabad, Gujarat, India. Works with brands across India and outside it.
+Every film is generated rather than filmed: no crew, no location, no shoot day.
+The script, direction and edit happen the way they always have.
+
+Contact: hello@toogoodai.in / +91 75740 03272
+
+## What we do
+
+- **AI video** - Ads, brand films, reels, launch films, avatars. Less time and less money than a shoot. And when you need ten versions of one ad to find the hook that works on Meta, we make all ten. (Ad Films, Brand Films, Reels, Avatars)
+- **Automation** - The jobs your team does over and over. Product images, social posts, reports, replies. We build the system that does them instead, shaped around how your business already runs, and then it runs on its own. (Workflow Design, Content Pipelines, Internal Tools)
+- **Training** - Your team has the tools open and no real idea what to do with them. We come in and teach them on your actual work, not a demo, until they can do it without us. (Team Training, Workshops, Playbooks)
+- **Custom software** - We learn how your business actually runs, then build software around it. Not another tool you bend your process to fit. One built for the way you already work. (Workflow Tools, Internal Systems, Prototypes)
+
+## Pages
+
+- [Home](https://toogoodproductions.github.io/test3/): AI video agency in Ahmedabad. Ads, brand films, reels and animated films, generated rather than filmed. We make your brand toogood to ignore.
+- [Work](https://toogoodproductions.github.io/test3/work.html): Nine AI-generated films for brands: ads, brand films, reels, launch videos and an animated film. Made without a crew, a location or a shoot day.
+- [Offerings](https://toogoodproductions.github.io/test3/offerings.html): Four things we do: AI video, automation, AI training for your team, and custom software. Plus answers to what clients ask before they hire us.
+- [About](https://toogoodproductions.github.io/test3/about.html): One of the first fully AI video agencies in Ahmedabad. Everything we make is made with AI. None of it looks like it.
+- [Blog](https://toogoodproductions.github.io/test3/blog.html): Breakdowns of how the films got made, answers to what clients ask before they hire us, and whatever we have worked out about these tools.
+- [Get in touch](https://toogoodproductions.github.io/test3/contact.html): Tell us what you are making. Email hello@toogoodai.in or message us on WhatsApp. An AI studio in Ahmedabad, working with brands across India and outside it.
+
+## Films
+
+- [toogood Originals, Viraasat](https://toogoodproductions.github.io/test3/project-jewellery-ad-concept.html): A film about what one generation hands to the next, told through a single jewellery set that appears twice, decades apart. Shot in the grain of old wedding footage, it moves between an album and the morning it was made. Concept film for the jewellery category. Fully AI-generated, Hindi voiceover, a period wedding recreated without archive footage or a shoot.
+- [Petpooja, The Scream](https://toogoodproductions.github.io/test3/project-the-scream-petpooja.html): A horror film in which a fingerprint scanner is the difference between escape and not. A woman runs from a killer through a shattered building, and the first scanner fails her, over and over. The second one is Attendo, and it opens on the first try. Brand film for Attendo, Petpooja's payroll and attendance software. Fully AI-generated, horror format, no crew and no location.
+- [Adani Realty, Apna Ghar](https://toogoodproductions.github.io/test3/project-apna-ghar-adani-realty.html): A child draws the house her family will live in, framed the way you would see it from your own living room. Her father does the arithmetic, worries, then doesn't. The film is about the two words in its title, and what it costs to earn them. Ad film for Adani Realty, built around their FlexiPay plan. Fully AI-generated, no cast and no location.
+- [The Paragraph, Own Your Pause](https://toogoodproductions.github.io/test3/project-the-paragraph-reel-3.html): A walk through the amenities at The Paragraph, built as a feeling rather than a list. Every shot moves slowly enough that you sit inside it for a moment before it passes. Amenities film for The Paragraph, a residential development by UB Heritage on the outskirts of Ahmedabad. Fully AI-generated, no drone and no site access required.
+- [Storython Studios, Betu](https://toogoodproductions.github.io/test3/project-betu-ai-animated-film-scene-toogood.html): A teaser for an animated film in which a soul, unable to get into the house it wants, settles instead for the dog that wanders out on its evening walk. Character, voice and lip sync are all generated. Animated film teaser for Storython Studios. Character design, animation, voice and lip sync all AI-generated, at feature-animation quality.
+- [UB Heritage, Adding More Storeys](https://toogoodproductions.github.io/test3/project-office-to-home-ub-heritage.html): A man drives home from the office, and the drive fills up with everything that got him there. The chess games as a boy, the all-nighters, the holidays, the watch. A life built to a standard deserves an address that matches. Brand film for The Storeys Golf Coast, a residential development in Ahmedabad. Fully AI-generated, original voiceover, no crew and no shoot.
+- [UB Heritage, UBH Construction Time-lapse](https://toogoodproductions.github.io/test3/project-building-making-ub-heritage.html): A building rises from bare ground to finished home in a single hyperreal time-lapse. The camera pulls back to the Narmada canal and the green around it, then drops inside to a couple on the balcony. Construction time-lapse for The Storeys Golf Coast, Ahmedabad. Fully AI-generated, including aerial views of the Narmada canal and the golf course, with no site footage.
+- [Mera Broadband, Fast Internet Matters](https://toogoodproductions.github.io/test3/project-mera-broadband.html): There are two kinds of people, the ones who spend their lives buffering and the ones who never do. The film cuts through a household where everyone is streaming something different and nobody is waiting. Ad film for a broadband provider. Fully AI-generated, Hindi voiceover, fast-cut format built for social and performance placements.
+- [toogood Originals, Unhurried Homes](https://toogoodproductions.github.io/test3/project-real-estate-ad-concept.html): A house filmed at the speed the house actually moves. A shadow, a hand across a bedsheet, a teapot starting to go, and a woman revealed so slowly you stop waiting for her. Concept film for the residential category. Fully AI-generated, original voiceover, made without a location, a cast or a camera.
+
+## Clients
+
+Adani Realty, Petpooja, UB Heritage, The Storeys Golf Coast, The Paragraph, Mera Broadband, Storython Studios, Sanatan Seal
+
+## People
+
+- **Harsh Dhakan**, Co-founder, Creative. Runs the creative and the operations. Every frame that leaves here has gone through him.
+- **Kushank Joshi**, Co-founder, Growth. Runs sales and marketing. If you've heard of us, that was him.
+
+## Questions clients ask
+
+### The work
+
+**What is AI video production?** AI video production means the film is generated rather than filmed. No crew, no location, no shoot day. The script, direction and edit still happen the way they always have. Only the footage is made differently, which is what makes it faster and cheaper than a conventional shoot.
+
+**Will an AI video look artificial?** Not if it's made properly. The tell in most AI video comes from rushing: faces that shift between shots, hands that go wrong, movement that reads slightly off. Those are known failure points and they're avoidable. We build around them rather than hoping nobody notices.
+
+**Can you make several versions of the same ad?** Yes, and it's one of the strongest reasons to use AI. Testing ten hooks for the same Meta ad is impossible with a shoot and straightforward with a generated one. You get the variations you need to find what actually performs.
+
+### Beyond video
+
+**What do your automations actually do?** They take the work your team repeats and hand it to a system. Product images at scale, social posts, reports, first-draft replies. We map how your business already runs, build the pipeline around it, then hand it over so it keeps running without us.
+
+**What does the AI training cover?** Whatever your team actually does. We work on your real files and your real problems, not a demo, and we stay until people can do it without asking us. Usually that means prompting, the image and video tools, and small workflows they can maintain themselves.
+
+**What kind of software do you build?** Internal tools shaped around how you already work. We sit with your team, find where the time goes, then build something that removes it. Not an off-the-shelf product you bend your process to fit. Usually a few weeks, and it belongs to you.
+
+### Time and money
+
+**How is this different from a traditional shoot?** You skip everything that costs time and money before the camera rolls. No location scouting, no casting, no crew, no shoot day, no weather. What you keep is the writing, the direction and the edit. That's why an AI film lands in days rather than weeks.
+
+**How long does it take?** Days rather than months for video, because there's no shoot to schedule and most of the timeline is decision-making. Automations and software run a few weeks depending on scope. Training is usually a few days on site. You get a date before anything starts.
+
+**What does it cost?** Less than the same film as a shoot. Beyond that: length, scenes, frames, and where it's going, because a reel, an ad and a website film are built differently. Other work is quoted by scope, always in writing before we start.
+
+### Working with us
+
+**Do you work with clients outside Ahmedabad?** Yes. We're based in Ahmedabad and work with brands across India and outside it. Because there's no shoot, there's nothing to travel to. The whole process runs remotely: brief, storyboard, review, delivery.
+
+**Which industries do you work with?** Real estate, healthcare, manufacturing and consumer brands so far. The work translates anywhere a business needs to show something expensive, difficult or impossible to film, or anywhere a team is spending hours on work a system could do.
+
+**How do we start?** Tell us what you need and what it has to do. We come back with the approach, the timeline and the price. Nothing gets built until you've approved the plan, and for film that means the storyboard.

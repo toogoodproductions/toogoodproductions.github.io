@@ -1,4 +1,4 @@
-# STAGING MODE - search engines blocked.
-# Remove this file (or replace with the live version) before going public.
+# STAGING MODE - search engines and answer engines blocked.
+# Going live is one command: python3 tools/seo.py --live
 User-agent: *
 Disallow: /
