@@ -2209,15 +2209,15 @@ body.film-open { overflow: hidden; }
 /* Client logos in the Work marquee. All supplied at one height and recoloured
    white, so they only need a cap here and a little optical breathing room. */
 .marquee-logo {
-  height: 30px;
+  height: 46px;
   width: auto;
   display: block;
-  opacity: .55;
+  opacity: .62;
   transition: opacity .4s var(--ease-inout);
 }
 .marquee-item:hover .marquee-logo { opacity: 1; }
 .marquee-item { display: inline-flex; align-items: center; }
-@media (max-width: 720px) { .marquee-logo { height: 22px; } }
+@media (max-width: 720px) { .marquee-logo { height: 32px; } }
 
 /* The production note under each project: same size, quieter, so the two
    paragraphs read as story then fact rather than one block. */
