@@ -6,8 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="#000000">
-  <title>Academy · toogood</title>
-  <meta name="description" content="Sample academy page — programs, curriculum and FAQ.">
+  <title>Offerings · toogood</title>
+  <meta name="description" content="Sample brand work index — grid and list views.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%234100f5'/%3E%3Cpath d='M11 8h10v4h-6v2h6v10H11v-4h6v-2h-6z' fill='%23fff'/%3E%3C/svg%3E">
   <link rel="preload" href="assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/chivo-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -78,126 +78,48 @@
   
   <main class="page-main">
 
-    <!-- Hero -->
-    <section class="page-hero container">
-      <span class="kicker type-label" data-reveal>Academy</span>
+    <!-- Hero: stark title + intro -->
+    <header class="page-hero container">
       <h1 class="type-heading-xl text-balance" data-mask-reveal>
-        <span class="line-mask"><span class="line-inner">Learn the craft of</span></span>
-        <span class="line-mask"><span class="line-inner">AI-native filmmaking</span></span>
+        <span class="line-mask"><span class="line-inner">Offerings</span></span>
       </h1>
-      <p class="hero-para text-dim" data-reveal style="max-width:64ch;margin-top:20px">
-        Lorem ipsum dolor sit amet — sample cohort-based programs taught by working
-        filmmakers and technologists.
-      </p>
+      <p class="type-base text-dim" data-reveal style="max-width:72ch;margin-top:24px">Video, the systems around it, and the software underneath. Four things we do, and we do all four for the same reason: so the work keeps moving without you waiting on anyone.</p>
+      <hr style="margin-top:48px">
+    </header>
+
+    <!-- Logotype marquee -->
+    <!-- Work index: Grid / List -->
+    <section class="section container offer-list" data-reveal-group>
+        <article class="offer-card" data-reveal>
+          <span class="offer-num type-heading-xs">01</span>
+          <h2 class="offer-title type-heading-lg">AI video</h2>
+          <p class="offer-body type-base text-dim">Ads, brand films, reels, launch films, avatars. Less time and less money than a shoot. And when you need ten versions of one ad to find the hook that works on Meta, we make all ten.</p>
+          <div class="offer-tags"><span class="offer-tag">Ad Films</span><span class="offer-tag">Brand Films</span><span class="offer-tag">Reels</span><span class="offer-tag">Avatars</span></div>
+          <span class="offer-glow" aria-hidden="true"></span>
+        </article>
+        <article class="offer-card" data-reveal>
+          <span class="offer-num type-heading-xs">02</span>
+          <h2 class="offer-title type-heading-lg">Automation</h2>
+          <p class="offer-body type-base text-dim">The jobs your team does over and over. Product images, social posts, reports, replies. We build the system that does them instead, shaped around how your business already runs, and then it runs on its own.</p>
+          <div class="offer-tags"><span class="offer-tag">Workflow Design</span><span class="offer-tag">Content Pipelines</span><span class="offer-tag">Internal Tools</span></div>
+          <span class="offer-glow" aria-hidden="true"></span>
+        </article>
+        <article class="offer-card" data-reveal>
+          <span class="offer-num type-heading-xs">03</span>
+          <h2 class="offer-title type-heading-lg">Training</h2>
+          <p class="offer-body type-base text-dim">Your team has the tools open and no real idea what to do with them. We come in and teach them on your actual work, not a demo, until they can do it without us.</p>
+          <div class="offer-tags"><span class="offer-tag">Team Training</span><span class="offer-tag">Workshops</span><span class="offer-tag">Playbooks</span></div>
+          <span class="offer-glow" aria-hidden="true"></span>
+        </article>
+        <article class="offer-card" data-reveal>
+          <span class="offer-num type-heading-xs">04</span>
+          <h2 class="offer-title type-heading-lg">Custom software</h2>
+          <p class="offer-body type-base text-dim">We learn how your business actually runs, then build software around it. Not another tool you bend your process to fit. One built for the way you already work.</p>
+          <div class="offer-tags"><span class="offer-tag">Workflow Tools</span><span class="offer-tag">Internal Systems</span><span class="offer-tag">Prototypes</span></div>
+          <span class="offer-glow" aria-hidden="true"></span>
+        </article>
     </section>
 
-    <!-- Programs -->
-    <section class="section container work-index" data-view="grid">
-      <div class="work-grid" data-reveal-group>
-        <div class="work-cell" data-reveal>
-          <a class="work-card" href="#apply">
-            <span class="media">
-              <span class="media-inner sheen-overlay">
-                <span class="scene scene--still"><span class="scene-art scene-art--showreel"></span><span class="scene-vignette"></span></span>
-              </span>
-            </span>
-            <span class="copy">
-              <span class="client type-heading-xs">8 weeks · Online</span>
-              <span class="title type-heading-sm">Foundations</span>
-            </span>
-          </a>
-        </div>
-        <div class="work-cell" data-reveal>
-          <a class="work-card" href="#apply">
-            <span class="media">
-              <span class="media-inner sheen-overlay">
-                <span class="scene scene--still"><span class="scene-art scene-art--city"></span><span class="scene-vignette"></span></span>
-              </span>
-            </span>
-            <span class="copy">
-              <span class="client type-heading-xs">12 weeks · Hybrid</span>
-              <span class="title type-heading-sm">Director Track</span>
-            </span>
-          </a>
-        </div>
-        <div class="work-cell" data-reveal>
-          <a class="work-card" href="#apply">
-            <span class="media">
-              <span class="media-inner sheen-overlay">
-                <span class="scene scene--still"><span class="scene-art scene-art--engine"></span><span class="scene-vignette"></span></span>
-              </span>
-            </span>
-            <span class="copy">
-              <span class="client type-heading-xs">6 weeks · Studio</span>
-              <span class="title type-heading-sm">Pipeline Masterclass</span>
-            </span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Curriculum -->
-    <section class="section container">
-      <div class="section-head">
-        <h2 class="type-heading-md" data-reveal>Curriculum</h2>
-        <span class="type-label text-dim" data-reveal>Sample syllabus</span>
-      </div>
-      <div class="faq" data-reveal>
-        <div class="faq-item">
-          <button class="faq-q">01 — Story &amp; World Building <span class="faq-x"></span></button>
-          <div class="faq-a"><div><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Building worlds
-          that hold together across formats and episodes.</p></div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">02 — Visual Development <span class="faq-x"></span></button>
-          <div class="faq-a"><div><p>Sed do eiusmod tempor incididunt — look development, style frames and
-          consistency systems.</p></div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">03 — Production Workflow <span class="faq-x"></span></button>
-          <div class="faq-a"><div><p>Ut enim ad minim veniam — shot design, iteration loops and review
-          culture inside a modern pipeline.</p></div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">04 — Edit, Sound &amp; Finishing <span class="faq-x"></span></button>
-          <div class="faq-a"><div><p>Quis nostrud exercitation — cutting, grading, mixing and mastering a
-          final deliverable.</p></div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
-    <section class="section container">
-      <div class="section-head">
-        <h2 class="type-heading-md" data-reveal>FAQ</h2>
-      </div>
-      <div class="faq" data-reveal>
-        <div class="faq-item">
-          <button class="faq-q">Who is this for? <span class="faq-x"></span></button>
-          <div class="faq-a"><div><p>Lorem ipsum dolor sit amet — filmmakers, designers and curious
-          producers. No prior tooling experience required.</p></div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Do I need my own equipment? <span class="faq-x"></span></button>
-          <div class="faq-a"><div><p>Consectetur adipiscing elit — a laptop and a browser are enough for
-          the online tracks.</p></div></div>
-        </div>
-        <div class="faq-item">
-          <button class="faq-q">Is there a certificate? <span class="faq-x"></span></button>
-          <div class="faq-a"><div><p>Sed do eiusmod tempor — yes, plus a portfolio piece reviewed by the
-          studio team.</p></div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Apply CTA -->
-    <section class="section container" id="apply" style="text-align:center">
-      <p class="type-label text-dim" data-reveal style="margin-bottom:16px">Applications open</p>
-      <a class="type-heading-md" href="contact.html" data-reveal style="display:inline-block;transition:color .3s"
-         onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color=''">
-        Apply for the next cohort →
-      </a>
-    </section>
 
 
     <!-- Footer -->
@@ -245,6 +167,8 @@
   <script src="assets/js/vendor/ScrollTrigger.min.js"></script>
   <script src="assets/js/vendor/lenis.min.js"></script>
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/work.js"></script>
+  <script src="assets/js/offerings.js"></script>
   <div class="test-badge" aria-hidden="true">test 3 · purple</div>
 </body>
 </html>

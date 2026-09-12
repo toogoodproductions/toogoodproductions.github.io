@@ -857,6 +857,9 @@ body.is-loading { overflow: hidden; }
 .work-card:hover .media { transform: scale(0.95) rotate(1.5deg); }
 .work-card .media-inner {
   position: relative;
+  /* It is a span, so without this the width and height below are ignored,
+     it collapses to nothing and the artwork inside never renders. */
+  display: block;
   width: 100%;
   height: 100%;
   background: var(--dark-shade);
@@ -1694,3 +1697,170 @@ html.return-visit .loader { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .scene-video { display: none; }
 }
+
+/* ---------- Work cards: loop preview on hover ---------- */
+.work-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  /* Visible from the start: the poster paints without the clip being
+     fetched, so a card is never a black hole while it waits. */
+  transition: transform .8s var(--ease-inout);
+}
+.work-card:hover .work-video,
+.work-card:focus-visible .work-video { transform: scale(1.04); }
+
+/* ---------- Full film player ---------- */
+.film-player {
+  position: fixed;
+  inset: 0;
+  z-index: 300;            /* above the fixed site header */
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(6, 6, 8, .92);
+  backdrop-filter: blur(14px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .4s var(--ease-inout);
+}
+.film-player.is-open { opacity: 1; pointer-events: auto; }
+.film-player-stage {
+  width: min(1200px, 100%);
+  transform: translateY(12px) scale(.985);
+  transition: transform .5s var(--ease-inout);
+}
+.film-player.is-open .film-player-stage { transform: none; }
+.film-player video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+  background: #000;
+  border-radius: 10px;
+}
+.film-player-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+.film-player-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .1);
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+.film-player-close:hover { background: rgba(255, 255, 255, .2); }
+body.film-open { overflow: hidden; }
+
+@media (prefers-reduced-motion: reduce) {
+  .work-video, .film-player, .film-player-stage { transition: none; }
+}
+
+/* ---------- Offerings ---------- */
+.offer-list {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+}
+.offer-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 34px 32px 30px;
+  border-radius: var(--radius);
+  background: var(--dark-shade);
+  border: 1px solid rgba(255, 255, 255, .07);
+  transition: transform .6s var(--ease-expo), border-color .6s var(--ease-inout);
+}
+.offer-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 255, 255, .18);
+}
+.offer-num {
+  display: block;
+  color: rgba(255, 255, 255, .32);
+  margin-bottom: 22px;
+}
+.offer-title { margin: 0 0 14px; }
+.offer-body { margin: 0 0 22px; max-width: 46ch; }
+.offer-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.offer-tag {
+  padding: 6px 13px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, .14);
+  font-size: 12px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .62);
+  transition: border-color .4s var(--ease-inout), color .4s var(--ease-inout);
+}
+.offer-card:hover .offer-tag {
+  border-color: rgba(255, 255, 255, .3);
+  color: rgba(255, 255, 255, .85);
+}
+/* Light follows the cursor across the card. */
+.offer-glow {
+  position: absolute;
+  inset: -40%;
+  z-index: -1;
+  opacity: 0;
+  background: radial-gradient(38% 38% at var(--mx, 50%) var(--my, 50%),
+              rgba(255, 255, 255, .13), transparent 70%);
+  transition: opacity .5s var(--ease-inout);
+}
+.offer-card:hover .offer-glow { opacity: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .offer-card, .offer-tag, .offer-glow { transition: none; }
+  .offer-card:hover { transform: none; }
+}
+
+/* Rail thumbnails now carry real film stills rather than gradient art. */
+.rail-thumb {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ---------- Project page: the full film ---------- */
+.film-stage {
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: #000;
+}
+.film-full {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+  background: #000;
+}
+/* The project hero runs its loop behind the title. It shares a class with the
+   home panels, whose rule keeps them hidden until their own script marks them
+   ready - that script does not run here, so opt back out of it. */
+.project-hero .scene-video {
+  opacity: 1;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+/* Floating list-view preview carries a running clip, not a still. */
+.work-preview video { width: 100%; height: 100%; object-fit: cover; display: block; }

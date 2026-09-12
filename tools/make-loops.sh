@@ -100,6 +100,7 @@ for src in "$SRC"/*.mp4; do
   # the middle band. Films listed here are centre-composed enough to survive it.
   case "$name" in
     "Office to Home - UB Heritage.mp4") zoom=1 ;;
+    "The Paragraph Reel 3.mp4")         zoom=1 ;;
     *)                                  zoom=0 ;;
   esac
   if [ "$W" -le "$H" ] && [ "$zoom" -eq 0 ]; then
@@ -207,8 +208,12 @@ PY
   "$FF" -v error -y -i "$src" -filter_complex "$filter" -map "[out]" -an \
     -c:v libx264 -crf 26 -preset slow -movflags +faststart "$out"
 
-  # Poster frame so the panel is never blank while the clip loads.
-  "$FF" -v error -y -i "$out" -frames:v 1 -q:v 4 "${out%.mp4}.jpg"
+  # Poster from the best-lit moment in the loop rather than frame one, which
+  # is often a dark hold or the tail of a transition and makes a poor card.
+  best_t=$("$FF" -v error -i "$out" -vf "fps=2,signalstats,metadata=print:file=-" \
+    -an -f null - 2>/dev/null | grep -o 'YAVG=[0-9.]*' | cut -d= -f2 \
+    | awk '{ if ($1 > m) { m = $1; i = NR - 1 } } END { printf "%.2f", i / 2 }')
+  "$FF" -v error -y -ss "${best_t:-0}" -i "$out" -frames:v 1 -q:v 4 "${out%.mp4}.jpg"
 
   n=$(echo "$scenes" | wc -w | tr -d ' ')
   printf "%-40s %6sKB  %s shots detected\n" "$(basename "$out")" \

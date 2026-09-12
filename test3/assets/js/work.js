@@ -175,6 +175,18 @@
       var p = ensurePreview();
       p.innerHTML = '<div class="scene scene--still">' + scene.innerHTML + '</div>';
       p.classList.add('is-on');
+
+      // The clone is a fresh element, so it starts paused however the card
+      // behaves. Roll it, and pick up wherever the card itself had got to.
+      var clone = p.querySelector('video');
+      var source = card.querySelector('video');
+      if (clone) {
+        clone.muted = true;
+        clone.setAttribute('webkit-playsinline', '');
+        if (source && source.currentTime) clone.currentTime = source.currentTime;
+        var go = clone.play();
+        if (go && go.catch) go.catch(function () {});
+      }
     });
     index.addEventListener('mouseleave', hidePreview);
     index.addEventListener('mouseout', function (e) {
