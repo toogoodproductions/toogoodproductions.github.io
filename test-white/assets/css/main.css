@@ -2109,3 +2109,84 @@ body.film-open { overflow: hidden; }
   .faq-panel .pan-detail { padding-left: 40px; padding-right: 28px; }
   .faq-panel .pan-body { font-size: 13.5px; }
 }
+
+/* ---------- Team ----------
+   Two people, kept small. A portrait at this size sits beside the copy
+   rather than dominating the page. The initials show through until a
+   photograph is dropped in, and the image removes itself if missing. */
+.crew-label {
+  margin: 0 0 32px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: rgba(255, 255, 255, .45);
+}
+.crew-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 300px));
+  gap: 44px 56px;
+}
+.crew-card { margin: 0; max-width: 300px; }
+.crew-portrait {
+  position: relative;
+  width: 150px;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: 18px;
+  background: var(--dark-shade);
+  border: 1px solid rgba(255, 255, 255, .08);
+}
+.crew-portrait img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  filter: grayscale(1) contrast(1.05);
+  transition: filter .7s var(--ease-inout), transform .9s var(--ease-expo);
+}
+.crew-card:hover .crew-portrait img { filter: none; transform: scale(1.04); }
+.crew-initials {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-display);
+  font-size: 42px;
+  color: rgba(255, 255, 255, .2);
+  z-index: 1;
+}
+.crew-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 26px;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+.crew-role {
+  display: block;
+  margin-top: 6px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.crew-bio {
+  margin: 12px 0 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, .55);
+}
+
+@media (max-width: 720px) {
+  .crew-grid { grid-template-columns: 1fr; gap: 34px; }
+  .crew-portrait { width: 110px; margin-bottom: 14px; }
+  .crew-name { font-size: 22px; }
+  .crew-bio { font-size: 13.5px; }
+}
+@media (prefers-reduced-motion: reduce) { .crew-portrait img { transition: none; } }
