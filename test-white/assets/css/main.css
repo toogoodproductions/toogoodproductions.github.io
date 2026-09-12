@@ -1875,156 +1875,92 @@ body.film-open { overflow: hidden; }
 
 @media (prefers-reduced-motion: reduce) { .faq-q, .faq-q::after { transition: none; } }
 
-/* ---------- Offerings ----------
-   Four rows. Only numbers and titles show; the row under the cursor opens
-   and the rest close. Laid out on a grid so the number, title, motif and
-   mark line up on one axis whether a row is open or shut. */
-.offer-index {
+/* ---------- Offerings / Product panels ----------
+   One idea per screen, in the same language as the home reel: a scene behind,
+   the copy resting on the bottom-left, the mark large and faint on the right.
+   Nothing to open, nothing to hover, nothing competing. */
+.offer-panel {
   position: relative;
+  min-height: 78vh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
   border-top: 1px solid var(--border);
-  max-width: 1100px;
 }
-/* Ambient wash for the whole section, anchored to the left edge. */
-.offer-index::before {
-  content: "";
-  position: absolute;
-  inset: -40px -24px;
-  z-index: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(70% 130% at 0% 50%,
-      color-mix(in srgb, var(--accent) 7%, transparent) 0%,
-      transparent 62%);
-}
-.offer-row { position: relative; z-index: 1; border-bottom: 1px solid var(--border); }
+.offer-panel .scene { position: absolute; inset: 0; }
+.offer-panel .scene-art { position: absolute; inset: -12%; }
 
-/* Light gathering on the open row, contained inside it. */
-.offer-row::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  opacity: 0;
-  pointer-events: none;
-  background: linear-gradient(90deg,
-    color-mix(in srgb, var(--accent) 10%, transparent) 0%,
-    color-mix(in srgb, var(--accent) 3%, transparent) 30%,
-    transparent 62%);
-  transition: opacity .6s var(--ease-inout);
+.pan-inner {
+  position: relative;
+  z-index: 2;
+  padding-top: 96px;
+  padding-bottom: 72px;
+  max-width: 900px;
 }
-.offer-row.is-open::after { opacity: 1; }
-
-.offer-head {
-  display: grid;
-  grid-template-columns: 52px 1fr auto auto;
-  align-items: center;
-  gap: 0 24px;
-  width: 100%;
-  padding: 26px 0;
-  background: none;
-  border: 0;
-  color: inherit;
-  text-align: left;
-  cursor: pointer;
-  font: inherit;
-}
-.offer-num {
+.pan-num {
+  display: block;
   font-family: var(--font-mono);
   font-size: 12px;
-  letter-spacing: .14em;
-  color: rgba(255, 255, 255, .3);
-  transition: color .45s var(--ease-inout);
+  letter-spacing: .16em;
+  color: var(--accent);
+  margin-bottom: 18px;
 }
-.offer-row.is-open .offer-num { color: var(--accent); }
-
-.offer-title {
+.pan-title {
   font-family: var(--font-display, inherit);
-  font-size: clamp(30px, 5.4vw, 74px);
-  line-height: 1;
+  font-size: clamp(38px, 7vw, 96px);
+  line-height: .95;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, .5);
-  transition: color .45s var(--ease-inout);
-}
-.offer-row.is-open .offer-title { color: #fff; }
-
-.offer-motif {
-  width: 40px;
-  height: 40px;
-  opacity: .32;
-  color: rgba(255, 255, 255, .85);
-  transition: opacity .45s var(--ease-inout), color .45s var(--ease-inout),
-              transform .8s var(--ease-expo);
-}
-.offer-motif svg { width: 100%; height: 100%; display: block; }
-.offer-row.is-open .offer-motif { opacity: 1; color: var(--accent); transform: rotate(-4deg); }
-
-.offer-mark {
-  width: 13px;
-  height: 13px;
-  position: relative;
-  opacity: .4;
-  transition: opacity .45s var(--ease-inout), transform .55s var(--ease-expo);
-}
-.offer-mark::before,
-.offer-mark::after { content: ""; position: absolute; background: currentColor; inset: 0; }
-.offer-mark::before { height: 1px; top: 6px; }
-.offer-mark::after { width: 1px; left: 6px; }
-.offer-row.is-open .offer-mark { opacity: 1; transform: rotate(135deg); }
-
-/* 0fr to 1fr animates height without knowing the content's size. */
-.offer-wrap {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows .6s var(--ease-expo);
-}
-.offer-row.is-open .offer-wrap { grid-template-rows: 1fr; }
-.offer-body {
-  overflow: hidden;
-  min-height: 0;
-  opacity: 0;
-  transition: opacity .45s var(--ease-inout) .1s;
-}
-.offer-row.is-open .offer-body { opacity: 1; }
-
-/* Indented to the title, not the number, so the block hangs off one edge. */
-.offer-inner { padding: 0 0 34px 76px; }
-.offer-text {
   margin: 0 0 22px;
-  max-width: 58ch;
+}
+.pan-lead {
+  margin: 0 0 14px;
+  max-width: 30ch;
+  font-size: clamp(17px, 2vw, 22px);
+  line-height: 1.35;
+  color: #fff;
+}
+.pan-body {
+  margin: 0 0 30px;
+  max-width: 52ch;
   font-size: 15px;
   line-height: 1.6;
   color: rgba(255, 255, 255, .58);
 }
-.offer-tags { display: flex; flex-wrap: wrap; gap: 8px; }
-.offer-tag {
-  padding: 6px 13px;
+.pan-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.pan-tag {
+  padding: 7px 14px;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, .14);
+  border: 1px solid rgba(255, 255, 255, .18);
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: .1em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, .6);
+  color: rgba(255, 255, 255, .72);
   transition: border-color .4s var(--ease-inout), color .4s var(--ease-inout),
               background-color .4s var(--ease-inout);
 }
-.offer-row.is-open .offer-tag:hover {
-  border-color: var(--accent);
-  color: var(--accent-fg);
-  background: var(--accent);
-}
+.pan-tag:hover { border-color: var(--accent); color: var(--accent-fg); background: var(--accent); }
 
-@media (max-width: 720px) {
-  .offer-head { grid-template-columns: 34px 1fr auto; gap: 0 12px; padding: 18px 0; }
-  .offer-motif { display: none; }
-  .offer-title { font-size: clamp(26px, 8.4vw, 40px); }
-  .offer-inner { padding: 0 0 24px 46px; }
-  .offer-text { font-size: 14px; line-height: 1.5; margin-bottom: 16px; }
-  .offer-tags { gap: 6px; }
-  .offer-tag { padding: 5px 10px; font-size: 10px; }
-  .offer-index::before { inset: -20px -16px; }
+/* The mark, large and faint, anchored to the right of the panel. */
+.pan-motif {
+  position: absolute;
+  right: 6%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(160px, 22vw, 300px);
+  height: clamp(160px, 22vw, 300px);
+  z-index: 1;
+  color: #fff;
+  opacity: .07;
+  pointer-events: none;
 }
-@media (prefers-reduced-motion: reduce) {
-  .offer-row::after, .offer-title, .offer-num, .offer-motif, .offer-mark,
-  .offer-wrap, .offer-body, .offer-tag { transition: none; }
+.pan-motif svg { width: 100%; height: 100%; display: block; }
+
+@media (max-width: 860px) {
+  .offer-panel { min-height: 0; }
+  .pan-inner { padding-top: 64px; padding-bottom: 56px; }
+  .pan-motif { right: 4%; width: 130px; height: 130px; opacity: .05; }
+  .pan-lead { max-width: none; font-size: 17px; }
+  .pan-body { font-size: 14px; margin-bottom: 24px; }
+  .pan-tag { padding: 6px 11px; font-size: 10px; }
 }
