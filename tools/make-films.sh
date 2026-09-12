@@ -19,12 +19,29 @@ slug() {
     | sed -E 's/\([^)]*\)//g; s/[^a-z0-9]+/-/g; s/^-+//; s/-+$//'
 }
 
+# Some projects are watched as a different cut from the one the loop and
+# frames come from. This maps such a source onto the project it belongs to.
+film_slug_for() {
+  case "$1" in
+    "Office to Home (with text).mp4") echo "office-to-home-ub-heritage" ;;
+    "Office to Home - UB Heritage.mp4") echo "" ;;   # superseded by the cut above
+    *) slug "$1" ;;
+  esac
+}
+
 for src in "$SRC"/*.mp4; do
   [ -e "$src" ] || continue
   name=$(basename "$src")
-  out="$OUT/$(slug "$name").mp4"
+  base=$(film_slug_for "$name")
+  if [ -z "$base" ]; then
+    echo "skip (superseded by another cut): $name"
+    continue
+  fi
+  out="$OUT/$base.mp4"
 
-  "$FF" -v error -y -i "$src" -vf "scale=-2:720" \
+  # 720 on the SHORT edge. Scaling by height alone leaves a vertical film
+  # only ~400px wide, which is soft once it is playing tall on screen.
+  "$FF" -v error -y -i "$src" -vf "scale='if(gt(a,1),-2,720)':'if(gt(a,1),720,-2)'" \
     -c:v libx264 -crf 26 -preset slow -profile:v high -pix_fmt yuv420p \
     -c:a aac -b:a 128k -movflags +faststart "$out"
 

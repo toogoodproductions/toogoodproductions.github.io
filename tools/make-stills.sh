@@ -28,6 +28,12 @@ for src in "$SRC"/*.mp4; do
   mkdir -p "$dir"
   rm -f "$dir"/*.jpg
 
+# Sources that are only the watchable cut of an existing project - they get a
+# full film but no loop, poster or frames of their own.
+case "$name" in
+  "Office to Home (with text).mp4") echo "skip (alternate cut): $name"; continue ;;
+esac
+
   DUR=$("$FP" -v error -show_entries format=duration -of csv=p=0 "$src")
 
   scenes=$("$FF" -v error -i "$src" \

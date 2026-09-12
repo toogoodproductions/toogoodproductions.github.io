@@ -96,11 +96,18 @@ for src in "$SRC"/*.mp4; do
     -show_entries stream=width,height:format=duration \
     -of csv=p=0:s=, "$src" | tr ',' ' ' | tr '\n' ' ') || true
 
+# Sources that are only the watchable cut of an existing project - they get a
+# full film but no loop, poster or frames of their own.
+case "$name" in
+  "Office to Home (with text).mp4") echo "skip (alternate cut): $name"; continue ;;
+esac
+
   # Verticals are skipped by default - filling a wide panel means keeping only
   # the middle band. Films listed here are centre-composed enough to survive it.
   case "$name" in
     "Office to Home - UB Heritage.mp4") zoom=1 ;;
     "The Paragraph Reel 3.mp4")         zoom=1 ;;
+    "Building Making - UB Heritage.mp4") zoom=1 ;;
     *)                                  zoom=0 ;;
   esac
   if [ "$W" -le "$H" ] && [ "$zoom" -eq 0 ]; then
