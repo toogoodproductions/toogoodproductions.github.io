@@ -1986,7 +1986,7 @@ body.film-open { overflow: hidden; }
   columns: 2;
   column-gap: 40px;
 }
-@media (max-width: 860px) { .offer-text { columns: 1; } }
+@media (max-width: 1000px) { .offer-text { columns: 1; max-width: 56ch; } }
 .offer-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 34px 62px; }
 .offer-tag {
   padding: 6px 13px;
@@ -2009,27 +2009,7 @@ body.film-open { overflow: hidden; }
   .offer-num { transition: none; }
 }
 
-/* The row's number, blown up behind its content. It lives on the row, not
-   inside the part that animates open - that element has to hide its overflow,
-   which was cutting the numeral in half. */
-.offer-ghost {
-  position: absolute;
-  right: 3%;
-  bottom: 0;
-  font-family: var(--font-display, inherit);
-  font-size: clamp(80px, 11vw, 150px);
-  line-height: .8;
-  color: rgba(255, 255, 255, .04);
-  pointer-events: none;
-  user-select: none;
-  z-index: 0;
-  opacity: 0;
-  transform: translateY(14px);
-  transition: opacity .7s var(--ease-inout), transform 1s var(--ease-expo);
-}
-.offer-row.is-open .offer-ghost { opacity: 1; transform: none; }
 .offer-head, .offer-wrap { position: relative; z-index: 1; }
-.offer-text, .offer-tags { position: relative; z-index: 1; }
 
 /* Tags carry more of the visual rhythm now the paragraph is quieter. */
 .offer-tag {
@@ -2057,5 +2037,49 @@ body.film-open { overflow: hidden; }
 .offer-row.is-open::before { opacity: 1; }
 
 @media (prefers-reduced-motion: reduce) {
-  .offer-ghost, .offer-tag, .offer-row::before { transition: none; }
+  .offer-tag, .offer-row::before { transition: none; }
+}
+
+/* ---------- Offerings: motif + mobile weight ----------
+   A drawn mark per row rather than a giant numeral. It sits in the head so it
+   is never inside the element that animates open, which is what was slicing
+   the numeral. Line drawings in the same thin-stroke language as the chips. */
+.offer-motif {
+  margin-left: auto;
+  flex: none;
+  width: 46px;
+  height: 46px;
+  align-self: center;
+  color: rgba(255, 255, 255, .3);
+  transition: color .5s var(--ease-inout), transform .9s var(--ease-expo);
+}
+.offer-motif svg { width: 100%; height: 100%; display: block; }
+.offer-row.is-open .offer-motif { color: var(--accent); transform: rotate(-4deg) scale(1.06); }
+
+/* Present on every row, dim until the row opens. */
+.offer-motif { opacity: .38; transition: opacity .5s var(--ease-inout),
+               color .5s var(--ease-inout), transform .9s var(--ease-expo); }
+.offer-row.is-open .offer-motif { opacity: 1; }
+
+.offer-mark { margin-left: 22px; }
+
+@media (max-width: 720px) {
+  /* The page was reading as a wall on a phone: everything smaller, one
+     column, motif dropped, and nothing open until it is asked for. */
+  .offer-motif { display: none; }
+  .offer-title { font-size: clamp(26px, 8.5vw, 40px); }
+  .offer-head { padding: 20px 0; gap: 14px; }
+  .offer-text {
+    columns: 1;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 18px;
+  }
+  .offer-tags { margin-bottom: 24px; gap: 6px; }
+  .offer-tag { padding: 5px 10px; font-size: 10px; }
+  .offer-mark { margin-left: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .offer-motif, .offer-motif svg > * { transition: none; }
+  .offer-motif svg > * { stroke-dashoffset: 0; }
 }

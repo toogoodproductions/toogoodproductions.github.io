@@ -11,7 +11,7 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23000000'/%3E%3Cpath d='M11 8h10v4h-6v2h6v10H11v-4h6v-2h-6z' fill='%23ffffff'/%3E%3C/svg%3E">
   <link rel="preload" href="assets/fonts/anton-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/chivo-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="assets/css/main.css?v=2609121029">
+  <link rel="stylesheet" href="assets/css/main.css?v=2609121043">
   <script type="speculationrules">{"prefetch":[{"where":{"href_matches":"/*"},"eagerness":"conservative"}]}</script>
 </head>
 <body>
@@ -32,6 +32,7 @@
     <nav class="header-nav glass" aria-label="Primary">
       <span class="glass-effect"></span>
       <div class="glass-content border-shine">
+        <a href="index.html">Home</a>
         <a href="work.html">Work</a>
         <a href="offerings.html">Offerings</a>
         <a href="product.html">Product</a>
@@ -61,6 +62,7 @@
     </div>
     <nav>
       <ul>
+        <li class="menu-item"><a href="index.html">Home</a></li>
         <li class="menu-item"><a href="work.html">Work</a></li>
         <li class="menu-item"><a href="offerings.html">Offerings</a></li>
         <li class="menu-item"><a href="product.html">Product</a></li>
@@ -94,9 +96,9 @@
           <button class="offer-head" type="button" aria-expanded="true" aria-controls="offer-01">
             <span class="offer-num">01</span>
             <span class="offer-title">AI video</span>
+            <span class="offer-motif" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="13" width="50" height="38" rx="5"/><path d="M28 26.5 40 32l-12 5.5z"/><path d="M7 22h50M7 42h50" opacity=".45"/></svg></span>
             <span class="offer-mark" aria-hidden="true"></span>
           </button>
-          <span class="offer-ghost" aria-hidden="true">01</span>
           <div class="offer-wrap" id="offer-01">
             <div class="offer-body">
               <p class="offer-text">Ads, brand films, reels, launch films, avatars. Less time and less money than a shoot. And when you need ten versions of one ad to find the hook that works on Meta, we make all ten.</p>
@@ -108,9 +110,9 @@
           <button class="offer-head" type="button" aria-expanded="false" aria-controls="offer-02">
             <span class="offer-num">02</span>
             <span class="offer-title">Automation</span>
+            <span class="offer-motif" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M52 32a20 20 0 1 1-5.9-14.1"/><path d="M52 18v8h-8"/><circle cx="32" cy="32" r="5.5"/></svg></span>
             <span class="offer-mark" aria-hidden="true"></span>
           </button>
-          <span class="offer-ghost" aria-hidden="true">02</span>
           <div class="offer-wrap" id="offer-02">
             <div class="offer-body">
               <p class="offer-text">The jobs your team does over and over. Product images, social posts, reports, replies. We build the system that does them instead, shaped around how your business already runs, and then it runs on its own.</p>
@@ -122,9 +124,9 @@
           <button class="offer-head" type="button" aria-expanded="false" aria-controls="offer-03">
             <span class="offer-num">03</span>
             <span class="offer-title">Training</span>
+            <span class="offer-motif" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 48h8V32h-8zM28 48h8V24h-8zM44 48h8V16h-8z"/><path d="M10 14l8 6 8-9 8 7" opacity=".45"/></svg></span>
             <span class="offer-mark" aria-hidden="true"></span>
           </button>
-          <span class="offer-ghost" aria-hidden="true">03</span>
           <div class="offer-wrap" id="offer-03">
             <div class="offer-body">
               <p class="offer-text">Your team has the tools open and no real idea what to do with them. We come in and teach them on your actual work, not a demo, until they can do it without us.</p>
@@ -136,9 +138,9 @@
           <button class="offer-head" type="button" aria-expanded="false" aria-controls="offer-04">
             <span class="offer-num">04</span>
             <span class="offer-title">Custom software</span>
+            <span class="offer-motif" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M25 16 13 32l12 16M39 16l12 16-12 16"/><circle cx="32" cy="32" r="3.5"/></svg></span>
             <span class="offer-mark" aria-hidden="true"></span>
           </button>
-          <span class="offer-ghost" aria-hidden="true">04</span>
           <div class="offer-wrap" id="offer-04">
             <div class="offer-body">
               <p class="offer-text">We learn how your business actually runs, then build software around it. Not another tool you bend your process to fit. One built for the way you already work.</p>
@@ -191,12 +193,12 @@
 
   </main>
 
-  <script src="assets/js/vendor/gsap.min.js?v=2609121029"></script>
-  <script src="assets/js/vendor/ScrollTrigger.min.js?v=2609121029"></script>
-  <script src="assets/js/vendor/lenis.min.js?v=2609121029"></script>
-  <script src="assets/js/main.js?v=2609121029"></script>
-  <script src="assets/js/work.js?v=2609121029"></script>
-  <script src="assets/js/offerings.js?v=2609121029"></script>
+  <script src="assets/js/vendor/gsap.min.js?v=2609121043"></script>
+  <script src="assets/js/vendor/ScrollTrigger.min.js?v=2609121043"></script>
+  <script src="assets/js/vendor/lenis.min.js?v=2609121043"></script>
+  <script src="assets/js/main.js?v=2609121043"></script>
+  <script src="assets/js/work.js?v=2609121043"></script>
+  <script src="assets/js/offerings.js?v=2609121043"></script>
   <div class="test-badge" aria-hidden="true">test · white</div>
 </body>
 </html>

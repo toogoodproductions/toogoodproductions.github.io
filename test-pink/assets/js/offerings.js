@@ -11,6 +11,16 @@
 
   var fine = !(window.matchMedia && window.matchMedia('(hover: none)').matches);
 
+  // On a phone the first row being open makes the page look long before you
+  // have asked it anything. Start closed there; on desktop the hover takes
+  // over the moment the pointer arrives anyway.
+  if (!fine || (window.matchMedia && window.matchMedia('(max-width: 720px)').matches)) {
+    rows.forEach(function (r) {
+      r.classList.remove('is-open');
+      r.querySelector('.offer-head').setAttribute('aria-expanded', 'false');
+    });
+  }
+
   function open(row) {
     rows.forEach(function (r) {
       var on = r === row;
