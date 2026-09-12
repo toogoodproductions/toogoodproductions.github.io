@@ -50,9 +50,14 @@ ORG_DESC = ("AI video agency in Ahmedabad. Ads, brand films, reels, launch films
             "animated films, generated rather than filmed. Also workflow automation, "
             "AI training and custom software.")
 
-# Real social profiles go here as absolute URLs. The footer links are still
-# placeholders, so there is nothing honest to claim yet and sameAs is omitted.
-SAME_AS = []
+# Claiming these ties the profiles to the brand as one entity, so a search for
+# "toogood ai" can return the site and the accounts together. LinkedIn is not
+# here because no URL has been supplied for it.
+SAME_AS = [
+    "https://www.instagram.com/toogoodco/",
+    "https://x.com/toogoodai",
+    "https://www.youtube.com/@toogoodproduction",
+]
 
 SERVICES = [
     ("AI video",

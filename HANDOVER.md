@@ -346,6 +346,10 @@ Things that matter:
 - **Prerendering every link loads and runs those pages**, quietly starting up
   video in the background. The rule is a conservative prefetch now; do not put it
   back.
+- **`hello@toogoodai.in` does not receive mail.** toogoodai.in publishes no
+  nameservers, no A record and no MX record, so every address on that domain
+  bounces. It is in the footer of every page and on the contact page. Until the
+  domain is set up, the site is advertising an address that does not work.
 - **Browsers request an icon from the domain root** whatever a page declares,
   which is why `favicon.ico` sits at the root as well as per-page links.
 - **A `set -e` shell script dies silently** when `read` hits end of input or
@@ -394,9 +398,9 @@ below it can wait.
 5. **Products two and three.** A line in `PRODUCTS` in `tools/seo.py`, a card in
    `product.html`, and a copy of the first product page. About an hour each once
    the copy exists.
-6. **Real social URLs.** Every footer icon still links to `#`. Put them in
-   `SAME_AS` in `tools/seo.py` and in the footers, and the profiles get tied to
-   the brand in search.
+6. **A LinkedIn URL.** Instagram, X and YouTube are wired into every footer and
+   claimed in `SAME_AS` in `tools/seo.py`. The LinkedIn icon was removed rather
+   than left pointing at nothing; it is one line in each footer to put back.
 7. **The Formspree form ID** on `contact.html`. The form refuses to send while
    `YOUR_FORM_ID` is there. Email and WhatsApp work.
 8. **Blog posts.** Page and layout ready, nothing written. This is the biggest
