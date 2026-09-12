@@ -291,9 +291,15 @@ Things that matter:
   They were revealed only at the end, which meant that on a phone, where the
   labels beside the device are hidden anyway, there was no way off the page
   until the thread finished.
-- **The active step gets a bar, a tinted ground and a blue number.** Shifting
-  the text and brightening it was not a change anybody noticed while their eyes
-  were on the phone.
+- **The active step takes the accent, filled.** On this site the accent is
+  white, so the row goes white with black type on it and steps to the right,
+  the same move as the buttons. Three quieter versions were tried and all three
+  were ignorable while the reader's eyes were on the phone: shifting the text,
+  a blue bar with a tint (which also put colour into an interface that is
+  deliberately colourless), and a rail with a travelling dot.
+- **The bot wears the hand favicon**, cropped from `assets/Favicon/Hand -
+  Favicon.png` with its outlines intact. Flattening it to white filled the gaps
+  between the fingers and the mark became a blob.
 - **The phone keeps Telegram's own dark palette.** The page is black and white,
   but a screenshot recoloured to match stops reading as a screenshot, which is
   the only job it has.

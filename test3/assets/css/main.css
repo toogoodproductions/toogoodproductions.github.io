@@ -2416,13 +2416,16 @@ body.film-open { overflow: hidden; }
   border-bottom: 1px solid rgba(0,0,0,.3);
 }
 .tg-back { width: 9px; height: 15px; flex: none; fill: none; stroke: var(--tg-blue); stroke-width: 2; }
+/* The bot wears the site's own mark. A two-letter monogram is what every
+   half-built bot uses; the hand is the thing people recognise in a tab. */
 .tg-avatar {
   width: 34px; height: 34px; border-radius: 50%;
   background: linear-gradient(160deg, #5288c1, #2b5278);
-  color: #fff; flex: none;
+  flex: none;
   display: grid; place-items: center;
-  font-size: 13px; font-weight: 600; letter-spacing: -.02em;
+  overflow: hidden;
 }
+.tg-avatar img { width: 17px; height: auto; display: block; }
 .tg-who { display: flex; flex-direction: column; line-height: 1.25; }
 .tg-who b { font-size: 14px; font-weight: 600; color: #fff; }
 .tg-who span { font-size: 11.5px; color: var(--tg-blue); }
@@ -2679,33 +2682,29 @@ body.film-open { overflow: hidden; }
 }
 
 /* ---- the four labels beside the phone ---- */
-.phases { margin-top: 36px; display: flex; flex-direction: column; gap: 2px; }
+/* The step the thread is on takes the accent, filled - which on this site
+   means white with black on it, the same move as the buttons. A rail with
+   a dot on it was legible and completely ignorable; this cannot be missed,
+   and no colour enters the interface to do it. */
+.phases {
+  position: relative;
+  margin-top: 36px;
+  display: flex; flex-direction: column;
+  gap: 4px;
+}
 .phase {
   position: relative;
   display: grid;
-  grid-template-columns: 32px 1fr;
-  gap: 16px;
-  padding: 16px 16px 16px 18px;
-  border-top: 1px solid rgba(255,255,255,.08);
-  transition: background .45s var(--ease-out);
-}
-.phase:last-child { border-bottom: 1px solid rgba(255,255,255,.08); }
-/* A bar that grows down the left of whichever step the thread is on. The
-   old version only shifted the text and brightened it, which on a black
-   page is not a change anybody notices while watching a phone. */
-.phase::before {
-  content: '';
-  position: absolute;
-  left: 0; top: -1px; bottom: -1px;
-  width: 3px;
-  background: var(--tg-blue, #6ab3f3);
-  transform: scaleY(0);
-  transform-origin: top;
-  transition: transform .45s var(--ease-out);
+  grid-template-columns: 30px 1fr;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  transition: background .4s var(--ease-out), border-color .4s, transform .45s var(--ease-out);
 }
 .phase-num {
   font-family: var(--font-mono); font-size: 10px; letter-spacing: .14em;
-  color: rgba(255,255,255,.3); padding-top: 4px;
+  color: rgba(255,255,255,.32); padding-top: 4px;
   transition: color .4s;
 }
 .phase-text { display: flex; flex-direction: column; gap: 5px; }
@@ -2722,15 +2721,21 @@ body.film-open { overflow: hidden; }
   color: rgba(255,255,255,.4);
   transition: color .4s;
 }
-.phase.is-done .phase-text b { color: rgba(255,255,255,.72); }
+/* Steps already gone past: outlined, so the list reads as progress rather
+   than four identical rows with one lit. */
+.phase.is-done { border-color: rgba(255,255,255,.14); }
 .phase.is-done .phase-num { color: rgba(255,255,255,.5); }
+.phase.is-done .phase-text b { color: rgba(255,255,255,.78); }
 
-/* The step the thread is on: bar out, tinted ground, everything white. */
-.phase.is-on { background: rgba(106,179,243,.09); }
-.phase.is-on::before { transform: scaleY(1); }
-.phase.is-on .phase-num { color: #6ab3f3; }
-.phase.is-on .phase-text b { color: #fff; }
-.phase.is-on .phase-text small { color: rgba(255,255,255,.72); }
+/* The step it is on. */
+.phase.is-on {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: translateX(6px);
+}
+.phase.is-on .phase-num { color: rgba(0,0,0,.45); }
+.phase.is-on .phase-text b { color: var(--accent-fg); }
+.phase.is-on .phase-text small { color: rgba(0,0,0,.68); }
 .chat-scroll.is-static .phase { opacity: 1; }
 
 /* ---- the one number ---- */
