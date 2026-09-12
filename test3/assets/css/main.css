@@ -2282,6 +2282,18 @@ body.film-open { overflow: hidden; }
 .prod-hero-film .play-badge { width: 72px; height: 72px; }
 .prod-hero-film .play-badge svg { width: 17px; height: 20px; }
 
+/* Section eyebrows. Long pages read as one undifferentiated scroll without
+   them, and this one has five distinct arguments in it. */
+.sec-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.35);
+  margin-bottom: 18px;
+}
+
 .prod-lede {
   max-width: 24ch;
   margin-top: 28px;

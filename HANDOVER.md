@@ -42,7 +42,7 @@ it. Promoting `test3/` to the root is an open decision.
 | `work.html` | Client logo marquee, then a grid/list of nine projects. |
 | `offerings.html` | Four services as click-to-open rows, then the FAQ. |
 | `product.html` | Product index. One card per product, same pattern as Work. |
-| `product-*.html` | A page per product. One so far. **Copy is a stand-in.** |
+| `product-*.html` | A page per product. One so far, Founder Branding Autopilot, with real copy and its own nine-question FAQ. |
 | `about.html` | Positioning, statement line, two founders, contact banner. |
 | `blog.html` | Layout ready. **No posts.** |
 | `contact.html` | Email, WhatsApp, socials, form. |
@@ -56,12 +56,15 @@ would mean touching all seventeen pages to save one letter.
 bar and the overlay menu on every page. The header bar only shows above 900px
 wide; below that it becomes the Menu button and Home lives inside the overlay.
 
-There is no standalone FAQ page. The FAQ lives on `offerings.html#faq`, twelve
-questions in four groups, with the structured data that search and answer engines
-read. Keep it in one place — duplicating it makes the two copies compete.
+There is no standalone FAQ page. The service FAQ lives on `offerings.html#faq`,
+twelve questions in four groups. The product page carries its own nine, about
+that product only. **Different questions on purpose** — two pages answering the
+same question compete with each other for it.
 
-**The FAQ is generated.** Both the rows people read and the structured data
-engines read come from `FAQ` in `tools/seo.py`. Edit there, never in the HTML.
+**The Offerings FAQ is generated.** Both the rows people read and the structured
+data engines read come from `FAQ` in `tools/seo.py`. Edit there, never in the
+HTML. The product FAQ is written into its page, and its questions are mirrored
+in `PRODUCTS[...]["faq"]` for the schema — change one and change the other.
 
 ---
 
@@ -383,25 +386,27 @@ below it can wait.
 
 ### Needs the user
 
-3. **Product copy** for `product-founders-digital-avatar.html`. Every word on
-   it is a stand-in and says so in the file. The page structure, the thread and
-   the film are done; only the writing is placeholder.
-4. **Products two and three.** A line in `PRODUCTS` in `tools/seo.py`, a card in
+3. **A price, or a price signal,** for Founder Branding Autopilot. The page
+   asks for the sale twice and says nothing about cost. Not invented here.
+4. **Where the setup session happens.** The FAQ promises "one recording session"
+   and the rest of the site says everything runs remotely with nothing to travel
+   to. Those two need to agree.
+5. **Products two and three.** A line in `PRODUCTS` in `tools/seo.py`, a card in
    `product.html`, and a copy of the first product page. About an hour each once
    the copy exists.
-5. **Real social URLs.** Every footer icon still links to `#`. Put them in
+6. **Real social URLs.** Every footer icon still links to `#`. Put them in
    `SAME_AS` in `tools/seo.py` and in the footers, and the profiles get tied to
    the brand in search.
-6. **The Formspree form ID** on `contact.html`. The form refuses to send while
+7. **The Formspree form ID** on `contact.html`. The form refuses to send while
    `YOUR_FORM_ID` is there. Email and WhatsApp work.
-7. **Blog posts.** Page and layout ready, nothing written. This is the biggest
+8. **Blog posts.** Page and layout ready, nothing written. This is the biggest
    single lever for being quoted by ChatGPT and Perplexity: they quote pages
    that answer a question properly. One post per film would do it.
-8. **Clean Viraasat master.** Burned-in timecode and watermark, and it is the
+9. **Clean Viraasat master.** Burned-in timecode and watermark, and it is the
    first thing anyone sees on the homepage.
-9. **Team photographs** → `assets/img/team/harsh-dhakan.jpg` and
+10. **Team photographs** → `assets/img/team/harsh-dhakan.jpg` and
    `kushank-joshi.jpg`. Square, around 600x600. Initials stand in until then.
-10. **A street address**, and a Google Business Profile. The schema claims
+11. **A street address**, and a Google Business Profile. The schema claims
     Ahmedabad, Gujarat and nothing finer, which is as far as the known facts go.
 
 ### Open work

@@ -20,9 +20,11 @@ Contact: hello@toogoodai.in / +91 75740 03272
 - [Home](https://toogoodproductions.github.io/test3/): AI video agency in Ahmedabad. Ads, brand films, reels and animated films, generated rather than filmed. We make your brand toogood to ignore.
 - [Work](https://toogoodproductions.github.io/test3/work.html): Nine AI-generated films for brands: ads, brand films, reels, launch videos and an animated film. Made without a crew, a location or a shoot day.
 - [Offerings](https://toogoodproductions.github.io/test3/offerings.html): Four things we do: AI video, automation, AI training for your team, and custom software. Plus answers to what clients ask before they hire us.
+- [Product](https://toogoodproductions.github.io/test3/product.html): Software we built for ourselves first, out of problems we hit doing the work, then turned into something other people can use.
 - [About](https://toogoodproductions.github.io/test3/about.html): One of the first fully AI video agencies in Ahmedabad. Everything made with AI. None of it looks like it.
 - [Blog](https://toogoodproductions.github.io/test3/blog.html): Breakdowns of how the films got made, answers to what clients ask before they hire us, and whatever we have worked out about these tools.
 - [Get in touch](https://toogoodproductions.github.io/test3/contact.html): Tell us what you are making. Email hello@toogoodai.in or message us on WhatsApp. An AI studio in Ahmedabad, working with brands across India and outside it.
+- [Founder Branding Autopilot](https://toogoodproductions.github.io/test3/product-founder-branding-autopilot.html): A founder gets one message at 7 am with what moved in their niche overnight, taps the story worth talking about and sends a voice note of what they think. An avatar with their face and voice delivers it as a finished, edited film, and they pick whether it goes to LinkedIn or Instagram.
 
 ## Films
 

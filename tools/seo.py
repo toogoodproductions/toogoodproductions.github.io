@@ -234,21 +234,55 @@ PROJECTS = [
 # One entry per product. Adding the next one means a line here, a card in
 # product.html and a product-<slug>.html cloned from the first.
 PRODUCTS = [
-    dict(slug="founders-digital-avatar",
-         name="Founder's digital avatar",
-         kicker="Founder content engine",
+    dict(slug="founder-branding-autopilot",
+         name="Founder Branding Autopilot",
+         kicker="Founder Content Engine",
          media="founder-avatar-card",
-         blurb="One message a morning, one line back from you, and a film goes out in your face.",
-         desc="A founder gets a digest of their niche every morning on Telegram or WhatsApp, "
-              "picks a point, types one line of what they think, and an avatar that looks and "
-              "sounds like them delivers it as a finished, edited film for LinkedIn or Instagram.",
+         blurb="One message a morning, one voice note back, and a film goes out in your face.",
+         desc="A founder gets one message at 7 am with what moved in their niche overnight, "
+              "taps the story worth talking about and sends a voice note of what they think. "
+              "An avatar with their face and voice delivers it as a finished, edited film, "
+              "and they pick whether it goes to LinkedIn or Instagram.",
          category="BusinessApplication",
-         features=["Daily niche digest on Telegram or WhatsApp",
-                   "Reply in one line to set the angle",
-                   "Avatar cloned to the founder's face and voice",
-                   "Script written in the founder's own style",
-                   "Automatic edit: b-roll, motion graphics, captions",
-                   "Choose where it goes: LinkedIn or Instagram"]),
+         features=["One message every morning with the last 24 hours in your niche",
+                   "Answer with a voice note, a few seconds is enough",
+                   "Avatar built from your own face and voice",
+                   "Script written against how you argue and what you would never say",
+                   "Cut, graded and captioned automatically",
+                   "You approve every post and choose LinkedIn or Instagram"],
+         faq=[
+             ("Does it actually sound like me?",
+              "That's what the setup is for. Before anything goes live we work out how you "
+              "argue, what you'd never say, and where you stop short. Every script gets "
+              "written against that."),
+             ("Why can't I just do this myself with HeyGen?",
+              "You could. HeyGen will make you an avatar this afternoon. What takes the time "
+              "is everything after it: knowing what's worth posting about today, writing it so "
+              "it sounds like you, cutting it, captioning it, getting it out. That's the part "
+              "we built, and it's the part that stops most founders posting."),
+             ("Will people be able to tell it's AI?",
+              "Some will, most won't. The ones who notice usually ask how you made it, which "
+              "is its own conversation. What people are actually judging is whether the "
+              "opinion is worth reading, and that part is yours."),
+             ("How much of my time does it take?",
+              "A message in the morning, a tap, and nine seconds of talking. That's the whole "
+              "of it."),
+             ("How long does setup take?",
+              "One recording session so we capture your face and voice properly, and a "
+              "conversation about how you think. After that you never sit in front of a "
+              "camera again."),
+             ("Do I approve everything before it posts?",
+              "Yes. Nothing goes out until you've seen it and chosen where it goes. You can "
+              "kill a post with one tap."),
+             ("What if the post doesn't sound right?",
+              "Say so and it gets rewritten. It learns from what you send back, so corrections "
+              "get rarer over the first few weeks."),
+             ("Who owns the avatar, and what happens if I stop?",
+              "Your likeness is yours. Nobody else can use it, and if you stop we delete the "
+              "avatar on request. Everything already made stays yours."),
+             ("Which platforms does it post to?",
+              "LinkedIn and Instagram to start. If you post somewhere else regularly, we add it."),
+         ]),
 ]
 
 CLIENTS = ["Adani Realty", "Petpooja", "UB Heritage", "The Storeys Golf Coast",
@@ -276,7 +310,7 @@ PAGES = {
              "software. Plus answers to what clients ask before they hire us.",
         image="mera-broadband"),
     "product.html": dict(
-        url=BASE + "/product.html", crumb="Product", kind="CollectionPage", noindex=True,
+        url=BASE + "/product.html", crumb="Product", kind="CollectionPage",
         title="Product · Software we built for ourselves first · toogood",
         desc="Software we built for ourselves first, out of problems we hit doing the work, "
              "then turned into something other people can use.",
@@ -304,7 +338,7 @@ PAGES = {
 for pr in PRODUCTS:
     PAGES["product-%s.html" % pr["slug"]] = dict(
         url="%s/product-%s.html" % (BASE, pr["slug"]),
-        crumb=pr["name"], kind="ItemPage", product=pr, noindex=True,
+        crumb=pr["name"], kind=["ItemPage", "FAQPage"], product=pr,
         title="%s · toogood" % pr["name"],
         desc=pr["desc"],
         image="betu-ai-animated-film-scene-toogood")
@@ -589,8 +623,14 @@ def graph_for(fname, page):
         webpage["mainEntity"] = {"@id": BASE + "/product.html#products"}
         nodes.append(product_list())
     elif "product" in page:
-        webpage["mainEntity"] = {"@id": product_id(page["product"]["slug"])}
-        nodes.append(product_node(page["product"]))
+        pr = page["product"]
+        webpage["mainEntity"] = [
+            {"@type": "Question", "name": q,
+             "acceptedAnswer": {"@type": "Answer", "text": a}}
+            for q, a in pr["faq"]
+        ]
+        webpage["about"] = {"@id": product_id(pr["slug"])}
+        nodes.append(product_node(pr))
     elif fname == "about.html":
         webpage["mainEntity"] = {"@id": org_id()}
         nodes.extend(people())
