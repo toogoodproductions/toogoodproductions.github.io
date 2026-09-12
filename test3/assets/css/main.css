@@ -2470,9 +2470,13 @@ body.film-open { overflow: hidden; }
 .tg-bubble ol { margin: 7px 0 2px; display: flex; flex-direction: column; gap: 6px; counter-reset: d; }
 .tg-bubble li {
   counter-increment: d;
+  /* Two cells only: the number, then everything else. Anything left loose
+     in here becomes a grid item of its own and lands in the 15px column. */
   display: grid; grid-template-columns: 15px 1fr; gap: 6px;
-  font-size: 12.5px; line-height: 1.35; color: rgba(255,255,255,.86);
+  font-size: 12.5px; line-height: 1.4; color: rgba(255,255,255,.86);
 }
+.tg-bubble li > span { min-width: 0; }
+.tg-bubble li b { color: #fff; }
 .tg-bubble li::before {
   content: counter(d) '.';
   color: var(--tg-blue); font-size: 12px;
@@ -2533,8 +2537,9 @@ body.film-open { overflow: hidden; }
   border-top: 1px solid rgba(0,0,0,.3);
 }
 .tg-input > svg { width: 17px; height: 17px; fill: rgba(255,255,255,.3); flex: none; }
-/* The founder's line types itself in here before it sends. Watching a
-   sentence appear is what makes eleven seconds of work believable. */
+/* Founders talk, they do not type. The input records, and what comes out
+   is a voice note with its transcript under it - which is both what
+   Telegram actually does and the only way the reader learns what was said. */
 .tg-draft {
   flex: 1; min-width: 0;
   font-size: 13px; line-height: 1.4;
@@ -2551,13 +2556,93 @@ body.film-open { overflow: hidden; }
 @keyframes caret { 0%,50% { opacity: 1; } 51%,100% { opacity: 0; } }
 .tg-send {
   flex: none;
-  width: 26px; height: 26px; border-radius: 50%;
+  width: 28px; height: 28px; border-radius: 50%;
   display: grid; place-items: center;
-  transition: background .25s;
+  transition: background .25s, transform .25s var(--ease-out);
 }
-.tg-send svg { width: 15px; height: 15px; fill: rgba(255,255,255,.3); transition: fill .25s; }
+.tg-send svg { grid-area: 1/1; width: 16px; height: 16px; fill: rgba(255,255,255,.35); transition: fill .25s, opacity .2s; }
+.tg-ic-send { opacity: 0; }
+.tg-input.is-rec .tg-send { background: #e0504a; transform: scale(1.12); }
+.tg-input.is-rec .tg-send .tg-ic-mic { fill: #fff; }
 .tg-input.is-live .tg-send { background: var(--tg-blue); }
-.tg-input.is-live .tg-send svg { fill: #0e1621; }
+.tg-input.is-live .tg-send .tg-ic-mic { opacity: 0; }
+.tg-input.is-live .tg-send .tg-ic-send { opacity: 1; fill: #0e1621; }
+
+/* ---- holding the mic down ---- */
+.tg-rec { display: none; }
+.tg-input.is-rec .tg-rec { flex: 1; min-width: 0; display: flex; align-items: center; gap: 8px; }
+.tg-input.is-rec .tg-draft { display: none; }
+.tg-input.is-rec > svg { opacity: 0; }
+.tg-rec-dot {
+  width: 8px; height: 8px; border-radius: 50%; background: #e0504a; flex: none;
+  animation: recBlink 1.1s steps(1) infinite;
+}
+@keyframes recBlink { 0%,55% { opacity: 1; } 56%,100% { opacity: .15; } }
+.tg-rec-time {
+  font-family: var(--font-mono); font-size: 12px; color: #fff; flex: none;
+  font-variant-numeric: tabular-nums;
+}
+.tg-rec-wave { display: flex; align-items: center; gap: 2px; height: 16px; flex: 1; min-width: 0; overflow: hidden; }
+.tg-rec-wave i {
+  flex: 1; min-width: 2px; max-width: 3px; border-radius: 2px;
+  background: rgba(255,255,255,.55);
+  height: var(--h);
+  animation: recWave .7s var(--ease-inout) infinite alternate;
+}
+.tg-rec-wave i:nth-child(3n)   { animation-delay: .1s; }
+.tg-rec-wave i:nth-child(3n+1) { animation-delay: .25s; }
+@keyframes recWave { from { transform: scaleY(.35); } to { transform: scaleY(1); } }
+.tg-rec-hint {
+  font-size: 11px; color: rgba(255,255,255,.35); flex: none;
+  display: none;
+}
+@media (min-width: 400px) { .tg-rec-hint { display: block; } }
+
+/* ---- the voice note that lands ---- */
+.tg-voice { max-width: 90%; min-width: 210px; }
+.tg-voice-row { display: flex; align-items: center; gap: 9px; }
+.tg-voice-play {
+  width: 30px; height: 30px; border-radius: 50%; flex: none;
+  background: rgba(255,255,255,.9);
+  display: grid; place-items: center;
+}
+.tg-voice-play svg { width: 9px; height: 11px; fill: #2b5278; margin-left: 2px; }
+.tg-voice-wave { display: flex; align-items: center; gap: 2px; height: 22px; flex: 1; min-width: 0; }
+.tg-voice-wave i {
+  flex: 1; min-width: 2px; border-radius: 2px;
+  height: var(--h);
+  background: rgba(255,255,255,.4);
+  transition: background .12s;
+}
+/* Plays itself through once, so the note reads as audio rather than a graphic. */
+.chat-step.is-in .tg-voice-wave i { animation: voicePlay 2.6s linear forwards; }
+@keyframes voicePlay { to { background: rgba(255,255,255,.95); } }
+.tg-voice-wave i:nth-child(1)  { animation-delay: 0s; }
+.tg-voice-wave i:nth-child(2)  { animation-delay: .04s; }
+.tg-voice-dur {
+  font-size: 11px; color: rgba(255,255,255,.6); flex: none;
+  font-variant-numeric: tabular-nums;
+}
+/* The bot reading the voice note back. This is the moment worth showing:
+   a transcript only proves it heard, and saying the angle proves it
+   understood, which is the thing anyone is actually sceptical about. */
+.tg-quote {
+  margin: 9px 0;
+  padding: 8px 10px 9px 11px;
+  border-left: 2px solid var(--tg-blue);
+  border-radius: 0 8px 8px 0;
+  background: rgba(106,179,243,.1);
+  font-size: 12.5px; line-height: 1.45;
+  color: #fff;
+}
+.tg-quote-label {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--tg-blue);
+  margin-bottom: 5px;
+}
+.tg-voice { min-width: 190px; max-width: 76%; }
 
 /* The payoff, and the only thing on this side of the screen that moves.
    It waits until the thread is over: offered any earlier it competes with

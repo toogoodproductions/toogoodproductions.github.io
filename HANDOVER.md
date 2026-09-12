@@ -274,9 +274,16 @@ Things that matter:
   when it appears rather than once on load.
 - **A button lights a beat before its reply lands.** A tap and its message are
   a beat apart; lighting them together looks like a diagram, not a phone.
-- **The founder's line types itself, character by character.** Watching a
-  sentence appear is what makes eleven seconds of work believable. A finished
-  bubble appearing whole does not.
+- **The founder answers with a voice note, not typing.** Founders talk. The
+  input goes into a recording state only when the bot asks for the take, the
+  clock counts up faster than real time because nobody watches nine seconds of
+  a timer, and what lands is a voice note with a waveform.
+- **The bot then reads the angle back before writing.** No transcript under the
+  voice note: a transcript only proves it heard. Saying the angle in its own
+  words proves it understood, which is the thing anyone is actually sceptical
+  about.
+- **The digest names things.** Rival, Platform, Data, Yours, each with a number
+  in it. A vague digest makes the whole product look vague.
 - **It starts once and is then left alone.** An earlier version rewound when
   the phone left the viewport, throwing away a conversation somebody was
   watching. Running it again is a button.

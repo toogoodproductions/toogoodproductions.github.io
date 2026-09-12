@@ -13,8 +13,8 @@
    takes is a demo that never plays.
 
    So it plays itself. The bot's buttons light up as though they were
-   pressed, the founder's line types itself into the input before it
-   sends, and at the end there is somewhere to go.
+   pressed, the input records a voice note the way a founder actually
+   answers a message, and at the end there is somewhere to go.
 
    Nothing here touches the scroll. Trapping someone for twenty seconds
    to make them watch is worse than them not watching.
@@ -25,6 +25,8 @@
 
   var phone = section.querySelector('.phone');
   var draft = section.querySelector('[data-chat-draft]');
+  var rec = section.querySelector('[data-chat-rec]');
+  var recTime = section.querySelector('[data-chat-rectime]');
   var input = section.querySelector('.tg-input');
   var done = section.querySelector('[data-chat-done]');
   var replay = section.querySelector('[data-chat-replay]');
@@ -77,24 +79,30 @@
     if (input) input.classList.toggle('is-live', !!text);
   }
 
+  function stopRec() {
+    if (input) input.classList.remove('is-rec');
+  }
+
+  // Holds the mic down, counts up, then lets go. The clock runs faster than
+  // real time: nobody wants to watch nine actual seconds of a timer.
+  function recordThen(seconds, after) {
+    if (!rec || !recTime) { after(); return; }
+    if (input) input.classList.add('is-rec');
+    var n = 0;
+    (function tick() {
+      recTime.textContent = '0:' + (n < 10 ? '0' : '') + n;
+      if (n >= seconds) { wait(420, function () { stopRec(); after(); }); return; }
+      n++;
+      wait(300, tick);
+    })();
+  }
+
   function reveal(el) {
     el.classList.add('is-in');
     var p = +el.getAttribute('data-phase');
     if (p) setPhase(p);
     var prev = steps[steps.indexOf(el) - 1];
     if (prev && prev.hasAttribute('data-typing')) prev.classList.remove('is-in');
-  }
-
-  // Types the founder's line into the input, then sends it. Watching the
-  // sentence appear is what makes eleven seconds of work believable.
-  function typeThen(text, after) {
-    var i = 0;
-    (function step() {
-      if (i > text.length) { wait(420, function () { setDraft(''); after(); }); return; }
-      setDraft(text.slice(0, i));
-      i += Math.random() < 0.25 ? 2 : 1;
-      wait(26 + Math.random() * 34, step);
-    })();
   }
 
   function run() {
@@ -104,9 +112,9 @@
     if (isNaN(gap)) gap = 700;
 
     wait(gap, function () {
-      var typed = el.getAttribute('data-typed');
-      if (typed) {
-        typeThen(typed, function () { tap(el); reveal(el); run(); });
+      var secs = +el.getAttribute('data-record');
+      if (secs) {
+        recordThen(secs, function () { reveal(el); run(); });
         return;
       }
       // The button lights a beat before the reply lands, the way a tap
@@ -122,6 +130,7 @@
   }
 
   function finish() {
+    stopRec();
     setDraft('');
     if (done) done.hidden = false;
   }
@@ -131,6 +140,7 @@
     at = 0;
     steps.forEach(function (el) { el.classList.remove('is-in'); });
     section.querySelectorAll('.tg-key').forEach(function (k) { k.classList.remove('is-picked'); });
+    stopRec();
     setDraft('');
     if (done) done.hidden = true;
     setPhase(0);
