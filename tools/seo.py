@@ -230,6 +230,27 @@ PROJECTS = [
          keywords="AI residential film, concept film, slow cinema, generated interiors"),
 ]
 
+# --- the products -------------------------------------------------------
+# One entry per product. Adding the next one means a line here, a card in
+# product.html and a product-<slug>.html cloned from the first.
+PRODUCTS = [
+    dict(slug="founders-digital-avatar",
+         name="Founder's digital avatar",
+         kicker="Founder content engine",
+         media="founder-avatar-card",
+         blurb="One message a morning, one line back from you, and a film goes out in your face.",
+         desc="A founder gets a digest of their niche every morning on Telegram or WhatsApp, "
+              "picks a point, types one line of what they think, and an avatar that looks and "
+              "sounds like them delivers it as a finished, edited film for LinkedIn or Instagram.",
+         category="BusinessApplication",
+         features=["Daily niche digest on Telegram or WhatsApp",
+                   "Reply in one line to set the angle",
+                   "Avatar cloned to the founder's face and voice",
+                   "Script written in the founder's own style",
+                   "Automatic edit: b-roll, motion graphics, captions",
+                   "Video or static, cut for LinkedIn or Instagram"]),
+]
+
 CLIENTS = ["Adani Realty", "Petpooja", "UB Heritage", "The Storeys Golf Coast",
            "The Paragraph", "Mera Broadband", "Storython Studios", "Sanatan Seal",
            "Money At Work"]
@@ -255,10 +276,10 @@ PAGES = {
              "software. Plus answers to what clients ask before they hire us.",
         image="mera-broadband"),
     "product.html": dict(
-        url=BASE + "/product.html", crumb="Product", kind="WebPage", noindex=True,
-        title="Product · toogood",
-        desc="Software we built for ourselves first, then turned into something other people "
-             "can use.",
+        url=BASE + "/product.html", crumb="Product", kind="CollectionPage", noindex=True,
+        title="Product · Software we built for ourselves first · toogood",
+        desc="Software we built for ourselves first, out of problems we hit doing the work, "
+             "then turned into something other people can use.",
         image="betu-ai-animated-film-scene-toogood"),
     "about.html": dict(
         url=BASE + "/about.html", crumb="About", kind="AboutPage",
@@ -279,6 +300,14 @@ PAGES = {
              "An AI studio in Ahmedabad, working with brands across India and outside it.",
         image="office-to-home-ub-heritage"),
 }
+
+for pr in PRODUCTS:
+    PAGES["product-%s.html" % pr["slug"]] = dict(
+        url="%s/product-%s.html" % (BASE, pr["slug"]),
+        crumb=pr["name"], kind="ItemPage", product=pr, noindex=True,
+        title="%s · toogood" % pr["name"],
+        desc=pr["desc"],
+        image="betu-ai-animated-film-scene-toogood")
 
 for p in PROJECTS:
     PAGES["project-%s.html" % p["slug"]] = dict(
@@ -444,6 +473,43 @@ def video_node(p, page_url):
     return node
 
 
+def product_id(slug):
+    return "%s/product-%s.html#product" % (BASE, slug)
+
+
+def product_node(pr):
+    return {
+        "@type": "SoftwareApplication",
+        "@id": product_id(pr["slug"]),
+        "name": pr["name"],
+        "alternateName": pr["kicker"],
+        "description": pr["desc"],
+        "url": "%s/product-%s.html" % (BASE, pr["slug"]),
+        "applicationCategory": pr["category"],
+        "operatingSystem": "Web",
+        "featureList": pr["features"],
+        "publisher": {"@id": org_id()},
+        "author": {"@id": org_id()},
+        "provider": {"@id": org_id()},
+    }
+
+
+def product_list():
+    return {
+        "@type": "ItemList",
+        "@id": BASE + "/product.html#products",
+        "name": "Product",
+        "numberOfItems": len(PRODUCTS),
+        "itemListElement": [
+            {
+                "@type": "ListItem", "position": i + 1,
+                "item": product_node(pr),
+            }
+            for i, pr in enumerate(PRODUCTS)
+        ],
+    }
+
+
 def work_list():
     return {
         "@type": "ItemList",
@@ -490,6 +556,8 @@ def graph_for(fname, page):
     if fname != "index.html":
         if "project" in page:
             crumbs.append(("Work", BASE + "/work.html"))
+        if "product" in page:
+            crumbs.append(("Product", BASE + "/product.html"))
         crumbs.append((page["crumb"], url))
 
     webpage = {
@@ -517,6 +585,12 @@ def graph_for(fname, page):
     elif fname == "offerings.html":
         webpage["mainEntity"] = questions()
         nodes.extend(services())
+    elif fname == "product.html":
+        webpage["mainEntity"] = {"@id": BASE + "/product.html#products"}
+        nodes.append(product_list())
+    elif "product" in page:
+        webpage["mainEntity"] = {"@id": product_id(page["product"]["slug"])}
+        nodes.append(product_node(page["product"]))
     elif fname == "about.html":
         webpage["mainEntity"] = {"@id": org_id()}
         nodes.extend(people())

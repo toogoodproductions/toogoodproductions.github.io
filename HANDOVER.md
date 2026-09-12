@@ -41,7 +41,8 @@ it. Promoting `test3/` to the root is an open decision.
 | `index.html` | The scroll reel. Seven full-screen panels plus an outro that loops back to the hero. |
 | `work.html` | Client logo marquee, then a grid/list of nine projects. |
 | `offerings.html` | Four services as click-to-open rows, then the FAQ. |
-| `product.html` | One product, built out: hero film, the Telegram thread, five steps, an input beside its output, and the persona section. **Copy is a stand-in.** |
+| `product.html` | Product index. One card per product, same pattern as Work. |
+| `product-*.html` | A page per product. One so far. **Copy is a stand-in.** |
 | `about.html` | Positioning, statement line, two founders, contact banner. |
 | `blog.html` | Layout ready. **No posts.** |
 | `contact.html` | Email, WhatsApp, socials, form. |
@@ -117,6 +118,13 @@ version-stamps every CSS and JS link. **Do not skip it.** Without it,
 visitors get new HTML with ten-minute-old cached scripts after a deploy. That bug
 cost hours: a page shipped with a stale script looking for markup that had been
 removed, so nothing responded and nothing errored.
+
+### Adding the next product
+
+1. A line in `PRODUCTS` in `tools/seo.py`.
+2. A card in `product.html`, copied from the one that is there.
+3. `product-<slug>.html`, copied from `product-founders-digital-avatar.html`.
+4. `python3 tools/seo.py` writes its title, description and schema.
 
 ### The product demo film
 
@@ -231,7 +239,24 @@ and Lenis which were already there.
 | `panel-video.js` | Home reel background film. |
 | `work-film.js` | Work card loops. |
 | `project-film.js` | Project hero: still until you press play. |
-| `panels.js` | Offerings, Product and FAQ rows. |
+| `panels.js` | Offerings and FAQ rows. |
+| `chat-scroll.js` | The product page's Telegram thread, played by scrolling. |
+
+### The played conversation
+
+`chat-scroll.js` pins the phone on the product page and brings the messages in
+one at a time as you scroll, with the four labels beside it ticking along.
+
+- **The log is `justify-content: flex-end` with hidden overflow.** New messages
+  push older ones off the top on their own. That is what a chat does, and it
+  costs no JavaScript.
+- **A message that has not arrived is `display: none`,** so the animation runs
+  every time it appears rather than only once. Scrolling back takes it away.
+- **The phone keeps Telegram's own dark palette.** The page is black and white,
+  but a screenshot recoloured to match stops reading as a screenshot, which is
+  the only job it has.
+- **Below 900px it does not pin.** Pinning a tall phone on a phone leaves
+  nowhere to pin it to, so narrow screens get the whole thread at once.
 
 ### Conventions worth keeping
 
