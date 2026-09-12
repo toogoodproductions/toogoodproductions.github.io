@@ -1991,8 +1991,8 @@ body.film-open { overflow: hidden; }
   position: absolute;
   right: 5%;
   top: 50%;
-  width: clamp(84px, 9vw, 132px);
-  height: clamp(84px, 9vw, 132px);
+  width: clamp(46px, 5vw, 68px);
+  height: clamp(46px, 5vw, 68px);
   z-index: 1;
   color: #fff;
   opacity: .085;
@@ -2038,14 +2038,25 @@ body.film-open { overflow: hidden; }
    three named groups so the block reads as three short lists rather than one
    long one, with room between them. */
 .faq-head-title {
+  /* Small, so it needs an edge to register as a section marker rather than
+     stray label text: a short accent rule above it and full-strength white. */
   padding-top: 96px;
   font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: .16em;
+  font-size: 13px;
+  letter-spacing: .2em;
   text-transform: uppercase;
   font-weight: 500;
-  color: rgba(255, 255, 255, .45);
+  color: #fff;
   margin-bottom: 40px;
+  position: relative;
+}
+.faq-head-title::before {
+  content: "";
+  display: block;
+  width: 42px;
+  height: 2px;
+  background: var(--accent);
+  margin-bottom: 18px;
 }
 
 .faq-list { padding-bottom: 96px; }
@@ -2190,3 +2201,7 @@ body.film-open { overflow: hidden; }
   .crew-bio { font-size: 13.5px; }
 }
 @media (prefers-reduced-motion: reduce) { .crew-portrait img { transition: none; } }
+
+/* The contact column uses the footer's icon set; it just needs the gap the
+   text list used to get from its list styling. */
+.contact-col .socials { margin-top: 14px; }

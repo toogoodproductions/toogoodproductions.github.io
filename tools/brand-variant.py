@@ -7,11 +7,10 @@ against a light tab strip, so the white build inverts instead.
 """
 import sys, glob, pathlib, re
 
+# White is the accent. A white favicon square would vanish against a light
+# tab strip, so the mark inverts instead.
 BUILDS = {
-    "test3":      ("white",    "%23000000", "%23ffffff"),
-    "test-white": ("white",    "%23000000", "%23ffffff"),
-    "test-sun":   ("sun",      "%23FFD23F", "%23000000"),
-    "test-pink":  ("hot pink", "%23FF3D81", "%23ffffff"),
+    "test3": ("white", "%23000000", "%23ffffff"),
 }
 
 d = sys.argv[1]
