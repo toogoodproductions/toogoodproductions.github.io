@@ -1605,7 +1605,7 @@ html.return-visit .loader { display: none; }
   line-height: 1.6;
 }
 @media (min-width: 640px)  { .contact-grid { grid-template-columns: repeat(2, 1fr); padding-top: 64px; } }
-@media (min-width: 1024px) { .contact-grid { grid-template-columns: 1.2fr 1fr 1.2fr 1.4fr; padding-top: 80px; padding-bottom: 120px; } }
+@media (min-width: 1024px) { .contact-grid { grid-template-columns: 1fr 0.7fr 1.7fr 1.3fr; padding-top: 80px; padding-bottom: 120px; } }
 .contact-col { display: flex; flex-direction: column; align-items: flex-start; }
 .contact-name { font-family: var(--font-display); font-size: 2.4rem; line-height: 1; text-transform: uppercase; }
 .contact-desc { margin-top: 10px; color: rgba(255,255,255,.55); max-width: 26ch; }
@@ -1621,7 +1621,20 @@ html.return-visit .loader { display: none; }
 .contact-list { display: flex; flex-direction: column; gap: 6px; }
 .contact-list a, .contact-line { color: var(--fg); transition: color .3s; }
 .contact-list a:hover, .contact-line:hover { color: var(--accent); }
-.contact-line { display: block; }
+.contact-line {
+  /* These are the two things someone came to this page for, so they read at
+     roughly twice the body size rather than at label scale. */
+  display: block;
+  margin-top: 6px;
+  font-size: clamp(19px, 2vw, 27px);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  /* An address is read as one thing - never split it across a line. It
+     shrinks to fit instead, which is why the size is capped rather than fixed. */
+  white-space: nowrap;
+}
+@media (max-width: 900px) { .contact-line { font-size: 19px; white-space: normal; } }
+@media (max-width: 720px) { .contact-line { font-size: 18px; } }
 
 .contact-form { width: 100%; max-width: 320px; }
 .form-fields { display: flex; flex-direction: column; gap: 8px; }
