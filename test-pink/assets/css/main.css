@@ -1886,6 +1886,7 @@ body.film-open { overflow: hidden; }
 .offer-row {
   border-bottom: 1px solid var(--border);
   position: relative;
+  overflow: hidden;          /* keeps the numeral from spilling past the row */
 }
 /* A line that draws in from the left under the open row. */
 .offer-row::after {
@@ -2008,26 +2009,26 @@ body.film-open { overflow: hidden; }
   .offer-num { transition: none; }
 }
 
-/* The row's number, blown up behind its content. Gives the open row an
-   anchor without inventing imagery that has nothing to do with the service. */
+/* The row's number, blown up behind its content. It lives on the row, not
+   inside the part that animates open - that element has to hide its overflow,
+   which was cutting the numeral in half. */
 .offer-ghost {
   position: absolute;
-  right: -10px;
-  top: 50%;
-  transform: translateY(-50%) scale(.94);
+  right: 3%;
+  bottom: 0;
   font-family: var(--font-display, inherit);
-  font-size: clamp(110px, 17vw, 230px);
-  line-height: 1;
-  color: rgba(255, 255, 255, .035);
+  font-size: clamp(80px, 11vw, 150px);
+  line-height: .8;
+  color: rgba(255, 255, 255, .04);
   pointer-events: none;
   user-select: none;
   z-index: 0;
-  transition: transform 1.1s var(--ease-expo), color .8s var(--ease-inout);
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .7s var(--ease-inout), transform 1s var(--ease-expo);
 }
-.offer-row.is-open .offer-ghost {
-  transform: translateY(-50%) scale(1);
-  color: rgba(255, 255, 255, .055);
-}
+.offer-row.is-open .offer-ghost { opacity: 1; transform: none; }
+.offer-head, .offer-wrap { position: relative; z-index: 1; }
 .offer-text, .offer-tags { position: relative; z-index: 1; }
 
 /* Tags carry more of the visual rhythm now the paragraph is quieter. */
