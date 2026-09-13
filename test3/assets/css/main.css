@@ -2413,14 +2413,20 @@ body.film-open { overflow: hidden; }
   display: flex;
   align-items: center;
 }
-.journey-track { display: flex; will-change: transform; }
+.journey-track { display: flex; height: 100%; will-change: transform; }
 
 .jstep {
   flex: none;
   width: 100vw;
+  height: 100%;
   display: grid;
   grid-template-columns: minmax(0, 1fr);
+  /* Both of these. align-content centres the rows in the panel; align-items
+     centres each item against its neighbour. Without the second the words sit
+     at the top of a cell stretched to the height of the drawing beside them,
+     which is what pushed the desktop steps up the screen. */
   align-content: center;
+  align-items: center;
   justify-items: center;
   text-align: center;
   gap: 26px;
@@ -2431,6 +2437,7 @@ body.film-open { overflow: hidden; }
   .jstep {
     grid-template-columns: minmax(240px, 380px) minmax(0, 460px);
     align-content: center;
+    align-items: center;
     justify-items: stretch;
     text-align: left;
     gap: 80px;
@@ -2495,8 +2502,11 @@ body.film-open { overflow: hidden; }
 .is-live .jtext > *:nth-child(3) { transition-delay: .16s; }
 
 /* --- the last panel --- */
-.jstep--end { grid-template-columns: 1fr; gap: 22px; }
-.jstep--end .jtext > :last-child { margin-top: 6px; }
+.jstep--end { grid-template-columns: 1fr; gap: 26px; }
+/* The button carried an inline margin of 8px, which read as attached to the
+   sentence above it rather than as the thing to do next. */
+.jcta { display: inline-flex; border-radius: 999px; margin-top: 28px; }
+@media (min-width: 900px) { .jcta { margin-top: 22px; } }
 @media (min-width: 900px) { .jstep--end { grid-template-columns: minmax(260px, 400px) minmax(0, 440px); } }
 
 /* --- how far along you are --- */
