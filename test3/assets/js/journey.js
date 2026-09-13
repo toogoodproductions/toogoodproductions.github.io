@@ -31,10 +31,22 @@
     steps.forEach(function (step, i) {
       var host = step.querySelector('[data-lottie]');
       if (!host || anims[i]) return;
-      anims[i] = window.lottie.loadAnimation({
-        container: host, renderer: 'svg', loop: true, autoplay: false,
+      // It loops, but it does not run without pause. The animation plays
+      // through, holds on its last frame for a beat, then goes again, so
+      // the panel reads as something that happened rather than a thing
+      // jittering in the corner of your eye.
+      var a = window.lottie.loadAnimation({
+        container: host, renderer: 'svg', loop: false, autoplay: false,
         path: host.getAttribute('data-lottie')
       });
+      a.__wanted = false;
+      a.addEventListener('complete', function () {
+        if (a.__hold) clearTimeout(a.__hold);
+        a.__hold = setTimeout(function () {
+          if (a.__wanted) { a.goToAndPlay(0, true); }
+        }, 1400);
+      });
+      anims[i] = a;
     });
   }
 
@@ -42,7 +54,10 @@
     for (var n = 0; n < steps.length; n++) steps[n].classList.toggle('is-live', n === i);
     if (window.__journeyArt) window.__journeyArt.show(i);
     Object.keys(anims).forEach(function (k) {
-      if (+k === i) anims[k].play(); else anims[k].pause();
+      var a = anims[k];
+      a.__wanted = (+k === i);
+      if (a.__wanted) { a.play(); }
+      else { a.pause(); if (a.__hold) clearTimeout(a.__hold); }
     });
   }
 
@@ -50,7 +65,7 @@
     section.classList.add('is-stacked');
     steps.forEach(function (s) { s.classList.add('is-live'); });
     if (window.__journeyArt) window.__journeyArt.all();
-    Object.keys(anims).forEach(function (k) { anims[k].play(); });
+    Object.keys(anims).forEach(function (k) { anims[k].__wanted = true; anims[k].play(); });
   }
 
   mountLottie();

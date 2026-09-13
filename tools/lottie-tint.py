@@ -45,9 +45,13 @@ def grey_gradient(node):
         c = arr[j + 1:j + 4]
         if not all(isinstance(x, (int, float)) for x in c):
             continue
-        v = round(1.0 - lum(c), 4)
-        v = round(0.12 + v * 0.88, 4)
+        v = (1.0 - lum(c)) ** GAMMA
+        v = round(FLOOR + v * (1.0 - FLOOR), 4)
         arr[j + 1] = arr[j + 2] = arr[j + 3] = v
+
+
+FLOOR = 0.08
+GAMMA = 0.72
 
 
 def flat(node):
@@ -66,7 +70,12 @@ def flat(node):
     if node.get("ty") in ("fl", "st") and isinstance(node.get("c"), dict):
         k = node["c"].get("k")
         if isinstance(k, list) and len(k) >= 3 and all(isinstance(n, (int, float)) for n in k):
-            v = round(1.0 - lum(k), 4)
+            # A straight luminance flip lands the body around 0.6, which on
+            # black is dark enough that a ring crossing the head reads as
+            # showing through it. The curve lifts the midtones so the figure
+            # is solid and anything over it is plainly in front.
+            v = (1.0 - lum(k)) ** GAMMA
+            v = round(FLOOR + v * (1.0 - FLOOR), 4)
             node["c"]["k"] = [v, v, v] + k[3:]
 
 
