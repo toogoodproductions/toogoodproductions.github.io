@@ -244,10 +244,10 @@ PRODUCTS = [
          kicker="Founder Content Engine",
          media="founder-avatar-card",
          blurb="Set up with you, then run without you. It posts in your face and your voice.",
-         desc="One setup session locks a founder's face, voice, positions and format. "
-              "After that it runs on its own: it watches their industry, writes the angle "
-              "and the script, generates the voice, edits, cuts the b-roll and captions, and "
-              "delivers at least ten short-form videos a month ready to post. No daily "
+         desc="toogood sets up a founder's face, voice, positions and format, and after "
+              "that it runs on its own: it watches their industry, decides what is worth "
+              "saying, writes the script, generates the voice, edits, cuts the b-roll and "
+              "adds the captions, and delivers short-form video ready to post. No daily "
               "involvement from the founder, no editor, no shoot days.",
          category="BusinessApplication",
          features=["Set up with you, then runs with no founder involvement",
@@ -255,7 +255,7 @@ PRODUCTS = [
                    "Watches your industry so nobody has to decide what to post",
                    "Script written against how you see your world and the words you would never use",
                    "Edit, b-roll and captions done automatically",
-                   "At least ten short-form videos a month, ready to post"],
+                   "Short-form video delivered ready to post"],
          faq=[
              ("Does it actually sound like me?",
               "That's what the setup is for. Before anything goes live we work out how you "
