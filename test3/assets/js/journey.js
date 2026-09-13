@@ -22,55 +22,39 @@
 
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---- proper motion graphics, when there are any ----------------
-     A .jart with data-lottie loads that animation and plays it while
-     its panel is in front. The inline SVG inside stays as the thing
-     that shows if the file is missing or the library never arrives,
-     so the page is never a row of empty boxes.
-     ---------------------------------------------------------------- */
-  var players = {};
+  /* A step can carry a Lottie file instead of a canvas. It plays only while
+     its panel is in front, like everything else here. */
+  var anims = {};
 
   function mountLottie() {
     if (!window.lottie) return;
     steps.forEach(function (step, i) {
-      var art = step.querySelector('.jart[data-lottie]');
-      if (!art || players[i]) return;
-      var anim = window.lottie.loadAnimation({
-        container: art,
-        renderer: 'svg',
-        loop: true,
-        autoplay: false,
-        path: art.getAttribute('data-lottie')
+      var host = step.querySelector('[data-lottie]');
+      if (!host || anims[i]) return;
+      anims[i] = window.lottie.loadAnimation({
+        container: host, renderer: 'svg', loop: true, autoplay: false,
+        path: host.getAttribute('data-lottie')
       });
-      anim.addEventListener('DOMLoaded', function () { art.classList.add('has-lottie'); });
-      anim.addEventListener('data_failed', function () { art.classList.remove('has-lottie'); });
-      players[i] = anim;
-    });
-  }
-
-  function playOnly(i) {
-    Object.keys(players).forEach(function (k) {
-      var anim = players[k];
-      if (+k === i) { anim.play(); } else { anim.pause(); }
     });
   }
 
   function live(i) {
     for (var n = 0; n < steps.length; n++) steps[n].classList.toggle('is-live', n === i);
-    playOnly(i);
+    if (window.__journeyArt) window.__journeyArt.show(i);
+    Object.keys(anims).forEach(function (k) {
+      if (+k === i) anims[k].play(); else anims[k].pause();
+    });
   }
 
   function stack() {
     section.classList.add('is-stacked');
     steps.forEach(function (s) { s.classList.add('is-live'); });
-    Object.keys(players).forEach(function (k) { players[k].play(); });
+    if (window.__journeyArt) window.__journeyArt.all();
+    Object.keys(anims).forEach(function (k) { anims[k].play(); });
   }
 
   mountLottie();
-  if (!window.lottie) {
-    // The library is loaded async so it can be absent on first paint.
-    window.addEventListener('load', mountLottie);
-  }
+  if (!window.lottie) window.addEventListener('load', mountLottie);
 
   if (reduced || !window.gsap || !window.ScrollTrigger) { stack(); return; }
 

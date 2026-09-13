@@ -2393,12 +2393,32 @@ body.film-open { overflow: hidden; }
   .jstep { grid-template-columns: minmax(240px, 380px) minmax(0, 460px); gap: 80px;
            justify-content: center; padding: 0 64px; }
 }
-.jart { color: #fff; opacity: .9; }
-/* Once a real animation mounts, the inline placeholder drawing steps aside.
-   It stays in the markup so a missing file or a blocked CDN leaves a drawing
-   rather than an empty box. */
-.jart.has-lottie > svg:first-child { display: none; }
-.jart svg { width: 100%; max-width: 300px; height: auto; display: block; margin-inline: auto; }
+/* Each step is a live canvas now, not an icon. A glow sits behind it so the
+   dots have something to be lit against, which is most of why this reads as
+   depth rather than as a diagram on a flat black page. */
+.jart {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 1;
+  margin-inline: auto;
+}
+.jart::before {
+  content: '';
+  position: absolute; inset: -18%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 48%, rgba(255,255,255,.09), rgba(255,255,255,0) 62%);
+  opacity: 0;
+  transition: opacity 1.1s var(--ease-out);
+}
+.is-live .jart::before { opacity: 1; }
+.art-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+
+/* A Lottie panel is whatever shape the file is, so it gets its own ratio
+   and sits inside the same glow as the canvases. */
+.jart--lottie { aspect-ratio: 4 / 5; }
+.jart--lottie svg { display: block; width: 100%; height: 100%; }
+
 .jtext { max-width: 46ch; }
 .jnum {
   display: block;
@@ -2412,37 +2432,11 @@ body.film-open { overflow: hidden; }
 }
 .jstep p { font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.55); }
 
-/* --- the drawings, animated only while their panel is in front --- */
-.jart .d, .jart .wire, .jart .loop, .jart .frame, .jart .nodes, .jart .lock {
-  stroke-dasharray: 1400; stroke-dashoffset: 1400;
-}
-.is-live .jart .d, .is-live .jart .wire, .is-live .jart .loop,
-.is-live .jart .frame, .is-live .jart .nodes, .is-live .jart .lock {
-  animation: draw 1.5s var(--ease-out) forwards;
-}
-@keyframes draw { to { stroke-dashoffset: 0; } }
-.is-live .jart .wire { animation-delay: .3s; }
-.is-live .jart .frame { animation-delay: .5s; }
-.is-live .jart .lock { animation-delay: .7s; }
-
-.jart .pulse, .jart .blips, .jart .rider, .jart .sweep { opacity: 0; }
-.is-live .jart .pulse, .is-live .jart .blips { animation: fadeUp .6s var(--ease-out) .9s forwards; }
-.is-live .jart .sweep { animation: fadeUp .4s linear .6s forwards, spin 3.4s linear .6s infinite; transform-origin: 100px 100px; }
-.is-live .jart .blips circle { animation: blip 3.4s linear .6s infinite; }
-.is-live .jart .blips circle:nth-child(2) { animation-delay: 1.45s; }
-.is-live .jart .blips circle:nth-child(3) { animation-delay: 2.2s; }
-.is-live .jart .blips circle:nth-child(4) { animation-delay: 3.0s; }
-@keyframes fadeUp { to { opacity: 1; } }
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes blip { 0% { opacity: 0; } 6% { opacity: 1; } 45% { opacity: 1; } 70% { opacity: 0; } 100% { opacity: 0; } }
-
-/* Step four never finishes, which is the point of step four. */
-.is-live .jart .rider {
-  animation: fadeUp .4s linear 1.1s forwards, ride 6s linear 1.1s infinite;
-  offset-path: path("M100 100c0-22 15-40 34-40s34 18 34 40-15 40-34 40-34-18-34-40-15-40-34-40-34 18-34 40 15 40 34 40 34-18 34-40z");
-  offset-rotate: 0deg;
-}
-@keyframes ride { to { offset-distance: 100%; } }
+/* The text arrives just behind its drawing rather than with it. */
+.jstep .jtext > * { opacity: 0; transform: translateY(14px); transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
+.is-live .jtext > * { opacity: 1; transform: none; }
+.is-live .jtext > *:nth-child(2) { transition-delay: .08s; }
+.is-live .jtext > *:nth-child(3) { transition-delay: .16s; }
 
 /* --- the last panel: the whole path at once --- */
 .jstep--end { grid-template-columns: 1fr; }
@@ -2453,10 +2447,11 @@ body.film-open { overflow: hidden; }
   content: ''; position: absolute; left: -12px; top: 26px;
   width: 8px; height: 1px; background: rgba(255,255,255,.3);
 }
-.jmini-art { display: block; width: 54px; height: 54px; color: rgba(255,255,255,.75); }
-.jmini-art svg { width: 100%; height: 100%; }
-.jmini-art svg .sweep, .jmini-art svg .blips, .jmini-art svg .rider, .jmini-art svg .pulse { opacity: 1; }
-.jmini-art svg * { stroke-dasharray: none !important; stroke-dashoffset: 0 !important; animation: none !important; }
+.jmini-art {
+  display: block; width: 44px; height: 44px; border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.2);
+  background: radial-gradient(circle at 50% 45%, rgba(255,255,255,.16), rgba(255,255,255,.02) 70%);
+}
 .jmini b { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .12em; color: rgba(255,255,255,.35); font-weight: 400; }
 
 /* --- how far along you are --- */
