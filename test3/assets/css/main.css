@@ -2373,7 +2373,14 @@ body.film-open { overflow: hidden; }
    once out of view.
    -------------------------------------------------------------------- */
 .journey { position: relative; }
+/* Centred on a wide screen, because what follows it runs across the middle
+   of the page and a heading hard against the left edge reads as detached
+   from it. Left-aligned on a phone, where the panels stack. */
 .journey-head { padding-top: 96px; padding-bottom: 8px; }
+@media (min-width: 900px) {
+  .journey-head { text-align: center; padding-bottom: 0; }
+  .journey-head h2 { margin-inline: auto; }
+}
 .journey-stage { overflow: hidden; }
 @media (min-width: 900px) {
   .journey-stage { height: 100vh; height: 100svh; display: flex; align-items: center; }

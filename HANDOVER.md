@@ -280,6 +280,14 @@ Things about the page that still matter:
   posts, which is the only honest thing to draw while there is one real video
   in existence. When there are ten, it becomes a grid of real thumbnails and
   gets much stronger.
+- **The argument is visibility, not the avatar.** An earlier version of the
+  differentiator led on the avatar being the easy part. True, and not the sale.
+  The sale is that founders get judged before they get met, and that what stops
+  people posting is never the camera, it is needing an idea and an hour again
+  tomorrow.
+- **One line per panel.** These carried paragraphs and read as homework at that
+  size. The long-form writing search needs lives in the differentiator and the
+  FAQ, where a reader has chosen to be.
 - **Say videos, not films.** Film is the word for the ad and brand work. This
   product makes short-form social video, and blurring the two cheapens the
   first one.
