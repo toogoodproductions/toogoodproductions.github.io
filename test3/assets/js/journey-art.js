@@ -210,9 +210,13 @@
     // this step starts, and a chain that ends in a rectangle labelled CUT
     // ends on a noun nobody buys. It ends on the video.
     var W = this.w, H = this.h;
-    var fw = Math.min(W * .20, 74), fh = fw * 16 / 9;
+    // On a phone this canvas is about 200px across. Three labelled rings and
+    // a video frame do not fit in that, so below the threshold the labels go
+    // and everything tightens rather than overlapping into mush.
+    var tight = W < 260;
+    var fw = Math.min(W * (tight ? .17 : .20), 74), fh = fw * 16 / 9;
     var fx = W * .80, fy = H * .5;                 // the finished video
-    var xs = [W * .16, W * .36, W * .56];          // the three stages
+    var xs = tight ? [W * .14, W * .33, W * .52] : [W * .16, W * .36, W * .56];
     var ry = H * .5;
     var names = ['SCRIPT', 'VIDEO', 'EDIT'];
 
@@ -238,7 +242,7 @@
       var sx = xs[i];
       var done = arrived || head >= i - .02;
       var hot = arrived ? 0 : Math.max(0, 1 - Math.abs(head - i) * 2.2);
-      var rr = 15 + hot * 5;
+      var rr = (tight ? 11 : 15) + hot * (tight ? 3 : 5);
 
       if (hot > 0) {
         x.fillStyle = 'rgba(255,255,255,' + (hot * .14).toFixed(3) + ')';
@@ -251,23 +255,26 @@
       x.strokeStyle = 'rgba(255,255,255,' + (done ? .92 : .34) + ')';
       x.lineWidth = 1.1;
       x.beginPath();
+      var g = tight ? .72 : 1;
       if (i === 0) {                    // lines of script
-        x.moveTo(sx - 6, ry - 4); x.lineTo(sx + 6, ry - 4);
-        x.moveTo(sx - 6, ry); x.lineTo(sx + 4, ry);
-        x.moveTo(sx - 6, ry + 4); x.lineTo(sx + 1, ry + 4);
+        x.moveTo(sx - 6*g, ry - 4*g); x.lineTo(sx + 6*g, ry - 4*g);
+        x.moveTo(sx - 6*g, ry); x.lineTo(sx + 4*g, ry);
+        x.moveTo(sx - 6*g, ry + 4*g); x.lineTo(sx + 1*g, ry + 4*g);
       } else if (i === 1) {             // a frame with a play mark
-        x.rect(sx - 7, ry - 5, 14, 10);
-        x.moveTo(sx - 2, ry - 3); x.lineTo(sx + 3, ry); x.lineTo(sx - 2, ry + 3);
+        x.rect(sx - 7*g, ry - 5*g, 14*g, 10*g);
+        x.moveTo(sx - 2*g, ry - 3*g); x.lineTo(sx + 3*g, ry); x.lineTo(sx - 2*g, ry + 3*g);
       } else {                          // a cut between two shots
-        x.moveTo(sx - 7, ry - 5); x.lineTo(sx - 1, ry - 5); x.lineTo(sx - 1, ry + 5); x.lineTo(sx - 7, ry + 5); x.closePath();
-        x.moveTo(sx + 1, ry - 5); x.lineTo(sx + 7, ry - 5); x.lineTo(sx + 7, ry + 5); x.lineTo(sx + 1, ry + 5); x.closePath();
+        x.moveTo(sx - 7*g, ry - 5*g); x.lineTo(sx - 1*g, ry - 5*g); x.lineTo(sx - 1*g, ry + 5*g); x.lineTo(sx - 7*g, ry + 5*g); x.closePath();
+        x.moveTo(sx + 1*g, ry - 5*g); x.lineTo(sx + 7*g, ry - 5*g); x.lineTo(sx + 7*g, ry + 5*g); x.lineTo(sx + 1*g, ry + 5*g); x.closePath();
       }
       x.stroke();
 
-      x.fillStyle = 'rgba(255,255,255,' + (done ? .7 : .26) + ')';
-      x.font = '9px ui-monospace, Menlo, monospace';
-      x.textAlign = 'center';
-      x.fillText(names[i], sx, ry + 36);
+      if (!tight) {
+        x.fillStyle = 'rgba(255,255,255,' + (done ? .7 : .26) + ')';
+        x.font = '9px ui-monospace, Menlo, monospace';
+        x.textAlign = 'center';
+        x.fillText(names[i], sx, ry + 36);
+      }
     }
 
     // the work in transit, with a short trail so the direction is obvious
@@ -352,7 +359,14 @@
     show: function (i) {
       fields.forEach(function (f, n) { if (n === i) f.play(); else f.stop(); });
     },
-    all: function () { fields.forEach(function (f) { f.play(); }); }
+    all: function () { fields.forEach(function (f) { f.play(); }); },
+    none: function () { fields.forEach(function (f) { f.stop(); }); },
+    play: function (i) { if (fields[i]) fields[i].play(); },
+    stop: function (i) { if (fields[i]) fields[i].stop(); },
+    // The canvas backing store is sized from the element, so it has to be
+    // measured again after a layout change or it renders at the wrong scale.
+    measure: function () { fields.forEach(function (f) { f.size(); }); },
+    count: fields.length
   };
 
   fields[0].play();

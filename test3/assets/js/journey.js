@@ -7,8 +7,11 @@
    horizontal move that tracks your finger feels like scrolling,
    while things popping in at thresholds feels like stuttering.
 
-   Narrow screens get the four steps stacked. Pinning a full-width
-   track on a phone is a fight with the address bar nobody wins.
+   It runs sideways at every width, phones included. One step fills the
+   screen and nothing else is on it, which is the whole point of the
+   section and was lost the moment it stacked into a list. The rebuild
+   only fires on a width change, so a phone's address bar sliding away
+   cannot tear the pin down mid-scroll.
    --------------------------------------------------------------- */
 (function () {
   var section = document.querySelector('[data-journey]');
@@ -47,15 +50,52 @@
     for (var n = 0; n < steps.length; n++) steps[n].classList.toggle('is-live', n === i);
   }
 
+  /* Wakes just the one step, for narrow screens. */
+  function awaken(i) {
+    if (window.__journeyArt) window.__journeyArt.show(i - 1);   // step 0 is the Lottie
+    Object.keys(anims).forEach(function (k) {
+      if (+k === i) anims[k].play(); else anims[k].pause();
+    });
+  }
+
   function playAll() {
     if (window.__journeyArt) window.__journeyArt.all();
     Object.keys(anims).forEach(function (k) { anims[k].play(); });
   }
 
+  /* Stacked, on a phone. Four animations running at once on a phone is what
+     made the scroll stutter, so only what is actually on screen runs, and
+     the canvases are measured again once the stacked layout has settled. */
+  var stackIO = null;
+
   function stack() {
     section.classList.add('is-stacked');
     steps.forEach(function (s) { s.classList.add('is-live'); });
-    playAll();
+
+    requestAnimationFrame(function () {
+      if (window.__journeyArt) { window.__journeyArt.measure(); window.__journeyArt.none(); }
+    });
+
+    if (stackIO) stackIO.disconnect();
+    if (!('IntersectionObserver' in window)) { playAll(); return; }
+
+    // The art index and the step index are not the same: step one carries a
+    // Lottie and no canvas, so the canvases start one behind.
+    stackIO = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = steps.indexOf(e.target);
+        var art = i - 1;                       // step 0 is the Lottie
+        if (e.isIntersecting) {
+          if (anims[i]) anims[i].play();
+          if (window.__journeyArt && art >= 0) window.__journeyArt.play(art);
+        } else {
+          if (anims[i]) anims[i].pause();
+          if (window.__journeyArt && art >= 0) window.__journeyArt.stop(art);
+        }
+      });
+    }, { rootMargin: '10% 0px', threshold: 0.15 });
+
+    steps.forEach(function (s) { stackIO.observe(s); });
   }
 
   mountLottie();
@@ -70,12 +110,20 @@
 
   function build() {
     if (st) { st.kill(true); st = null; }
+    if (stackIO) { stackIO.disconnect(); stackIO = null; }
     section.classList.remove('is-stacked');
     steps.forEach(function (s) { s.classList.remove('is-live'); });
 
-    if (window.innerWidth < 900) { stack(); return; }
+    if (window.__journeyArt) { window.__journeyArt.measure(); }
+    var narrow = window.innerWidth < 900;
+
+    // On a phone, only the step in front animates: four at once is what made
+    // the scroll stutter. On desktop everything runs, which it can afford.
+    if (narrow) { if (window.__journeyArt) window.__journeyArt.none(); }
+    else { playAll(); }
 
     live(0);
+    if (narrow) awaken(0);
     var last = 0;
 
     st = ScrollTrigger.create({
@@ -88,7 +136,12 @@
       // A screen of scroll per panel, plus a held beat at the end. Without
       // the hold the pin releases the instant the last panel arrives and the
       // closing frame, which is the one asking for the sale, flashes past.
-      end: function () { return '+=' + (track.scrollWidth - window.innerWidth + window.innerHeight * 0.7); },
+      // A screen of travel per panel. Using the track width alone gives a
+      // phone barely half a screen of scroll per step, which flicks past.
+      end: function () {
+        var per = Math.max(window.innerWidth, window.innerHeight * 0.82);
+        return '+=' + (per * (steps.length - 1) + window.innerHeight * 0.7);
+      },
       pin: stage,
       pinSpacing: true,
       scrub: 0.6,
@@ -96,10 +149,12 @@
       invalidateOnRefresh: true,
       onUpdate: function (self) {
         var max = track.scrollWidth - window.innerWidth;
-        var total = max + window.innerHeight * 0.7;
+        var per = Math.max(window.innerWidth, window.innerHeight * 0.82);
+        var travel = per * (steps.length - 1);
+        var total = travel + window.innerHeight * 0.7;
         // The track finishes moving before the pin does, so the last panel
         // sits still while the remaining scroll is spent.
-        var p = Math.min(1, (self.progress * total) / max);
+        var p = Math.min(1, (self.progress * total) / travel);
 
         gsap.set(track, { x: -max * p });
         if (bar) bar.style.transform = 'scaleX(' + p.toFixed(3) + ')';
@@ -124,8 +179,15 @@
           if (txt) gsap.set(txt, { x: off * -24, force3D: true });
         }
 
-        var i = Math.round(p * (steps.length - 1));
-        if (i !== last) { last = i; live(i); }
+        // A dead zone around the boundary. Rounding alone lets the index
+        // flip back and forth under a scrubbed scroll, which restarts an
+        // animation every time it does.
+        var exact = p * (steps.length - 1);
+        if (Math.abs(exact - last) > 0.62) {
+          last = Math.round(exact);
+          live(last);
+          if (narrow) awaken(last);
+        }
       }
     });
   }

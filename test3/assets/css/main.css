@@ -247,8 +247,14 @@ a:hover .sheen-overlay::before,
 .btn-glass:hover { background: rgba(255,255,255,0.2); }
 .btn-dark { background: rgba(0,0,0,0.1); }
 
-.btn-md { height: 56px; padding: 0 20px; }
-.btn-lg { height: 64px; padding: 0 24px; }
+/* A 64px pill is a desktop button. On a phone it eats the composition, so
+   both sizes come down and the gap inside them closes up with it. */
+.btn-md { height: 48px; padding: 0 18px; gap: 12px; }
+.btn-lg { height: 52px; padding: 0 20px; gap: 12px; }
+@media (min-width: 600px) {
+  .btn-md { height: 56px; padding: 0 20px; gap: 16px; }
+  .btn-lg { height: 64px; padding: 0 24px; gap: 16px; }
+}
 @media (min-width: 768px) {
   .btn-lg { padding-left: 32px; }
   .btn-md { padding-left: 24px; }
@@ -2255,11 +2261,24 @@ body.film-open { overflow: hidden; }
 .project-hero.no-film .play-badge,
 .prod-hero-film.no-film .play-badge { display: none; }
 
-.prod-hero { display: grid; gap: 44px; align-items: center; }
+/* Below the two-column breakpoint everything in the hero is centred. A
+   centred film with the words hard against the left edge reads as two
+   things that got separated rather than one composition. */
+.prod-hero { display: grid; gap: 40px; align-items: center; justify-items: center; text-align: center; }
+.prod-hero-copy { max-width: 34ch; }
+.prod-hero-copy .prod-sub { margin-top: 20px; margin-inline: auto; max-width: 34ch; }
+.prod-hero .kicker { justify-content: center; }
 @media (min-width: 900px) {
-  .prod-hero { grid-template-columns: 1fr minmax(260px, 340px); gap: 72px; }
+  .prod-hero {
+    grid-template-columns: 1fr minmax(260px, 340px);
+    gap: 72px;
+    justify-items: stretch;
+    text-align: left;
+  }
+  .prod-hero-copy { max-width: none; }
+  .prod-hero-copy .prod-sub { margin-inline: 0; max-width: 44ch; }
+  .prod-hero .kicker { justify-content: flex-start; }
 }
-.prod-hero-copy .prod-sub { margin-top: 24px; max-width: 44ch; }
 .prod-hero-film {
   position: relative;
   aspect-ratio: 9 / 16;
@@ -2268,9 +2287,11 @@ body.film-open { overflow: hidden; }
   background: #000;
   border: 1px solid rgba(255,255,255,.1);
   box-shadow: 0 50px 90px -50px rgba(0,0,0,.9);
-  max-width: 340px;
+  max-width: min(300px, 72vw);
   width: 100%;
+  margin-inline: auto;
 }
+@media (min-width: 900px) { .prod-hero-film { max-width: 340px; } }
 .prod-hero-film > img,
 .prod-hero-film > video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .prod-hero-film > video { opacity: 0; pointer-events: none; }
@@ -2373,21 +2394,24 @@ body.film-open { overflow: hidden; }
    once out of view.
    -------------------------------------------------------------------- */
 .journey { position: relative; }
-/* Centred on a wide screen, because what follows it runs across the middle
-   of the page and a heading hard against the left edge reads as detached
-   from it. Left-aligned on a phone, where the panels stack. */
-.journey-head { padding-top: 96px; padding-bottom: 8px; }
-@media (min-width: 900px) {
-  .journey-head { text-align: center; padding-bottom: 0; }
-  .journey-head h2 { margin-inline: auto; }
-}
+.journey-head { padding-top: 72px; padding-bottom: 4px; text-align: center; }
+@media (min-width: 900px) { .journey-head { padding-top: 96px; padding-bottom: 0; } }
+.journey-head h2 { margin-inline: auto; }
 /* It is the title for the whole section, so it carries the weight of one
    rather than sitting at the size of a subhead. */
-.journey-title { max-width: 14ch; line-height: .95; }
+.journey-title { max-width: 15ch; line-height: .95; }
 @media (min-width: 900px) { .journey-title { max-width: 18ch; } }
-.journey-stage { overflow: hidden; }
-@media (min-width: 900px) {
-  .journey-stage { height: 100vh; height: 100svh; display: flex; align-items: center; }
+
+/* The stage is a screen tall at every width. Phones and tablets get the
+   same sideways run as desktop: one step in front of you and nothing else
+   on the screen, which is the entire point of the section and was lost the
+   moment it collapsed into a list. */
+.journey-stage {
+  overflow: hidden;
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+  align-items: center;
 }
 .journey-track { display: flex; will-change: transform; }
 
@@ -2395,25 +2419,38 @@ body.film-open { overflow: hidden; }
   flex: none;
   width: 100vw;
   display: grid;
-  grid-template-columns: 1fr;
-  align-items: center;
-  gap: 32px;
-  padding: 48px var(--pad);
+  grid-template-columns: minmax(0, 1fr);
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+  gap: 26px;
+  padding: 0 26px;
 }
+@media (min-width: 600px) { .jstep { gap: 34px; padding: 0 48px; } }
 @media (min-width: 900px) {
-  .jstep { grid-template-columns: minmax(240px, 380px) minmax(0, 460px); gap: 80px;
-           justify-content: center; padding: 0 64px; }
+  .jstep {
+    grid-template-columns: minmax(240px, 380px) minmax(0, 460px);
+    align-content: center;
+    justify-items: stretch;
+    text-align: left;
+    gap: 80px;
+    justify-content: center;
+    padding: 0 64px;
+  }
 }
-/* Each step is a live canvas now, not an icon. A glow sits behind it so the
+
+/* Each step is a live canvas, not an icon. A glow sits behind it so the
    dots have something to be lit against, which is most of why this reads as
    depth rather than as a diagram on a flat black page. */
 .jart {
   position: relative;
   width: 100%;
-  max-width: 380px;
+  max-width: min(230px, 58vw);
   aspect-ratio: 1;
   margin-inline: auto;
 }
+@media (min-width: 600px) { .jart { max-width: 270px; } }
+@media (min-width: 900px) { .jart { max-width: 380px; } }
 .jart::before {
   content: '';
   position: absolute; inset: -18%;
@@ -2430,21 +2467,26 @@ body.film-open { overflow: hidden; }
 .jart--lottie { aspect-ratio: 4 / 5; }
 .jart--lottie svg { display: block; width: 100%; height: 100%; }
 
-.jtext { max-width: 46ch; }
+.jtext { max-width: 30ch; }
+@media (min-width: 900px) { .jtext { max-width: 46ch; } }
 .jnum {
   display: block;
-  font-family: var(--font-mono); font-size: 11px; letter-spacing: .16em;
-  color: rgba(255,255,255,.35); margin-bottom: 14px;
+  font-family: var(--font-mono); font-size: 10.5px; letter-spacing: .16em;
+  color: rgba(255,255,255,.35); margin-bottom: 12px;
 }
 .jstep h3 {
   font-family: var(--font-display);
-  font-size: 3.2rem; line-height: 1.05; letter-spacing: -.02em;
-  text-transform: uppercase; margin-bottom: 18px;
+  font-size: 2.4rem; line-height: 1.05; letter-spacing: -.02em;
+  text-transform: uppercase; margin-bottom: 14px;
 }
+@media (min-width: 600px) { .jstep h3 { font-size: 3rem; } }
+@media (min-width: 900px) { .jstep h3 { font-size: 3.2rem; margin-bottom: 18px; } }
+
 /* One line each, so it can be set large enough to read from across a room.
    These were paragraphs, which on a panel this size reads as homework. */
-.jstep p { font-size: 19px; line-height: 1.5; color: rgba(255,255,255,.62); max-width: 24ch; }
-@media (min-width: 900px) { .jstep p { font-size: 21px; } }
+.jstep p { font-size: 16px; line-height: 1.5; color: rgba(255,255,255,.62); }
+@media (min-width: 600px) { .jstep p { font-size: 19px; } }
+@media (min-width: 900px) { .jstep p { font-size: 21px; max-width: 24ch; } }
 
 /* The text arrives just behind its drawing rather than with it. */
 .jstep .jtext > * { opacity: 0; transform: translateY(14px); transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
@@ -2453,7 +2495,8 @@ body.film-open { overflow: hidden; }
 .is-live .jtext > *:nth-child(3) { transition-delay: .16s; }
 
 /* --- the last panel --- */
-.jstep--end { grid-template-columns: 1fr; }
+.jstep--end { grid-template-columns: 1fr; gap: 22px; }
+.jstep--end .jtext > :last-child { margin-top: 6px; }
 @media (min-width: 900px) { .jstep--end { grid-template-columns: minmax(260px, 400px) minmax(0, 440px); } }
 
 /* --- how far along you are --- */
@@ -2465,11 +2508,29 @@ body.film-open { overflow: hidden; }
 }
 .journey.is-stacked .journey-rail { display: none; }
 
-/* --- stacked, on a phone --- */
+/* --- the fallback ------------------------------------------------------
+   Only reached with JavaScript off, GSAP missing, or reduced motion asked
+   for. Everything is shown at once, stacked, with nothing moving.
+   ----------------------------------------------------------------------- */
 .journey.is-stacked .journey-stage { height: auto; display: block; overflow: visible; }
 .journey.is-stacked .journey-track { display: block; transform: none !important; }
-.journey.is-stacked .jstep { width: auto; padding: 40px var(--pad); border-top: 1px solid var(--border); }
-.journey.is-stacked .jart svg { max-width: 180px; }
+.journey.is-stacked .jstep {
+  width: auto;
+  grid-template-columns: 104px minmax(0, 1fr);
+  align-items: center;
+  text-align: left;
+  gap: 20px;
+  padding: 26px var(--pad);
+  border-top: 1px solid var(--border);
+  transform: none !important;
+  opacity: 1 !important;
+}
+.journey.is-stacked .jart, .journey.is-stacked .jart--lottie { max-width: 104px; margin: 0; }
+.journey.is-stacked .jart::before { opacity: 1; }
+.journey.is-stacked .jtext { max-width: none; transform: none !important; }
+.journey.is-stacked .jtext > * { opacity: 1; transform: none; }
+.journey.is-stacked .jstep h3 { font-size: 2rem; }
+.journey.is-stacked .journey-rail { display: none; }
 
 /* ---- the persona section ---- */
 .moat { border-top: 1px solid var(--border); padding-top: 56px; }
