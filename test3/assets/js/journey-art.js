@@ -205,87 +205,119 @@
       return;
     }
 
-    // build: a line of stages with work handed along it, continuously. The
-    // old version was particles flying at a rectangle, which showed motion
-    // but no process, and process is the entire point of this step.
-    var n_ = 4;
-    var pad = this.w * .1;
-    var span = this.w - pad * 2;
-    var gap = span / (n_ - 1);
-    var cy2 = this.h * .5;
-    var cycle = 4.2;
-    var head = ((this.t % cycle) / cycle) * (n_ - 1);   // which stage the work is at
+    // build: script, video, edit, and then the thing itself. Three stages
+    // rather than four, because the angle is already decided by the time
+    // this step starts, and a chain that ends in a rectangle labelled CUT
+    // ends on a noun nobody buys. It ends on the video.
+    var W = this.w, H = this.h;
+    var fw = Math.min(W * .20, 74), fh = fw * 16 / 9;
+    var fx = W * .80, fy = H * .5;                 // the finished video
+    var xs = [W * .16, W * .36, W * .56];          // the three stages
+    var ry = H * .5;
+    var names = ['SCRIPT', 'VIDEO', 'EDIT'];
 
-    // the rail
-    x.strokeStyle = 'rgba(255,255,255,.16)';
+    var cycle = 5.0;
+    var u = (this.t % cycle) / cycle;              // 0..1, one pass
+    var stageSpan = 0.76;                          // the rest is spent inside the frame
+    var head = Math.min(1, u / stageSpan) * (xs.length - 1);
+    var arrived = u > stageSpan;
+    var settle = arrived ? Math.min(1, (u - stageSpan) / (1 - stageSpan)) : 0;
+
+    var hx = arrived
+      ? xs[2] + (fx - fw / 2 - xs[2]) * Math.min(1, settle * 2.2)
+      : xs[0] + (xs[2] - xs[0]) * (head / (xs.length - 1));
+
+    // the rail, and how much of it has been travelled
+    x.strokeStyle = 'rgba(255,255,255,.14)';
     x.lineWidth = 1;
-    x.beginPath(); x.moveTo(pad, cy2); x.lineTo(pad + span, cy2); x.stroke();
+    x.beginPath(); x.moveTo(xs[0], ry); x.lineTo(fx - fw / 2, ry); x.stroke();
+    x.strokeStyle = 'rgba(255,255,255,.55)';
+    x.beginPath(); x.moveTo(xs[0], ry); x.lineTo(hx, ry); x.stroke();
 
-    // the part of the rail already travelled, brighter
-    x.strokeStyle = 'rgba(255,255,255,.6)';
-    x.beginPath(); x.moveTo(pad, cy2); x.lineTo(pad + gap * head, cy2); x.stroke();
-
-    for (i = 0; i < n_; i++) {
-      var sx = pad + gap * i;
-      var done = head >= i;
-      var hot = Math.max(0, 1 - Math.abs(head - i) * 1.8);
-      var rr = 13 + hot * 5;
-
-      x.strokeStyle = 'rgba(255,255,255,' + (done ? .85 : .3) + ')';
-      x.lineWidth = 1.2;
-      x.beginPath(); x.arc(sx, cy2, rr, 0, 6.283); x.stroke();
+    for (i = 0; i < xs.length; i++) {
+      var sx = xs[i];
+      var done = arrived || head >= i - .02;
+      var hot = arrived ? 0 : Math.max(0, 1 - Math.abs(head - i) * 2.2);
+      var rr = 15 + hot * 5;
 
       if (hot > 0) {
-        x.fillStyle = 'rgba(255,255,255,' + (hot * .16).toFixed(3) + ')';
-        x.beginPath(); x.arc(sx, cy2, rr + hot * 12, 0, 6.283); x.fill();
+        x.fillStyle = 'rgba(255,255,255,' + (hot * .14).toFixed(3) + ')';
+        x.beginPath(); x.arc(sx, ry, rr + hot * 14, 0, 6.283); x.fill();
       }
+      x.strokeStyle = 'rgba(255,255,255,' + (done ? .85 : .28) + ')';
+      x.lineWidth = 1.2;
+      x.beginPath(); x.arc(sx, ry, rr, 0, 6.283); x.stroke();
 
-      // what each stage does, drawn small inside its ring
-      x.strokeStyle = 'rgba(255,255,255,' + (done ? .9 : .35) + ')';
+      x.strokeStyle = 'rgba(255,255,255,' + (done ? .92 : .34) + ')';
       x.lineWidth = 1.1;
       x.beginPath();
-      if (i === 0) {            // a thought, caught
-        x.arc(sx, cy2, 4.5, 0, 6.283);
-      } else if (i === 1) {     // lines of script
-        x.moveTo(sx - 6, cy2 - 4); x.lineTo(sx + 6, cy2 - 4);
-        x.moveTo(sx - 6, cy2); x.lineTo(sx + 4, cy2);
-        x.moveTo(sx - 6, cy2 + 4); x.lineTo(sx + 2, cy2 + 4);
-      } else if (i === 2) {     // a waveform, the voice
-        for (var b = -6; b <= 6; b += 3) {
-          var hgt = 3 + Math.abs(Math.sin(b * .9 + this.t * 3)) * 5;
-          x.moveTo(sx + b, cy2 - hgt); x.lineTo(sx + b, cy2 + hgt);
-        }
-      } else {                  // the cut
-        x.rect(sx - 6, cy2 - 5, 12, 10);
-        x.moveTo(sx - 2, cy2 - 2.5); x.lineTo(sx + 3, cy2); x.lineTo(sx - 2, cy2 + 2.5);
+      if (i === 0) {                    // lines of script
+        x.moveTo(sx - 6, ry - 4); x.lineTo(sx + 6, ry - 4);
+        x.moveTo(sx - 6, ry); x.lineTo(sx + 4, ry);
+        x.moveTo(sx - 6, ry + 4); x.lineTo(sx + 1, ry + 4);
+      } else if (i === 1) {             // a frame with a play mark
+        x.rect(sx - 7, ry - 5, 14, 10);
+        x.moveTo(sx - 2, ry - 3); x.lineTo(sx + 3, ry); x.lineTo(sx - 2, ry + 3);
+      } else {                          // a cut between two shots
+        x.moveTo(sx - 7, ry - 5); x.lineTo(sx - 1, ry - 5); x.lineTo(sx - 1, ry + 5); x.lineTo(sx - 7, ry + 5); x.closePath();
+        x.moveTo(sx + 1, ry - 5); x.lineTo(sx + 7, ry - 5); x.lineTo(sx + 7, ry + 5); x.lineTo(sx + 1, ry + 5); x.closePath();
       }
       x.stroke();
+
+      x.fillStyle = 'rgba(255,255,255,' + (done ? .7 : .26) + ')';
+      x.font = '9px ui-monospace, Menlo, monospace';
+      x.textAlign = 'center';
+      x.fillText(names[i], sx, ry + 36);
     }
 
-    // the work itself, travelling
-    var hx = pad + gap * head;
-    x.fillStyle = '#fff';
-    x.beginPath(); x.arc(hx, cy2, 3.6, 0, 6.283); x.fill();
-    x.fillStyle = 'rgba(255,255,255,.18)';
-    x.beginPath(); x.arc(hx, cy2, 11, 0, 6.283); x.fill();
-
-    // and a trail behind it so the direction is never in doubt
-    for (i = 1; i <= 5; i++) {
-      var tx = hx - i * 7;
-      if (tx < pad) break;
-      x.fillStyle = 'rgba(255,255,255,' + (.30 - i * .05).toFixed(3) + ')';
-      x.beginPath(); x.arc(tx, cy2, 2.2 - i * .25, 0, 6.283); x.fill();
+    // the work in transit, with a short trail so the direction is obvious
+    if (!arrived || settle < 1) {
+      for (i = 5; i >= 1; i--) {
+        var tx = hx - i * 7;
+        if (tx < xs[0]) continue;
+        x.fillStyle = 'rgba(255,255,255,' + (.26 - i * .04).toFixed(3) + ')';
+        x.beginPath(); x.arc(tx, ry, 2.1 - i * .22, 0, 6.283); x.fill();
+      }
+      x.fillStyle = 'rgba(255,255,255,.16)';
+      x.beginPath(); x.arc(hx, ry, 10, 0, 6.283); x.fill();
+      x.fillStyle = '#fff';
+      x.beginPath(); x.arc(hx, ry, 3.4, 0, 6.283); x.fill();
     }
 
-    // labels under the rail
-    x.fillStyle = 'rgba(255,255,255,.4)';
-    x.font = '9px ui-monospace, Menlo, monospace';
-    x.textAlign = 'center';
-    var names = ['ANGLE', 'SCRIPT', 'VOICE', 'CUT'];
-    for (i = 0; i < n_; i++) {
-      x.fillStyle = 'rgba(255,255,255,' + (head >= i ? .7 : .28) + ')';
-      x.fillText(names[i], pad + gap * i, cy2 + 34);
+    // the video, which fills as the work lands in it
+    var fill = settle;
+    x.save();
+    x.strokeStyle = 'rgba(255,255,255,' + (.22 + fill * .68).toFixed(3) + ')';
+    x.lineWidth = 1.4;
+    x.beginPath();
+    if (x.roundRect) x.roundRect(fx - fw / 2, fy - fh / 2, fw, fh, 9);
+    else x.rect(fx - fw / 2, fy - fh / 2, fw, fh);
+    x.stroke();
+
+    if (fill > 0) {
+      x.save();
+      x.beginPath();
+      if (x.roundRect) x.roundRect(fx - fw / 2, fy - fh / 2, fw, fh, 9);
+      else x.rect(fx - fw / 2, fy - fh / 2, fw, fh);
+      x.clip();
+      // it fills from the bottom, the way a render completes
+      x.fillStyle = 'rgba(255,255,255,.10)';
+      x.fillRect(fx - fw / 2, fy + fh / 2 - fh * fill, fw, fh * fill);
+      x.restore();
     }
+
+    if (fill > .45) {
+      var pa = Math.min(1, (fill - .45) / .3);
+      x.fillStyle = 'rgba(255,255,255,' + (pa * .92).toFixed(3) + ')';
+      x.beginPath();
+      x.moveTo(fx - 5, fy - 8); x.lineTo(fx + 8, fy); x.lineTo(fx - 5, fy + 8);
+      x.closePath(); x.fill();
+      // captions, because that is what comes out
+      x.fillStyle = 'rgba(255,255,255,' + (pa * .45).toFixed(3) + ')';
+      x.fillRect(fx - fw * .3, fy + fh * .3, fw * .6, 2.5);
+      x.fillRect(fx - fw * .2, fy + fh * .3 + 6, fw * .4, 2.5);
+    }
+    x.restore();
   };
 
   Field.prototype.tick = function () {

@@ -2430,7 +2430,10 @@ body.film-open { overflow: hidden; }
   font-size: 3.2rem; line-height: 1.05; letter-spacing: -.02em;
   text-transform: uppercase; margin-bottom: 18px;
 }
-.jstep p { font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.55); }
+/* One line each, so it can be set large enough to read from across a room.
+   These were paragraphs, which on a panel this size reads as homework. */
+.jstep p { font-size: 19px; line-height: 1.5; color: rgba(255,255,255,.62); max-width: 24ch; }
+@media (min-width: 900px) { .jstep p { font-size: 21px; } }
 
 /* The text arrives just behind its drawing rather than with it. */
 .jstep .jtext > * { opacity: 0; transform: translateY(14px); transition: opacity .7s var(--ease-out), transform .7s var(--ease-out); }
