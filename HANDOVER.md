@@ -275,6 +275,11 @@ first. For the record, and so nobody repeats them:
 
 Things about the page that still matter:
 
+- **The month grid is the page's one picture.** Thirty day cells, ten filled,
+  cascading in on scroll. It is the schedule rather than a wall of invented
+  posts, which is the only honest thing to draw while there is one real video
+  in existence. When there are ten, it becomes a grid of real thumbnails and
+  gets much stronger.
 - **Say videos, not films.** Film is the word for the ad and brand work. This
   product makes short-form social video, and blurring the two cheapens the
   first one.

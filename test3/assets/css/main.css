@@ -2366,6 +2366,51 @@ body.film-open { overflow: hidden; }
 .phase.is-on .phase-text small { color: rgba(0,0,0,.68); }
 .chat-scroll.is-static .phase { opacity: 1; }
 
+/* ---- a month, drawn ------------------------------------------------
+   Ten videos arriving without you is a shape before it is a sentence.
+   This is the schedule, not a wall of invented posts: nothing here
+   pretends to be work that does not exist yet.
+   -------------------------------------------------------------------- */
+.month {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 40px;
+  max-width: 560px;
+}
+@media (min-width: 640px) { .month { grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 10px; max-width: 720px; } }
+
+.mday {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  border: 1px solid rgba(255,255,255,.1);
+  display: grid;
+  place-items: center;
+  transition: background .5s var(--ease-out), border-color .5s;
+}
+.mday i {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-style: normal;
+  color: rgba(255,255,255,.22);
+}
+.mday svg { display: none; }
+
+/* A day something went out. Filled with the accent, which on this site is
+   white, so the month reads as ten marks on an empty grid. */
+.mday.is-on { background: var(--accent); border-color: var(--accent); }
+.mday.is-on i { display: none; }
+.mday.is-on svg { display: block; width: 8px; height: 10px; fill: var(--accent-fg); }
+
+.month-note {
+  margin-top: 26px;
+  max-width: 56ch;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255,255,255,.45);
+}
+
 /* ---- the one number ---- */
 .swap {
   display: grid;
