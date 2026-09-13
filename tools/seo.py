@@ -243,18 +243,19 @@ PRODUCTS = [
          name="Founder Branding Autopilot",
          kicker="Founder Content Engine",
          media="founder-avatar-card",
-         blurb="One message a morning, one voice note back, and a film goes out in your face.",
-         desc="A founder gets one message at 7 am with what moved in their niche overnight, "
-              "taps the story worth talking about and sends a voice note of what they think. "
-              "An avatar with their face and voice delivers it as a finished, edited film, "
-              "and they pick whether it goes to LinkedIn or Instagram.",
+         blurb="Locked once. After that it posts in your face and your voice without you.",
+         desc="One setup session locks a founder's face, voice, positions and format. "
+              "After that it runs on its own: it watches their industry, writes the angle "
+              "and the script, generates the voice, edits, cuts the b-roll and captions, and "
+              "delivers at least ten short-form videos a month ready to post. No daily "
+              "involvement from the founder, no editor, no shoot days.",
          category="BusinessApplication",
-         features=["One message every morning with the last 24 hours in your niche",
-                   "Answer with a voice note, a few seconds is enough",
+         features=["One setup session, then no founder involvement",
                    "Avatar built from your own face and voice",
+                   "Watches your industry so nobody has to decide what to post",
                    "Script written against how you argue and what you would never say",
-                   "Cut, graded and captioned automatically",
-                   "You approve every post and choose LinkedIn or Instagram"],
+                   "Edit, b-roll and captions done automatically",
+                   "At least ten short-form videos a month, ready to post"],
          faq=[
              ("Does it actually sound like me?",
               "That's what the setup is for. Before anything goes live we work out how you "
@@ -270,15 +271,11 @@ PRODUCTS = [
               "is its own conversation. What people are actually judging is whether the "
               "opinion is worth reading, and that part is yours."),
              ("How much of my time does it take?",
-              "A message in the morning, a tap, and nine seconds of talking. That's the whole "
-              "of it."),
+              "One session at the start, and nothing after it. That is the point of it."),
              ("How long does setup take?",
               "One recording session so we capture your face and voice properly, and a "
               "conversation about how you think. After that you never sit in front of a "
               "camera again."),
-             ("Do I approve everything before it posts?",
-              "Yes. Nothing goes out until you've seen it and chosen where it goes. You can "
-              "kill a post with one tap."),
              ("What if the post doesn't sound right?",
               "Say so and it gets rewritten. It learns from what you send back, so corrections "
               "get rarer over the first few weeks."),

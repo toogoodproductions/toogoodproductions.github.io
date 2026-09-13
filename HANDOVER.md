@@ -42,7 +42,7 @@ it. Promoting `test3/` to the root is an open decision.
 | `work.html` | Client logo marquee, then a grid/list of nine projects. |
 | `offerings.html` | Four services as click-to-open rows, then the FAQ. |
 | `product.html` | Product index. One card per product, same pattern as Work. |
-| `product-*.html` | A page per product. One so far, Founder Branding Autopilot, with real copy and its own nine-question FAQ. |
+| `product-*.html` | A page per product. One so far, Founder Branding Autopilot, with its own FAQ. **Copy is a stand-in again after the model changed.** |
 | `about.html` | Positioning, statement line, two founders, contact banner. |
 | `blog.html` | Layout ready. **No posts.** |
 | `contact.html` | Email, WhatsApp, socials, form. |
@@ -251,71 +251,42 @@ and Lenis which were already there.
 | `work-film.js` | Work card loops, and any film outside the grid that opts in with `data-loop-film`. |
 | `project-film.js` | A hero that holds a film: still until you press play. Project pages, and the product hero via `data-film-hero`. |
 | `panels.js` | Offerings and FAQ rows. |
-| `chat-play.js` | The product page's Telegram thread, played start to finish. |
 
-### The played conversation
+### The product page, and the thread that used to be on it
 
-`chat-play.js` runs the Telegram thread on the product page. It starts once,
-when the phone comes into view, and plays start to finish in about twenty
-seconds: the digest arrives, a button lights up as though it were pressed, the
-founder's line types itself into the input and sends, the film comes back, a
-destination is picked, it posts. Then a payoff block offers the contact page
-and a replay.
+The page went through four models in a day. The last one is the real one:
+**everything is locked in one setup session, then it runs with no founder
+involvement at all.** No daily message, no voice note, no approval.
 
-Three versions were wrong before this one. Do not go back to any of them.
+A Telegram thread used to sit in the middle of it, played by the page. It is
+gone, along with `chat-play.js` and about 15 KB of CSS, because there is no
+daily interaction left to draw. Do not resurrect it without checking the model
+first. For the record, and so nobody repeats them:
 
 1. **Tied to the scrollbar**, phone pinned, a message per so many pixels moved.
    It stuttered, because a conversation does not happen in scroll distance.
-2. **Genuinely interactive**, with real buttons to tap. It worked, and nobody
-   tapped them. A phone on a page does not read as a thing you can use, and a
-   demo waiting on an action the visitor never takes never plays at all.
-3. **Scroll locked until it finished.** Considered and rejected. Trapping
+2. **Genuinely interactive**, with real buttons to tap. It worked and nobody
+   tapped them. A phone on a page does not read as a thing you can use.
+3. **Played itself** on a timer. Good, and then the product changed underneath
+   it.
+4. **Scroll locked until it finished.** Considered and rejected: trapping
    someone for twenty seconds to make them watch is worse than them not
    watching, and it breaks on a phone.
 
-Things that matter:
+Things about the page that still matter:
 
-- **The whole transcript is in the markup, in order.** A crawler or a reader
-  without JavaScript gets the conversation as a document. The script hides it
-  and hands it back a turn at a time.
-- **The log is `justify-content: flex-end` with hidden overflow.** New messages
-  push older ones off the top on their own, which is what a chat does, and it
-  costs no JavaScript.
-- **A turn that has not arrived is `display: none`,** so its animation runs
-  when it appears rather than once on load.
-- **A button lights a beat before its reply lands.** A tap and its message are
-  a beat apart; lighting them together looks like a diagram, not a phone.
-- **The founder answers with a voice note, not typing.** Founders talk. The
-  input goes into a recording state only when the bot asks for the take, the
-  clock counts up faster than real time because nobody watches nine seconds of
-  a timer, and what lands is a voice note with a waveform.
-- **The bot then reads the angle back before writing.** No transcript under the
-  voice note: a transcript only proves it heard. Saying the angle in its own
-  words proves it understood, which is the thing anyone is actually sceptical
-  about.
-- **The digest names things.** Rival, Platform, Data, Yours, each with a number
-  in it. A vague digest makes the whole product look vague.
-- **It starts once and is then left alone.** An earlier version rewound when
-  the phone left the viewport, throwing away a conversation somebody was
-  watching. Running it again is a button.
-- **Get yours and Run it again are there from the start, on every width.**
-  They were revealed only at the end, which meant that on a phone, where the
-  labels beside the device are hidden anyway, there was no way off the page
-  until the thread finished.
-- **The active step takes the accent, filled.** On this site the accent is
-  white, so the row goes white with black type on it and steps to the right,
-  the same move as the buttons. Three quieter versions were tried and all three
-  were ignorable while the reader's eyes were on the phone: shifting the text,
-  a blue bar with a tint (which also put colour into an interface that is
-  deliberately colourless), and a rail with a travelling dot.
-- **The bot wears the hand favicon**, cropped from `assets/Favicon/Hand -
-  Favicon.png` with its outlines intact. Flattening it to white filled the gaps
-  between the fingers and the mark became a blob.
-- **The phone keeps Telegram's own dark palette.** The page is black and white,
-  but a screenshot recoloured to match stops reading as a screenshot, which is
-  the only job it has.
-- **Below 900px the labels beside it are hidden.** The thread is the selling
-  point and a column of explanation was competing with it.
+- **Say videos, not films.** Film is the word for the ad and brand work. This
+  product makes short-form social video, and blurring the two cheapens the
+  first one.
+- **The four steps carry the page.** The last one takes the accent, filled,
+  because it is the promise rather than a step.
+- **The FAQ is written into the page, and mirrored** in `PRODUCTS[...]["faq"]`
+  in `tools/seo.py` for the schema. Change one and change the other.
+- **One question is deliberately missing.** "Do I approve everything before it
+  posts?" used to be answered yes. Under autopilot that is false, and the
+  honest replacement has not been supplied. It is the first objection any buyer
+  will raise, so the page needs an answer: a pause switch, a weekly summary of
+  what went out, or approval for the first month then hands off.
 
 ### Conventions worth keeping
 
@@ -390,27 +361,28 @@ below it can wait.
 
 ### Needs the user
 
-3. **A price, or a price signal,** for Founder Branding Autopilot. The page
+3. **Copy for the product page.** The model changed after the supplied copy was
+   written, so most of that page is a stand-in again and says so in the file.
+4. **The approval answer.** See above. The page cannot ship without it.
+5. **A price, or a price signal,** for Founder Branding Autopilot. The page
    asks for the sale twice and says nothing about cost. Not invented here.
-4. **Where the setup session happens.** The FAQ promises "one recording session"
+6. **Where the setup session happens.** The FAQ promises "one recording session"
    and the rest of the site says everything runs remotely with nothing to travel
    to. Those two need to agree.
-5. **Products two and three.** A line in `PRODUCTS` in `tools/seo.py`, a card in
+7. **Products two and three.** A line in `PRODUCTS` in `tools/seo.py`, a card in
    `product.html`, and a copy of the first product page. About an hour each once
    the copy exists.
-6. **A LinkedIn URL.** Instagram, X and YouTube are wired into every footer and
+8. **A LinkedIn URL.** Instagram, X and YouTube are wired into every footer and
    claimed in `SAME_AS` in `tools/seo.py`. The LinkedIn icon was removed rather
    than left pointing at nothing; it is one line in each footer to put back.
-7. **The Formspree form ID** on `contact.html`. The form refuses to send while
+9. **The Formspree form ID** on `contact.html`. The form refuses to send while
    `YOUR_FORM_ID` is there. Email and WhatsApp work.
-8. **Blog posts.** Page and layout ready, nothing written. This is the biggest
+10. **Blog posts.** Page and layout ready, nothing written. This is the biggest
    single lever for being quoted by ChatGPT and Perplexity: they quote pages
    that answer a question properly. One post per film would do it.
-9. **Clean Viraasat master.** Burned-in timecode and watermark, and it is the
+11. **Clean Viraasat master.** Burned-in timecode and watermark, and it is the
    first thing anyone sees on the homepage.
-10. **Team photographs** → `assets/img/team/harsh-dhakan.jpg` and
-   `kushank-joshi.jpg`. Square, around 600x600. Initials stand in until then.
-11. **A street address**, and a Google Business Profile. The schema claims
+12. **A street address**, and a Google Business Profile. The schema claims
     Ahmedabad, Gujarat and nothing finer, which is as far as the known facts go.
 
 ### Open work
