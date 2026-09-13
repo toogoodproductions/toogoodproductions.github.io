@@ -15,6 +15,10 @@ assets/video/*
 !assets/video/products/
 !assets/video/.gitkeep
 
+# Original founder portraits as supplied. The square crops the site uses
+# live in test3/assets/img/team/.
+assets/Founders Photos/
+
 # Local review page, not part of the site
 _preview.html
 
