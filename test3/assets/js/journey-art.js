@@ -74,12 +74,7 @@
       return;
     }
 
-    // build: particles stream in from the left and assemble a frame
-    for (i = 0; i < 80; i++) {
-      p = { r: rnd(.8, 1.9), sp: rnd(.35, 1.1) };
-      this.reset(p, true);
-      this.parts.push(p);
-    }
+    // build draws itself from the clock, so it holds no particles
   };
 
   Field.prototype.reset = function (p, first) {
@@ -176,33 +171,121 @@
       return;
     }
 
-    // build
-    var fx = this.w * .62, fy = this.h * .5;
-    var fw = Math.min(this.w * .26, 92), fh = fw * 16 / 9;
+    if (this.mode === 'whole') {
+      // The three steps, complete, with work still moving between them. The
+      // closing panel used to be three numbered dots, which said nothing
+      // that the steps beside them had not already said.
+      var N = 3, R2 = Math.min(this.w, this.h) * .3;
+      var ccx = this.w / 2, ccy = this.h / 2;
+      var spin = this.t * .5;
 
-    for (i = 0; i < this.parts.length; i++) {
-      p = this.parts[i];
-      p.x += p.sp;
-      p.y += (p.ty - p.y) * .012;
-      if (p.x > fx - fw / 2) { this.reset(p); continue; }
-      var fade = Math.min(1, (fx - fw / 2 - p.x) / 40);
-      x.fillStyle = 'rgba(255,255,255,' + (.5 * fade + .15).toFixed(3) + ')';
-      x.beginPath(); x.arc(p.x, p.y, p.r, 0, 6.283); x.fill();
+      x.strokeStyle = 'rgba(255,255,255,.16)';
+      x.lineWidth = 1;
+      x.beginPath(); x.arc(ccx, ccy, R2, 0, 6.283); x.stroke();
+
+      for (i = 0; i < N; i++) {
+        var a2 = spin + i * 6.283 / N;
+        var nx = ccx + Math.cos(a2) * R2, ny = ccy + Math.sin(a2) * R2;
+        x.strokeStyle = 'rgba(255,255,255,.7)';
+        x.lineWidth = 1.2;
+        x.beginPath(); x.arc(nx, ny, 15, 0, 6.283); x.stroke();
+        x.fillStyle = 'rgba(255,255,255,.1)';
+        x.beginPath(); x.arc(nx, ny, 15, 0, 6.283); x.fill();
+        x.strokeStyle = 'rgba(255,255,255,.9)';
+        x.beginPath(); x.moveTo(nx - 4, ny + 0); x.lineTo(nx - 1, ny + 4); x.lineTo(nx + 5, ny - 4); x.stroke();
+      }
+
+      // the work, going round and never arriving anywhere final
+      for (i = 0; i < 3; i++) {
+        var ta = spin * 2.2 + i * 2.1;
+        var tx2 = ccx + Math.cos(ta) * R2, ty2 = ccy + Math.sin(ta) * R2;
+        x.fillStyle = 'rgba(255,255,255,' + (.85 - i * .22).toFixed(2) + ')';
+        x.beginPath(); x.arc(tx2, ty2, 3.4 - i * .7, 0, 6.283); x.fill();
+      }
+      return;
     }
 
-    var pulse = .5 + Math.sin(this.t * 1.8) * .5;
-    x.strokeStyle = 'rgba(255,255,255,' + (.35 + pulse * .4).toFixed(3) + ')';
-    x.lineWidth = 1.3;
-    x.beginPath();
-    if (x.roundRect) x.roundRect(fx - fw / 2, fy - fh / 2, fw, fh, 10);
-    else x.rect(fx - fw / 2, fy - fh / 2, fw, fh);
-    x.stroke();
+    // build: a line of stages with work handed along it, continuously. The
+    // old version was particles flying at a rectangle, which showed motion
+    // but no process, and process is the entire point of this step.
+    var n_ = 4;
+    var pad = this.w * .1;
+    var span = this.w - pad * 2;
+    var gap = span / (n_ - 1);
+    var cy2 = this.h * .5;
+    var cycle = 4.2;
+    var head = ((this.t % cycle) / cycle) * (n_ - 1);   // which stage the work is at
 
-    x.fillStyle = 'rgba(255,255,255,' + (.55 + pulse * .35).toFixed(3) + ')';
-    x.beginPath();
-    x.moveTo(fx - 6, fy - 9); x.lineTo(fx + 9, fy); x.lineTo(fx - 6, fy + 9);
-    x.closePath(); x.fill();
-    return;
+    // the rail
+    x.strokeStyle = 'rgba(255,255,255,.16)';
+    x.lineWidth = 1;
+    x.beginPath(); x.moveTo(pad, cy2); x.lineTo(pad + span, cy2); x.stroke();
+
+    // the part of the rail already travelled, brighter
+    x.strokeStyle = 'rgba(255,255,255,.6)';
+    x.beginPath(); x.moveTo(pad, cy2); x.lineTo(pad + gap * head, cy2); x.stroke();
+
+    for (i = 0; i < n_; i++) {
+      var sx = pad + gap * i;
+      var done = head >= i;
+      var hot = Math.max(0, 1 - Math.abs(head - i) * 1.8);
+      var rr = 13 + hot * 5;
+
+      x.strokeStyle = 'rgba(255,255,255,' + (done ? .85 : .3) + ')';
+      x.lineWidth = 1.2;
+      x.beginPath(); x.arc(sx, cy2, rr, 0, 6.283); x.stroke();
+
+      if (hot > 0) {
+        x.fillStyle = 'rgba(255,255,255,' + (hot * .16).toFixed(3) + ')';
+        x.beginPath(); x.arc(sx, cy2, rr + hot * 12, 0, 6.283); x.fill();
+      }
+
+      // what each stage does, drawn small inside its ring
+      x.strokeStyle = 'rgba(255,255,255,' + (done ? .9 : .35) + ')';
+      x.lineWidth = 1.1;
+      x.beginPath();
+      if (i === 0) {            // a thought, caught
+        x.arc(sx, cy2, 4.5, 0, 6.283);
+      } else if (i === 1) {     // lines of script
+        x.moveTo(sx - 6, cy2 - 4); x.lineTo(sx + 6, cy2 - 4);
+        x.moveTo(sx - 6, cy2); x.lineTo(sx + 4, cy2);
+        x.moveTo(sx - 6, cy2 + 4); x.lineTo(sx + 2, cy2 + 4);
+      } else if (i === 2) {     // a waveform, the voice
+        for (var b = -6; b <= 6; b += 3) {
+          var hgt = 3 + Math.abs(Math.sin(b * .9 + this.t * 3)) * 5;
+          x.moveTo(sx + b, cy2 - hgt); x.lineTo(sx + b, cy2 + hgt);
+        }
+      } else {                  // the cut
+        x.rect(sx - 6, cy2 - 5, 12, 10);
+        x.moveTo(sx - 2, cy2 - 2.5); x.lineTo(sx + 3, cy2); x.lineTo(sx - 2, cy2 + 2.5);
+      }
+      x.stroke();
+    }
+
+    // the work itself, travelling
+    var hx = pad + gap * head;
+    x.fillStyle = '#fff';
+    x.beginPath(); x.arc(hx, cy2, 3.6, 0, 6.283); x.fill();
+    x.fillStyle = 'rgba(255,255,255,.18)';
+    x.beginPath(); x.arc(hx, cy2, 11, 0, 6.283); x.fill();
+
+    // and a trail behind it so the direction is never in doubt
+    for (i = 1; i <= 5; i++) {
+      var tx = hx - i * 7;
+      if (tx < pad) break;
+      x.fillStyle = 'rgba(255,255,255,' + (.30 - i * .05).toFixed(3) + ')';
+      x.beginPath(); x.arc(tx, cy2, 2.2 - i * .25, 0, 6.283); x.fill();
+    }
+
+    // labels under the rail
+    x.fillStyle = 'rgba(255,255,255,.4)';
+    x.font = '9px ui-monospace, Menlo, monospace';
+    x.textAlign = 'center';
+    var names = ['ANGLE', 'SCRIPT', 'VOICE', 'CUT'];
+    for (i = 0; i < n_; i++) {
+      x.fillStyle = 'rgba(255,255,255,' + (head >= i ? .7 : .28) + ')';
+      x.fillText(names[i], pad + gap * i, cy2 + 34);
+    }
   };
 
   Field.prototype.tick = function () {

@@ -2438,21 +2438,9 @@ body.film-open { overflow: hidden; }
 .is-live .jtext > *:nth-child(2) { transition-delay: .08s; }
 .is-live .jtext > *:nth-child(3) { transition-delay: .16s; }
 
-/* --- the last panel: the whole path at once --- */
+/* --- the last panel --- */
 .jstep--end { grid-template-columns: 1fr; }
-@media (min-width: 900px) { .jstep--end { grid-template-columns: minmax(280px, 420px) minmax(0, 420px); } }
-.jpath { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
-.jmini { display: flex; flex-direction: column; align-items: center; gap: 8px; position: relative; }
-.jmini + .jmini::before {
-  content: ''; position: absolute; left: -12px; top: 26px;
-  width: 8px; height: 1px; background: rgba(255,255,255,.3);
-}
-.jmini-art {
-  display: block; width: 44px; height: 44px; border-radius: 50%;
-  border: 1px solid rgba(255,255,255,.2);
-  background: radial-gradient(circle at 50% 45%, rgba(255,255,255,.16), rgba(255,255,255,.02) 70%);
-}
-.jmini b { font-family: var(--font-mono); font-size: 9.5px; letter-spacing: .12em; color: rgba(255,255,255,.35); font-weight: 400; }
+@media (min-width: 900px) { .jstep--end { grid-template-columns: minmax(260px, 400px) minmax(0, 440px); } }
 
 /* --- how far along you are --- */
 .journey-rail { padding-block: 28px 8px; }

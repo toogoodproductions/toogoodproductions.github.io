@@ -38,23 +38,31 @@
     });
   }
 
+  /* Everything runs, always. An earlier version played only the panel in
+     front and paused the rest, which sounds tidy and stutters in practice:
+     under a scrubbed scroll the rounded index flips back and forth at a
+     boundary and the animation restarts every time it does. Three small
+     animations cost less than that ever did. */
   function live(i) {
     for (var n = 0; n < steps.length; n++) steps[n].classList.toggle('is-live', n === i);
-    if (window.__journeyArt) window.__journeyArt.show(i);
-    Object.keys(anims).forEach(function (k) {
-      if (+k === i) anims[k].play(); else anims[k].pause();
-    });
+  }
+
+  function playAll() {
+    if (window.__journeyArt) window.__journeyArt.all();
+    Object.keys(anims).forEach(function (k) { anims[k].play(); });
   }
 
   function stack() {
     section.classList.add('is-stacked');
     steps.forEach(function (s) { s.classList.add('is-live'); });
-    if (window.__journeyArt) window.__journeyArt.all();
-    Object.keys(anims).forEach(function (k) { anims[k].play(); });
+    playAll();
   }
 
   mountLottie();
-  if (!window.lottie) window.addEventListener('load', mountLottie);
+  playAll();
+  if (!window.lottie) {
+    window.addEventListener('load', function () { mountLottie(); playAll(); });
+  }
 
   if (reduced || !window.gsap || !window.ScrollTrigger) { stack(); return; }
 
@@ -95,6 +103,26 @@
 
         gsap.set(track, { x: -max * p });
         if (bar) bar.style.transform = 'scaleX(' + p.toFixed(3) + ')';
+
+        // Each panel is scaled and dimmed by how far it is from the middle
+        // of the screen, and its art and its words travel at slightly
+        // different speeds. Flat panels sliding past read as a slideshow;
+        // this reads as depth.
+        var mid = window.innerWidth / 2;
+        for (var n = 0; n < steps.length; n++) {
+          var r = steps[n].getBoundingClientRect();
+          var off = (r.left + r.width / 2 - mid) / window.innerWidth;   // -1..1
+          var away = Math.min(1, Math.abs(off));
+          gsap.set(steps[n], {
+            scale: 1 - away * 0.14,
+            opacity: 1 - away * 0.72,
+            force3D: true
+          });
+          var art = steps[n].querySelector('.jart, .jpath');
+          var txt = steps[n].querySelector('.jtext');
+          if (art) gsap.set(art, { x: off * -70, force3D: true });
+          if (txt) gsap.set(txt, { x: off * -24, force3D: true });
+        }
 
         var i = Math.round(p * (steps.length - 1));
         if (i !== last) { last = i; live(i); }
