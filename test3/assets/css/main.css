@@ -2394,6 +2394,10 @@ body.film-open { overflow: hidden; }
            justify-content: center; padding: 0 64px; }
 }
 .jart { color: #fff; opacity: .9; }
+/* Once a real animation mounts, the inline placeholder drawing steps aside.
+   It stays in the markup so a missing file or a blocked CDN leaves a drawing
+   rather than an empty box. */
+.jart.has-lottie > svg:first-child { display: none; }
 .jart svg { width: 100%; max-width: 300px; height: auto; display: block; margin-inline: auto; }
 .jtext { max-width: 46ch; }
 .jnum {
