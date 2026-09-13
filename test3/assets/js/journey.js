@@ -140,7 +140,8 @@
       // phone barely half a screen of scroll per step, which flicks past.
       end: function () {
         var per = Math.max(window.innerWidth, window.innerHeight * 0.82);
-        return '+=' + (per * (steps.length - 1) + window.innerHeight * 0.7);
+        var hold = window.innerHeight * (window.innerWidth < 900 ? 0.22 : 0.7);
+        return '+=' + (per * (steps.length - 1) + hold);
       },
       pin: stage,
       pinSpacing: true,
@@ -151,7 +152,7 @@
         var max = track.scrollWidth - window.innerWidth;
         var per = Math.max(window.innerWidth, window.innerHeight * 0.82);
         var travel = per * (steps.length - 1);
-        var total = travel + window.innerHeight * 0.7;
+        var total = travel + window.innerHeight * (window.innerWidth < 900 ? 0.22 : 0.7);
         // The track finishes moving before the pin does, so the last panel
         // sits still while the remaining scroll is spent.
         var p = Math.min(1, (self.progress * total) / travel);

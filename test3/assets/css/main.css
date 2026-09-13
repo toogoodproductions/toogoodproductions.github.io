@@ -2261,23 +2261,13 @@ body.film-open { overflow: hidden; }
 .project-hero.no-film .play-badge,
 .prod-hero-film.no-film .play-badge { display: none; }
 
-/* Below the two-column breakpoint everything in the hero is centred. A
-   centred film with the words hard against the left edge reads as two
-   things that got separated rather than one composition. */
-.prod-hero { display: grid; gap: 40px; align-items: center; justify-items: center; text-align: center; }
-.prod-hero-copy { max-width: 34ch; }
-.prod-hero-copy .prod-sub { margin-top: 20px; margin-inline: auto; max-width: 34ch; }
-.prod-hero .kicker { justify-content: center; }
+/* Below the two-column breakpoint the film centres on its own and the words
+   stay left, the way every other page on the site sets its type. */
+.prod-hero { display: grid; gap: 36px; align-items: center; }
+.prod-hero-copy .prod-sub { margin-top: 20px; max-width: 38ch; }
 @media (min-width: 900px) {
-  .prod-hero {
-    grid-template-columns: 1fr minmax(260px, 340px);
-    gap: 72px;
-    justify-items: stretch;
-    text-align: left;
-  }
-  .prod-hero-copy { max-width: none; }
-  .prod-hero-copy .prod-sub { margin-inline: 0; max-width: 44ch; }
-  .prod-hero .kicker { justify-content: flex-start; }
+  .prod-hero { grid-template-columns: 1fr minmax(260px, 340px); gap: 72px; }
+  .prod-hero-copy .prod-sub { max-width: 44ch; }
 }
 .prod-hero-film {
   position: relative;
@@ -2502,7 +2492,12 @@ body.film-open { overflow: hidden; }
 .is-live .jtext > *:nth-child(3) { transition-delay: .16s; }
 
 /* --- the last panel --- */
+/* The closing panel has fewer elements than the others, so the same centring
+   leaves more black around it. Its drawing runs larger to take some of that
+   back rather than leaving a hole under the button. */
 .jstep--end { grid-template-columns: 1fr; gap: 26px; }
+.jstep--end .jart { max-width: min(270px, 70vw); }
+@media (min-width: 900px) { .jstep--end .jart { max-width: 380px; } }
 /* The button carried an inline margin of 8px, which read as attached to the
    sentence above it rather than as the thing to do next. */
 .jcta { display: inline-flex; border-radius: 999px; margin-top: 28px; }
@@ -2510,7 +2505,8 @@ body.film-open { overflow: hidden; }
 @media (min-width: 900px) { .jstep--end { grid-template-columns: minmax(260px, 400px) minmax(0, 440px); } }
 
 /* --- how far along you are --- */
-.journey-rail { padding-block: 28px 8px; }
+.journey-rail { padding-block: 10px 0; }
+@media (min-width: 900px) { .journey-rail { padding-block: 28px 8px; } }
 .journey-bar { display: block; height: 1px; background: rgba(255,255,255,.12); position: relative; }
 .journey-bar i {
   position: absolute; inset: 0; display: block;
@@ -2543,6 +2539,12 @@ body.film-open { overflow: hidden; }
 .journey.is-stacked .journey-rail { display: none; }
 
 /* ---- the persona section ---- */
-.moat { border-top: 1px solid var(--border); padding-top: 56px; }
+/* The journey ends on a full screen of its own, so the section after it does
+   not need another 64px of air before it starts. */
+.journey + .section { padding-top: 12px; }
+@media (min-width: 900px) { .journey + .section { padding-top: 64px; } }
+
+.moat { border-top: 1px solid var(--border); padding-top: 36px; }
+@media (min-width: 900px) { .moat { padding-top: 56px; } }
 .moat-body { max-width: 60ch; margin-top: 24px; color: rgba(255,255,255,.55); display: flex; flex-direction: column; gap: 16px; }
 .moat-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
