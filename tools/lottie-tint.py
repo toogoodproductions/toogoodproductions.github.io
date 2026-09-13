@@ -15,8 +15,12 @@ onblack near-white is treated as paper and hidden outright; everything
         else becomes white, carrying its old weight as opacity. Right for
         line art.
 flat    every shape stays fully opaque and is separated by grey alone,
-        with old white falling to black. Right for stacked illustration,
-        where varying opacity turns overlaps see-through.
+        with old white falling to black. Right for stacked illustration
+        drawn as dark ink on white.
+flatlight
+        the same, but luminance is kept rather than flipped, for artwork
+        whose figure is already the pale shape. Flipping that one turns
+        the figure into a grey slab.
 """
 import json, sys
 
@@ -25,7 +29,7 @@ def lum(c):
     return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]
 
 
-def grey_gradient(node):
+def grey_gradient(node, invert=True):
     """Gradient fills keep their colours in a flat array, not a colour
     property, so the ordinary walk goes straight past them and a page that
     should be monochrome keeps a coloured wash in it."""
@@ -45,13 +49,40 @@ def grey_gradient(node):
         c = arr[j + 1:j + 4]
         if not all(isinstance(x, (int, float)) for x in c):
             continue
-        v = (1.0 - lum(c)) ** GAMMA
-        v = round(FLOOR + v * (1.0 - FLOOR), 4)
+        if invert:
+            v = (1.0 - lum(c)) ** GAMMA
+            v = round(FLOOR + v * (1.0 - FLOOR), 4)
+        else:
+            v = round(0.12 + (lum(c) ** 0.85) * 0.88, 4)
         arr[j + 1] = arr[j + 2] = arr[j + 3] = v
 
 
-FLOOR = 0.08
-GAMMA = 0.72
+# Lift and contrast for the flat mapping. A straight luminance flip lands a
+# mid-tone body around 0.6, which reads as dark grey on black. These push the
+# midtones up so the figure is light and solid while the range survives.
+FLOOR = 0.18
+GAMMA = 0.50
+
+
+def flatlight(node):
+    """Flat illustration whose figure is already drawn light.
+
+    flat() flips luminance, which is right when the drawing is dark ink on
+    white paper. This one is the opposite: the body is the pale shape and
+    the details are dark, so flipping it turned the figure into a grey
+    slab. Here luminance is kept and only lifted, so light stays light.
+    """
+    if not isinstance(node, dict):
+        return
+    if node.get("ty") in ("gf", "gs"):
+        grey_gradient(node, invert=False)
+        return
+    if node.get("ty") in ("fl", "st") and isinstance(node.get("c"), dict):
+        k = node["c"].get("k")
+        if isinstance(k, list) and len(k) >= 3 and all(isinstance(n, (int, float)) for n in k):
+            v = lum(k) ** 0.85
+            v = round(0.12 + v * 0.88, 4)
+            node["c"]["k"] = [v, v, v] + k[3:]
 
 
 def flat(node):
@@ -126,6 +157,8 @@ def walk(o, how):
             onblack(o)
         elif how == "flat":
             flat(o)
+        elif how == "flatlight":
+            flatlight(o)
         for k, v in o.items():
             if how != "onblack" and k == "c" and isinstance(v, dict) and isinstance(v.get("k"), list) \
                and len(v["k"]) in (3, 4) and all(isinstance(n, (int, float)) for n in v["k"]):
