@@ -253,14 +253,14 @@ PRODUCTS = [
          features=["Set up with you, then runs with no founder involvement",
                    "Avatar built from your own face and voice",
                    "Watches your industry so nobody has to decide what to post",
-                   "Script written against how you argue and what you would never say",
+                   "Script written against how you see your world and the words you would never use",
                    "Edit, b-roll and captions done automatically",
                    "At least ten short-form videos a month, ready to post"],
          faq=[
              ("Does it actually sound like me?",
               "That's what the setup is for. Before anything goes live we work out how you "
-              "argue, what you'd never say, and where you stop short. Every script gets "
-              "written against that."),
+              "see your world, the words you'd never use, and where you stop short of the "
+              "obvious point. Every script gets written against that."),
              ("Why can't I just do this myself with HeyGen?",
               "You could. HeyGen will make you an avatar this afternoon. What takes the time "
               "is everything after it: knowing what's worth posting about today, writing it so "
