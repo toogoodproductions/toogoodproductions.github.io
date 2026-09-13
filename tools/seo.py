@@ -243,14 +243,14 @@ PRODUCTS = [
          name="Founder Branding Autopilot",
          kicker="Founder Content Engine",
          media="founder-avatar-card",
-         blurb="Locked once. After that it posts in your face and your voice without you.",
+         blurb="Set up with you, then run without you. It posts in your face and your voice.",
          desc="One setup session locks a founder's face, voice, positions and format. "
               "After that it runs on its own: it watches their industry, writes the angle "
               "and the script, generates the voice, edits, cuts the b-roll and captions, and "
               "delivers at least ten short-form videos a month ready to post. No daily "
               "involvement from the founder, no editor, no shoot days.",
          category="BusinessApplication",
-         features=["One setup session, then no founder involvement",
+         features=["Set up with you, then runs with no founder involvement",
                    "Avatar built from your own face and voice",
                    "Watches your industry so nobody has to decide what to post",
                    "Script written against how you argue and what you would never say",
@@ -271,11 +271,12 @@ PRODUCTS = [
               "is its own conversation. What people are actually judging is whether the "
               "opinion is worth reading, and that part is yours."),
              ("How much of my time does it take?",
-              "One session at the start, and nothing after it. That is the point of it."),
+              "The setup, and nothing after it. Once it is running you are not involved."),
              ("How long does setup take?",
-              "One recording session so we capture your face and voice properly, and a "
-              "conversation about how you think. After that you never sit in front of a "
-              "camera again."),
+              "As long as it takes to get you right. We capture your face and voice "
+              "properly and work out how you actually think, and we would rather spend "
+              "another afternoon on that than ship something that sounds like somebody "
+              "else. After that you never sit in front of a camera again."),
              ("What if the post doesn't sound right?",
               "Say so and it gets rewritten. It learns from what you send back, so corrections "
               "get rarer over the first few weeks."),

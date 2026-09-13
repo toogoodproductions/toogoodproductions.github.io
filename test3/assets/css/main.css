@@ -2381,6 +2381,10 @@ body.film-open { overflow: hidden; }
   .journey-head { text-align: center; padding-bottom: 0; }
   .journey-head h2 { margin-inline: auto; }
 }
+/* It is the title for the whole section, so it carries the weight of one
+   rather than sitting at the size of a subhead. */
+.journey-title { max-width: 14ch; line-height: .95; }
+@media (min-width: 900px) { .journey-title { max-width: 18ch; } }
 .journey-stage { overflow: hidden; }
 @media (min-width: 900px) {
   .journey-stage { height: 100vh; height: 100svh; display: flex; align-items: center; }
