@@ -320,9 +320,13 @@ PAGES = {
         image="the-scream-petpooja"),
     "offerings.html": dict(
         url=BASE + "/offerings", crumb="Offerings", kind=["WebPage", "FAQPage"],
-        # The page name is dropped rather than one of the four services: nobody
-        # searches "offerings", and Google cuts a title past about 60 characters.
-        title="AI video, automation, training, software · toogood",
+        # Ahmedabad earns its place here: "AI video" alone is a fight with
+        # Synthesia and Runway that we lose, and "AI video agency Ahmedabad" is
+        # one we can win. Two things had to go to make room under the 60
+        # character cut - the word "Offerings", which nobody searches for, and
+        # "software", which is the least-searched of the four and is still named
+        # in the description directly underneath.
+        title="AI video, automation, training · Ahmedabad · toogood",
         desc="Four things we do: AI video, automation, AI training for your team, and custom "
              "software. Plus answers to what clients ask before they hire us.",
         image="mera-broadband"),
