@@ -10,8 +10,9 @@ The toogood site: a dark, film-led agency site built as static HTML, CSS and
 vanilla JavaScript. No build step, no framework, no package manager. Edit a file,
 commit, push — GitHub Pages serves it.
 
-- **Live:** https://toogoodproductions.github.io/ — and it is genuinely live:
-  crawlers are allowed in as of 14 September 2026.
+- **Live:** https://toogoodai.in — on its own domain since 14 September 2026,
+  with crawlers allowed in. `toogoodproductions.github.io` and `www.` both
+  redirect here.
 - **Repo:** https://github.com/toogoodproductions/toogoodproductions.github.io
 - **Local machine path:** `/Users/toogood/Downloads/Claude - toogood/Website`
 - **Status page (Notion):** https://app.notion.com/p/3d98466c8f13817eb74afda41046841d
@@ -184,13 +185,14 @@ FAQPage on Offerings, two Person nodes on About.
 Two constants at the top decide every absolute URL:
 
 ```python
-ROOT = "https://toogoodproductions.github.io"   # the host
+ROOT = "https://toogoodai.in"                   # the host
 BASE = ROOT                                     # the site within it
 ```
 
-The site sits at the root now, so the two are the same. Moving to toogoodai.in
-means changing `ROOT` and nothing else — **and that domain has to resolve
-first.** A canonical pointing at a dead domain is worse than no canonical.
+The site sits at the root of its own domain, so the two are the same. If the
+address ever moves again, change `ROOT`, run the script, commit — **and only
+after the new address already serves the site.** A canonical pointing at an
+address that is not ready is worse than no canonical.
 
 `robots.txt` lets every crawler in, and that is now the default. Blocking them
 again is the thing you have to ask for:
@@ -341,10 +343,11 @@ Things about the page that still matter:
 - **Prerendering every link loads and runs those pages**, quietly starting up
   video in the background. The rule is a conservative prefetch now; do not put it
   back.
-- **`hello@toogoodai.in` does not receive mail.** toogoodai.in publishes no
-  nameservers, no A record and no MX record, so every address on that domain
-  bounces. It is in the footer of every page and on the contact page. Until the
-  domain is set up, the site is advertising an address that does not work.
+- **`hello@toogoodai.in` may still have no mailbox.** The DNS side is right —
+  GoDaddy MX, SPF, DKIM and DMARC are all in place, so mail routes. That is not
+  the same as the address existing. It is in the footer of every page, on the
+  contact page and in `llms.txt`, so it is worth sending it a test from an
+  outside account rather than assuming.
 - **Browsers request an icon from the domain root** whatever a page declares,
   which is why `favicon.ico` sits at the root as well as per-page links.
 - **A `set -e` shell script dies silently** when `read` hits end of input or
@@ -370,43 +373,43 @@ below it can wait.
 
 ### Decide first
 
-1. **toogoodai.in, or stay on github.io.** The site went live at
-   `https://toogoodproductions.github.io/` on 14 September 2026, so that is the
-   address Google and the answer engines are learning. Moving later is possible
-   and gives some of that away, so the sooner this is settled the better.
-   - toogoodai.in needs a `CNAME` file in the repo plus DNS at the registrar,
-     and **it has to resolve before canonicals point at it** — a canonical
-     aimed at a dead domain is worse than none. As of writing it publishes no
-     NS, A or MX records at all, which is also why `hello@toogoodai.in` bounces.
-   - Once it resolves: change `ROOT` at the top of `tools/seo.py`, run
-     `python3 tools/seo.py`, commit. GitHub Pages redirects the old address to
-     the custom domain on its own, so the handover is not a hard cut.
+1. **Verify the site in Google Search Console.** Nothing else on this list
+   changes what you can see. Without it there is no way to submit the sitemap,
+   no way to know what the site ranks for, and no warning when something
+   breaks. It needs a tag or file that Google gives you, so it cannot be done
+   from here. Bing Webmaster Tools is worth the same five minutes — ChatGPT's
+   search leans on Bing.
+2. **A Google Business Profile** for Ahmedabad. For "AI video agency in
+   Ahmedabad" a verified listing outranks anything on the page. The schema
+   already claims the city with nothing behind it.
 
 ### Needs the user
 
-2. **Copy for the product page.** The model changed after the supplied copy was
+3. **Copy for the product page.** The model changed after the supplied copy was
    written, so most of that page is a stand-in again and says so in the file.
-3. **The approval answer.** See above. The page cannot ship without it.
-4. **A price, or a price signal,** for Founder Branding Autopilot. The page
+4. **The approval answer.** See above. The page cannot ship without it.
+5. **A price, or a price signal,** for Founder Branding Autopilot. The page
    asks for the sale twice and says nothing about cost. Not invented here.
-5. **Where the setup session happens.** The FAQ promises "one recording session"
+6. **Where the setup session happens.** The FAQ promises "one recording session"
    and the rest of the site says everything runs remotely with nothing to travel
    to. Those two need to agree.
-6. **Products two and three.** A line in `PRODUCTS` in `tools/seo.py`, a card in
+7. **Products two and three.** A line in `PRODUCTS` in `tools/seo.py`, a card in
    `product.html`, and a copy of the first product page. About an hour each once
    the copy exists.
-7. **A LinkedIn URL.** Instagram, X and YouTube are wired into every footer and
+8. **A LinkedIn URL.** Instagram, X and YouTube are wired into every footer and
    claimed in `SAME_AS` in `tools/seo.py`. The LinkedIn icon was removed rather
    than left pointing at nothing; it is one line in each footer to put back.
-8. **The Formspree form ID** on `contact.html`. The form refuses to send while
+9. **The Formspree form ID** on `contact.html`. The form refuses to send while
    `YOUR_FORM_ID` is there. Email and WhatsApp work.
-9. **Blog posts.** Page and layout ready, nothing written. This is the biggest
+10. **Blog posts.** Page and layout ready, nothing written. This is the biggest
    single lever for being quoted by ChatGPT and Perplexity: they quote pages
    that answer a question properly. One post per film would do it.
-10. **Clean Viraasat master.** Burned-in timecode and watermark, and it is the
+11. **Clean Viraasat master.** Burned-in timecode and watermark, and it is the
    first thing anyone sees on the homepage.
-11. **A street address**, and a Google Business Profile. The schema claims
-    Ahmedabad, Gujarat and nothing finer, which is as far as the known facts go.
+12. **A street address.** The schema claims Ahmedabad, Gujarat and nothing
+    finer, which is as far as the known facts go. Needed for the Business
+    Profile in item 2, and worth adding to `ADDRESS` in `tools/seo.py` at the
+    same time.
 
 ### Open work
 

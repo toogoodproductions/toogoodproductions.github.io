@@ -45,4 +45,4 @@ Allow: /
 User-agent: meta-externalagent
 Allow: /
 
-Sitemap: https://toogoodproductions.github.io/sitemap.xml
+Sitemap: https://toogoodai.in/sitemap.xml

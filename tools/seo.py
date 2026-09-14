@@ -27,10 +27,12 @@ import time
 
 # --- where the site lives ------------------------------------------------
 # ROOT is the host. BASE is the site within it. The site was promoted out of
-# test3/ to the repo root, so the two are now the same. Moving to toogoodai.in
-# means changing ROOT and nothing else - but that domain must resolve first,
-# because a canonical pointing at nothing is worse than no canonical at all.
-ROOT = "https://toogoodproductions.github.io"
+# test3/ to the repo root, so the two are now the same. The one line below is
+# every absolute URL on the site: canonicals, Open Graph, sitemap, schema.
+# It moved to toogoodai.in on 14 September 2026, only after that domain was
+# already serving the site over a valid certificate - a canonical pointing at
+# an address that is not ready yet is worse than no canonical at all.
+ROOT = "https://toogoodai.in"
 BASE = ROOT
 
 PAGES_DIR = pathlib.Path(".")
