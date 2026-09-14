@@ -45,8 +45,10 @@ TAGLINE = "Make it toogood, or don't make it."
 EMAIL = "hello@toogoodai.in"
 PHONE = "+917574003272"
 PHONE_DISPLAY = "+91 75740 03272"
+STREET = "58, Harisiddh Park Coop H Soc Ltd, Ghatlodia Road"
 CITY = "Ahmedabad"
 REGION = "Gujarat"
+POSTCODE = "380061"
 COUNTRY = "IN"
 ORG_DESC = ("AI video agency in Ahmedabad. Ads, brand films, reels, launch films and "
             "animated films, generated rather than filmed. Also workflow automation, "
@@ -251,6 +253,11 @@ PRODUCTS = [
               "saying, writes the script, generates the voice, edits, cuts the b-roll and "
               "adds the captions, and delivers short-form video ready to post. No daily "
               "involvement from the founder, no editor, no shoot days.",
+         # The line above is the full description, and the schema keeps it: there
+         # is no length limit there and the detail is what an answer engine quotes.
+         # This shorter one is for the page, where Google cuts near 155 characters.
+         meta="A founder's face, voice and positions are set at the start. After that it "
+              "runs alone, writing, generating and editing short-form video ready to post.",
          category="BusinessApplication",
          features=["Set up with you, then runs with no founder involvement",
                    "Avatar built from your own face and voice",
@@ -310,7 +317,9 @@ PAGES = {
         image="the-scream-petpooja"),
     "offerings.html": dict(
         url=BASE + "/offerings", crumb="Offerings", kind=["WebPage", "FAQPage"],
-        title="Offerings · AI video, automation, training, software · toogood",
+        # The page name is dropped rather than one of the four services: nobody
+        # searches "offerings", and Google cuts a title past about 60 characters.
+        title="AI video, automation, training, software · toogood",
         desc="Four things we do: AI video, automation, AI training for your team, and custom "
              "software. Plus answers to what clients ask before they hire us.",
         image="mera-broadband"),
@@ -336,7 +345,7 @@ PAGES = {
         url=BASE + "/contact", crumb="Get in touch", kind="ContactPage",
         title="Get in touch · toogood",
         desc="Tell us what you are making. Email hello@toogoodai.in or message us on WhatsApp. "
-             "An AI studio in Ahmedabad, working with brands across India and outside it.",
+             "An AI studio in Ahmedabad, working with brands in India and beyond.",
         image="office-to-home-ub-heritage"),
 }
 
@@ -345,15 +354,36 @@ for pr in PRODUCTS:
         url="%s/product-%s" % (BASE, pr["slug"]),
         crumb=pr["name"], kind=["ItemPage", "FAQPage"], product=pr,
         title="%s · toogood" % pr["name"],
-        desc=pr["desc"],
+        desc=pr.get("meta") or pr["desc"],
         image="betu-ai-animated-film-scene-toogood")
+
+def page_desc(summary, note, limit=155):
+    """The description Google actually shows under the link.
+
+    It cuts at roughly 155 characters, so anything written past that is written
+    for nobody - and a sentence chopped mid-word reads worse than a shorter one
+    that ends. Take the opening sentence of the story, then the opening line of
+    the production note if the pair still fits. That order on purpose: the story
+    is what makes someone click, the note is what reassures them afterwards.
+    Both are sentences lifted whole from copy that was already written and
+    checked, so shortening can never introduce a claim.
+    """
+    story = summary.split(". ")[0].rstrip(".") + "."
+    fact = note.split(". ")[0].rstrip(".") + "."
+    both = story + " " + fact
+    if len(both) <= limit:
+        return both
+    if len(story) <= limit:
+        return story
+    return story[:limit - 1].rsplit(" ", 1)[0] + "…"
+
 
 for p in PROJECTS:
     PAGES["project-%s.html" % p["slug"]] = dict(
         url="%s/project-%s" % (BASE, p["slug"]),
         crumb=p["title"], kind="ItemPage", project=p,
         title="%s · %s · toogood" % (p["title"], p["client"]),
-        desc="%s %s" % (p["summary"].split(". ")[0] + ".", p["note"]),
+        desc=page_desc(p["summary"], p["note"]),
         image=p["slug"])
 
 
@@ -382,8 +412,13 @@ def organisation():
         "image": {"@id": BASE + "/#logo"},
         "address": {
             "@type": "PostalAddress",
+            # This has to match the Google Business Profile listing character for
+            # character. Google cross-checks the two, and a mismatch is one of the
+            # commonest reasons a local listing stays unverified.
+            "streetAddress": STREET,
             "addressLocality": CITY,
             "addressRegion": REGION,
+            "postalCode": POSTCODE,
             "addressCountry": COUNTRY,
         },
         "areaServed": [
