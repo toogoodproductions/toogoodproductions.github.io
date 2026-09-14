@@ -290,7 +290,7 @@ PRODUCTS = [
 
 CLIENTS = ["Adani Realty", "Petpooja", "UB Heritage", "The Storeys Golf Coast",
            "The Paragraph", "Mera Broadband", "Storython Studios", "Sanatan Seal",
-           "Money At Work"]
+           "Money At Work", "Nephurocare Pharma"]
 
 # --- the pages -----------------------------------------------------------
 PAGES = {
