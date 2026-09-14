@@ -38,6 +38,9 @@ BASE = ROOT
 PAGES_DIR = pathlib.Path(".")
 OUT_DIR = pathlib.Path(".")
 
+# Google Analytics 4. Set to "" to take the tag off every page in one edit.
+GA_ID = "G-5R1NETMJTZ"
+
 TODAY = time.strftime("%Y-%m-%d", time.gmtime())
 
 NAME = "toogood"
@@ -729,8 +732,18 @@ def head_block(fname, page):
         meta("geo.placename", CITY),
         '  <script type="application/ld+json">%s</script>'
         % json.dumps(graph_for(fname, page), ensure_ascii=False, separators=(",", ":")),
-        "  <!-- seo:end -->",
     ]
+    if GA_ID:
+        # Generated rather than pasted into seventeen files by hand, so it cannot
+        # end up on sixteen of them. `async` keeps it off the critical path: the
+        # page paints whether or not Google answers.
+        lines += [
+            "  <!-- Google Analytics -->",
+            '  <script async src="https://www.googletagmanager.com/gtag/js?id=%s"></script>' % GA_ID,
+            "  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}"
+            "gtag('js',new Date());gtag('config','%s');</script>" % GA_ID,
+        ]
+    lines.append("  <!-- seo:end -->")
     return "\n".join(lines)
 
 
