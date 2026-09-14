@@ -183,11 +183,20 @@
     if (e.key === 'Escape') closeMenu();
   });
 
-  /* ---------- Active nav link ---------- */
-  var path = location.pathname.split('/').pop() || 'index.html';
+  /* ---------- Active nav link ----------
+     Every page answers on two addresses: /work is the one we publish, and
+     /work.html still works because the file is named that and GitHub Pages
+     serves both. So compare a normalised key rather than the raw string, or
+     the highlight goes missing for anyone arriving on an older .html link. */
+  function navKey(s) {
+    s = (s || '').split('?')[0].split('#')[0];
+    s = s.substring(s.lastIndexOf('/') + 1);
+    if (s.slice(-5) === '.html') s = s.slice(0, -5);
+    return s === 'index' ? '' : s;
+  }
+  var path = navKey(location.pathname);
   document.querySelectorAll('.header-nav a, .mobile-menu nav a').forEach(function (a) {
-    var href = a.getAttribute('href');
-    if (href === path) a.classList.add('is-active');
+    if (navKey(a.getAttribute('href')) === path) a.classList.add('is-active');
   });
 
   /* ---------- Reveal on scroll (armed AFTER the intro so above-the-fold

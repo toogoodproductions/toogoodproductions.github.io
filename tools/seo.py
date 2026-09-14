@@ -303,37 +303,37 @@ PAGES = {
              "generated rather than filmed. We make your brand toogood to ignore.",
         image="jewellery-ad-concept"),
     "work.html": dict(
-        url=BASE + "/work.html", crumb="Work", kind="CollectionPage",
+        url=BASE + "/work", crumb="Work", kind="CollectionPage",
         title="Work · AI ad films, brand films and reels · toogood",
         desc="Nine AI-generated films for brands: ads, brand films, reels, launch videos and "
              "an animated film. Made without a crew, a location or a shoot day.",
         image="the-scream-petpooja"),
     "offerings.html": dict(
-        url=BASE + "/offerings.html", crumb="Offerings", kind=["WebPage", "FAQPage"],
+        url=BASE + "/offerings", crumb="Offerings", kind=["WebPage", "FAQPage"],
         title="Offerings · AI video, automation, training, software · toogood",
         desc="Four things we do: AI video, automation, AI training for your team, and custom "
              "software. Plus answers to what clients ask before they hire us.",
         image="mera-broadband"),
     "product.html": dict(
-        url=BASE + "/product.html", crumb="Product", kind="CollectionPage",
+        url=BASE + "/product", crumb="Product", kind="CollectionPage",
         title="Product · Software we built for ourselves first · toogood",
         desc="Software we built for ourselves first, out of problems we hit doing the work, "
              "then turned into something other people can use.",
         image="betu-ai-animated-film-scene-toogood"),
     "about.html": dict(
-        url=BASE + "/about.html", crumb="About", kind="AboutPage",
+        url=BASE + "/about", crumb="About", kind="AboutPage",
         title="About · toogood",
         desc="One of the first fully AI video agencies in Ahmedabad. Everything made with AI. "
              "None of it looks like it.",
         image="real-estate-ad-concept"),
     "blog.html": dict(
-        url=BASE + "/blog.html", crumb="Blog", kind=["CollectionPage", "Blog"],
+        url=BASE + "/blog", crumb="Blog", kind=["CollectionPage", "Blog"],
         title="Blog · toogood",
         desc="Breakdowns of how the films got made, answers to what clients ask before they "
              "hire us, and whatever we have worked out about these tools.",
         image="apna-ghar-adani-realty"),
     "contact.html": dict(
-        url=BASE + "/contact.html", crumb="Get in touch", kind="ContactPage",
+        url=BASE + "/contact", crumb="Get in touch", kind="ContactPage",
         title="Get in touch · toogood",
         desc="Tell us what you are making. Email hello@toogoodai.in or message us on WhatsApp. "
              "An AI studio in Ahmedabad, working with brands across India and outside it.",
@@ -342,7 +342,7 @@ PAGES = {
 
 for pr in PRODUCTS:
     PAGES["product-%s.html" % pr["slug"]] = dict(
-        url="%s/product-%s.html" % (BASE, pr["slug"]),
+        url="%s/product-%s" % (BASE, pr["slug"]),
         crumb=pr["name"], kind=["ItemPage", "FAQPage"], product=pr,
         title="%s · toogood" % pr["name"],
         desc=pr["desc"],
@@ -350,7 +350,7 @@ for pr in PRODUCTS:
 
 for p in PROJECTS:
     PAGES["project-%s.html" % p["slug"]] = dict(
-        url="%s/project-%s.html" % (BASE, p["slug"]),
+        url="%s/project-%s" % (BASE, p["slug"]),
         crumb=p["title"], kind="ItemPage", project=p,
         title="%s · %s · toogood" % (p["title"], p["client"]),
         desc="%s %s" % (p["summary"].split(". ")[0] + ".", p["note"]),
@@ -417,11 +417,11 @@ def organisation():
 
 
 def person_id(name):
-    return BASE + "/about.html#" + name.lower().replace(" ", "-")
+    return BASE + "/about#" + name.lower().replace(" ", "-")
 
 
 def service_id(name):
-    return BASE + "/offerings.html#" + name.lower().replace(" ", "-")
+    return BASE + "/offerings#" + name.lower().replace(" ", "-")
 
 
 def people():
@@ -434,7 +434,7 @@ def people():
             "jobTitle": role,
             "description": bio,
             "worksFor": {"@id": org_id()},
-            "url": BASE + "/about.html",
+            "url": BASE + "/about",
         })
     return out
 
@@ -451,7 +451,7 @@ def services():
             "provider": {"@id": org_id()},
             "areaServed": [{"@type": "Country", "name": "India"}],
             "category": tags,
-            "url": BASE + "/offerings.html",
+            "url": BASE + "/offerings",
         })
     return out
 
@@ -513,7 +513,7 @@ def video_node(p, page_url):
 
 
 def product_id(slug):
-    return "%s/product-%s.html#product" % (BASE, slug)
+    return "%s/product-%s#product" % (BASE, slug)
 
 
 def product_node(pr):
@@ -523,7 +523,7 @@ def product_node(pr):
         "name": pr["name"],
         "alternateName": pr["kicker"],
         "description": pr["desc"],
-        "url": "%s/product-%s.html" % (BASE, pr["slug"]),
+        "url": "%s/product-%s" % (BASE, pr["slug"]),
         "applicationCategory": pr["category"],
         "operatingSystem": "Web",
         "featureList": pr["features"],
@@ -536,7 +536,7 @@ def product_node(pr):
 def product_list():
     return {
         "@type": "ItemList",
-        "@id": BASE + "/product.html#products",
+        "@id": BASE + "/product#products",
         "name": "Product",
         "numberOfItems": len(PRODUCTS),
         "itemListElement": [
@@ -552,7 +552,7 @@ def product_list():
 def work_list():
     return {
         "@type": "ItemList",
-        "@id": BASE + "/work.html#films",
+        "@id": BASE + "/work#films",
         "name": "Work",
         "numberOfItems": len(PROJECTS),
         "itemListOrder": "https://schema.org/ItemListOrderAscending",
@@ -561,9 +561,9 @@ def work_list():
                 "@type": "ListItem", "position": i + 1,
                 "item": {
                     "@type": "VideoObject",
-                    "@id": "%s/project-%s.html#film" % (BASE, p["slug"]),
+                    "@id": "%s/project-%s#film" % (BASE, p["slug"]),
                     "name": p["title"],
-                    "url": "%s/project-%s.html" % (BASE, p["slug"]),
+                    "url": "%s/project-%s" % (BASE, p["slug"]),
                     "thumbnailUrl": ROOT + "/assets/video/loops/%s.jpg" % p["slug"],
                     # Naming the client here is what ties the logo in the
                     # marquee to a real brand for anything reading the page.
@@ -594,9 +594,9 @@ def graph_for(fname, page):
     crumbs = [("Home", BASE + "/")]
     if fname != "index.html":
         if "project" in page:
-            crumbs.append(("Work", BASE + "/work.html"))
+            crumbs.append(("Work", BASE + "/work"))
         if "product" in page:
-            crumbs.append(("Product", BASE + "/product.html"))
+            crumbs.append(("Product", BASE + "/product"))
         crumbs.append((page["crumb"], url))
 
     webpage = {
@@ -619,13 +619,13 @@ def graph_for(fname, page):
         webpage["mainEntity"] = {"@id": org_id()}
         nodes.append(work_list())
     elif fname == "work.html":
-        webpage["mainEntity"] = {"@id": BASE + "/work.html#films"}
+        webpage["mainEntity"] = {"@id": BASE + "/work#films"}
         nodes.append(work_list())
     elif fname == "offerings.html":
         webpage["mainEntity"] = questions()
         nodes.extend(services())
     elif fname == "product.html":
-        webpage["mainEntity"] = {"@id": BASE + "/product.html#products"}
+        webpage["mainEntity"] = {"@id": BASE + "/product#products"}
         nodes.append(product_list())
     elif "product" in page:
         pr = page["product"]
@@ -800,7 +800,7 @@ def llms_txt():
         L.append("- [%s](%s): %s" % (page["crumb"], page["url"], page["desc"]))
     L += ["", "## Films", ""]
     for p in PROJECTS:
-        L.append("- [%s, %s](%s/project-%s.html): %s %s"
+        L.append("- [%s, %s](%s/project-%s): %s %s"
                  % (p["client"], p["title"], BASE, p["slug"], p["summary"], p["note"]))
     L += ["", "## Clients", "", ", ".join(CLIENTS), "", "## People", ""]
     for name, role, bio in FOUNDERS:
