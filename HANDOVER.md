@@ -407,9 +407,10 @@ below it can wait.
 11. **Clean Viraasat master.** Burned-in timecode and watermark, and it is the
    first thing anyone sees on the homepage.
 12. **A street address.** The schema claims Ahmedabad, Gujarat and nothing
-    finer, which is as far as the known facts go. Needed for the Business
-    Profile in item 2, and worth adding to `ADDRESS` in `tools/seo.py` at the
-    same time.
+    finer, which is as far as the known facts go — `CITY`, `REGION` and
+    `COUNTRY` near the top of `tools/seo.py`. A real street needs a
+    `streetAddress` line adding to the `PostalAddress` block alongside them.
+    Needed for the Business Profile in item 2.
 
 ### Open work
 
