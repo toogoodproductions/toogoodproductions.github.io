@@ -55,7 +55,16 @@ into one `assets/`, which is why pages now say `assets/…` where they used to s
 | `contact.html` | Email, WhatsApp, socials, form. |
 | `project-*.html` | Nine project pages, one per film. |
 
-**`product.html` stays the URL** even though it is an index of several products
+**Addresses have no `.html` on them.** The files are named `work.html` and so
+on, but GitHub Pages answers on `/work` as well, byte for byte — so the clean
+form is the published one. Canonicals, the sitemap, the schema, `llms.txt` and
+every internal link use it. The `.html` addresses still work, so no old link
+ever breaks; they are simply not the official ones. Two consequences worth
+knowing: never link to a `.html` address from inside the site, and the nav
+highlighter in `main.js` normalises both forms on purpose — it compared raw
+filenames before, which lost the current-page marker on a legacy link.
+
+**`product` stays the page name** even though it is an index of several products
 now. It is linked from the header, the overlay menu and every footer; renaming it
 would mean touching all seventeen pages to save one letter.
 
@@ -63,7 +72,7 @@ would mean touching all seventeen pages to save one letter.
 bar and the overlay menu on every page. The header bar only shows above 900px
 wide; below that it becomes the Menu button and Home lives inside the overlay.
 
-There is no standalone FAQ page. The service FAQ lives on `offerings.html#faq`,
+There is no standalone FAQ page. The service FAQ lives on `/offerings#faq`,
 twelve questions in four groups. The product page carries its own nine, about
 that product only. **Different questions on purpose** — two pages answering the
 same question compete with each other for it.
@@ -210,8 +219,9 @@ That opens the site to search engines and names the AI crawlers explicitly —
 GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot and the rest — so
 the work can be quoted rather than skipped. `llms.txt` is the plain-language
 brief those engines read: who we are, the four services, all nine films, the
-clients, the founders and the full FAQ. `product.html` carries `noindex` and
-stays out of the sitemap until it has real copy.
+clients, the founders and the full FAQ. Every page is `index,follow` and every
+page is in the sitemap; the product page was held back with `noindex` while it
+was empty, and that came off once it had a page per product.
 
 **Client names are carried by `alt` text and by structured data, not by hidden
 text.** Every logo in the Work marquee has the brand name as its `alt`, which is
@@ -429,7 +439,7 @@ below it can wait.
   holding a cached copy of a different file at the same URL.
 - **Nephurocare** in the Work marquee. The logo order is fixed by hand in
   `work.html` and both marquee sets must stay identical, or the loop jumps.
-- **The FAQ** is twelve questions in four groups on `offerings.html#faq`,
+- **The FAQ** is twelve questions in four groups on `/offerings#faq`,
   generated from `tools/seo.py` so the visible rows and the structured data
   cannot drift.
 - **Search, answer and AI engines** get titles, descriptions, canonicals, Open
