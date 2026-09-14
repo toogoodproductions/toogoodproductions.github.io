@@ -10,7 +10,8 @@ The toogood site: a dark, film-led agency site built as static HTML, CSS and
 vanilla JavaScript. No build step, no framework, no package manager. Edit a file,
 commit, push — GitHub Pages serves it.
 
-- **Live:** https://toogoodproductions.github.io/test3/
+- **Live:** https://toogoodproductions.github.io/ — and it is genuinely live:
+  crawlers are allowed in as of 14 September 2026.
 - **Repo:** https://github.com/toogoodproductions/toogoodproductions.github.io
 - **Local machine path:** `/Users/toogood/Downloads/Claude - toogood/Website`
 - **Status page (Notion):** https://app.notion.com/p/3d98466c8f13817eb74afda41046841d
@@ -19,22 +20,27 @@ commit, push — GitHub Pages serves it.
 
 | Folder | What it is |
 | --- | --- |
-| `test3/` | **The site.** All current work lives here. |
-| `test/`, `test2/` | Old variants, untouched, effectively dead. |
+| *(repo root)* | **The site.** The pages sit here, so `index.html` is the home page. |
+| `assets/css`, `assets/js`, `assets/fonts`, `assets/lottie` | Everything a page loads to render itself. |
 | `assets/video/` | Source films (ignored by git) plus generated output (committed). `products/` holds the product demo film, its loop and its card. |
-| `assets/img/` | Logos, team photos, favicon files. |
+| `assets/img/` | Client logos, team photos, the wordmark. |
 | `assets/Logo (Brand)/` | Original client logo files as supplied. |
 | `assets/Favicon/` | Original favicon art as supplied. |
 | `tools/` | Scripts that generate everything from the source films. |
+| `test/`, `test2/` | Old variants, untouched, effectively dead. `robots.txt` blocks them so they cannot compete with the real pages in search. |
 
-The **root domain still shows the old site**. Nothing in this work has touched
-it. Promoting `test3/` to the root is an open decision.
+The site was built in `test3/` and promoted to the root on 14 September 2026.
+`test3/` no longer exists; the old root site (`academy.html`, `brand.html`,
+`engine.html`, `narrative.html`, `news.html`, `project.html`) was removed in the
+same commit and lives on only in git history. The two asset trees were merged
+into one `assets/`, which is why pages now say `assets/…` where they used to say
+`../assets/…`.
 
 ---
 
 ## Pages
 
-17 pages, all in `test3/`.
+17 pages, all at the repo root.
 
 | Page | Notes |
 | --- | --- |
@@ -117,11 +123,11 @@ trims the margin, recolours to white and normalises to one height. The Storeys
 Golf Coast is a two-tone lockup and is resized only — flattening it to white
 destroys it.
 
-### After any change to `test3/`
+### After any change to a page
 
 ```bash
 python3 tools/seo.py
-python3 tools/stamp-assets.py test3 "$(date -u +%y%m%d%H%M)"
+python3 tools/stamp-assets.py . "$(date -u +%y%m%d%H%M)"
 ```
 
 The first rewrites titles, descriptions and structured data. The second
@@ -134,7 +140,7 @@ removed, so nothing responded and nothing errored.
 
 1. A line in `PRODUCTS` in `tools/seo.py`.
 2. A card in `product.html`, copied from the one that is there.
-3. `product-<slug>.html`, copied from `product-founders-digital-avatar.html`.
+3. `product-<slug>.html`, copied from `product-founder-branding-autopilot.html`.
 4. `python3 tools/seo.py` writes its title, description and schema.
 
 ### The product demo film
@@ -162,7 +168,7 @@ bubble and the output card run, so neither pulls the full film down.
 ## What search and answer engines read
 
 `tools/seo.py` is the single source of truth. Run it from the repo root and it
-writes, into every page in `test3/`, between `<!-- seo:start -->` and
+writes, into every page at the repo root, between `<!-- seo:start -->` and
 `<!-- seo:end -->` in the head: title, meta description, canonical, robots,
 Open Graph, Twitter card and one JSON-LD `@graph`. It also writes the visible
 FAQ rows on `offerings.html`, and `sitemap.xml`, `llms.txt` and `robots.txt` at
@@ -179,19 +185,24 @@ Two constants at the top decide every absolute URL:
 
 ```python
 ROOT = "https://toogoodproductions.github.io"   # the host
-BASE = ROOT + "/test3"                          # the site within it
+BASE = ROOT                                     # the site within it
 ```
 
-Promoting `test3/` to the root means `BASE = ROOT`. Moving to toogoodai.in means
-changing `ROOT` — **and that domain has to resolve first.** A canonical pointing
-at a dead domain is worse than no canonical.
+The site sits at the root now, so the two are the same. Moving to toogoodai.in
+means changing `ROOT` and nothing else — **and that domain has to resolve
+first.** A canonical pointing at a dead domain is worse than no canonical.
 
-`robots.txt` still blocks everyone, because the site is staging on a test URL.
-Going live is one command:
+`robots.txt` lets every crawler in, and that is now the default. Blocking them
+again is the thing you have to ask for:
 
 ```bash
-python3 tools/seo.py --live
+python3 tools/seo.py --staging
 ```
+
+It was the other way round while the site was on a test URL. The default was
+flipped the day it went public, because the old default was a trap: an ordinary
+run after a copy change would have silently put the live site back behind a
+`Disallow: /`.
 
 That opens the site to search engines and names the AI crawlers explicitly —
 GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot and the rest — so
@@ -239,7 +250,7 @@ so prefer keeping a slug and changing only the displayed title.
 
 ## How the JavaScript is organised
 
-All in `test3/assets/js/`. Plain IIFEs, no modules, no dependencies beyond GSAP
+All in `assets/js/`. Plain IIFEs, no modules, no dependencies beyond GSAP
 and Lenis which were already there.
 
 | File | Does |
@@ -359,43 +370,42 @@ below it can wait.
 
 ### Decide first
 
-1. **The final web address.** toogoodai.in, or promote `test3/` to the repo
-   root. Google and the answer engines learn whichever address the site goes
-   live on, and moving afterwards gives some of that away. Nothing else here is
-   time-sensitive in the same way.
+1. **toogoodai.in, or stay on github.io.** The site went live at
+   `https://toogoodproductions.github.io/` on 14 September 2026, so that is the
+   address Google and the answer engines are learning. Moving later is possible
+   and gives some of that away, so the sooner this is settled the better.
    - toogoodai.in needs a `CNAME` file in the repo plus DNS at the registrar,
      and **it has to resolve before canonicals point at it** — a canonical
-     aimed at a dead domain is worse than none.
-   - Then change `ROOT` (and `BASE`, if test3 is promoted) at the top of
-     `tools/seo.py` and run it.
-2. **Go live**, when the address is settled: `python3 tools/seo.py --live`.
-   Until then `robots.txt` blocks every crawler, which is correct for a site
-   sitting on a test URL.
+     aimed at a dead domain is worse than none. As of writing it publishes no
+     NS, A or MX records at all, which is also why `hello@toogoodai.in` bounces.
+   - Once it resolves: change `ROOT` at the top of `tools/seo.py`, run
+     `python3 tools/seo.py`, commit. GitHub Pages redirects the old address to
+     the custom domain on its own, so the handover is not a hard cut.
 
 ### Needs the user
 
-3. **Copy for the product page.** The model changed after the supplied copy was
+2. **Copy for the product page.** The model changed after the supplied copy was
    written, so most of that page is a stand-in again and says so in the file.
-4. **The approval answer.** See above. The page cannot ship without it.
-5. **A price, or a price signal,** for Founder Branding Autopilot. The page
+3. **The approval answer.** See above. The page cannot ship without it.
+4. **A price, or a price signal,** for Founder Branding Autopilot. The page
    asks for the sale twice and says nothing about cost. Not invented here.
-6. **Where the setup session happens.** The FAQ promises "one recording session"
+5. **Where the setup session happens.** The FAQ promises "one recording session"
    and the rest of the site says everything runs remotely with nothing to travel
    to. Those two need to agree.
-7. **Products two and three.** A line in `PRODUCTS` in `tools/seo.py`, a card in
+6. **Products two and three.** A line in `PRODUCTS` in `tools/seo.py`, a card in
    `product.html`, and a copy of the first product page. About an hour each once
    the copy exists.
-8. **A LinkedIn URL.** Instagram, X and YouTube are wired into every footer and
+7. **A LinkedIn URL.** Instagram, X and YouTube are wired into every footer and
    claimed in `SAME_AS` in `tools/seo.py`. The LinkedIn icon was removed rather
    than left pointing at nothing; it is one line in each footer to put back.
-9. **The Formspree form ID** on `contact.html`. The form refuses to send while
+8. **The Formspree form ID** on `contact.html`. The form refuses to send while
    `YOUR_FORM_ID` is there. Email and WhatsApp work.
-10. **Blog posts.** Page and layout ready, nothing written. This is the biggest
+9. **Blog posts.** Page and layout ready, nothing written. This is the biggest
    single lever for being quoted by ChatGPT and Perplexity: they quote pages
    that answer a question properly. One post per film would do it.
-11. **Clean Viraasat master.** Burned-in timecode and watermark, and it is the
+10. **Clean Viraasat master.** Burned-in timecode and watermark, and it is the
    first thing anyone sees on the homepage.
-12. **A street address**, and a Google Business Profile. The schema claims
+11. **A street address**, and a Google Business Profile. The schema claims
     Ahmedabad, Gujarat and nothing finer, which is as far as the known facts go.
 
 ### Open work
@@ -408,6 +418,13 @@ below it can wait.
 
 ### Done, so nobody redoes it
 
+- **The site is live at the root**, promoted out of `test3/` on 14 September
+  2026, with crawlers allowed in. The old root site was removed in the same
+  commit. Assets were re-stamped at the same time, which matters: the old root
+  pages used `/assets/css/main.css` too, so anyone who had visited before was
+  holding a cached copy of a different file at the same URL.
+- **Nephurocare** in the Work marquee. The logo order is fixed by hand in
+  `work.html` and both marquee sets must stay identical, or the loop jumps.
 - **The FAQ** is twelve questions in four groups on `offerings.html#faq`,
   generated from `tools/seo.py` so the visible rows and the structured data
   cannot drift.

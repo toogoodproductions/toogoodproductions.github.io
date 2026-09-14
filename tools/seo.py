@@ -3,10 +3,10 @@
 
 Run from the repo root after any copy change:
 
-    python3 tools/seo.py          # staging: robots.txt still blocks crawlers
-    python3 tools/seo.py --live   # go live: robots.txt opens the site up
+    python3 tools/seo.py             # the site is live; robots.txt lets crawlers in
+    python3 tools/seo.py --staging   # put it back behind a Disallow: /
 
-Into every page in test3/, between the seo markers in <head>:
+Into every page at the repo root, between the seo markers in <head>:
   title, meta description, canonical, robots, Open Graph, Twitter, JSON-LD.
 
 Into offerings.html, between the faq markers: the visible FAQ rows.
@@ -26,14 +26,14 @@ import sys
 import time
 
 # --- where the site lives ------------------------------------------------
-# ROOT is the host. BASE is the site within it. Promoting test3/ to the repo
-# root means BASE = ROOT. Moving to toogoodai.in means changing ROOT, and that
-# domain must resolve first - a canonical pointing at nothing is worse than
-# none. Shared assets (video, client logos) sit at ROOT, page assets at BASE.
+# ROOT is the host. BASE is the site within it. The site was promoted out of
+# test3/ to the repo root, so the two are now the same. Moving to toogoodai.in
+# means changing ROOT and nothing else - but that domain must resolve first,
+# because a canonical pointing at nothing is worse than no canonical at all.
 ROOT = "https://toogoodproductions.github.io"
-BASE = ROOT + "/test3"
+BASE = ROOT
 
-PAGES_DIR = pathlib.Path("test3")
+PAGES_DIR = pathlib.Path(".")
 OUT_DIR = pathlib.Path(".")
 
 TODAY = time.strftime("%Y-%m-%d", time.gmtime())
@@ -815,7 +815,7 @@ def llms_txt():
 
 STAGING_ROBOTS = """\
 # STAGING MODE - search engines and answer engines blocked.
-# Going live is one command: python3 tools/seo.py --live
+# Back to live is one command: python3 tools/seo.py
 User-agent: *
 Disallow: /
 """
@@ -823,6 +823,10 @@ Disallow: /
 LIVE_ROBOTS = """\
 User-agent: *
 Allow: /
+
+# Earlier drafts of this site are still in the repo. They are not the site.
+Disallow: /test/
+Disallow: /test2/
 
 # Answer engines are welcome. Being quoted is the point.
 User-agent: GPTBot
@@ -869,7 +873,12 @@ Sitemap: {root}/sitemap.xml
 
 
 def main():
-    live = "--live" in sys.argv[1:]
+    # The site is live, so live is the default. It used to be the other way
+    # round, which became a trap the moment the site went public: an ordinary
+    # run after a copy change would have quietly put robots.txt back to
+    # Disallow: / and dropped the site out of the index with nothing to show
+    # for it. Blocking crawlers is now the thing you have to ask for.
+    live = "--staging" not in sys.argv[1:]
 
     for fname, page in PAGES.items():
         path = PAGES_DIR / fname

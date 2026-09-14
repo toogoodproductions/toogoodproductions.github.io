@@ -16,7 +16,7 @@ assets/video/*
 !assets/video/.gitkeep
 
 # Original founder portraits as supplied. The square crops the site uses
-# live in test3/assets/img/team/.
+# live in assets/img/team/.
 assets/Founders Photos/
 
 # Local review page, not part of the site
