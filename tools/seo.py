@@ -58,12 +58,13 @@ ORG_DESC = ("AI video agency in Ahmedabad. Ads, brand films, reels, launch films
             "AI training and custom software.")
 
 # Claiming these ties the profiles to the brand as one entity, so a search for
-# "toogood ai" can return the site and the accounts together. LinkedIn is not
-# here because no URL has been supplied for it.
+# "toogood ai" can return the site and the accounts together. Order matches the
+# socials row in the footer.
 SAME_AS = [
     "https://www.instagram.com/toogoodco/",
     "https://x.com/toogoodai",
     "https://www.youtube.com/@toogoodproduction",
+    "https://www.linkedin.com/company/toogoodai/",
 ]
 
 SERVICES = [
