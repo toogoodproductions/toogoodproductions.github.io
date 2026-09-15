@@ -27,3 +27,13 @@ _preview.html
 
 # Local comparison files, not part of the site
 _review/
+
+# Apna Ghar / Adani Realty came off the site on 15 September 2026. The files
+# stay on the local machine deliberately - these rules only stop them being
+# published again, by a stray `git add -A` or by make-logos.py regenerating
+# the logo from the source that is still in the folder.
+assets/Logo (Brand)/Adani Realty.png
+assets/img/logos/adani-realty.png
+assets/video/films/apna-ghar-adani-realty.*
+assets/video/loops/apna-ghar-adani-realty.*
+assets/video/stills/apna-ghar-adani-realty/

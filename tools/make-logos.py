@@ -20,7 +20,6 @@ NAMES = {
     "Storythone.png": "storython-studios",
     "The Parapgraph.png": "the-paragraph",
     "UB Herritage.png": "ub-heritage",
-    "Adani Realty.png": "adani-realty",
     "Mera Broadband.png": "mera-broadband",
     "Petpooja.png": "petpooja",
     "Sanatan Seal.png": "sanatan-seal",
