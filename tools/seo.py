@@ -184,15 +184,6 @@ PROJECTS = [
          note="Brand film for Attendo, Petpooja's payroll and attendance software. Fully "
               "AI-generated, horror format, no crew and no location.",
          keywords="AI brand film, SaaS film, horror format, payroll software ad"),
-    dict(slug="apna-ghar-adani-realty", client="Adani Realty", title="Apna Ghar",
-         seconds=70, w=1456, h=720,
-         summary="A child draws the house her family will live in, framed the way you would see "
-                 "it from your own living room. Her father does the arithmetic, worries, then "
-                 "doesn't. The film is about the two words in its title, and what it costs to "
-                 "earn them.",
-         note="Ad film for Adani Realty, built around their FlexiPay plan. Fully AI-generated, "
-              "no cast and no location.",
-         keywords="AI real estate ad film, property launch film, AI cast"),
     dict(slug="the-paragraph-reel-3", client="The Paragraph", title="Own Your Pause",
          seconds=65, w=720, h=1280,
          summary="A walk through the amenities at The Paragraph, built as a feeling rather than "
@@ -301,7 +292,7 @@ PRODUCTS = [
          ]),
 ]
 
-CLIENTS = ["Adani Realty", "Petpooja", "UB Heritage", "The Storeys Golf Coast",
+CLIENTS = ["Petpooja", "UB Heritage", "The Storeys Golf Coast",
            "The Paragraph", "Mera Broadband", "Storython Studios", "Sanatan Seal",
            "Money At Work", "Nephurocare Pharma"]
 
@@ -348,7 +339,7 @@ PAGES = {
         title="Blog · toogood",
         desc="Breakdowns of how the films got made, answers to what clients ask before they "
              "hire us, and whatever we have worked out about these tools.",
-        image="apna-ghar-adani-realty"),
+        image="building-making-ub-heritage"),
     "contact.html": dict(
         url=BASE + "/contact", crumb="Get in touch", kind="ContactPage",
         title="Get in touch · toogood",

@@ -45,15 +45,15 @@ into one `assets/`, which is why pages now say `assets/…` where they used to s
 
 | Page | Notes |
 | --- | --- |
-| `index.html` | The scroll reel. Seven full-screen panels plus an outro that loops back to the hero. |
-| `work.html` | Client logo marquee, then a grid/list of nine projects. |
+| `index.html` | The scroll reel. Six full-screen panels plus an outro that loops back to the hero. |
+| `work.html` | Client logo marquee, then a grid/list of eight projects. |
 | `offerings.html` | Four services as click-to-open rows, then the FAQ. |
 | `product.html` | Product index. One card per product, same pattern as Work. |
 | `product-*.html` | A page per product. One so far, Founder Branding Autopilot, with its own FAQ. **Copy is a stand-in again after the model changed.** |
 | `about.html` | Positioning, statement line, two founders, contact banner. |
 | `blog.html` | Layout ready. **No posts.** |
 | `contact.html` | Email, WhatsApp, socials, form. |
-| `project-*.html` | Nine project pages, one per film. |
+| `project-*.html` | Eight project pages, one per film. |
 
 **Addresses have no `.html` on them.** The files are named `work.html` and so
 on, but GitHub Pages answers on `/work` as well, byte for byte — so the clean
@@ -155,7 +155,7 @@ removed, so nothing responded and nothing errored.
 
 ### The product demo film
 
-Not part of the nine-project pipeline, so it is built directly. From a vertical
+Not part of the project pipeline, so it is built directly. From a vertical
 master in `assets/video/`:
 
 ```bash
@@ -187,7 +187,7 @@ next run overwrites it.
 
 The schema carried on each page: Organization plus ProfessionalService (address,
 phone, email, founders, service catalogue, topics), WebSite, a typed page node,
-breadcrumbs, and then per page — nine VideoObjects with real durations on the
+breadcrumbs, and then per page — eight VideoObjects with real durations on the
 project pages, an ItemList on Work and the reel, four Service nodes and a
 FAQPage on Offerings, two Person nodes on About.
 
@@ -218,7 +218,7 @@ run after a copy change would have silently put the live site back behind a
 That opens the site to search engines and names the AI crawlers explicitly —
 GPTBot, ClaudeBot, PerplexityBot, Google-Extended, Applebot and the rest — so
 the work can be quoted rather than skipped. `llms.txt` is the plain-language
-brief those engines read: who we are, the four services, all nine films, the
+brief those engines read: who we are, the four services, all eight films, the
 clients, the founders and the full FAQ. Every page is `index,follow` and every
 page is in the sitemap; the product page was held back with `noindex` while it
 was empty, and that came off once it had a page per product.
@@ -236,13 +236,12 @@ is no `sameAs` yet: the footer social links are still `#`.
 
 ---
 
-## The nine projects
+## The eight projects
 
 | Slug | Client | Title |
 | --- | --- | --- |
 | `jewellery-ad-concept` | toogood Originals | Viraasat |
 | `the-scream-petpooja` | Petpooja | The Scream |
-| `apna-ghar-adani-realty` | Adani Realty | Apna Ghar |
 | `the-paragraph-reel-3` | The Paragraph | Own Your Pause |
 | `betu-ai-animated-film-scene-toogood` | Storython Studios | Betu |
 | `office-to-home-ub-heritage` | UB Heritage | Adding More Storeys |
@@ -367,7 +366,7 @@ Things about the page that still matter:
 
 ## Free hosting, and why nothing else is needed
 
-Films are served from the repo by GitHub Pages. The heaviest page, Work with nine
+Films are served from the repo by GitHub Pages. The heaviest page, Work with eight
 films, loads in about 233 KB because no video is fetched until you scroll to it.
 
 If traffic ever outgrows GitHub's free allowance, every film is already under
@@ -431,6 +430,15 @@ below it can wait.
 - **A second favicon**, the Face mark, sits unused in `assets/Favicon/`.
 
 ### Done, so nobody redoes it
+
+- **Apna Ghar / Adani Realty was taken off the site** on 15 September 2026 — the
+  home page panel, the Work card, the marquee logo, the project page and every
+  schema and sitemap entry. The rail on the home page navigates by panel index,
+  so the panel after it had to be renumbered; that is the part to watch if
+  another one is ever removed. **The video files are still in
+  `assets/video/`** and still reachable by direct URL. They are linked from
+  nowhere, but if the work has to be gone rather than merely unlisted, those
+  files need deleting too.
 
 - **The site is live at the root**, promoted out of `test3/` on 14 September
   2026, with crawlers allowed in. The old root site was removed in the same
