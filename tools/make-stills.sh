@@ -70,6 +70,14 @@ PY
       "$dir/$(printf '%02d' "$n").jpg"
   done
 
+  # Superman's longest walking shot is blurred. Keep the selected, held
+  # close-up as the first gallery image when rebuilding the stills.
+  case "$name" in
+    "Superman AD.mp4")
+      "$FF" -v error -y -ss 2 -i "$src" -frames:v 1 -vf "scale=1280:-2" -q:v 3 "$dir/01.jpg"
+      ;;
+  esac
+
   printf "%-40s %s frames  %sKB\n" "$(basename "$dir")" "$n" \
     "$(( $(du -sk "$dir" | cut -f1) ))"
 done

@@ -469,3 +469,26 @@ below it can wait.
 Move fast, verify on the live site rather than locally, and say plainly when
 something could not be checked. Do not re-ask questions already answered. When a
 change looks wrong, check the cache before rebuilding anything.
+
+
+## Local preview update — 28 October 2026
+
+Who is Superman? (`superman-ad`) is added to Work and as a new homepage panel
+after Betu, between Betu and The Scream (reordered on 30 October at the
+user’s request). The full scroll order is Viraasat/hero, Betu, Who is
+Superman?, The Scream, Fast Internet Matters, Adding More Storeys,
+Unhurried Homes, then the loop-back hero. Existing panel content is retained. The user approved publication of this update on 30 October 2026.
+
+The user selected the **fridge sequence** for the cropped photo/poster.
+`assets/video/stills/superman-ad/04.jpg` is the selected freeze frame, also
+copied to `assets/video/loops/superman-ad.jpg` and
+`assets/video/films/superman-ad.jpg`. If the video-generation scripts are
+rerun, restore those two poster copies from the selected fridge still.
+
+Local sample: `python3 .claude/serve.py`, then http://127.0.0.1:4173/.
+The preview server supports the site's clean URLs.
+
+On 30 October the first Superman gallery still was replaced with the sharp
+user-selected shot at 00:02 (the leftmost of three candidates, Superman
+on the street with reporters). The source-specific
+override in `tools/make-stills.sh` preserves this selection on regeneration.

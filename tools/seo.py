@@ -167,6 +167,12 @@ FAQ = [
 # is the day the film went onto the site. lang only where the voiceover
 # language is actually known.
 PROJECTS = [
+    dict(slug="superman-ad", client="Attendo", title="Who is Superman?",
+         seconds=52, w=1280, h=720, published="2026-10-30",
+         summary="Even a superhero has to clock in. A film for Attendo that brings Superman "
+                 "into the everyday routine of office attendance.",
+         note="An ad for Attendo. Watch the full film with sound.",
+         keywords="Superman ad, Attendo, attendance software ad"),
     dict(slug="jewellery-ad-concept", client="toogood Originals", title="Viraasat",
          seconds=88, w=1280, h=720, lang="hi",
          summary="A film about what one generation hands to the next, told through a single "
@@ -309,7 +315,7 @@ PAGES = {
         title="Work · AI ad films, brand films and reels · toogood",
         desc="Nine AI-generated films for brands: ads, brand films, reels, launch videos and "
              "an animated film. Made without a crew, a location or a shoot day.",
-        image="the-scream-petpooja"),
+        image="superman-ad"),
     "offerings.html": dict(
         url=BASE + "/offerings", crumb="Offerings", kind=["WebPage", "FAQPage"],
         # Ahmedabad earns its place here: "AI video" alone is a fight with
@@ -525,7 +531,7 @@ def video_node(p, page_url):
         "name": p["title"],
         "description": "%s %s" % (p["summary"], p["note"]),
         "thumbnailUrl": [ROOT + "/assets/video/loops/%s.jpg" % p["slug"]],
-        "uploadDate": "2026-09-12",
+        "uploadDate": p.get("published", "2026-09-12"),
         "duration": iso_duration(p["seconds"]),
         "contentUrl": ROOT + "/assets/video/films/%s.mp4" % p["slug"],
         "url": page_url,
