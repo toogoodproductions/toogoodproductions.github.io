@@ -492,3 +492,24 @@ On 30 October the first Superman gallery still was replaced with the sharp
 user-selected shot at 00:02 (the leftmost of three candidates, Superman
 on the street with reporters). The source-specific
 override in `tools/make-stills.sh` preserves this selection on regeneration.
+
+
+## Hidden projects — 1 November 2026
+
+The user asked to hide Who is Superman?, The Scream, and the broadband ad
+(the catalogue calls it Fast Internet Matters / Mera Broadband). They are
+removed from the homepage scroll, thumbnail rail, mobile dots, Work cards,
+public structured data, sitemap, and llms.txt. Work has six films; the scroll
+is Viraasat/hero, Betu, Adding More Storeys, Unhurried Homes, then loop-back.
+Petpooja and Mera Broadband logos are also hidden from the client marquee.
+
+Nothing is deleted: all three complete project-page bodies and every media
+file remain in the repository. `HIDDEN_PROJECTS` in `tools/seo.py` controls
+page visibility: hidden pages get noindex, canonical Work, and an immediate
+redirect to Work; their main content also carries the hidden attribute.
+These paths intentionally remain crawlable so crawlers can read noindex.
+
+To restore a project, remove its slug from `HIDDEN_PROJECTS` and run seo.py;
+this restores its original full page and metadata. Restore its Work card and
+optional reel panel/rail/dot from release `ae814b5`, then renumber navigation.
+If needed, also restore its client logo and the PUBLIC_CLIENTS filter.
